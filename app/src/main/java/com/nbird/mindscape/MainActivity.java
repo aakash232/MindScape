@@ -17,10 +17,14 @@ public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
     TextView title,title1;
 
+    //Hi Zimmy And Sneha
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         animation = findViewById(R.id.animationView);
         title=(TextView) findViewById(R.id.textView);
