@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Hi Zimmy And Sneha
 
+    // hi kartik
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void Animation() {
-        animation.setSpeed(2f);
+    public void Animation() {animation.setSpeed(2f);
     }
 
 
