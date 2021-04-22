@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mindscapebackground"
+    android:background="@drawable/back1"
     tools:context=".MainActivity">
 
 
@@ -26,6 +26,7 @@
         android:fontFamily="@font/comfortaa"
         android:gravity="center_horizontal|center_vertical"
         android:text="MindScape"
+        android:textColor="#000000"
         android:textSize="45sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -42,6 +43,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="320dp"
         android:fontFamily="sans-serif"
+        android:textColor="#000000"
         android:gravity="center_horizontal|center_vertical"
         android:text=" @NiftyNile "
         android:textSize="15sp"
@@ -52,22 +54,33 @@
         app:layout_constraintTop_toBottomOf="@+id/mindscape" />
 
     <Button
-        android:id="@+id/registerbutton"
-        android:layout_width="167dp"
+        android:id="@+id/registersmallbutton"
+        android:layout_width="160dp"
         android:layout_height="52dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/register"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:text="REGISTER"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="#ffffff"
+        android:background="@drawable/blackwithwhitestroke"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/loginbutton"
-        android:layout_width="167dp"
+        android:id="@+id/login"
+        android:layout_width="160dp"
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/login"
+        android:background="@drawable/whitewithblackstroke"
+        android:text="LOGIN"
+        android:textColor="#000000"
+        android:fontFamily="@font/roboto_bold"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

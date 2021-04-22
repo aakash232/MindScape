@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             public void run() {
-                Intent slideIntent = new Intent(MainActivity.this, slideActivity.class);
+                Intent slideIntent = new Intent(MainActivity.this, welcomeActivity.class);
                 startActivity(slideIntent);
                 finish();
 
