@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488668964689",
+    "project_id": "mindscape-3a832",
+    "storage_bucket": "mindscape-3a832.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488668964689:android:ec80b2fa9f0878b5c6d570",
+        "android_client_info": {
+          "package_name": "com.nbird.mindscape"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488668964689-tud7ohejplo85q2chc742qrhi5hdbr1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOpQ2A18L5cDveVpoRkh10E_ZNnlFie1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488668964689-tud7ohejplo85q2chc742qrhi5hdbr1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
