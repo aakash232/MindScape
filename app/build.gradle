@@ -23,6 +23,10 @@ android {
     }
 }
 
+repositories{
+    mavenCentral()
+}
+
 dependencies {
 
     implementation "com.airbnb.android:lottie:3.7.0"  //Animation
@@ -37,6 +41,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'  // RoundedImageView
     implementation 'com.google.android.material:material:1.0.0'   //editTextView
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
 }
