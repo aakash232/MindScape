@@ -33,7 +33,7 @@ public class loginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2);
+        setContentView(R.layout.activity_login);
 
         password=(TextInputEditText) findViewById(R.id.password);
         mail=(TextInputEditText) findViewById(R.id.email) ;
@@ -61,7 +61,7 @@ public class loginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               login();
+                login();
             }
         });
 
@@ -122,10 +122,10 @@ public class loginActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
 
                     if(mAuth.getCurrentUser().isEmailVerified()){
-                            Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
-                            loadingDialog.dismiss();
-                            finish();
+                        Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
+                        loadingDialog.dismiss();
+                        finish();
                     }else{
 
                         Toast.makeText(loginActivity.this, "Email Not Verified.Please Check Your Mail!", Toast.LENGTH_SHORT).show();

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-public class slideActivity extends AppCompatActivity {
+public class SlideActivity extends AppCompatActivity {
 
 
     private ViewPager slideViewPager;
@@ -29,31 +29,16 @@ public class slideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slide);
 
 
-
         slideViewPager=(ViewPager) findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
         nextbutton=(Button) findViewById(R.id.button5);
         backbutton=(Button) findViewById(R.id.button4);
 
 
-
-
         sliderAdapter=new SliderAdapter(this);
         slideViewPager.setAdapter(sliderAdapter);
 
-        final SharedPreferences slidepermission = getBaseContext().getSharedPreferences("SlidePermission", 0);
-        final SharedPreferences.Editor editorslidepermission = slidepermission.edit();
 
-        Boolean slidername = slidepermission.getBoolean("sp", false);
-        if(slidername){
-            Intent intent=new Intent(getBaseContext(),welcomeActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            finish();
-        }
-
-        editorslidepermission.putBoolean("sp", true);
-        editorslidepermission.apply();
 
         addDotsIndicator(0);
         slideViewPager.addOnPageChangeListener(viewListner);
@@ -92,7 +77,7 @@ public class slideActivity extends AppCompatActivity {
 
         }
         if(mDots.length>0){
-            mDots[position].setTextColor(getResources().getColor(R.color.colorAccent));
+            mDots[position].setTextColor(getResources().getColor(R.color.colorPrimary));
         }
     }
     ViewPager.OnPageChangeListener viewListner=new ViewPager.OnPageChangeListener() {
@@ -112,19 +97,14 @@ public class slideActivity extends AppCompatActivity {
                 backbutton.setVisibility(View.INVISIBLE);
                 nextbutton.setScaleX(1);
                 nextbutton.setScaleY(1);
-                nextbutton.setBackgroundResource(R.color.transparent);
-                nextbutton.setText("Next");
-                backbutton.setText("");
+                nextbutton.setBackgroundResource(R.drawable.nextfire);
             }
             else if(position==mDots.length-1){
                 nextbutton.setEnabled(true);
                 backbutton.setEnabled(true);
                 backbutton.setVisibility(View.VISIBLE);
-
-                nextbutton.setBackgroundResource(R.drawable.loadingbackground);
-
-                nextbutton.setText("Finish");
-                backbutton.setText("Back");
+                nextbutton.setWidth(100);
+                nextbutton.setBackgroundResource(R.drawable.donefire);
             }
 
             else {
@@ -132,10 +112,8 @@ public class slideActivity extends AppCompatActivity {
                 backbutton.setEnabled(true);
                 backbutton.setVisibility(View.VISIBLE);
                 nextbutton.setScaleX(1);
-                nextbutton.setBackgroundResource(R.color.transparent);
+                nextbutton.setBackgroundResource(R.drawable.nextfire);
                 nextbutton.setScaleY(1);
-                nextbutton.setText("Next");
-                backbutton.setText("Back");
             }
         }
 
