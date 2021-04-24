@@ -14,7 +14,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class MainActivity extends AppCompatActivity {
 
     LottieAnimationView animation;
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 2675;
     TextView title,title1;
 
     //Hi Zimmy And Sneha

@@ -1,6 +1,6 @@
 package com.nbird.mindscape;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -108,7 +108,7 @@ public class registerActivity extends AppCompatActivity {
         final String password1=password.getText().toString().trim();
         fAuth.createUserWithEmailAndPassword(email,password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete( Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -117,7 +117,7 @@ public class registerActivity extends AppCompatActivity {
                     user.sendEmailVerification()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                                public void onComplete( Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(registerActivity.this, "A Verification Link Has been Send To Your Mail. Please Check!", Toast.LENGTH_LONG).show();
 
