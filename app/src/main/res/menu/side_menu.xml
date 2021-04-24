@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+           <item>
+
+
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/nav_order"
+                        android:title="My Orders"
+                        />
+                    <item
+                        android:id="@+id/referral_code"
+                        android:title="Referral Code"
+                        />
+                    <item
+                        android:id="@+id/nav_help"
+                        android:title="Help Guide"
+                        />
+                    <item
+                        android:id="@+id/nav_logout"
+                        android:title="Logout"
+                        />
+
+                </group>
+
+
+        </item>
+
+    <item
+        android:title="Communication" >
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_contact"
+                    android:title="Contact Us"
+                    />
+
+                <item
+                    android:id="@+id/nav_about"
+                    android:title="About Us"
+                    />
+                <item
+                    android:id="@+id/nav_rate"
+                    android:title="Rate Us"
+                    />
+            </group>
+
+        </menu>
+
+    </item>
+
+
+
+
+    <item android:title="Legal">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+            <item
+                android:id="@+id/nav_tos"
+                android:title="Terms of Service"
+               />
+
+                <item
+                    android:id="@+id/nav_ref"
+                    android:title="Refund Policy"
+                    />
+
+                <item
+                    android:id="@+id/nav_ps"
+                    android:title="Privacy statement"
+                    />
+
+            </group>
+
+        </menu>
+
+
+    </item>
+
+</menu>
