@@ -5,8 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/mindscapebackground"
+    android:background="@drawable/backimage"
     tools:context=".MainActivity">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/backlitemodeanim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="-5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/backlitemode"
+        app:lottie_speed="1.4" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
@@ -32,12 +46,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="200dp"
-        android:fontFamily="@font/oasis"
+        android:layout_marginBottom="180dp"
+        android:fontFamily="@font/comfortaa"
         android:gravity="left"
         android:text="Mind"
-        android:textColor="#00FFF7"
-        android:textSize="60sp"
+        android:textColor="#000000"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView2" />
@@ -46,13 +60,13 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:layout_marginStart="2dp"
-        android:fontFamily="@font/foresta"
+        android:fontFamily="@font/comfortaa"
         android:gravity="center"
         android:text="Scape"
-        android:textColor="#00FFF7"
-        android:textSize="65sp"
+        android:textColor="#000000"
+        android:textSize="37sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
