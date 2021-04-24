@@ -7,14 +7,28 @@
     android:background="@drawable/back1"
     tools:context=".MainActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/backlitemodeanim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="-5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/backlitemode"
+        app:lottie_speed="1.4" />
+
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="230dp"
-        android:layout_height="190dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="175dp"
-        android:background="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/mindscape"
+        android:background="@drawable/logoex"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,6 +97,17 @@
         android:scaleY="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googlesignin"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="@+id/registersmallbutton"
+        app:layout_constraintStart_toStartOf="@+id/login"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975"
+        style="@style/CardView.Dark"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
