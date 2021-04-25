@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mindscapebackground"
-    tools:context=".SliderActivity">
+    android:background="@drawable/blur"
+    tools:context=".MainActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/slideViewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/frame"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.viewpager.widget.ViewPager>
+
 
     <LinearLayout
         android:id="@+id/dotLayout"
@@ -25,30 +26,35 @@
         android:layout_height="68dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/slideViewPager"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toStartOf="@+id/slideViewPager">
+        app:layout_constraintBottom_toBottomOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toTopOf="@+id/button4">
+
 
     </LinearLayout>
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:background="#73000000"
-        android:text="Previous"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/dotLayout"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/nextfire"
+        android:rotation="180"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:background="#73000000"
-        android:text="Next"
-        app:layout_constraintBottom_toTopOf="@+id/dotLayout"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/nextfire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

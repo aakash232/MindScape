@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class SliderAdapter extends PagerAdapter {
 
     Context context;
@@ -22,21 +24,30 @@ public class SliderAdapter extends PagerAdapter {
 
     //Array
     public int[] slide_images={
-            R.drawable.slide,
-            R.drawable.slide,
-            R.drawable.slide,
+            R.raw.animonline,
+            R.raw.slideanim2,
+            R.raw.animleadership,
     };
 
     public String[] slide_Headings={
-            "1 vs 1 - Tournaments - Single player",
-            "KBC - Custom quiz - Picture quiz",
-            " "
+      "Experience Quizing Like Never Before! ",
+      "KBC - Custom Quiz - Picture Quiz",
+      "Play more To Achieve Ranks! "
     };
 
     public String[] slide_descs={
-            "Experience Quizing like never before!Compete with players across the world. ",
-            "Play the legindary KBC Test your visual skills with picture mode... And Do your friends really know you? Check out the personal custom quiz. Create Share Enjoy! ",
-            "* Play more to achieve ranks! * Top the Leadership boards * Track your progress and achievements Welcome to the best way to Learn, Compete and Have Fun!!!"
+      "Compete with players across the world. \n" +
+              "1 vs 1 - Tournaments - Single player",
+      "Play the legindary KBC... \n" +
+              "Test your visual skills with picture mode and \n"+
+              "Do your friends really know you? \n" +
+              "Check out the personal custom quiz. \n" +
+              "Create Share Enjoy! ",
+      "* Top the Leadership boards\n" +
+              "* Track your progress and achievements\n" +
+              "\n" +
+              "Welcome to the best way to\n" +
+              "Learn, Compete and Have Fun!!!",
     };
     @Override
     public int getCount() {
@@ -54,15 +65,18 @@ public class SliderAdapter extends PagerAdapter {
         layoutInflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view =layoutInflater.inflate(R.layout.slidelayout,container,false);
 
-        ImageView slideImageView=(ImageView) view.findViewById(R.id.imageView);
+        LottieAnimationView animation=(LottieAnimationView) view.findViewById(R.id.anim);
         TextView slideHeading=(TextView) view.findViewById(R.id.textView);
         TextView slideDiscription=(TextView) view.findViewById(R.id.textView2);
 
-        slideImageView.setImageResource(slide_images[position]);
+        animation.setAnimation(slide_images[position]);
         slideHeading.setText(slide_Headings[position]);
         slideDiscription.setText(slide_descs[position]);
 
         container.addView(view);
+
+
+
         return view;
     }
 
