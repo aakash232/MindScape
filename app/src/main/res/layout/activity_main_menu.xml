@@ -11,20 +11,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/backlitemodeanim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="-5dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/backlitemode"
-        app:lottie_speed="1.4" />
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -56,6 +43,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title=""
          />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/slideViewPager"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <LinearLayout
+            android:id="@+id/dotLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/slideViewPager"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:scrollbars="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slideViewPager" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
