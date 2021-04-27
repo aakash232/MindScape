@@ -10,18 +10,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class mainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,11 +43,20 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     int setter=0;
 
 
-    private ViewPager slideViewPager;
+    public ViewPager slideViewPager;
     private LinearLayout dotLayout;
     private slideAdapterMainMenuHorizontalSlide sliderAdapter;
     private TextView[] mDots;
     private int currentPage;
+
+
+    private List<mainMenuFactsHolder> list;
+    mainMenuFactsAdapter categoryAdapter;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +88,41 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 navigationView.setCheckedItem(R.id.nav_view);
          RecyclerCardView();
 
-
-        sliderAdapter=new slideAdapterMainMenuHorizontalSlide(this);
-        slideViewPager.setAdapter(sliderAdapter);
-        addDotsIndicator(0);
-        slideViewPager.addOnPageChangeListener(viewListner);
+         dataForHorizontalSlide();
 
 
 
+
+
+
+    }
+
+    public void dataForHorizontalSlide(){
+        list = new ArrayList<>();
+
+
+
+        myRef.child("Facts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                    list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+                }
+
+
+
+                sliderAdapter=new slideAdapterMainMenuHorizontalSlide(mainMenuActivity.this,list);
+                slideViewPager.setAdapter(sliderAdapter);
+                addDotsIndicator(0);
+                slideViewPager.addOnPageChangeListener(viewListner);
+                sliderAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(mainMenuActivity.this,"Facts Data Can't be Loaded", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 

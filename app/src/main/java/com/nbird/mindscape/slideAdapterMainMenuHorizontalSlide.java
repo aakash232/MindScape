@@ -13,15 +13,21 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.util.List;
+
 
 public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
+    private List<mainMenuFactsHolder> listItem;
 
-    public slideAdapterMainMenuHorizontalSlide(Context context){
+    public slideAdapterMainMenuHorizontalSlide(Context context, List<mainMenuFactsHolder> list){
         this.context=context;
+        this.listItem=list;
     }
+
+
 
     //Array
     public int[] slide_images={
@@ -52,7 +58,7 @@ public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
     };
     @Override
     public int getCount() {
-        return slide_Headings.length;
+        return 3;
     }
 
     @Override
@@ -70,15 +76,29 @@ public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
         TextView slideHeading=(TextView) view.findViewById(R.id.textView);
         TextView slideDiscription=(TextView) view.findViewById(R.id.textView2);
 
-        constraintLayout.setBackgroundResource(slide_images[position]);
-        slideHeading.setText(slide_Headings[position]);
-        slideDiscription.setText(slide_descs[position]);
+        setManupulation(listItem.get(position).getSet(),constraintLayout);
+        slideHeading.setText(listItem.get(position).getTitle());
+        slideDiscription.setText(listItem.get(position).getDis());
 
         container.addView(view);
 
 
 
         return view;
+    }
+
+    public void setManupulation(int set, ConstraintLayout constraintLayout){
+            switch (set){
+                case 1:
+                    constraintLayout.setBackgroundResource(R.drawable.example);
+                    break;
+                case 2:
+                    constraintLayout.setBackgroundResource(R.drawable.example);
+                    break;
+                case 3:
+                    constraintLayout.setBackgroundResource(R.drawable.animalsdemo);
+                    break;
+            }
     }
 
 

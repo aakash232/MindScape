@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "488668964689",
+    "firebase_url": "https://mindscape-3a832-default-rtdb.firebaseio.com",
     "project_id": "mindscape-3a832",
     "storage_bucket": "mindscape-3a832.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "488668964689-attnt1t5j7edvj6u6pa4f6th036ujvhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nbird.mindscape",
+            "certificate_hash": "389c73cf5260183aec104a98cf50158cd5e62aa0"
+          }
+        },
         {
           "client_id": "488668964689-tud7ohejplo85q2chc742qrhi5hdbr1e.apps.googleusercontent.com",
           "client_type": 3
