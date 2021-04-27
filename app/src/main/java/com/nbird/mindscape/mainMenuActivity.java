@@ -1,6 +1,6 @@
 package com.nbird.mindscape;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class mainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -56,7 +57,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
-
+   int num=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         toolbar = findViewById(R.id.toolbar);
         slideViewPager=(ViewPager) findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
-
+        list = new ArrayList<>();
 
 
         setSupportActionBar(toolbar);
@@ -88,7 +89,12 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 navigationView.setCheckedItem(R.id.nav_view);
          RecyclerCardView();
 
-         dataForHorizontalSlide();
+           for(int i=1;i<=3;i++){
+               dataForHorizontalSlide();
+           }
+
+
+
 
 
 
@@ -98,34 +104,48 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
     public void dataForHorizontalSlide(){
-        list = new ArrayList<>();
+
+        // create instance of Random class
+        Random rand = new Random();
+
+        // Generate random integers in range 0 to 999
+
+        final int categoryRandomNumber = rand.nextInt(3)+1;  //NEED TO CHANGE HERE
+        int setRandomNumber = rand.nextInt(4)+1;   //NEED TO CHANGE HERE
 
 
 
-        myRef.child("Facts").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange( DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                     list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+                    num++;
+                }
+
+                if(num==3){
+                    AdapterManupulation();
                 }
 
 
-
-                sliderAdapter=new slideAdapterMainMenuHorizontalSlide(mainMenuActivity.this,list);
-                slideViewPager.setAdapter(sliderAdapter);
-                addDotsIndicator(0);
-                slideViewPager.addOnPageChangeListener(viewListner);
-                sliderAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError error) {
                 Toast.makeText(mainMenuActivity.this,"Facts Data Can't be Loaded", Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
 
-
+    public void AdapterManupulation(){
+        sliderAdapter=new slideAdapterMainMenuHorizontalSlide(mainMenuActivity.this,list);
+        slideViewPager.setAdapter(sliderAdapter);
+        addDotsIndicator(0);
+        slideViewPager.addOnPageChangeListener(viewListner);
+        sliderAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -175,7 +195,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     };
 
         @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
         switch (menuItem.getItemId()){
             case R.id.referral_code:

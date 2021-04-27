@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -25,15 +25,15 @@ public class recyclerViewAdapterHori extends RecyclerView.Adapter<recyclerViewAd
 
 
 
-    @NonNull
+
     @Override
-    public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public viewholder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewfact,parent,false);
         return new viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewholder holder, int position) {
+    public void onBindViewHolder( viewholder holder, int position) {
         holder.setData(listItem.get(position).getHeadingText(),listItem.get(position).getDisText());
     }
 
@@ -46,7 +46,7 @@ public class recyclerViewAdapterHori extends RecyclerView.Adapter<recyclerViewAd
         private TextView heatText;
         private TextView disText;
 
-        public viewholder(@NonNull View itemView) {
+        public viewholder( View itemView) {
             super(itemView);
             heatText=itemView.findViewById(R.id.exam_title);
             disText=itemView.findViewById(R.id.exam_dis);

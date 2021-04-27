@@ -5,17 +5,26 @@ public class mainMenuFactsHolder {
     String title;
     String dis;
     int set;
+    int category;
 
     public mainMenuFactsHolder() {
     }
 
 
-    public mainMenuFactsHolder(String title, String dis, int set) {
+    public mainMenuFactsHolder(String title, String dis, int set,int category) {
         this.title = title;
         this.dis = dis;
         this.set = set;
+        this.category=category;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
