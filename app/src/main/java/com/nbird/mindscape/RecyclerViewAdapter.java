@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,9 +28,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.setter=setter;
     }
 
-    @NonNull
+
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater=LayoutInflater.from(mContext);
         view=mInflater.inflate(R.layout.cardviewmainmenu,parent,false);
@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+    public void onBindViewHolder( final MyViewHolder holder, final int position) {
 
         holder.tv_exam_title.setText(mData.get(position).getTitle());
         holder.img_exam_thumbnail.setImageResource(mData.get(position).getThumbnail());
@@ -49,16 +49,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-      /*  holder.cardView.setOnClickListener(new View.OnClickListener() {
+       holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 a=position;
-                Intent intent = new Intent(mContext, BoardYearActivity.class);
+                Intent intent = new Intent(mContext, singleModeListView.class);
                 intent.putExtra("position", a + 1);
                 mContext.startActivity(intent);
             }
         });
-*/
+
     }
 
 

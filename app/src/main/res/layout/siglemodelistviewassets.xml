@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="175dp"
+    android:layout_width="match_parent"
     android:id="@+id/cardview_id"
-    android:layout_height="190dp"
+    android:layout_height="110dp"
     android:clickable="true"
     android:scaleX="0.9"
     android:scaleY="0.9"
@@ -15,19 +15,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@drawable/outsidecardview"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/exam_img_id"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="left"
-            android:layout_width="70dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_width="80dp"
             android:elevation="5dp"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             />
 
         <LinearLayout
@@ -50,7 +49,7 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:gravity="left"
-                android:text="1 Vs 1"
+                android:text="Flora And Fauna"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -66,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/mouse_memoirs"
-                android:text="Exam"/>
+                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life, such as fungi, are collectively referred to as biota."/>
 
         </LinearLayout>
     </LinearLayout>

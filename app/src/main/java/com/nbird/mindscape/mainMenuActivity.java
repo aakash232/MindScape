@@ -12,6 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -72,6 +75,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         list = new ArrayList<>();
 
 
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -93,15 +98,9 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                dataForHorizontalSlide();
            }
 
-
-
-
-
-
-
-
-
     }
+
+
 
     public void dataForHorizontalSlide(){
 
