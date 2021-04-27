@@ -128,6 +128,18 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void addDotsIndicator(int position){
         mDots=new TextView[3];
         dotLayout.removeAllViews();
@@ -224,18 +236,18 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }*/
 
     public void parto(){
-        lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Joint Entrance Examination – Advanced, which replaces IIT-JEE, is an annual examination for admissions to the prestigious IITs of India."));
-        lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Joint Entrance Examination – Main is a national level entrance exam conducted by NTA to offer admission to BE/BTech, BPlan, BArch courses at IIITs, NITs"));
-        lstExam.add(new Modes("Tournment Mode",R.drawable.tournament,"Joint Entrance Examination – Advanced, which replaces IIT-JEE, is an annual examination for admissions to the prestigious IITs of India."));
-        lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Joint Entrance Examination – Main is a national level entrance exam conducted by NTA to offer admission to BE/BTech, BPlan, BArch courses at IIITs, NITs"));
-        lstExam.add(new Modes("KBC",R.drawable.kbc,"Joint Entrance Examination – Advanced, which replaces IIT-JEE, is an annual examination for admissions to the prestigious IITs of India."));
-        lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Joint Entrance Examination – Main is a national level entrance exam conducted by NTA to offer admission to BE/BTech, BPlan, BArch courses at IIITs, NITs"));
+        lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
+        lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
+        lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
+        lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
+        lstExam.add(new Modes("KBC",R.drawable.kbc,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
+        lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
     }
 
     public void marta(){
-        facts.add(new Facts("Single Mode","Joint Entrance Examination – Advanced, which replaces IIT-JEE, is an annual examination for admissions to the prestigious IITs of India."));
-        facts.add(new Facts("1 Vs 1","Joint Entrance Examination – Main is a national level entrance exam conducted by NTA to offer admission to BE/BTech, BPlan, BArch courses at IIITs, NITs"));
-        facts.add(new Facts("Tournment Mode","Joint Entrance Examination – Advanced, which replaces IIT-JEE, is an annual examination for admissions to the prestigious IITs of India."));
+        facts.add(new Facts("Single Mode","Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
+        facts.add(new Facts("1 Vs 1","Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
+        facts.add(new Facts("Tournament Mode","Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
     }
 
 

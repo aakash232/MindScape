@@ -12,7 +12,7 @@
         android:id="@+id/proimage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"/>
 
     <TextView
@@ -21,8 +21,8 @@
         android:layout_height="30dp"
         android:text="niftynile@gmail.com"
         android:textColor="#FFFFFF"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/comfortaa"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="15dp"/>
