@@ -29,34 +29,6 @@ public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
     }
 
 
-
-    //Array
-    public int[] slide_images={
-            R.drawable.example,
-            R.drawable.animalsdemo,
-            R.drawable.example,
-    };
-
-    public String[] slide_Headings={
-            "Experience Quizing Like Never Before! ",
-            "KBC - Custom Quiz - Picture Quiz",
-            "Play more To Achieve Ranks! "
-    };
-
-    public String[] slide_descs={
-            "Compete with players across the world. \n" +
-                    "1 vs 1 - Tournaments - Single player",
-            "Play the legindary KBC... \n" +
-                    "Test your visual skills with picture mode and \n"+
-                    "Do your friends really know you? \n" +
-                    "Check out the personal custom quiz. \n" +
-                    "Create Share Enjoy! ",
-            "* Top the Leadership boards\n" +
-                    "* Track your progress and achievements\n" +
-                    "\n" +
-                    "Welcome to the best way to\n" +
-                    "Learn, Compete and Have Fun!!!",
-    };
     @Override
     public int getCount() {
         return 3;

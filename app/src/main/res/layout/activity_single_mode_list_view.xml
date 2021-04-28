@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backimage"
+    tools:context=".singleModeListView">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/officialcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/backlitemodeanim"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="-5dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/selecticon"
+                    app:lottie_speed="0.5" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:text="Select Your Category"
+                    android:textColor="#000000"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewHistoricalMonuments"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-5dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/cathistoricalmonuments"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/exam_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Historical Monuments"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/exam_dis"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewFloraAndFauna"
+                    android:layout_width="240dp"
+                    android:layout_height="110dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewHistoricalMonuments"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/exam_img_id"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catfloranandfauna"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora And Fauna"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewAstronomyAndSpace"
+                    android:layout_width="0dp"
+                    android:layout_height="220dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.97"
+                    android:scaleY="0.97"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewHistoricalMonuments"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewFloraAndFauna"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewHistoricalMonuments"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catspaceandastrology"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Astronomy And Space"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewGeography"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewAstronomyAndSpace"
+                    app:layout_constraintEnd_toStartOf="@+id/cardviewAstronomyAndSpace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewFloraAndFauna"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catgeography"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Geography"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewSports"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewAstronomyAndSpace"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catsports"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Sports"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewSomeSuperlatives"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewSports"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewAstronomyAndSpace"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewSports"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewAstronomyAndSpace"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catsomesuperlatives"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Some Superlatives"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewConuntryCapitalAndCurrencies"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="-5dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewSomeSuperlatives"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewSports"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewSports"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catcountriesandcapitals"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Conuntry,Capitals And Currencies"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:layout_marginRight="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewFamousPersonalities"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="-5dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewSomeSuperlatives"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewSports"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewConuntryCapitalAndCurrencies"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catfamousperson"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Famous Personalities"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:layout_marginRight="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewHealthAndDiseases"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewFamousPersonalities"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewFamousPersonalities"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catscience"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Science"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewScience"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewHealthAndDiseases"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewHealthAndDiseases"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewFamousPersonalities"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catimportantdates"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Important Dates And Events"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:layout_marginRight="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewReligionAndMythology"
+                    android:layout_width="120dp"
+                    android:layout_height="250dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.98"
+                    android:scaleY="0.98"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewHealthAndDiseases"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewHealthAndDiseases"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/catrelionandculture"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Religion And Mythology"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginRight="10dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewHistory"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewScience"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewReligionAndMythology"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewScience"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/cathistory"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="History"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewFilmAndEntertainment"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewReligionAndMythology"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewScience"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewReligionAndMythology"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewHistory"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catfilmandentertainment"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Film And Entertainment"
+                                android:textColor="#000000"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewInventionsAndDiscoveries"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="-5dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewSomeSuperlatives"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewSports"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewReligionAndMythology"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catinventionsanddiscovery"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Inventions And Discoveries"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewInventionsAndDiscoveries"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewInventionsAndDiscoveries"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewInventionsAndDiscoveries">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardviewFirstInDifferentFields"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.95"
+                        android:scaleY="0.95"
+                        app:layout_constraintStart_toStartOf="@+id/cardviewFamousPersonalities"
+                        app:layout_constraintTop_toBottomOf="@+id/cardviewInventionsAndDiscoveries"
+                        cardview:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/outsidecardview"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/catfirstindifferentfields"
+                                android:elevation="5dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/insidecardview"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="First In Different Fields"
+                                    android:textColor="#000000"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:elevation="3dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:textColor="#000000"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardviewFestivalArtAndCulture"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.95"
+                        android:scaleY="0.95"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardviewFirstInDifferentFields"
+                        app:layout_constraintTop_toBottomOf="@+id/cardviewInventionsAndDiscoveries"
+                        cardview:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/outsidecardview"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/catfestivalartandculture"
+                                android:elevation="5dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/insidecardview"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="Festival,Art And Culture"
+                                    android:textColor="#000000"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:elevation="3dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:textColor="#000000"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardviewPolityAndConstitution"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.95"
+                        android:scaleY="0.95"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardviewFirstInDifferentFields"
+                        app:layout_constraintTop_toBottomOf="@+id/cardviewInventionsAndDiscoveries"
+                        cardview:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/outsidecardview"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/catlaws"
+                                android:elevation="5dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/insidecardview"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="Polity And Constitution"
+                                    android:textColor="#000000"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:elevation="3dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="left"
+                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:textColor="#000000"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewLiterature"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewHealthDiseases"
+                    app:layout_constraintEnd_toStartOf="@+id/cardviewHealthDiseases"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/literature"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Literature"
+                                android:textColor="#000000"
+                                android:textSize="30sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewHealthDiseases"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/cathealthanddisease"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Health And Disease"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewMiscellaneous"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="-5dp"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewSomeSuperlatives"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewSports"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewLiterature"
+                    cardview:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/outsidecardview"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@drawable/catmis"
+                            android:elevation="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/insidecardview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Miscellaneous"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
