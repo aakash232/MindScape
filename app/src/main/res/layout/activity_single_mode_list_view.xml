@@ -4,18 +4,30 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="5dp"
     android:layout_height="match_parent"
     android:background="@drawable/backimage"
     tools:context=".singleModeListView">
 
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/officialcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,12 +62,10 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="Select Your Category"
                     android:textColor="#000000"
-                    android:textSize="40sp"
+                    android:textSize="45sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/backlitemodeanim"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/backlitemodeanim"
-                    app:layout_constraintVertical_bias="0.426" />
+                    app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewHistoricalMonuments"
@@ -116,6 +126,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
@@ -226,9 +237,9 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catspaceandastrology"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catspaceandastrology"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -296,9 +307,9 @@
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="@drawable/catgeography"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/catgeography"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -328,6 +339,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
@@ -366,9 +378,9 @@
                             android:layout_height="80dp"
                             android:layout_gravity="left"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catsports"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catsports"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -436,11 +448,11 @@
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:layout_gravity="left"
+                            android:layout_gravity="center"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
-                            android:background="@drawable/catsomesuperlatives"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catsomesuperlatives"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -509,9 +521,9 @@
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="@drawable/catcountriesandcapitals"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/catcountriesandcapitals"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -544,6 +556,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
+                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
@@ -582,8 +595,8 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catfamousperson"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/catfamousperson"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -616,6 +629,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
+                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
@@ -653,9 +667,9 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catscience"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catscience"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -726,8 +740,8 @@
                             android:layout_gravity="left"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
-                            android:background="@drawable/catimportantdates"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catimportantdates"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -759,6 +773,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
+                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
@@ -774,8 +789,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewReligionAndMythology"
-                    android:layout_width="170dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="250dp"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
                     android:scaleX="0.98"
@@ -795,14 +810,14 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catrelionandculture"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/catrelionandculture"
                             android:elevation="5dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="5dp"
@@ -828,6 +843,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginBottom="5dp"
+                                android:layout_marginRight="10dp"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
@@ -844,7 +860,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewHistory"
                     android:layout_width="0dp"
-                    android:layout_height="110dp"
+                    android:layout_height="125dp"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
                     android:scaleX="0.95"
@@ -863,9 +879,9 @@
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="@drawable/cathistory"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/cathistory"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -895,6 +911,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
@@ -912,11 +929,12 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewFilmAndEntertainment"
                     android:layout_width="0dp"
-                    android:layout_height="110dp"
+                    android:layout_height="0dp"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
                     android:scaleX="0.95"
                     android:scaleY="0.95"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewReligionAndMythology"
                     app:layout_constraintEnd_toEndOf="@+id/cardviewScience"
                     app:layout_constraintStart_toEndOf="@+id/cardviewReligionAndMythology"
                     app:layout_constraintTop_toBottomOf="@+id/cardviewHistory"
@@ -932,8 +950,8 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catfilmandentertainment"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/catfilmandentertainment"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -1003,8 +1021,8 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/catinventionsanddiscovery"
                             android:layout_marginTop="7dp"
+                            android:background="@drawable/catinventionsanddiscovery"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -1086,8 +1104,8 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="7dp"
                                 android:layout_marginTop="7dp"
-                                android:background="@drawable/catfirstindifferentfields"
                                 android:layout_marginRight="5dp"
+                                android:background="@drawable/catfirstindifferentfields"
                                 android:elevation="5dp" />
 
                             <LinearLayout
@@ -1156,10 +1174,10 @@
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/catfestivalartandculture"
                                 android:layout_marginLeft="7dp"
                                 android:layout_marginTop="7dp"
                                 android:layout_marginRight="5dp"
+                                android:background="@drawable/catfestivalartandculture"
                                 android:elevation="5dp" />
 
                             <LinearLayout
@@ -1229,9 +1247,9 @@
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="7dp"
-                                android:background="@drawable/catlaws"
                                 android:layout_marginTop="7dp"
                                 android:layout_marginRight="5dp"
+                                android:background="@drawable/catlaws"
                                 android:elevation="5dp" />
 
                             <LinearLayout
@@ -1302,9 +1320,9 @@
                             android:layout_height="80dp"
                             android:layout_gravity="left"
                             android:layout_marginLeft="7dp"
-                            android:background="@drawable/literature"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/literature"
                             android:elevation="5dp" />
 
                         <LinearLayout
@@ -1327,7 +1345,7 @@
                                 android:gravity="left"
                                 android:text="Literature"
                                 android:textColor="#000000"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1371,10 +1389,10 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/cathealthanddisease"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="5dp"
+                            android:background="@drawable/cathealthanddisease"
                             android:elevation="5dp" />
 
                         <LinearLayout
