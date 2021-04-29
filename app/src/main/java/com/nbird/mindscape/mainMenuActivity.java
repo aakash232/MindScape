@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
    int num=0;
 
+    private ShimmerFrameLayout mShimmerViewContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         toolbar = findViewById(R.id.toolbar);
         slideViewPager=(ViewPager) findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
         list = new ArrayList<>();
 
 
@@ -125,6 +130,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 }
 
                 if(num==3){
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     AdapterManupulation();
                 }
 
@@ -253,6 +260,18 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         final recyclerViewAdapterHori categoryAdapter = new recyclerViewAdapterHori(facts);
         recyclerView.setAdapter(categoryAdapter);
     }*/
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
 
     public void parto(){
         lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
