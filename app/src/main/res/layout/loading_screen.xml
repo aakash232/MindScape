@@ -10,32 +10,19 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        app:layout_constraintBottom_toTopOf="@+id/loading"
-        app:layout_constraintEnd_toEndOf="@+id/loading"
-        app:layout_constraintStart_toStartOf="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/mindscapeloading"
-        app:lottie_speed="1.4" />
+        app:lottie_rawRes="@raw/loadingeditanim"
+        app:lottie_speed="1.0" />
 
-    <TextView
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppins"
-        android:gravity="center_horizontal"
-        android:text="Loading...."
-        android:textColor="#000000"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
