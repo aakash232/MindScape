@@ -52,10 +52,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                a=position;
-                Intent intent = new Intent(mContext, singleModeListView.class);
-                intent.putExtra("position", a + 1);
-                mContext.startActivity(intent);
+                a=position+1;
+                switch (a){
+                    case 1:
+                        Intent intent = new Intent(mContext, singleModeListView.class);
+                        intent.putExtra("position", a);
+                        mContext.startActivity(intent);break;
+                    case 5:
+                        Intent intent1 = new Intent(mContext, singleModeListView.class);  //Sneha change this 'singleModeListView' to Your KBC Activity
+                        intent1.putExtra("position", a);
+                        mContext.startActivity(intent1);break;
+                }
+
             }
         });
 

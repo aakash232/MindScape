@@ -6,7 +6,7 @@ public class Facts {
     String disText;
 
 
-    public Facts(){
+    public Facts(int ava1){
 
     }
 
