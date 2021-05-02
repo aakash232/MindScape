@@ -1,6 +1,7 @@
 package com.nbird.mindscape;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,18 +19,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class loginActivity extends AppCompatActivity {
 
     Dialog loadingDialog;
     TextInputEditText mail,password;
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
-
+    String personEmail;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference table_user = database.getReference("User");
+    int firstTime=0;
+    String imageurl="https://firebasestorage.googleapis.com/v0/b/paper-wind.appspot.com/o/BydefalutPic%2Fdefaultpropic.png?alt=media&token=f655727d-9740-4ac9-9ba2-f53ea02dc778";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,10 +134,82 @@ public class loginActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
 
                     if(mAuth.getCurrentUser().isEmailVerified()){
-                        Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
-                        loadingDialog.dismiss();
-                        finish();
+
+                        if (task.isSuccessful()) {
+                            GoogleSignInAccount account= GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                            personEmail = account.getEmail();
+                            final SharedPreferences mailreminder = getBaseContext().getSharedPreferences("mailreminder123", 0);
+                            final SharedPreferences.Editor editormailreminder = mailreminder.edit();
+                            editormailreminder.putString("123", personEmail);
+                            editormailreminder.commit();
+
+                            table_user.child(mAuth.getCurrentUser().getUid()).child("personal").child("firstTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try {
+                                        firstTime =  snapshot.getValue(Integer.class);
+
+                                    } catch (Exception e) {
+                                        if (firstTime == 0) {
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("propic").setValue(imageurl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+                                            firstTime = 1;
+                                            User s1 = new User(firstTime);
+
+
+
+
+
+
+
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("personal").setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(loginActivity.this, mainMenuActivity.class);
+                                                        intent.putExtra("firstTime", 0);
+                                                        startActivity(intent);
+                                                        loadingDialog.dismiss();
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(loginActivity.this, "Record Not Saved!", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+                            Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(loginActivity.this, mainMenuActivity.class);
+                            intent.putExtra("firstTime", 1);
+                            startActivity(intent);
+                            loadingDialog.dismiss();
+                            finish();
+
+
+
+
+                        } else {
+
+                            Toast.makeText(getBaseContext(), "Error!"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            loadingDialog.dismiss();
+
+                        }
+
+
                     }else{
 
                         Toast.makeText(loginActivity.this, "Email Not Verified.Please Check Your Mail!", Toast.LENGTH_SHORT).show();
