@@ -130,7 +130,7 @@ public class quizActivity extends AppCompatActivity {
             // create instance of Random class
             Random rand = new Random();
 
-            // Generate random integers in range 0 to 2
+            // Generate random integers in range 0 to 29
 
             final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
               //NEED TO CHANGE HERE
@@ -640,7 +640,7 @@ public class quizActivity extends AppCompatActivity {
         });
     }
 
-    public void LLFalseManupulator(){
+    public void LLFalseManupulator(){        //Setting all the lifelines enable:False when an option is selected.
         audienceLL.setClickable(false);
         audienceLL.setEnabled(false);
         audienceLL.setAlpha(0.8f);
@@ -659,7 +659,7 @@ public class quizActivity extends AppCompatActivity {
 
     }
 
-    public void LLTrueManupulator(){
+    public void LLTrueManupulator(){       //Setting all the lifelines enable:False when next button is pressed.
         audienceLL.setClickable(true);
         audienceLL.setEnabled(true);
         audienceLL.setAlpha(1.0f);
@@ -687,14 +687,14 @@ public class quizActivity extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
-            //wrong.start();
+
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
             score++;
         }else {
             //incorrect
-            //correct.start();
+
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -715,7 +715,7 @@ public class quizActivity extends AppCompatActivity {
         }
     }
 
-    public void countDownTimerFun(){
+    public void countDownTimerFun(){   //Clock Algo
         new CountDownTimer(60000*10, 1000) {
             int minutes=0;
             int second=0;

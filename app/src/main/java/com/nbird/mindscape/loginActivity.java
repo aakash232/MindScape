@@ -137,7 +137,7 @@ public class loginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             GoogleSignInAccount account= GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-                            personEmail = account.getEmail();
+                            personEmail = mail.getText().toString();
                             final SharedPreferences mailreminder = getBaseContext().getSharedPreferences("mailreminder123", 0);
                             final SharedPreferences.Editor editormailreminder = mailreminder.edit();
                             editormailreminder.putString("123", personEmail);
