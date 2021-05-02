@@ -8,6 +8,22 @@
     android:background="@drawable/backimage"
     tools:context=".singleModeListView">
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="-5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/backlitemode"
+        app:lottie_speed="1.4" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -86,7 +102,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -158,7 +174,7 @@
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -229,7 +245,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -299,9 +315,9 @@
                     cardview:cardCornerRadius="5dp">
 
                     <LinearLayout
-                        android:layout_width="250dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -370,7 +386,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -442,7 +458,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -515,7 +531,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -588,7 +604,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -659,7 +675,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -731,7 +747,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -802,7 +818,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -873,7 +889,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -943,7 +959,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -1014,7 +1030,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -1095,7 +1111,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/outsidecardview"
+                            android:background="@drawable/whitewithblackstroke"
                             android:orientation="vertical">
 
                             <ImageView
@@ -1167,7 +1183,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/outsidecardview"
+                            android:background="@drawable/whitewithblackstroke"
                             android:orientation="vertical">
 
                             <ImageView
@@ -1239,7 +1255,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/outsidecardview"
+                            android:background="@drawable/whitewithblackstroke"
                             android:orientation="vertical">
 
                             <ImageView
@@ -1312,7 +1328,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -1382,7 +1398,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="vertical">
 
                         <ImageView
@@ -1454,7 +1470,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/outsidecardview"
+                        android:background="@drawable/whitewithblackstroke"
                         android:orientation="horizontal">
 
                         <ImageView

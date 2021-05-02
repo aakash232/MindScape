@@ -1,6 +1,7 @@
 package com.nbird.mindscape;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,6 +32,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -44,8 +47,12 @@ public class welcomeActivity extends AppCompatActivity {
     Dialog loadingDialog;
     int RC_SIGN_IN=1;
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
-
+    int firstTime=0;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference table_user = database.getReference("User");
     private GoogleSignInClient mGoogleSignInClient;
+    String personEmail;
+    String imageurl="https://firebasestorage.googleapis.com/v0/b/paper-wind.appspot.com/o/BydefalutPic%2Fdefaultpropic.png?alt=media&token=f655727d-9740-4ac9-9ba2-f53ea02dc778";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +89,7 @@ public class welcomeActivity extends AppCompatActivity {
                 loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                 loadingDialog.setCancelable(true);
                 loadingDialog.show();
+
 
 
 
@@ -134,11 +142,71 @@ public class welcomeActivity extends AppCompatActivity {
                     public void onComplete( Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
+                            GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                            personEmail = account.getEmail();
+                            final SharedPreferences mailreminder = getBaseContext().getSharedPreferences("mailreminder123", 0);
+                            final SharedPreferences.Editor editormailreminder = mailreminder.edit();
+                            editormailreminder.putString("123", personEmail);
+                            editormailreminder.commit();
+
+                            table_user.child(mAuth.getCurrentUser().getUid()).child("personal").child("firstTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try {
+                                        firstTime =  snapshot.getValue(Integer.class);
+
+                                    } catch (Exception e) {
+                                        if (firstTime == 0) {
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("propic").setValue(imageurl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+                                            firstTime = 1;
+                                            User s1 = new User(firstTime);
+
+
+
+
+
+
+
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("personal").setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(welcomeActivity.this, mainMenuActivity.class);
+                                                        intent.putExtra("firstTime", 0);
+                                                        startActivity(intent);
+                                                        loadingDialog.dismiss();
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(welcomeActivity.this, "Record Not Saved!", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
 
                             Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
+                            Intent intent = new Intent(welcomeActivity.this, mainMenuActivity.class);
+                            intent.putExtra("firstTime", 1);
+                            startActivity(intent);
                             loadingDialog.dismiss();
                             finish();
+
+
+
 
                         } else {
 
