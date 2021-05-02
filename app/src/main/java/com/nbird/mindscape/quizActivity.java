@@ -688,18 +688,18 @@ public class quizActivity extends AppCompatActivity {
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
 
-            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));
+            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
             score++;
         }else {
             //incorrect
 
-            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));
+            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
             Button correctOption = (Button) linearLayout.findViewWithTag(list.get(position).getCorrectAnswer());
-            correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));
+            correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
             correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             correctOption.setShadowLayer(3,1,1,R.color.lightred);
         }
