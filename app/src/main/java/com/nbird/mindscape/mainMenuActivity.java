@@ -87,7 +87,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
    int num=0;
-    String randomuid,mailid123,imageurl;
+    String randomuid,mailid123,imageurl,imageurl123;
 
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -1248,6 +1248,26 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
 
 
+    }
+
+    public void proPicFunction(){
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl123 = (String) snapshot.getValue();
+                SharedPreferences propic = getApplicationContext().getSharedPreferences("Propic", 0);
+                SharedPreferences.Editor editor = propic.edit();
+                editor.putString("key", imageurl123);
+                editor.apply();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

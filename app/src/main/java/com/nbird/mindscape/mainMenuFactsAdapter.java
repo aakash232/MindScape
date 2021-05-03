@@ -69,7 +69,6 @@ public class mainMenuFactsAdapter extends RecyclerView.Adapter<mainMenuFactsAdap
         public void setData(String title, String dis, final int set) {
             this.title.setText(title);
             this.dis.setText(dis);
-
             setManupulation(set,constraintLayout);
             addDotsIndicator(0);
             slideViewPager.addOnPageChangeListener(viewListner);

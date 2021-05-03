@@ -27,11 +27,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,9 +61,9 @@ public class quizActivity extends AppCompatActivity {
     long milliHolder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
-
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
     TextView timerText;
-
+    String imageurl;
     int num=0;
 
     int expertnum=0;
@@ -126,7 +128,7 @@ public class quizActivity extends AppCompatActivity {
         setNo=getIntent().getIntExtra("setNo",10);
 
         loadingDialog.show();
-
+        proPicFunction();
 
 
         countDownTimerFun();
@@ -557,6 +559,8 @@ public class quizActivity extends AppCompatActivity {
                                         scoreIntent.putExtra("minutestext",minutestext);
                                         scoreIntent.putExtra("secondtext",secondtext);
                                         scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
@@ -574,7 +578,8 @@ public class quizActivity extends AppCompatActivity {
                                         scoreIntent.putExtra("seconds",second);
                                         scoreIntent.putExtra("minutestext",minutestext);
                                         scoreIntent.putExtra("secondtext",secondtext);
-
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
@@ -780,7 +785,24 @@ public class quizActivity extends AppCompatActivity {
         }.start();
     }
 
+    public void proPicFunction(){
 
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl = (String) snapshot.getValue();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 }
