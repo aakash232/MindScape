@@ -51,12 +51,12 @@ public class quizActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     private int count;
     private List<questionHolder> list,listsecondary;
-
+    CountDownTimer countDownTimer;
     private int position=0;
     private int score=0;
      int category;
     private int setNo;
-
+    long milliHolder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
 
@@ -79,9 +79,15 @@ public class quizActivity extends AppCompatActivity {
     int yo4;
 
     int selectNum;
+    int lifelineSum=0;
 
     CardView audienceLL,expertAdviceLL,fiftyfiftyLL,swapTheQuestionLL;
     LinearLayout linearLayoutexpert,linearLayoutAudience,linearLayoutFiftyFifty,linearLayoutSwap;
+
+    int minutes=0;
+    int second=0;
+    String minutestext;
+    String secondtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +151,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
                     if (option1.getText().toString().equals(list.get(position).getCorrectAnswer())) {
@@ -272,6 +279,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
 
@@ -396,6 +404,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
                     nextButton.setEnabled(false);
@@ -445,7 +454,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
-
+                    lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
                     String answerByExpert=list.get(position).getCorrectAnswer();
@@ -536,12 +545,22 @@ public class quizActivity extends AppCompatActivity {
                                 position++;
                                 LLTrueManupulator();
 
+
+
                                 if(swapnum==0){
                                     if (position == 10) {
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
                                         finish();
                                         return;
                                     }
@@ -550,8 +569,16 @@ public class quizActivity extends AppCompatActivity {
                                     if (position == 11) {
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
                                         finish();
                                         return;
                                     }
@@ -716,13 +743,11 @@ public class quizActivity extends AppCompatActivity {
     }
 
     public void countDownTimerFun(){   //Clock Algo
-        new CountDownTimer(60000*10, 1000) {
-            int minutes=0;
-            int second=0;
-            String minutestext;
-            String secondtext;
+        countDownTimer=new CountDownTimer(60000*10, 1000) {
+
 
             public void onTick(long millisUntilFinished) {
+                milliHolder=millisUntilFinished;
                 if(second==60){
                     second=0;
                     minutes++;
@@ -748,6 +773,7 @@ public class quizActivity extends AppCompatActivity {
                 }
             }
             public void onFinish() {
+
                 Toast.makeText(quizActivity.this, "Time Done", Toast.LENGTH_SHORT).show();
             }
 
