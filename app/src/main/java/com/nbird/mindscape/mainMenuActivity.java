@@ -725,7 +725,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             usernameEditText.setError("Field cannot be empty");
             return false;
         }else if(name1.length()>30){
-            usernameEditText.setError("Usernaem should be less than 30 characters");
+            usernameEditText.setError("Username should be less than 30 characters");
             return false;
         }
         else
