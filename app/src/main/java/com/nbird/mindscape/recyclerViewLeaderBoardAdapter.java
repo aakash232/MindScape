@@ -85,15 +85,15 @@ public class recyclerViewLeaderBoardAdapter extends RecyclerView.Adapter<recycle
                 this.totalTime.setText(String.valueOf("Total Time : "+minutes+" min "+sec+" sec "));
             }
 
-            if(sumationScore<50000){
-                if(sumationScore<25000){
+            if(sumationScore<100000){
+                if(sumationScore<50000){
                     levelTextView.setText(" Lv. 1 ");
                 }else{
                     levelTextView.setText(" Lv. 2 ");
                 }
             }else{
                 int holder;
-                holder=sumationScore/25000;
+                holder=sumationScore/50000;
                 levelTextView.setText(" Lv. "+holder+" ");
             }
 
