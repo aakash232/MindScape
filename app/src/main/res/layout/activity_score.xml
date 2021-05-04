@@ -526,7 +526,7 @@
                 android:gravity="center"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
-                android:text=" Leader Board "
+                android:text=" Single Player Quiz Leader Board "
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold"

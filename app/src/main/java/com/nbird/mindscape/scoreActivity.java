@@ -82,6 +82,8 @@ public class scoreActivity extends AppCompatActivity {
     TextView levelText;
     int sumationOfScore=0;
     ImageView image1,image2;
+    int collider;
+    TextView disDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,12 +115,18 @@ public class scoreActivity extends AppCompatActivity {
         lifelineSum=getIntent().getIntExtra("lifeline",0);
         minutes=getIntent().getIntExtra("minutes",0);
         second=getIntent().getIntExtra("seconds",0);
+        collider=getIntent().getIntExtra("Collider",0);
         minutestext=getIntent().getStringExtra("minutestext");
         secondtext=getIntent().getStringExtra("secondtext");
         imageurl=getIntent().getStringExtra("imageurl");
         milliholder=getIntent().getLongExtra("milliholder",0);
 
 
+        if(collider==100){
+            cardViewChangeCategory.setAlpha(0);
+            cardViewChangeCategory.setEnabled(false);
+            cardViewChangeCategory.setClickable(false);
+        }
 
 
         recyclerView = findViewById(R.id.recyclerview);
@@ -147,15 +155,31 @@ public class scoreActivity extends AppCompatActivity {
         totalLifeLine.setText(" Life-Lines Used : "+lifelineSum+"/4 ");
         totalTimeTaken.setText(" Time Taken : "+minutestext+":"+secondtext+" ");
 
-        totalSum= milliholder/100;
-        totalSum=totalSum+6000;
-        for(int i=1;i<=lifelineSum;i++){
-            totalSum=totalSum-1500;
+
+        if(collider==100){
+            totalSum= milliholder/150;
+            totalSum=totalSum+6000;
+            for(int i=1;i<=lifelineSum;i++){
+                totalSum=totalSum-1500;
+            }
+            for (int i=1;i<=score;i++){
+                totalSum=totalSum+1000;
+            }
+            totalScoreNumber.setText(" Total Score : "+totalSum+" ");
+
+        }else{
+            totalSum= milliholder/100;
+            totalSum=totalSum+6000;
+            for(int i=1;i<=lifelineSum;i++){
+                totalSum=totalSum-1500;
+            }
+            for (int i=1;i<=score;i++){
+                totalSum=totalSum+1000;
+            }
+            totalScoreNumber.setText(" Total Score : "+totalSum+" ");
+
         }
-        for (int i=1;i<=score;i++){
-            totalSum=totalSum+1000;
-        }
-        totalScoreNumber.setText(" Total Score : "+totalSum+" ");
+
 
         buttonFunction();
         highestScoreSet();
@@ -373,30 +397,56 @@ public class scoreActivity extends AppCompatActivity {
 
 
     public void buttonFunction(){
-        cardViewHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        cardViewChangeCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(scoreActivity.this,singleModeListView.class);
-                startActivity(intent);
-            }
-        });
+        if(collider==100){
+            cardViewRematch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(scoreActivity.this,activity_picture_singlePlayer.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            cardViewHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }else{
+            cardViewRematch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(scoreActivity.this,quizActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
-        cardViewRematch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(scoreActivity.this,quizActivity.class);
-                intent.putExtra("category",category);
-                startActivity(intent);
-            }
-        });
+            cardViewHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            cardViewChangeCategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(scoreActivity.this,singleModeListView.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+
+
+
+
     }
 
     public void dataSetter(){
@@ -446,18 +496,18 @@ public class scoreActivity extends AppCompatActivity {
 
     public void levelManupulation(){
 
-        if(sumationOfScore<50000){
-            if(sumationOfScore<25000){
+        if(sumationOfScore<100000){
+            if(sumationOfScore<50000){
                 levelText.setText(" Lv. 1 ");
             }else{
                 levelText.setText(" Lv. 2 ");
             }
         }else{
             int holder;
-            holder=sumationOfScore/25000;
+            holder=sumationOfScore/50000;
             levelText.setText(" Lv. "+holder+" ");
         }
-        SharedPreferences batch = getApplicationContext().getSharedPreferences("Batch2", 0);
+        SharedPreferences batch = getApplicationContext().getSharedPreferences("Batch3", 0);
         SharedPreferences.Editor editor = batch.edit();
         int s1;
 
@@ -473,6 +523,7 @@ public class scoreActivity extends AppCompatActivity {
 
             if(s1==0){
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To bronze");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.bronze);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -490,6 +541,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To silver");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.silver);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -503,6 +555,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To Gold");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.gold);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -516,6 +569,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To Platinum");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.platinum);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -529,6 +583,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To Diamond");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.diamond);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -542,6 +597,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To Amethyst");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.amethyst);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -555,6 +611,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To Master");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.master);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -568,6 +625,7 @@ public class scoreActivity extends AppCompatActivity {
             if(s1==0){
 
                 dialogFunction();
+                disDialog.setText("Congratulations "+username123+".You Are Upgraded To King");      //   Aakash Changes Are to be done here
                 image2.setBackgroundResource(R.drawable.king);
                 Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
                 image2.setAnimation(imgAnim1);
@@ -584,7 +642,7 @@ public class scoreActivity extends AppCompatActivity {
         final View view1= LayoutInflater.from(scoreActivity.this).inflate(R.layout.batch_display_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
         builder.setView(view1);
         builder.setCancelable(false);
-        ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
+        disDialog=((TextView) view1.findViewById(R.id.textTitle));
         ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
         image1=((ImageView) view1.findViewById(R.id.imageIcon));
         image2=((ImageView) view1.findViewById(R.id.imageIcon2));
