@@ -7,17 +7,27 @@ public class leaderBoardHolder {
     int correct;
     int wrong;
     String imageUrl;
+    int sumationScore;
 
     public leaderBoardHolder() {
     }
 
-    public leaderBoardHolder(String username, int score, int totalTime, int correct,int wrong, String imageUrl) {
+    public leaderBoardHolder(String username, int score, int totalTime, int correct,int wrong, String imageUrl,int sumationScore) {
         this.username = username;
         this.score = score;
         this.totalTime = totalTime;
         this.correct=correct;
         this.wrong=wrong;
         this.imageUrl = imageUrl;
+        this.sumationScore=sumationScore;
+    }
+
+    public int getSumationScore() {
+        return sumationScore;
+    }
+
+    public void setSumationScore(int sumationScore) {
+        this.sumationScore = sumationScore;
     }
 
     public int getWrong() {

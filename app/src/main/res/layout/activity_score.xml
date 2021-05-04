@@ -39,6 +39,51 @@
         app:lottie_rawRes="@raw/partypoppersanim"
         app:lottie_speed="1" />
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:foreground="?selectableItemBackground"
+        android:layout_marginLeft="30dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white"
+            android:orientation="horizontal"
+            android:elevation="10dp">
+
+
+          <ImageView
+              android:id="@+id/levelImage"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              />
+
+            <TextView
+                android:id="@+id/levelText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="    "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/mouse_memoirs"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
@@ -119,6 +164,8 @@
                     android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp" />
+
+
 
 
                 <LinearLayout

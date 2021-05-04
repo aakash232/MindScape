@@ -71,6 +71,9 @@ public class scoreActivity extends AppCompatActivity {
     int correct;
     int wrongfire=0,wrong=0;
     LottieAnimationView partypoper;
+    ImageView levelImage;
+    TextView levelText;
+    int sumationOfScore=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +91,8 @@ public class scoreActivity extends AppCompatActivity {
         imageView=(ImageView) findViewById(R.id.propic);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
+        levelImage=(ImageView) findViewById(R.id.levelImage);
+        levelText=(TextView) findViewById(R.id.levelText);
 
         partypoper.loop(false);
 
@@ -190,18 +195,35 @@ public class scoreActivity extends AppCompatActivity {
                                                         wrongfire=wrongfire+wrong;
 
 
-                                                        leaderBoardHolder s1 = new leaderBoardHolder(username123,score123,timeHolder,correct,wrongfire,imageurl);
-
-                                                        myRef.child("leaderBoard").child("singlePlayer").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        myRef.child("leaderBoard").child("singlePlayer").child(mAuth.getCurrentUser().getUid()).child("sumationScore").addListenerForSingleValueEvent(new ValueEventListener() {
                                                             @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                 dataSetter();
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                                                sumationOfScore=snapshot.getValue(Integer.class);
+                                                                sumationOfScore= (int) (sumationOfScore+totalSum);
+                                                                levelManupulation();
+
+                                                                leaderBoardHolder s1 = new leaderBoardHolder(username123,score123,timeHolder,correct,wrongfire,imageurl,sumationOfScore);
+
+                                                                myRef.child("leaderBoard").child("singlePlayer").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        dataSetter();
+
+                                                                    }
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                    }
+                                                                });
                                                             }
+
+                                                            @Override
                                                             public void onCancelled(@NonNull DatabaseError error) {
 
                                                             }
                                                         });
+
+
 
 
 
@@ -234,11 +256,16 @@ public class scoreActivity extends AppCompatActivity {
                                 myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                                        sumationOfScore= (int) totalSum;
+                                        levelImage.setBackgroundResource(R.drawable.blackiron);
+                                        levelText.setText(" Lv. 1 ");
                                         username123=snapshot.getValue(String.class);
                                         wrong=10-score;
                                         int manu= (int) ((600000-milliholder)/1000);
                                         int sums=(int)totalSum;
-                                        leaderBoardHolder s1 = new leaderBoardHolder(username123,sums,manu,score,wrong,imageurl);
+                                        leaderBoardHolder s1 = new leaderBoardHolder(username123,sums,manu,score,wrong,imageurl,sumationOfScore);
 
                                         myRef.child("leaderBoard").child("singlePlayer").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -399,6 +426,44 @@ public class scoreActivity extends AppCompatActivity {
     protected void onPause() {
         mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
+    }
+
+
+    public void levelManupulation(){
+
+        if(sumationOfScore<50000){
+            if(sumationOfScore<25000){
+                levelText.setText(" Lv. 1 ");
+            }else{
+                levelText.setText(" Lv. 2 ");
+            }
+        }else{
+            int holder;
+            holder=sumationOfScore/25000;
+            levelText.setText(" Lv. "+holder+" ");
+        }
+
+
+
+        if(sumationOfScore<50000){
+            levelImage.setBackgroundResource(R.drawable.blackiron);
+        }else if(sumationOfScore<200000){
+            levelImage.setBackgroundResource(R.drawable.bronze);
+        }else if(sumationOfScore<500000){
+            levelImage.setBackgroundResource(R.drawable.silver);
+        }else if(sumationOfScore<1000000){
+            levelImage.setBackgroundResource(R.drawable.gold);
+        }else if(sumationOfScore<1500000){
+            levelImage.setBackgroundResource(R.drawable.platinum);
+        }else if(sumationOfScore<2500000){
+            levelImage.setBackgroundResource(R.drawable.diamond);
+        }else if(sumationOfScore<4000000){
+            levelImage.setBackgroundResource(R.drawable.amethyst);
+        }else if(sumationOfScore<6000000){
+            levelImage.setBackgroundResource(R.drawable.master);
+        }else{
+            levelImage.setBackgroundResource(R.drawable.king);
+        }
     }
 
 }
