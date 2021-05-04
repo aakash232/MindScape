@@ -2,8 +2,27 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:interpolator="@android:anim/linear_interpolator">
     <alpha
-        android:duration="300"
+        android:duration="2000"
         android:fromAlpha="1.0"
         android:toAlpha="0.0" >
     </alpha>
+
+
+    <scale
+        android:fromXScale="130dp"
+        android:fromYScale="130dp"
+        android:toXScale="0dp"
+        android:toYScale="0dp">
+
+    </scale>
+
+
+    <rotate
+        android:fromDegrees="0"
+        android:toDegrees="1440"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="2000" >
+
+    </rotate>
 </set>

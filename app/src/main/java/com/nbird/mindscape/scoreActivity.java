@@ -2,8 +2,10 @@ package com.nbird.mindscape;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,9 +13,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,10 +77,11 @@ public class scoreActivity extends AppCompatActivity {
     int timeHolder=0;
     int correct;
     int wrongfire=0,wrong=0;
-    LottieAnimationView partypoper;
+    LottieAnimationView partypoper,party2;
     ImageView levelImage;
     TextView levelText;
     int sumationOfScore=0;
+    ImageView image1,image2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +99,7 @@ public class scoreActivity extends AppCompatActivity {
         imageView=(ImageView) findViewById(R.id.propic);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
+        party2 = (LottieAnimationView)findViewById(R.id.party2);
         levelImage=(ImageView) findViewById(R.id.levelImage);
         levelText=(TextView) findViewById(R.id.levelText);
 
@@ -122,6 +131,12 @@ public class scoreActivity extends AppCompatActivity {
 
         categoryAdapter = new recyclerViewLeaderBoardAdapter(list);
         recyclerView.setAdapter(categoryAdapter);
+
+
+
+
+
+
 
 
 
@@ -442,28 +457,150 @@ public class scoreActivity extends AppCompatActivity {
             holder=sumationOfScore/25000;
             levelText.setText(" Lv. "+holder+" ");
         }
+        SharedPreferences batch = getApplicationContext().getSharedPreferences("Batch2", 0);
+        SharedPreferences.Editor editor = batch.edit();
+        int s1;
+
+
 
 
 
         if(sumationOfScore<50000){
+
             levelImage.setBackgroundResource(R.drawable.blackiron);
         }else if(sumationOfScore<200000){
+            s1 = batch.getInt("bronze", 0);
+
+            if(s1==0){
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.bronze);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("bronze", 1);
+                editor.apply();
+            }
+
+
+
+
             levelImage.setBackgroundResource(R.drawable.bronze);
         }else if(sumationOfScore<500000){
+
+            s1 = batch.getInt("silver", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.silver);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("silver", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.silver);
         }else if(sumationOfScore<1000000){
+
+            s1 = batch.getInt("gold", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.gold);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("gold", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.gold);
         }else if(sumationOfScore<1500000){
+
+            s1 = batch.getInt("platinum", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.platinum);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("platinum", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.platinum);
         }else if(sumationOfScore<2500000){
+
+            s1 = batch.getInt("diamond", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.diamond);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("diamond", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.diamond);
         }else if(sumationOfScore<4000000){
+
+            s1 = batch.getInt("amethyst", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.amethyst);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("amethyst", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.amethyst);
         }else if(sumationOfScore<6000000){
+
+            s1 = batch.getInt("master", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.master);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("master", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.master);
         }else{
+
+            s1 = batch.getInt("king", 0);
+            if(s1==0){
+
+                dialogFunction();
+                image2.setBackgroundResource(R.drawable.king);
+                Animation imgAnim1 = AnimationUtils.loadAnimation(this, R.anim.batchanim);
+                image2.setAnimation(imgAnim1);
+                editor.putInt("king", 1);
+                editor.apply();
+            }
             levelImage.setBackgroundResource(R.drawable.king);
         }
+    }
+
+    public void dialogFunction(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(scoreActivity.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(scoreActivity.this).inflate(R.layout.batch_display_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
+        ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+        image1=((ImageView) view1.findViewById(R.id.imageIcon));
+        image2=((ImageView) view1.findViewById(R.id.imageIcon2));
+        final AlertDialog alertDialog=builder.create();
+        party2.loop(false);
+        party2.playAnimation();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+        view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
     }
 
 }
