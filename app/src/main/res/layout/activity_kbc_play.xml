@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KbcPlay"
+    android:background="@drawable/kbc">
+
+
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/play"
+        android:onClick="playB"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toStartOf="@+id/highscore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/exit"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="174dp"
+        android:layout_marginBottom="47dp"
+        android:onClick="exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play"
+        app:srcCompat="@drawable/exit" />
+
+    <ImageView
+        android:id="@+id/highscore"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="174dp"
+        android:onClick="score"
+        app:layout_constraintBottom_toTopOf="@+id/rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/play"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/high_score" />
+
+    <ImageView
+        android:id="@+id/rate"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginBottom="47dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exit"
+        app:layout_constraintTop_toBottomOf="@+id/highscore"
+        app:srcCompat="@drawable/rate" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

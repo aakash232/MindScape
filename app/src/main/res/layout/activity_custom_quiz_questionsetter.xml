@@ -83,8 +83,8 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:inputType="text"
+            android:singleLine="true"
             android:textColor="#000000" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,8 +124,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="@font/comfortaa"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="A."
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -148,6 +148,7 @@
                     android:textColor="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,8 +158,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="@font/comfortaa"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="B."
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -181,6 +182,7 @@
                     android:textColor="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,8 +192,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="@font/comfortaa"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="C."
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -214,6 +216,7 @@
                     android:textColor="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -223,8 +226,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="@font/comfortaa"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="D."
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -249,17 +252,85 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="select the correct option"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout27" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+        <RadioButton
+            android:id="@+id/optionARadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="A."
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/optionBRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="B."
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/optionCRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="C."
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/optionDRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="D."
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/nextbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/pureblack"
         android:text="Next"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout27" />
+        app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
