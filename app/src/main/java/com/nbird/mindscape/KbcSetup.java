@@ -1,5 +1,6 @@
 package com.nbird.mindscape;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 
@@ -24,12 +26,18 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +50,22 @@ public class KbcSetup extends AppCompatActivity {
     LinearLayout linearLayoutButton,linearLayoutPrice,lifelineLayout;
     int count=0,position=0,score=0;
     TextView kbc_que;
-    private List<questionHolder> list;
+    private List<questionHolder> list,listsecondary;
+    private int setNo;
+
     TextView timerText;
     CountDownTimer countDownTimer;
     Button half,advice,audience,flip,quit;
     Button button1,button2,button3,button4;
-
+    int category;
     MediaPlayer kbcQueMus,kbcCountMus;
+
+    String wrongString;
+
+    Dialog loadingDialog,expert1dialog;
+
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    DatabaseReference myRef=database.getReference();
 
     int selectNum;
     int halfnum=0;
@@ -57,7 +74,7 @@ public class KbcSetup extends AppCompatActivity {
     int flipnum=0;
     int manupulator=0;
     int manupulator1=0;
-
+    int num=0;
     int yo1;
     int yo2;
     int yo3;
@@ -89,7 +106,13 @@ public class KbcSetup extends AppCompatActivity {
         timerText = findViewById(R.id.timerText);
 
         list = new ArrayList<>();
-        easyFunction();
+        listsecondary=new ArrayList<>();
+
+        category=getIntent().getIntExtra("category",1);
+        setNo=getIntent().getIntExtra("setNo",10);
+
+        if(loadingDialog!=null)
+            loadingDialog.show();
 
         countDownTimer = new CountDownTimer(31000, 1000) {
 
@@ -101,25 +124,26 @@ public class KbcSetup extends AppCompatActivity {
                     timerText.setText(""+ millisUntilFinished/1000);
             }
             public void onFinish() {
-                countDownTimer.start();
-                kbcCountMus.stop();
+                countDownTimer.cancel();
+
+                wrongString = "Time's Up!";
+                moveToScore();
             }
 
         }.start();
 
+        for(int i=0;i<11;i++){
+            // create instance of Random class
+            Random rand = new Random();
 
-        playAnim(kbc_que,0,list.get(position).getQuestionTextView());
+            // Generate random integers in range 0 to 29
 
-        for (int i = 0; i < 4; i++) {
-            linearLayoutButton.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public void onClick(View view) {
-                    checkAnswer((Button) view);
-                }
-            });
+            final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+            //NEED TO CHANGE HERE
+
+
+            fireBaseData(setNumber);
         }
-
 
         half.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -483,14 +507,54 @@ public class KbcSetup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 kbcCountMus.stop();
-                Intent i = new Intent(KbcSetup.this,KbcPlay.class);
-                startActivity(i);
+                wrongString = "";
+                moveToScore();
             }
         });
 
     }
 
-    private void playAnim(final View view, final int value,final String data){
+    public void fireBaseData(int setNumber){
+        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                    list.add(snapshot1.getValue(questionHolder.class));
+                    num++;
+                }
+                if(num==10) {
+                    if (list.size() > 0) {
+                        for (int i = 0; i < 4; i++) {
+                            linearLayoutButton.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View view) {
+                                    checkAnswer((Button) view);
+                                }
+                            });
+                        }
+                        playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
+                    } else {
+                        finish();
+                        Toast.makeText(KbcSetup.this, "No Questions", Toast.LENGTH_SHORT).show();
+
+                    }
+                    if(loadingDialog!=null)
+                        loadingDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(KbcSetup.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                if(loadingDialog!=null)
+                    loadingDialog.dismiss();
+                finish();
+            }
+        });
+    }
+
+    private void playAnim(final View view, final int value, final String data){
         view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500).setStartDelay(100).setInterpolator(new DecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -499,16 +563,20 @@ public class KbcSetup extends AppCompatActivity {
                     String option="";
                     if(count==0){
                         option=list.get(position).getOption1();
-                        linearLayoutButton.getChildAt(0).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#269BFF")));
+                        button1.setTextColor(Color.parseColor("#ffffff"));
+                        linearLayoutButton.getChildAt(0).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==1){
                         option=list.get(position).getOption2();
-                        linearLayoutButton.getChildAt(1).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#269BFF")));
+                        button2.setTextColor(Color.parseColor("#ffffff"));
+                        linearLayoutButton.getChildAt(1).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==2){
                         option=list.get(position).getOption3();
-                        linearLayoutButton.getChildAt(2).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#269BFF")));
+                        button3.setTextColor(Color.parseColor("#ffffff"));
+                        linearLayoutButton.getChildAt(2).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==3){
                         option=list.get(position).getOption4();
-                        linearLayoutButton.getChildAt(3).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#269BFF")));
+                        button4.setTextColor(Color.parseColor("#ffffff"));
+                        linearLayoutButton.getChildAt(3).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }
                     playAnim(linearLayoutButton.getChildAt(count),0,option);
                     count++;
@@ -546,6 +614,8 @@ public class KbcSetup extends AppCompatActivity {
     private void checkAnswer(Button selectedOption){
         enableOption(false);
         kbcCountMus.stop();
+
+        LLFalseManupulator();
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             nextQue();
             countDownTimer.cancel();
@@ -563,15 +633,9 @@ public class KbcSetup extends AppCompatActivity {
 
 
         }else {
-            countDownTimer.cancel();;
-
-            String string = "Wrong Answer";
-            View res = linearLayoutPrice.getChildAt(score+1);
-            Intent intent = new Intent(KbcSetup.this,KbcScoreActivity.class);
-            intent.putExtra("string",string);
-            intent.putExtra("score", res.toString());
-            startActivity(intent);
-
+            wrongString = "Wrong Answer";
+            moveToScore();
+            countDownTimer.cancel();
         }
     }
 
@@ -586,20 +650,6 @@ public class KbcSetup extends AppCompatActivity {
         }
     }
 
-    public void easyFunction(){
-
-        list.add(new questionHolder("What is the capital of Russia?", "Moscow", "Dhaka", "New York", "Paris", "Moscow"));
-        list.add(new questionHolder("Which of these fractions is of the greatest value?", "1/4", "1/3", "1/2", "1/1", "1/1"));
-        list.add(new questionHolder("When is the International Yoga Day Celebrated", "June 21", "March 21", "April 22", "May 31", "June 21"));
-        list.add(new questionHolder("What is the name of the protective outer layer of trees called?", "Phloem", "Cambium Layer", "Heartwood", "Bark", "Bark"));
-        list.add(new questionHolder("Which liquid do plants need for photosynthesis?", "Liquid Methane", "Water", "Liquid Nitrogen", "Liquid Oxygen", "Water"));
-        list.add(new questionHolder("Which is the fastest animal on two legs?", "Kiwi", "Ostrich", "Emu", "Penguin", "Ostrich"));
-        list.add(new questionHolder("Which mountain is the highest in the world", "Kanchenjunga", "K2", "Mount Everest", "Nanda Devi", "Mount Everest"));
-        list.add(new questionHolder("According to a proverb,what is said to be 'The Mother Of Invention'?", "Society", "Problem", "Science", "Necessity", "Necessity"));
-        list.add(new questionHolder("What do the five rings of the Olympics represent?", "Five Games", "Five Languages", "Five Continents", "Five Oceans", "Five Continents"));
-        list.add(new questionHolder("How many watts equal a megawatt?", "One Hundred", "One Thousand", "Ten Thousand", "One Lakh", "One Lakh"));
-
-    }
 
     public void LLFalseManupulator(){        //Setting all the lifelines enable:False when an option is selected.
         audience.setClickable(false);
@@ -642,11 +692,39 @@ public class KbcSetup extends AppCompatActivity {
         count = 0;
         position++;
         enableOption(true);
-        if(position==list.size()) {
-            finish();
-            return;
+
+        LLTrueManupulator();
+
+        if(flipnum==0){
+            if (position == 10) {
+                Intent scoreIntent = new Intent(KbcSetup.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return;
+            }
+
+        }else {
+            if (position == 11) {
+                Intent scoreIntent = new Intent(KbcSetup.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return;
+            }
         }
 
+        count = 0;
         playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
+    }
+
+    public void moveToScore()
+    {
+        Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
+        i.putExtra("string",wrongString);
+        i.putExtra("score",score);
+        startActivity(i);
     }
 }
