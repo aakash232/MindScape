@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile"
+    android:background="@drawable/backimage">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/backlitemodeanim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="-5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/coldmountain"
+        app:lottie_speed="0.3" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/backblack"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/personaldetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilepic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/defaultpropic" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Mr. Harry"
+            android:textSize="35sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/mouse_memoirs"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                 <ImageView
+                     android:id="@+id/levelicon"
+                     android:layout_width="50dp"
+                     android:layout_height="40dp"
+                     android:src="@drawable/silver"
+                     />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:text="Level 3"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/mouse_memoirs"/>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/personaldetails"
+        android:orientation="vertical"
+        app:cardBackgroundColor="@color/transparentwhite"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="5dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/lightgrey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Stats"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/lightgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/quizcount"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:textStyle="bold"
+                    android:text="20 Quizzes Completed"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:background="@drawable/circular_shape_view"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:id="@+id/topscore"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"
+                    android:text="Top Score 200000"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:background="@drawable/circular_shape_view"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:id="@+id/percentile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="12dp"
+                    android:text="98.90  Percentile"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:background="@drawable/circular_shape_view"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/accuracy"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:text="95% Accuracy"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/circular_shape_view"
+                android:gravity="center"
+                android:layout_centerInParent="true"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
