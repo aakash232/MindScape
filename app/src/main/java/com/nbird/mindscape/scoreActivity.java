@@ -163,7 +163,7 @@ public class scoreActivity extends AppCompatActivity {
                 totalSum=totalSum-1500;
             }
             for (int i=1;i<=score;i++){
-                totalSum=totalSum+1000;
+                totalSum=totalSum+950;
             }
             totalScoreNumber.setText(" Total Score : "+totalSum+" ");
 
@@ -535,7 +535,7 @@ public class scoreActivity extends AppCompatActivity {
 
 
             levelImage.setBackgroundResource(R.drawable.bronze);
-        }else if(sumationOfScore<500000){
+        }else if(sumationOfScore<800000){
 
             s1 = batch.getInt("silver", 0);
             if(s1==0){
@@ -549,7 +549,7 @@ public class scoreActivity extends AppCompatActivity {
                 editor.apply();
             }
             levelImage.setBackgroundResource(R.drawable.silver);
-        }else if(sumationOfScore<1000000){
+        }else if(sumationOfScore<1800000){
 
             s1 = batch.getInt("gold", 0);
             if(s1==0){
@@ -563,7 +563,7 @@ public class scoreActivity extends AppCompatActivity {
                 editor.apply();
             }
             levelImage.setBackgroundResource(R.drawable.gold);
-        }else if(sumationOfScore<1500000){
+        }else if(sumationOfScore<3000000){
 
             s1 = batch.getInt("platinum", 0);
             if(s1==0){
@@ -577,7 +577,7 @@ public class scoreActivity extends AppCompatActivity {
                 editor.apply();
             }
             levelImage.setBackgroundResource(R.drawable.platinum);
-        }else if(sumationOfScore<2500000){
+        }else if(sumationOfScore<4000000){
 
             s1 = batch.getInt("diamond", 0);
             if(s1==0){
@@ -591,7 +591,7 @@ public class scoreActivity extends AppCompatActivity {
                 editor.apply();
             }
             levelImage.setBackgroundResource(R.drawable.diamond);
-        }else if(sumationOfScore<4000000){
+        }else if(sumationOfScore<8000000){
 
             s1 = batch.getInt("amethyst", 0);
             if(s1==0){
@@ -605,7 +605,7 @@ public class scoreActivity extends AppCompatActivity {
                 editor.apply();
             }
             levelImage.setBackgroundResource(R.drawable.amethyst);
-        }else if(sumationOfScore<6000000){
+        }else if(sumationOfScore<12000000){
 
             s1 = batch.getInt("master", 0);
             if(s1==0){

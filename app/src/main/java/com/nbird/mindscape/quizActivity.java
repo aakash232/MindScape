@@ -779,7 +779,22 @@ public class quizActivity extends AppCompatActivity {
             }
             public void onFinish() {
 
-                Toast.makeText(quizActivity.this, "Time Done", Toast.LENGTH_SHORT).show();
+                Toast.makeText(quizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
+                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("imageurl",imageurl);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                finish();
             }
 
         }.start();
@@ -802,6 +817,12 @@ public class quizActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onBackPressed() {
+        quizActivity.super.onBackPressed();
+        finish();
+
     }
 
 

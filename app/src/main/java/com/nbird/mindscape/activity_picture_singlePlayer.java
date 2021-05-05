@@ -489,7 +489,9 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             //NEED TO CHANGE HERE
 
             fireBaseData(setNumber);
+
         }
+
     }
 
     //Firebase Fetch
@@ -499,6 +501,10 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     list.add(snapshot1.getValue(pictureQuizHolder.class));
+                    Glide.with(getBaseContext())
+                            .load(list.get(num).getQuestionPicture())
+                            .preload(200, 100);
+
                     num++;
                 }
                 if(num==10) {
@@ -774,7 +780,22 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             }
             public void onFinish() {
 
-                Toast.makeText(activity_picture_singlePlayer.this, "Time Done", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
+                Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("imageurl",imageurl);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                finish();
             }
 
         }.start();
@@ -798,5 +819,10 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             }
         });
     }
+    public void onBackPressed() {
+        activity_picture_singlePlayer.super.onBackPressed();
+        finish();
+    }
+
 
 }
