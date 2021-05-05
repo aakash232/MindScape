@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +66,7 @@ public class quizActivity extends AppCompatActivity {
     TextView timerText;
     String imageurl;
     int num=0;
-
+    ImageView expertImage;
     int expertnum=0;
     int swapnum=0;
     int audiencenum=0;
@@ -74,12 +75,12 @@ public class quizActivity extends AppCompatActivity {
     int manupulator1=0;
     int fiftyfiftynum=0;
 
-
+    TextView titleText;
     int yo1;
     int yo2;
     int yo3;
     int yo4;
-
+    String userName;
     int selectNum;
     int lifelineSum=0;
 
@@ -113,7 +114,7 @@ public class quizActivity extends AppCompatActivity {
         linearLayoutAudience=(LinearLayout) findViewById(R.id.linearLayoutAudience) ;
         linearLayoutFiftyFifty=(LinearLayout) findViewById(R.id.linearLayoutfiftyfifty) ;
         linearLayoutSwap=(LinearLayout) findViewById(R.id.linearLayoutSwap) ;
-
+        userNameFunction();
 
         loadingDialog=new Dialog(this);
         loadingDialog.setContentView(R.layout.loading_screen);
@@ -467,9 +468,11 @@ public class quizActivity extends AppCompatActivity {
                     final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I Think It's : \n'"+answerByExpert+"'");
+                    titleText=((TextView) view1.findViewById(R.id.textTitle));
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I Think It's : \n'"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    expertAdviceImageManupulator();
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -492,9 +495,9 @@ public class quizActivity extends AppCompatActivity {
                     final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your EXPERT ADVICE Life Line Once.");
+                    titleText=((TextView) view1.findViewById(R.id.textTitle));
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
-
+                    expertAdviceImageManupulator();
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
@@ -511,6 +514,9 @@ public class quizActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
 
 
     }
@@ -824,6 +830,69 @@ public class quizActivity extends AppCompatActivity {
         finish();
 
     }
+
+    public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
+        Random rand = new Random();
+        int num = rand.nextInt(11)+1;
+
+        switch (num){
+            case 1:
+                expertImage.setBackgroundResource(R.drawable.expert1female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 2:
+                expertImage.setBackgroundResource(R.drawable.expert2male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 3:
+                expertImage.setBackgroundResource(R.drawable.expert3male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 4:
+                expertImage.setBackgroundResource(R.drawable.expert4male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 5:
+                expertImage.setBackgroundResource(R.drawable.expert5male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 6:
+                expertImage.setBackgroundResource(R.drawable.expert6female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 7:
+                expertImage.setBackgroundResource(R.drawable.expert7male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 8:
+                expertImage.setBackgroundResource(R.drawable.expert8female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 9:
+                expertImage.setBackgroundResource(R.drawable.expert9female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 10:
+                expertImage.setBackgroundResource(R.drawable.expert10male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 11:
+                expertImage.setBackgroundResource(R.drawable.expert11male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 12:
+                expertImage.setBackgroundResource(R.drawable.expert12male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+
+        }
+
+
+    }
+
+    public void userNameFunction(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
 
 }

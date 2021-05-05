@@ -68,7 +68,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     String imageurl;
     private int position=0, score=0, count;
     private int setNo;
-
+    ImageView expertImage;
     int category,num=0, expertnum=0, swapnum=0, audiencenum=0, fiftyfiftynum=0, selectNum;
     int yo1,yo2,yo3,yo4;
     int manupulator=0, manupulator1=0;
@@ -79,6 +79,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     String secondtext;
     int lifelineSum=0;
     long milliHolder;
+    TextView titleText;
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +116,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         loadingDialog.show();
         proPicFunction();
         countDownTimerFun();
-
+        userNameFunction();
 
         //LIFELINES
 
@@ -433,10 +435,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Dr. Harry (PhD) is Expert for the day");
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I feel you should go for  : \n'"+answerByExpert+"'");
+                    titleText=((TextView) view1.findViewById(R.id.textTitle));
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n'"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
-
+                    expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    expertAdviceImageManupulator();
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
@@ -460,7 +463,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     builder.setCancelable(false);
                     ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
-
+                    expertAdviceImageManupulator();
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
@@ -823,6 +826,76 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         activity_picture_singlePlayer.super.onBackPressed();
         finish();
     }
+    public void expertAdviceImageManupulator() {    //Aakash changes in this functions are to be done
+        Random rand = new Random();
+        int num = rand.nextInt(11) + 1;
 
+        switch (num) {
+            case 1:
+                expertImage.setBackgroundResource(R.drawable.expert1female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 2:
+                expertImage.setBackgroundResource(R.drawable.expert2male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 3:
+                expertImage.setBackgroundResource(R.drawable.expert3male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 4:
+                expertImage.setBackgroundResource(R.drawable.expert4male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 5:
+                expertImage.setBackgroundResource(R.drawable.expert5male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 6:
+                expertImage.setBackgroundResource(R.drawable.expert6female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 7:
+                expertImage.setBackgroundResource(R.drawable.expert7male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 8:
+                expertImage.setBackgroundResource(R.drawable.expert8female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 9:
+                expertImage.setBackgroundResource(R.drawable.expert9female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 10:
+                expertImage.setBackgroundResource(R.drawable.expert10male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 11:
+                expertImage.setBackgroundResource(R.drawable.expert11male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+            case 12:
+                expertImage.setBackgroundResource(R.drawable.expert12male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");
+                break;
+
+        }
+
+    }
+
+    public void userNameFunction(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }
