@@ -21,17 +21,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,25 +59,33 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     CardView audienceLL,expertAdviceLL,fiftyfiftyLL,swapTheQuestionLL;
     LinearLayout linearLayoutexpert,linearLayoutAudience,linearLayoutFiftyFifty,linearLayoutSwap;
     Dialog loadingDialog,expert1dialog;
-
+    ImageView questionImage;
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
-
-    private List<questionHolder> list, listsecondary;
-
+    CountDownTimer countDownTimer;
+    private List<pictureQuizHolder> list, listsecondary;
+    String imageurl;
     private int position=0, score=0, count;
     private int setNo;
 
     int category,num=0, expertnum=0, swapnum=0, audiencenum=0, fiftyfiftynum=0, selectNum;
     int yo1,yo2,yo3,yo4;
     int manupulator=0, manupulator1=0;
-
+    String linkHolder;
+    int minutes=0;
+    int second=0;
+    String minutestext;
+    String secondtext;
+    int lifelineSum=0;
+    long milliHolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_singleplayer);
 
-        questionTextView=findViewById(R.id.question);
+        questionTextView=findViewById(R.id.questionTip);
+        questionImage=(ImageView) findViewById(R.id.questionImage);
         scoreBoard=findViewById(R.id.questionNumber);
         option1=(Button) findViewById(R.id.button1);
         option2=(Button) findViewById(R.id.button2);
@@ -99,11 +111,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         list=new ArrayList<>();
         listsecondary=new ArrayList<>();
 
-        category=getIntent().getIntExtra("category",1);
-        setNo=getIntent().getIntExtra("setNo",10);
-
         loadingDialog.show();
-
+        proPicFunction();
         countDownTimerFun();
 
 
@@ -115,6 +124,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
                     if (option1.getText().toString().equals(list.get(position).getCorrectAnswer())) {
@@ -239,6 +249,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
 
@@ -363,6 +374,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
                     nextButton.setEnabled(false);
@@ -410,7 +422,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
-
+                    lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
                     String answerByExpert=list.get(position).getCorrectAnswer();
@@ -471,22 +483,28 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             // create instance of Random class
             Random rand = new Random();
 
-            // Generate random integers in range 0 to 29
+            // Generate random integers in range 0 to 14
 
-            final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+            final int setNumber = rand.nextInt(13)+1;  //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
 
             fireBaseData(setNumber);
+
         }
+
     }
 
     //Firebase Fetch
     public void fireBaseData(int setNumber){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuiz").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(questionHolder.class));
+                    list.add(snapshot1.getValue(pictureQuizHolder.class));
+                    Glide.with(getBaseContext())
+                            .load(list.get(num).getQuestionPicture())
+                            .preload(200, 100);
+
                     num++;
                 }
                 if(num==10) {
@@ -512,12 +530,26 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                 position++;
                                 LLTrueManupulator();
 
+
+
+
                                 if(swapnum==0){
                                     if (position == 10) {
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
+                                        scoreIntent.putExtra("Collider",100);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        finish();
                                         finish();
                                         return;
                                     }
@@ -526,8 +558,18 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                     if (position == 11) {
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        finish();
                                         finish();
                                         return;
                                     }
@@ -565,6 +607,14 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 if(value==0 && count<4){
                     String option="";
                     if(count==0){
+
+
+                        linkHolder=list.get(position).getQuestionPicture();
+                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        Animation imgAnim1 = AnimationUtils.loadAnimation(activity_picture_singlePlayer.this, R.anim.scaleincanim);
+                        questionImage.setAnimation(imgAnim1);
+
+
                         option=list.get(position).getOption1();
                         option1.setTextColor(Color.parseColor("#ffffff"));
                         linearLayout.getChildAt(0).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
@@ -653,6 +703,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         swapTheQuestionLL.setClickable(true);
         swapTheQuestionLL.setEnabled(true);
         swapTheQuestionLL.setAlpha(1.0f);
+
+
     }
 
     //Color coding for options
@@ -696,14 +748,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
     //Clock Algorithm (UpCounter)
-    public void countDownTimerFun(){
-        new CountDownTimer(60000*10, 1000) {
-            int minutes=0;
-            int second=0;
-            String minutestext;
-            String secondtext;
+    public void countDownTimerFun(){   //Clock Algo
+        countDownTimer=new CountDownTimer(60000*10, 1000) {
+
 
             public void onTick(long millisUntilFinished) {
+                milliHolder=millisUntilFinished;
                 if(second==60){
                     second=0;
                     minutes++;
@@ -729,10 +779,50 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 }
             }
             public void onFinish() {
-                Toast.makeText(activity_picture_singlePlayer.this, "Time Done", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
+                Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("imageurl",imageurl);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                finish();
             }
 
         }.start();
     }
+
+    public void proPicFunction(){
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl = (String) snapshot.getValue();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void onBackPressed() {
+        activity_picture_singlePlayer.super.onBackPressed();
+        finish();
+    }
+
 
 }
