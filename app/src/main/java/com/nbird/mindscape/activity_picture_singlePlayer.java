@@ -21,17 +21,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,53 +46,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class quizActivity extends AppCompatActivity {
+import android.os.Bundle;
 
-    Dialog loadingDialog,expert1dialog;
+import androidx.appcompat.app.AppCompatActivity;
 
-    TextView questionTextView,scoreBoard;
+public class activity_picture_singlePlayer extends AppCompatActivity {
+
+    //Variable Declaration
+    TextView questionTextView,scoreBoard,timerText;
     Button option1,option2,option3,option4,nextButton;
     LinearLayout linearLayout;
-    private int count;
-    private List<questionHolder> list,listsecondary;
-
-    private int position=0;
-    private int score=0;
-     int category;
-    private int setNo;
-
-    FirebaseDatabase database=FirebaseDatabase.getInstance();
-    DatabaseReference myRef=database.getReference();
-
-    TextView timerText;
-
-    int num=0;
-
-    int expertnum=0;
-    int swapnum=0;
-    int audiencenum=0;
-
-    int manupulator=0;
-    int manupulator1=0;
-    int fiftyfiftynum=0;
-
-
-    int yo1;
-    int yo2;
-    int yo3;
-    int yo4;
-
-    int selectNum;
-
     CardView audienceLL,expertAdviceLL,fiftyfiftyLL,swapTheQuestionLL;
     LinearLayout linearLayoutexpert,linearLayoutAudience,linearLayoutFiftyFifty,linearLayoutSwap;
+    Dialog loadingDialog,expert1dialog;
+    ImageView questionImage;
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    DatabaseReference myRef=database.getReference();
+    CountDownTimer countDownTimer;
+    private List<pictureQuizHolder> list, listsecondary;
+    String imageurl;
+    private int position=0, score=0, count;
+    private int setNo;
 
+    int category,num=0, expertnum=0, swapnum=0, audiencenum=0, fiftyfiftynum=0, selectNum;
+    int yo1,yo2,yo3,yo4;
+    int manupulator=0, manupulator1=0;
+    String linkHolder;
+    int minutes=0;
+    int second=0;
+    String minutestext;
+    String secondtext;
+    int lifelineSum=0;
+    long milliHolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        setContentView(R.layout.activity_picture_singleplayer);
 
-        questionTextView=findViewById(R.id.question);
+        questionTextView=findViewById(R.id.questionTip);
+        questionImage=(ImageView) findViewById(R.id.questionImage);
         scoreBoard=findViewById(R.id.questionNumber);
         option1=(Button) findViewById(R.id.button1);
         option2=(Button) findViewById(R.id.button2);
@@ -106,45 +103,28 @@ public class quizActivity extends AppCompatActivity {
         linearLayoutFiftyFifty=(LinearLayout) findViewById(R.id.linearLayoutfiftyfifty) ;
         linearLayoutSwap=(LinearLayout) findViewById(R.id.linearLayoutSwap) ;
 
-
         loadingDialog=new Dialog(this);
         loadingDialog.setContentView(R.layout.loading_screen);
         loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         loadingDialog.setCancelable(false);
 
-
         list=new ArrayList<>();
         listsecondary=new ArrayList<>();
 
-        category=getIntent().getIntExtra("category",1);
-        setNo=getIntent().getIntExtra("setNo",10);
-
         loadingDialog.show();
-
-
-
+        proPicFunction();
         countDownTimerFun();
 
 
-        for(int i=0;i<11;i++){
-            // create instance of Random class
-            Random rand = new Random();
+        //LIFELINES
 
-            // Generate random integers in range 0 to 29
-
-            final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
-              //NEED TO CHANGE HERE
-
-
-            fireBaseData(setNumber);
-        }
-
-
+        //50-50
         fiftyfiftyLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
                     if (option1.getText().toString().equals(list.get(position).getCorrectAnswer())) {
@@ -238,13 +218,13 @@ public class quizActivity extends AppCompatActivity {
 
                 }else{
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
-                    final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your FIFTY-FIFTY Life Line Once.");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your FIFTY-FIFTY Life Line Once.");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -259,19 +239,17 @@ public class quizActivity extends AppCompatActivity {
                             alertDialog.dismiss();
                         }
                     });
-
                 }
-
-
-
             }
         });
 
+        //Audience Poll
         audienceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
 
@@ -318,13 +296,13 @@ public class quizActivity extends AppCompatActivity {
                     }
 
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(quizActivity.this, R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity_picture_singlePlayer.this, R.style.AlertDialogTheme);
 
-                    final View view1 = LayoutInflater.from(quizActivity.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1 = LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText(" MindScapers from across the world have casted their votes above. Choose your option! ");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
                     BarChart barChart = ((BarChart) view1.findViewById(R.id.barChart));
 
 
@@ -335,7 +313,7 @@ public class quizActivity extends AppCompatActivity {
                     visitors.add(new BarEntry(4, yo4));
 
 
-                    BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
+                    BarDataSet barDataSet = new BarDataSet(visitors, "Vote Bars");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
                     barDataSet.setValueTextColor(Color.BLUE);
@@ -363,13 +341,13 @@ public class quizActivity extends AppCompatActivity {
                     });
                 }else{
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
-                    final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your AUDIENCE POLL Life Line Once.");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -389,13 +367,14 @@ public class quizActivity extends AppCompatActivity {
         });
 
 
-
+        //Swap the question
         swapTheQuestionLL.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
                     nextButton.setEnabled(false);
@@ -409,13 +388,13 @@ public class quizActivity extends AppCompatActivity {
                     playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
                 }else{
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
-                    final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your SWAP Life Line Once.");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your SWAP Life Line Once.");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -437,28 +416,26 @@ public class quizActivity extends AppCompatActivity {
         });
 
 
-
-
-
+        //Expert advice
         expertAdviceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(expertnum==0){
-
+                    lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
                     String answerByExpert=list.get(position).getCorrectAnswer();
 
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
-                    final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I Think It's : \n'"+answerByExpert+"'");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Dr. Harry (PhD) is Expert for the day");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I feel you should go for  : \n'"+answerByExpert+"'");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -476,13 +453,13 @@ public class quizActivity extends AppCompatActivity {
 
 
                 }else{
-                    AlertDialog.Builder builder=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
-                    final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your EXPERT ADVICE Life Line Once.");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -502,15 +479,32 @@ public class quizActivity extends AppCompatActivity {
         });
 
 
+        for(int i=0;i<11;i++){
+            // create instance of Random class
+            Random rand = new Random();
+
+            // Generate random integers in range 0 to 14
+
+            final int setNumber = rand.nextInt(13)+1;  //NEED TO CHANGE HERE
+            //NEED TO CHANGE HERE
+
+            fireBaseData(setNumber);
+
+        }
+
     }
 
-
+    //Firebase Fetch
     public void fireBaseData(int setNumber){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuiz").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(questionHolder.class));
+                    list.add(snapshot1.getValue(pictureQuizHolder.class));
+                    Glide.with(getBaseContext())
+                            .load(list.get(num).getQuestionPicture())
+                            .preload(200, 100);
+
                     num++;
                 }
                 if(num==10) {
@@ -536,22 +530,46 @@ public class quizActivity extends AppCompatActivity {
                                 position++;
                                 LLTrueManupulator();
 
+
+
+
                                 if(swapnum==0){
                                     if (position == 10) {
-                                        Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                        Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
+                                        scoreIntent.putExtra("Collider",100);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        finish();
                                         finish();
                                         return;
                                     }
 
                                 }else {
                                     if (position == 11) {
-                                        Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                        Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        finish();
                                         finish();
                                         return;
                                     }
@@ -564,7 +582,7 @@ public class quizActivity extends AppCompatActivity {
                         });
                     } else {
                         finish();
-                        Toast.makeText(quizActivity.this, "No Questions", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity_picture_singlePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
 
                     }
                     loadingDialog.dismiss();
@@ -573,14 +591,14 @@ public class quizActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(quizActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_picture_singlePlayer.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
                 finish();
             }
         });
     }
 
-
+    //AnimPlay
     private void playAnim(final View view, final int value, final String data){
         view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500).setStartDelay(100).setInterpolator(new DecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -589,6 +607,14 @@ public class quizActivity extends AppCompatActivity {
                 if(value==0 && count<4){
                     String option="";
                     if(count==0){
+
+
+                        linkHolder=list.get(position).getQuestionPicture();
+                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        Animation imgAnim1 = AnimationUtils.loadAnimation(activity_picture_singlePlayer.this, R.anim.scaleincanim);
+                        questionImage.setAnimation(imgAnim1);
+
+
                         option=list.get(position).getOption1();
                         option1.setTextColor(Color.parseColor("#ffffff"));
                         linearLayout.getChildAt(0).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
@@ -640,7 +666,8 @@ public class quizActivity extends AppCompatActivity {
         });
     }
 
-    public void LLFalseManupulator(){        //Setting all the lifelines enable:False when an option is selected.
+    //Setting all the lifelines enable:False when an option is selected.
+    public void LLFalseManupulator(){
         audienceLL.setClickable(false);
         audienceLL.setEnabled(false);
         audienceLL.setAlpha(0.8f);
@@ -659,7 +686,8 @@ public class quizActivity extends AppCompatActivity {
 
     }
 
-    public void LLTrueManupulator(){       //Setting all the lifelines enable:False when next button is pressed.
+    //Setting all the lifelines enable:False when next button is pressed.
+    public void LLTrueManupulator(){
         audienceLL.setClickable(true);
         audienceLL.setEnabled(true);
         audienceLL.setAlpha(1.0f);
@@ -675,8 +703,11 @@ public class quizActivity extends AppCompatActivity {
         swapTheQuestionLL.setClickable(true);
         swapTheQuestionLL.setEnabled(true);
         swapTheQuestionLL.setAlpha(1.0f);
+
+
     }
 
+    //Color coding for options
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void checkAnswer(Button selectedOption){
         enableOption(false);
@@ -715,14 +746,14 @@ public class quizActivity extends AppCompatActivity {
         }
     }
 
+
+    //Clock Algorithm (UpCounter)
     public void countDownTimerFun(){   //Clock Algo
-        new CountDownTimer(60000*10, 1000) {
-            int minutes=0;
-            int second=0;
-            String minutestext;
-            String secondtext;
+        countDownTimer=new CountDownTimer(60000*10, 1000) {
+
 
             public void onTick(long millisUntilFinished) {
+                milliHolder=millisUntilFinished;
                 if(second==60){
                     second=0;
                     minutes++;
@@ -737,7 +768,7 @@ public class quizActivity extends AppCompatActivity {
                     timerText.setText(" Timer "+minutestext+":"+secondtext+" ");
                     second++;
                 }else{
-                        minutestext="0"+String.valueOf(minutes);
+                    minutestext="0"+String.valueOf(minutes);
                     if(second<10){
                         secondtext="0"+String.valueOf(second);
                     }else{
@@ -748,13 +779,50 @@ public class quizActivity extends AppCompatActivity {
                 }
             }
             public void onFinish() {
-                Toast.makeText(quizActivity.this, "Time Done", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
+                Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("imageurl",imageurl);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                finish();
             }
 
         }.start();
     }
 
+    public void proPicFunction(){
 
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl = (String) snapshot.getValue();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void onBackPressed() {
+        activity_picture_singlePlayer.super.onBackPressed();
+        finish();
+    }
 
 
 }

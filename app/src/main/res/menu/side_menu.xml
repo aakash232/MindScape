@@ -7,16 +7,12 @@
                 <group android:checkableBehavior="single">
 
                     <item
-                        android:id="@+id/nav_order"
-                        android:title="My Orders"
+                        android:id="@+id/nav_help"
+                        android:title="Help Guide"
                         />
                     <item
                         android:id="@+id/referral_code"
                         android:title="Referral Code"
-                        />
-                    <item
-                        android:id="@+id/nav_help"
-                        android:title="Help Guide"
                         />
                     <item
                         android:id="@+id/nav_logout"
