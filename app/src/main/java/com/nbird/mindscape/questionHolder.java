@@ -7,7 +7,7 @@ public class questionHolder {
     public questionHolder() {
     }
 
-    public questionHolder(String questionTextView, String option1, String option2, String option3, String option4, String correctAnswer, int setNo) {
+    public questionHolder(String questionTextView, String option1, String option2, String option3, String option4, String correctAnswer) {
         this.questionTextView = questionTextView;
         this.option1 = option1;
         this.option2 = option2;

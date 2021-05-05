@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent.putExtra("position", a);
                         mContext.startActivity(intent);break;
                     case 5:
-                        Intent intent1 = new Intent(mContext, singleModeListView.class);  //Sneha change this 'singleModeListView' to Your KBC Activity
+                        Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);
                         mContext.startActivity(intent1);break;
                 }

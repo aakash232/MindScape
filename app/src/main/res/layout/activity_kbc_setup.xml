@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kbc"
+    tools:context=".KbcSetup">
+
+    <LinearLayout
+        android:id="@+id/lifeLineLayout"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout28"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/half"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/half" />
+
+        <Button
+            android:id="@+id/audience"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/audiencek" />
+
+        <Button
+            android:id="@+id/flip"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/flipk" />
+
+        <Button
+            android:id="@+id/expert"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/expertk" />
+
+        <Button
+            android:id="@+id/quit"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/quit" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/que_vec"
+        android:layout_width="600dp"
+        android:layout_height="78dp"
+        android:background="@drawable/que_vec"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/optLayout"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice">
+
+        <TextView
+            android:id="@+id/kbc_que"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:textSize="20dp"
+            android:translationX="45dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/optLayout"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/opt"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice">
+
+
+        <Button
+            android:id="@+id/opt1"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text=""
+            android:translationX="50dp" />
+
+        <Button
+            android:id="@+id/opt2"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text=""
+            android:translationX="103dp" />
+
+        <Button
+            android:id="@+id/opt3"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text=""
+            android:translationX="-390dp"
+            android:translationY="60dp" />
+
+        <Button
+            android:id="@+id/opt4"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text=""
+            android:translationX="-335dp"
+            android:translationY="60dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPrice"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_price"
+        android:gravity="bottom"
+        android:layoutDirection="inherit"
+        android:orientation="vertical"
+        android:paddingLeft="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="5 crore"
+            app:layout_constraintBottom_toTopOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="1 crore"
+            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="50 lakh"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="25 lakh"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="1250000"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="640000"
+            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="320000"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="160000"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="80000"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="40000"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="20000"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="10000"
+            app:layout_constraintBottom_toTopOf="@+id/textView1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="5000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/countdown"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/que_vec"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="30 s"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

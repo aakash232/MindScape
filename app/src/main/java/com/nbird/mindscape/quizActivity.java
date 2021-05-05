@@ -89,7 +89,7 @@ public class quizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         questionTextView=findViewById(R.id.question);
-        scoreBoard=findViewById(R.id.questionNumber);
+
         option1=(Button) findViewById(R.id.button1);
         option2=(Button) findViewById(R.id.button2);
         option3=(Button) findViewById(R.id.button3);
@@ -616,9 +616,11 @@ public class quizActivity extends AppCompatActivity {
                     try {
                         ((TextView) view).setText(data);
                         if(swapnum==0){
-                            scoreBoard.setText(" Question "+(position+1)+"/10 ");
+                            if(scoreBoard!=null){
+                            scoreBoard.setText(" Question "+(position+1)+"/10 ");}
                         }else{
-                            scoreBoard.setText(" Question "+(position)+"/10 ");
+                            if(scoreBoard!=null)
+                                scoreBoard.setText(" Question "+(position)+"/10 ");
                         }
 
                     } catch (ClassCastException ex) {
@@ -715,7 +717,8 @@ public class quizActivity extends AppCompatActivity {
         }
     }
 
-    public void countDownTimerFun(){   //Clock Algo
+    public void countDownTimerFun(){
+        //Clock Algo
         new CountDownTimer(60000*10, 1000) {
             int minutes=0;
             int second=0;

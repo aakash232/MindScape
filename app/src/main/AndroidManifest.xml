@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".scoreActivity"></activity>
+        <activity android:name=".KbcWel"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".KbcPlay"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".KbcScoreActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".KbcSetup"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".scoreActivity"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".quizActivity" />
         <activity android:name=".singleModeListView" />
         <activity android:name=".SlideActivity" />
