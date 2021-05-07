@@ -150,6 +150,16 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
 
+        //ProfileButton
+        ImageView profilebutton = (ImageView) findViewById(R.id.profilebutton);
+        profilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mainMenuActivity.this,profile.class);
+                startActivity(i);
+            }
+        });
+
 
 
 
@@ -301,7 +311,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
         switch (menuItem.getItemId()){
-            case R.id.referral_code:
+            case R.id.nav_logout:
                 Intent intent1=new Intent(mainMenuActivity.this,loginActivity.class);
                 startActivity(intent1);
                 break;

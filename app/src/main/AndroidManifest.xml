@@ -17,7 +17,7 @@
             android:screenOrientation="landscape"/>
         <activity android:name=".KbcScoreActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".scoreActivity"></activity>
+        <activity android:name=".scoreActivity"/>
         <activity android:name=".quizActivity" />
         <activity android:name=".singleModeListView" />
         <activity android:name=".SlideActivity" />
@@ -26,7 +26,11 @@
         <activity android:name=".welcomeActivity" />
         <activity android:name=".registerActivity" />
         <activity android:name=".forgotPasswordActivity" />
+        <activity android:name=".profile" />
+        <activity android:name=".picture_quiz_menu" />
+        <activity android:name=".activity_picture_singlePlayer" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
