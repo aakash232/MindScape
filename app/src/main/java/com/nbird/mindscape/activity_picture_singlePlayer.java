@@ -29,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -504,9 +504,9 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     list.add(snapshot1.getValue(pictureQuizHolder.class));
-                    Glide.with(getBaseContext())
-                            .load(list.get(num).getQuestionPicture())
-                            .preload(200, 100);
+                   // Glide.with(getBaseContext())
+                          //  .load(list.get(num).getQuestionPicture())
+                           // .preload(200, 100);
 
                     num++;
                 }
@@ -613,7 +613,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        //Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
                         Animation imgAnim1 = AnimationUtils.loadAnimation(activity_picture_singlePlayer.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 
