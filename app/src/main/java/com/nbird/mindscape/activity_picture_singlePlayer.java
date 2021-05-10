@@ -259,7 +259,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                         manupulator = 1;
                     } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 2;
-                    } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
+                    } else if (option3.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 3;
                     } else {
                         manupulator = 4;

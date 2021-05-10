@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:id="@+id/cardview_id"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginBottom="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        cardview:cardCornerRadius="5dp"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        cardview:layout_constraintBottom_toBottomOf="parent"
+        cardview:layout_constraintEnd_toEndOf="parent"
+        cardview:layout_constraintStart_toStartOf="parent"
+        cardview:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/backlitemodeanim"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:elevation="-5dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    cardview:lottie_autoPlay="true"
+                    cardview:lottie_loop="true"
+                    cardview:lottie_rawRes="@raw/waitinganim"
+                    cardview:lottie_speed="1.1" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/blackwithwhitestroke"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:layout_margin="10dp"
+                        android:text=" Waiting For Opponent to Complete the Quiz "/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout29"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/whitewithblackstroke"
+                    android:orientation="horizontal"
+                    cardview:layout_constraintBottom_toBottomOf="parent"
+                    cardview:layout_constraintEnd_toEndOf="parent"
+                    cardview:layout_constraintStart_toStartOf="parent"
+                    cardview:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/exam_img_id"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
+                            cardview:layout_constraintBottom_toBottomOf="parent"
+                            cardview:layout_constraintEnd_toEndOf="parent"
+
+                            cardview:layout_constraintStart_toStartOf="parent"
+                            cardview:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/insidecardviewlessradius"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/userName123"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:text="Ghost Rider"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/ratio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Correct/Wrong : 4/6"
+                                    android:textColor="#000000"
+                                    android:layout_margin="5dp"
+                                    android:textSize="12dp"
+                                    android:fontFamily="@font/mouse_memoirs"/>
+                                <TextView
+                                    android:id="@+id/timeTaken"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Time Taken : 1min 3 sec"
+                                    android:textColor="#000000"
+                                    android:layout_margin="5dp"
+                                    android:gravity="right"
+                                    android:textSize="12dp"
+                                    android:fontFamily="@font/mouse_memoirs"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/accuracy"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Accuracy : 60%"
+                                    android:textColor="#000000"
+                                    android:layout_margin="5dp"
+                                    android:textSize="12dp"
+                                    android:fontFamily="@font/mouse_memoirs"/>
+                                <TextView
+                                    android:id="@+id/lifeLines"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Life-Lines : 2/4"
+                                    android:textColor="#000000"
+                                    android:layout_margin="5dp"
+                                    android:gravity="right"
+                                    android:textSize="12dp"
+                                    android:fontFamily="@font/mouse_memoirs"/>
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:background="@drawable/whitewithblackstroke"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/dotLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@id/slideViewPager"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    shimmer:layout_constraintEnd_toEndOf="parent"
+                    shimmer:layout_constraintTop_toTopOf="parent">
+
+                </LinearLayout>
+
+
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container"
+                    shimmer:duration="800"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dotLayout"
+                    cardview:layout_constraintBottom_toBottomOf="parent"
+                    cardview:layout_constraintEnd_toEndOf="parent"
+                    cardview:layout_constraintStart_toStartOf="parent"
+                    cardview:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/data_placeholder_layout" />
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/slideViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dotLayout"
+                    cardview:layout_constraintBottom_toBottomOf="parent"
+                    cardview:layout_constraintStart_toEndOf="@+id/shimmer_view_container"
+                    shimmer:layout_constraintEnd_toEndOf="parent"
+                    shimmer:layout_constraintTop_toTopOf="parent">
+
+
+                </androidx.viewpager.widget.ViewPager>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

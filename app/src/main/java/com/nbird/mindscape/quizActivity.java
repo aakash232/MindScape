@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -290,7 +290,7 @@ public class quizActivity extends AppCompatActivity {
                         manupulator = 1;
                     } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 2;
-                    } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
+                    } else if (option3.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 3;
                     } else {
                         manupulator = 4;
@@ -585,6 +585,7 @@ public class quizActivity extends AppCompatActivity {
                                         scoreIntent.putExtra("minutestext",minutestext);
                                         scoreIntent.putExtra("secondtext",secondtext);
                                         scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
                                         scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
