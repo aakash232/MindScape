@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -142,14 +144,11 @@ public class scoreActivity extends AppCompatActivity {
 
 
 
+        Glide.with(getBaseContext()).load(imageurl).apply(RequestOptions
+                .bitmapTransform(new RoundedCorners(14)))
+                .into(imageView);
 
 
-
-
-
-
-
-        Glide.with(getBaseContext()).load(imageurl).into(imageView);
 
         totalCorrectAns.setText(" Correct Answer : "+score+"/10 ");
         totalLifeLine.setText(" Life-Lines Used : "+lifelineSum+"/4 ");
@@ -158,7 +157,6 @@ public class scoreActivity extends AppCompatActivity {
 
         if(collider==100){
             totalSum= milliholder/150;
-            totalSum=totalSum+6000;
             for(int i=1;i<=lifelineSum;i++){
                 totalSum=totalSum-1500;
             }
@@ -169,7 +167,6 @@ public class scoreActivity extends AppCompatActivity {
 
         }else{
             totalSum= milliholder/100;
-            totalSum=totalSum+6000;
             for(int i=1;i<=lifelineSum;i++){
                 totalSum=totalSum-1500;
             }

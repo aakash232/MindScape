@@ -23,15 +23,18 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,19 +54,19 @@ public class quizActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     private int count;
     private List<questionHolder> list,listsecondary;
-
+    CountDownTimer countDownTimer;
     private int position=0;
     private int score=0;
      int category;
     private int setNo;
-
+    long milliHolder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
-
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
     TextView timerText;
-
+    String imageurl;
     int num=0;
-
+    ImageView expertImage;
     int expertnum=0;
     int swapnum=0;
     int audiencenum=0;
@@ -72,16 +75,22 @@ public class quizActivity extends AppCompatActivity {
     int manupulator1=0;
     int fiftyfiftynum=0;
 
-
+    TextView titleText;
     int yo1;
     int yo2;
     int yo3;
     int yo4;
-
+    String userName;
     int selectNum;
+    int lifelineSum=0;
 
     CardView audienceLL,expertAdviceLL,fiftyfiftyLL,swapTheQuestionLL;
     LinearLayout linearLayoutexpert,linearLayoutAudience,linearLayoutFiftyFifty,linearLayoutSwap;
+
+    int minutes=0;
+    int second=0;
+    String minutestext;
+    String secondtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +114,7 @@ public class quizActivity extends AppCompatActivity {
         linearLayoutAudience=(LinearLayout) findViewById(R.id.linearLayoutAudience) ;
         linearLayoutFiftyFifty=(LinearLayout) findViewById(R.id.linearLayoutfiftyfifty) ;
         linearLayoutSwap=(LinearLayout) findViewById(R.id.linearLayoutSwap) ;
-
+        userNameFunction();
 
         loadingDialog=new Dialog(this);
         loadingDialog.setContentView(R.layout.loading_screen);
@@ -120,7 +129,7 @@ public class quizActivity extends AppCompatActivity {
         setNo=getIntent().getIntExtra("setNo",10);
 
         loadingDialog.show();
-
+        proPicFunction();
 
 
         countDownTimerFun();
@@ -145,6 +154,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
                     if (option1.getText().toString().equals(list.get(position).getCorrectAnswer())) {
@@ -272,6 +282,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
 
@@ -279,7 +290,7 @@ public class quizActivity extends AppCompatActivity {
                         manupulator = 1;
                     } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 2;
-                    } else if (option2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
+                    } else if (option3.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 3;
                     } else {
                         manupulator = 4;
@@ -396,6 +407,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
                     nextButton.setEnabled(false);
@@ -445,7 +457,7 @@ public class quizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
-
+                    lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
                     String answerByExpert=list.get(position).getCorrectAnswer();
@@ -456,9 +468,11 @@ public class quizActivity extends AppCompatActivity {
                     final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I Think It's : \n'"+answerByExpert+"'");
+                    titleText=((TextView) view1.findViewById(R.id.textTitle));
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I Think It's : \n'"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    expertAdviceImageManupulator();
 
 
                     final AlertDialog alertDialog=builder.create();
@@ -481,9 +495,9 @@ public class quizActivity extends AppCompatActivity {
                     final View view1= LayoutInflater.from(quizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your EXPERT ADVICE Life Line Once.");
+                    titleText=((TextView) view1.findViewById(R.id.textTitle));
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
-
+                    expertAdviceImageManupulator();
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
@@ -500,6 +514,9 @@ public class quizActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
 
 
     }
@@ -536,12 +553,24 @@ public class quizActivity extends AppCompatActivity {
                                 position++;
                                 LLTrueManupulator();
 
+
+
                                 if(swapnum==0){
                                     if (position == 10) {
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
                                         finish();
                                         return;
                                     }
@@ -550,8 +579,18 @@ public class quizActivity extends AppCompatActivity {
                                     if (position == 11) {
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
                                         finish();
                                         return;
                                     }
@@ -716,13 +755,11 @@ public class quizActivity extends AppCompatActivity {
     }
 
     public void countDownTimerFun(){   //Clock Algo
-        new CountDownTimer(60000*10, 1000) {
-            int minutes=0;
-            int second=0;
-            String minutestext;
-            String secondtext;
+        countDownTimer=new CountDownTimer(60000*10, 1000) {
+
 
             public void onTick(long millisUntilFinished) {
+                milliHolder=millisUntilFinished;
                 if(second==60){
                     second=0;
                     minutes++;
@@ -748,10 +785,112 @@ public class quizActivity extends AppCompatActivity {
                 }
             }
             public void onFinish() {
-                Toast.makeText(quizActivity.this, "Time Done", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(quizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
+                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("imageurl",imageurl);
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                finish();
             }
 
         }.start();
+    }
+
+    public void proPicFunction(){
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl = (String) snapshot.getValue();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void onBackPressed() {
+        quizActivity.super.onBackPressed();
+        finish();
+
+    }
+
+    public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
+        Random rand = new Random();
+        int num = rand.nextInt(11)+1;
+
+        switch (num){
+            case 1:
+                expertImage.setBackgroundResource(R.drawable.expert1female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 2:
+                expertImage.setBackgroundResource(R.drawable.expert2male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 3:
+                expertImage.setBackgroundResource(R.drawable.expert3male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 4:
+                expertImage.setBackgroundResource(R.drawable.expert4male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 5:
+                expertImage.setBackgroundResource(R.drawable.expert5male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 6:
+                expertImage.setBackgroundResource(R.drawable.expert6female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 7:
+                expertImage.setBackgroundResource(R.drawable.expert7male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 8:
+                expertImage.setBackgroundResource(R.drawable.expert8female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 9:
+                expertImage.setBackgroundResource(R.drawable.expert9female);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 10:
+                expertImage.setBackgroundResource(R.drawable.expert10male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 11:
+                expertImage.setBackgroundResource(R.drawable.expert11male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+            case 12:
+                expertImage.setBackgroundResource(R.drawable.expert12male);
+                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+
+        }
+
+
+    }
+
+    public void userNameFunction(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

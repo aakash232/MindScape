@@ -161,6 +161,20 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
 
 
+        try{
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCorrectAns").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCurrentScore").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineLifeLineUsed").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineTimeTaken").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
+            myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
+        }catch (Exception e){
+
+        }
 
 
         final SharedPreferences mailreminder = this.getSharedPreferences("mailreminder123", 0);

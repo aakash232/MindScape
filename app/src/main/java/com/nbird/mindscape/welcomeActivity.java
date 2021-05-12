@@ -52,6 +52,7 @@ public class welcomeActivity extends AppCompatActivity {
     final DatabaseReference table_user = database.getReference("User");
     private GoogleSignInClient mGoogleSignInClient;
     String personEmail;
+    int onevsoneOnlineFinder=0;
     String imageurl="https://firebasestorage.googleapis.com/v0/b/paper-wind.appspot.com/o/BydefalutPic%2Fdefaultpropic.png?alt=media&token=f655727d-9740-4ac9-9ba2-f53ea02dc778";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +165,7 @@ public class welcomeActivity extends AppCompatActivity {
                                                 }
                                             });
                                             firstTime = 1;
-                                            User s1 = new User(firstTime);
+                                            User s1 = new User(firstTime,onevsoneOnlineFinder);
 
 
 

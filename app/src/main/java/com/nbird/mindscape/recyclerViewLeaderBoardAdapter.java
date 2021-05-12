@@ -13,6 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -73,7 +75,12 @@ public class recyclerViewLeaderBoardAdapter extends RecyclerView.Adapter<recycle
         }
 
         public void setData(String username, int score,int totalTime ,int correct,int wrong,String imageUrl,int sumationScore) {
-            Glide.with(itemView.getContext()).load(imageUrl).into(imageUrl1);
+
+            Glide.with(itemView.getContext())
+                    .load(imageUrl)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                    .into(imageUrl1);
+
             this.username.setText(username+" ");
             this.score.setText(String.valueOf("Score : "+score+" "));
 

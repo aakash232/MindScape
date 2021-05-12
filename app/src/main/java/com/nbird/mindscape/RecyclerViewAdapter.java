@@ -58,13 +58,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         Intent intent = new Intent(mContext, singleModeListView.class);
                         intent.putExtra("position", a);
                         mContext.startActivity(intent);break;
-
+                    case 2:
+                        Intent intent123 = new Intent(mContext, oneVsOneChoiceActivity.class);
+                        intent123.putExtra("position", a);
+                        mContext.startActivity(intent123);break;
                     case 4:
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
                         mContext.startActivity(intent4);break;
-
-
                     case 5:
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);

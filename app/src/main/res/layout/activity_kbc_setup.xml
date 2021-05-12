@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/lifeLineLayout"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout28"
         app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,30 +19,35 @@
         <Button
             android:id="@+id/half"
             android:layout_width="60dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:background="@drawable/half" />
 
         <Button
             android:id="@+id/audience"
             android:layout_width="60dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:background="@drawable/audiencek" />
 
         <Button
             android:id="@+id/flip"
             android:layout_width="60dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:background="@drawable/flipk" />
 
         <Button
             android:id="@+id/expert"
             android:layout_width="60dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:background="@drawable/expertk" />
 
         <Button
             android:id="@+id/quit"
             android:layout_width="60dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:background="@drawable/quit" />
 
@@ -130,7 +135,8 @@
         android:orientation="vertical"
         android:paddingLeft="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView

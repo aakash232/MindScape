@@ -22,7 +22,7 @@
 
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/imageIcon"
+            android:id="@+id/backlitemodeanim"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginTop="10dp"
@@ -32,45 +32,74 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/sorryanim"
+            app:lottie_rawRes="@raw/letteranim"
             app:lottie_speed="1" />
 
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/insidecardviewlessradius"
             android:fontFamily="@font/mouse_memoirs"
             android:padding="10dp"
+            android:text=""
             android:textAlignment="center"
-            android:gravity="center"
             android:textColor="#000000"
             android:textSize="23sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/buttonYes"
+
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
 
-
-        <Button
-            android:id="@+id/buttonYes"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/blackwithwhitestroke"
-            android:fontFamily="@font/mouse_memoirs"
-            android:textColor="#ffffff"
-            android:textSize="15sp"
+        <LinearLayout
+            android:id="@+id/linearLayout32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
-            app:layout_constraintStart_toStartOf="@+id/layoutDialog" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/buttonYes"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/blackwithwhitestroke"
+                android:fontFamily="@font/mouse_memoirs"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:text="Accept"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
+                app:layout_constraintStart_toStartOf="@+id/layoutDialog" />
+
+
+            <Button
+                android:id="@+id/buttonNo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/whitewithblackstroke"
+                android:fontFamily="@font/mouse_memoirs"
+                android:textColor="#000000"
+                android:text="Reject"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
+                app:layout_constraintStart_toStartOf="@+id/layoutDialog" />
+
+
+        </LinearLayout>
+
 
 
 
