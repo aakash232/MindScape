@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -63,7 +64,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
-    CountDownTimer countDownTimer;
+    CountDownTimer countDownTimer,countDownTimerForPic;
     private List<pictureQuizHolder> list, listsecondary;
     String imageurl;
     private int position=0, score=0, count;
@@ -81,6 +82,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     long milliHolder;
     TextView titleText;
     String userName;
+    int starter=0,starterQuestion=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,10 +112,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         loadingDialog.setCancelable(false);
 
+
         list=new ArrayList<>();
         listsecondary=new ArrayList<>();
 
         loadingDialog.show();
+
         proPicFunction();
         countDownTimerFun();
         userNameFunction();
@@ -504,9 +508,9 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     list.add(snapshot1.getValue(pictureQuizHolder.class));
-                   // Glide.with(getBaseContext())
-                          //  .load(list.get(num).getQuestionPicture())
-                           // .preload(200, 100);
+                    Glide.with(getBaseContext())
+                            .load(list.get(num).getQuestionPicture())
+                            .preload(20, 10);
 
                     num++;
                 }
@@ -534,44 +538,44 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                 LLTrueManupulator();
 
 
-
-
-                                if(swapnum==0){
+                                if (swapnum == 0) {
                                     if (position == 10) {
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
-                                        scoreIntent.putExtra("lifeline",lifelineSum);
-                                        scoreIntent.putExtra("minutes",minutes);
-                                        scoreIntent.putExtra("seconds",second);
-                                        scoreIntent.putExtra("minutestext",minutestext);
-                                        scoreIntent.putExtra("secondtext",secondtext);
-                                        scoreIntent.putExtra("milliholder",milliHolder);
-                                        scoreIntent.putExtra("imageurl",imageurl);
-                                        scoreIntent.putExtra("Collider",100);
+                                        scoreIntent.putExtra("lifeline", lifelineSum);
+                                        scoreIntent.putExtra("minutes", minutes);
+                                        scoreIntent.putExtra("seconds", second);
+                                        scoreIntent.putExtra("minutestext", minutestext);
+                                        scoreIntent.putExtra("secondtext", secondtext);
+                                        scoreIntent.putExtra("milliholder", milliHolder);
+                                        scoreIntent.putExtra("imageurl", imageurl);
+                                        scoreIntent.putExtra("Collider", 100);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        if(countDownTimer!=null){
-                                            countDownTimer.cancel();}
+                                        if (countDownTimer != null) {
+                                            countDownTimer.cancel();
+                                        }
                                         finish();
                                         finish();
                                         return;
                                     }
 
-                                }else {
+                                } else {
                                     if (position == 11) {
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
-                                        scoreIntent.putExtra("lifeline",lifelineSum);
-                                        scoreIntent.putExtra("minutes",minutes);
-                                        scoreIntent.putExtra("seconds",second);
-                                        scoreIntent.putExtra("minutestext",minutestext);
-                                        scoreIntent.putExtra("secondtext",secondtext);
-                                        scoreIntent.putExtra("milliholder",milliHolder);
-                                        scoreIntent.putExtra("imageurl",imageurl);
+                                        scoreIntent.putExtra("lifeline", lifelineSum);
+                                        scoreIntent.putExtra("minutes", minutes);
+                                        scoreIntent.putExtra("seconds", second);
+                                        scoreIntent.putExtra("minutestext", minutestext);
+                                        scoreIntent.putExtra("secondtext", secondtext);
+                                        scoreIntent.putExtra("milliholder", milliHolder);
+                                        scoreIntent.putExtra("imageurl", imageurl);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        if(countDownTimer!=null){
-                                            countDownTimer.cancel();}
+                                        if (countDownTimer != null) {
+                                            countDownTimer.cancel();
+                                        }
                                         finish();
                                         finish();
                                         return;
@@ -588,7 +592,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                         Toast.makeText(activity_picture_singlePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
 
                     }
-                    loadingDialog.dismiss();
+                    //loadingDialog.dismiss();
+
                 }
             }
 
@@ -613,7 +618,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
                         linkHolder=list.get(position).getQuestionPicture();
-                        //Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
                         Animation imgAnim1 = AnimationUtils.loadAnimation(activity_picture_singlePlayer.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 
@@ -756,6 +761,9 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
             public void onTick(long millisUntilFinished) {
+
+                picWaiter();
+
                 milliHolder=millisUntilFinished;
                 if(second==60){
                     second=0;
@@ -897,5 +905,19 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             }
         });
     }
+
+    public void picWaiter(){
+        if(questionImage.getDrawable() != null){
+            try {
+                loadingDialog.dismiss();
+            }catch (Exception e){
+
+            }
+
+        }
+    }
+
+
+
 
 }

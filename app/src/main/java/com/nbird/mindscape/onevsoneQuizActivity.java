@@ -911,7 +911,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 opponentUsername=getIntent().getStringExtra("opponentUserName");
                 myProPicUrl=getIntent().getStringExtra("mypropic");
                 myName=getIntent().getStringExtra("myName");
-                Toast.makeText(onevsoneQuizActivity.this, "Gate1", Toast.LENGTH_LONG).show();
+
                 myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                 scoreIntent.putExtra("opponentUID",opponentUID);
                 scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -1114,7 +1114,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
                       }
 
-                              Toast.makeText(onevsoneQuizActivity.this, "Gate3", Toast.LENGTH_LONG).show();
+
                               Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
                               myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                               scoreIntent.putExtra("opponentUID",opponentUID);
@@ -1331,7 +1331,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
-                            Toast.makeText(onevsoneQuizActivity.this, "Gate2", Toast.LENGTH_LONG).show();
+
                             myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                             scoreIntent.putExtra("opponentUID",opponentUID);
                             scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);

@@ -172,6 +172,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
             myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
+            myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
         }catch (Exception e){
 
         }
@@ -399,7 +401,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
         lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
-        lstExam.add(new Modes("KBC",R.drawable.kbc_main,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
+        lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
         lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
     }
 

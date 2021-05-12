@@ -554,6 +554,8 @@ public class KbcSetup extends AppCompatActivity {
         });
     }
 
+
+
     private void playAnim(final View view, final int value, final String data){
         view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500).setStartDelay(100).setInterpolator(new DecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

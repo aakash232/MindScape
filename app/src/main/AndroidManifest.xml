@@ -9,19 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KbcSetup"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".KbcPlay"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".KbcWel"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".KbcScoreActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".scoreActivity"/>
+        <activity android:name=".multiPlayerPictureQuiz"></activity>
+        <activity
+            android:name=".KbcSetup"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".KbcPlay"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".KbcWel"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".KbcScoreActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".scoreActivity" />
         <activity android:name=".quizActivity" />
         <activity android:name=".singleModeListView" />
         <activity android:name=".SlideActivity" />
         <activity android:name=".loginActivity" />
+        <activity android:name=".onevsoneOnlineScoreCard" />
+        <activity android:name=".onevsoneQuizActivity" />
+        <activity android:name=".oneVsOneChoiceActivity" />
         <activity android:name=".mainMenuActivity" />
         <activity android:name=".welcomeActivity" />
         <activity android:name=".registerActivity" />
@@ -30,7 +38,6 @@
         <activity android:name=".picture_quiz_menu" />
         <activity android:name=".activity_picture_singlePlayer" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

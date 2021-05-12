@@ -64,9 +64,6 @@
                         android:text="Finding Your Opponent.Please Wait!!Unit Then Read Some Facts Given Below."/>
 
                 </LinearLayout>
-
-
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

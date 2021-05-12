@@ -104,7 +104,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     RecyclerView recyclerView;
     private ShimmerFrameLayout mShimmerViewContainer;
     recyclerViewLeaderBoardAdapter categoryAdapter;
-
+    int desider;
 
 
     @Override
@@ -181,6 +181,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         arroppo=getIntent().getIntegerArrayListExtra("oppoArr");
         minman=getIntent().getIntExtra("minman",0);
         secman=getIntent().getIntExtra("secman",0);
+        desider=getIntent().getIntExtra("desider",0);
 
 
         timerSetter();
@@ -238,15 +239,28 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                     if(acceptInt==1){
                                         myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
                                         myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
-                                        Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
-                                        intent.putExtra("opponentUID",opponentUID);
-                                        intent.putExtra("opponentImageUrl",opponentimageUrl);
-                                        intent.putExtra("opponentUserName",opponentUsername);
-                                        intent.putExtra("mypropic",myProPicUrl);
-                                        intent.putExtra("myName",myName123);
-                                        intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-                                        startActivity(intent);
-                                        finish();
+                                        if(desider==0){
+                                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
+                                            intent.putExtra("opponentUID",opponentUID);
+                                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                            intent.putExtra("opponentUserName",opponentUsername);
+                                            intent.putExtra("mypropic",myProPicUrl);
+                                            intent.putExtra("myName",myName123);
+                                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                            startActivity(intent);
+                                            finish();
+                                        }else{
+                                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
+                                            intent.putExtra("opponentUID",opponentUID);
+                                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                            intent.putExtra("opponentUserName",opponentUsername);
+                                            intent.putExtra("mypropic",myProPicUrl);
+                                            intent.putExtra("myName",myName123);
+                                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
                                     }else {
                                         Toast.makeText(onevsoneOnlineScoreCard.this, "Request Declined By "+opponentUsername, Toast.LENGTH_SHORT).show();
                                         myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();;
@@ -280,10 +294,10 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 .bitmapTransform(new RoundedCorners(14)))
                 .into(onlineImage);
 
-        minrev=2-minutes;
-        secriv=59-second;
+        minrev=2-minman;
+        secriv=59-secman;
 
-        totalSum= ((60*minman)+secman)*80;
+        totalSum= ((60*minrev)+secriv)*80;
         for(int i=1;i<=lifelineSum;i++){
             totalSum=totalSum-1500;
         }
@@ -624,20 +638,32 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     alertDialog.dismiss();
+
                     myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
-                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
-                            intent.putExtra("opponentUID",opponentUID);
-                            intent.putExtra("opponentImageUrl",opponentimageUrl);
-                            intent.putExtra("opponentUserName",opponentUsername);
-                            intent.putExtra("mypropic",myProPicUrl);
-                            intent.putExtra("myName",myName123);
-                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-
-                            startActivity(intent);
-                            finish();
+                            if(desider==0){
+                                Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
+                                intent.putExtra("opponentUID",opponentUID);
+                                intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                intent.putExtra("opponentUserName",opponentUsername);
+                                intent.putExtra("mypropic",myProPicUrl);
+                                intent.putExtra("myName",myName123);
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
+                                intent.putExtra("opponentUID",opponentUID);
+                                intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                intent.putExtra("opponentUserName",opponentUsername);
+                                intent.putExtra("mypropic",myProPicUrl);
+                                intent.putExtra("myName",myName123);
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                startActivity(intent);
+                                finish();
+                            }
 
                         }
                     });
@@ -669,16 +695,30 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
 
     public void randomNumberGeneratorFunction(){
-        for(int i=0;i<14;i++){
-            // create instance of Random class
-            Random rand = new Random();
+        if(desider==0){
+            for(int i=0;i<14;i++){
+                // create instance of Random class
+                Random rand = new Random();
 
-            // Generate random integers in range 0 to 29
+                // Generate random integers in range 0 to 29
 
-            int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
-            //NEED TO CHANGE HERE
-            arrlist30.add(setNumber);
+                int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+                //NEED TO CHANGE HERE
+                arrlist30.add(setNumber);
+            }
+        }else{
+            for(int i=0;i<14;i++){
+                // create instance of Random class
+                Random rand = new Random();
+
+                // Generate random integers in range 0 to 29
+
+                int setNumber = rand.nextInt(13)+1;  //NEED TO CHANGE HERE
+                //NEED TO CHANGE HERE
+                arrlist30.add(setNumber);
+            }
         }
+
 
         try{
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").child(String.valueOf(1)).setValue(arrlist30.get(0)).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1086,7 +1126,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 pieChart.setData(pieData);
                                 pieChart.getDescription().setEnabled(false);
                                 pieChart.setCenterText("Score");
-                                pieChart.animate();
+                                pieChart.animateXY(1000,1000);
 
 
 

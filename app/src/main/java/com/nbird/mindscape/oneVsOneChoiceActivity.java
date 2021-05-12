@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -47,9 +48,9 @@ import java.util.List;
 import java.util.Random;
 
 public class oneVsOneChoiceActivity extends AppCompatActivity {
-    CardView online;
-    ImageView userImage, batch;
-    TextView userName123, level, secondPlayername;
+    CardView online,local,share,cardView11;
+    ImageView userImage, batch,batch99;
+    TextView userName123, level, secondPlayername,levelText99;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -59,14 +60,19 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     String userName, proPicUrl;
     private TextView[] mDots;
     int num = 0;
-    private ShimmerFrameLayout mShimmerViewContainer, shimmer1;
+    int codeInteger;
+    LinearLayout linearLayout300;
+    TextView shareText;
+    private ShimmerFrameLayout mShimmerViewContainer, shimmer1,shimmer40,shimmer30;
     private onevsoneonlineAdapter sliderAdapter;
     ActionBarDrawerToggle mToggle;
     private LinearLayout dotLayout;
     private int currentPage;
-    AlertDialog.Builder builder;
-    View view1;
+    AlertDialog.Builder builder,builder9;
+    View view1,view9;
     int i = 0;
+    AlertDialog alertDialog123;
+    int roomCode;
     CardView cardView5;
     Button cancelButton;
     int matcherStatus, timeHolder, correct, wrong, wrongfire, sumationOfScore;
@@ -82,36 +88,116 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     List<Integer> arrlist;
     int globalInt;
     String username;
-    TextView myLevel, oppoLevel, oppoRatio;
+    Button joinButtonFinal;
+    TextView myLevel, oppoLevel, oppoRatio,oppoRatio1,oppoAccu1,highestScore1,totalTime1;
     ImageView myBatch, oppoBatch;
     int sumofq;
-
+    Button joinButton,createButton;
     TextView totalTime, oppoAccu;
     TextView highestScore;
-    LinearLayout linearLayout100,batchLinearLayout;
+    LinearLayout linearLayout100,batchLinearLayout,batchdisplay1;
+    TextInputEditText roomCodeEditText;
+    String roomCodeString;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_vs_one_choice);
 
         online = (CardView) findViewById(R.id.online);
+        local = (CardView) findViewById(R.id.local);
         arrlist = new ArrayList<>(13);
 
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Mode Activity");
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         builder = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
         view1 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.onevsone_online_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
+
+        builder9 = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
+        view9 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.onevsone_local_main_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
+
+
+
+
         mShimmerViewContainer = (ShimmerFrameLayout) view1.findViewById(R.id.shimmer_view_container);
         shimmer1 = (ShimmerFrameLayout) view1.findViewById(R.id.shimmer1);
+        shimmer40=(ShimmerFrameLayout)view9.findViewById(R.id.shimmer40);
+        shimmer30 = (ShimmerFrameLayout) view9.findViewById(R.id.shimmer30);
+
+        shareText=(TextView) view9.findViewById(R.id.shareText);
+
         oppoRatio = (TextView) view1.findViewById(R.id.oppoRatio);
         oppoAccu = (TextView) view1.findViewById(R.id.oppoAccu);
         highestScore = (TextView) view1.findViewById(R.id.highestScore);
         totalTime = (TextView) view1.findViewById(R.id.totalTime);
+
+        oppoRatio1 = (TextView) view9.findViewById(R.id.oppoRatio);
+        oppoAccu1 = (TextView) view9.findViewById(R.id.oppoAccu);
+        highestScore1 = (TextView) view9.findViewById(R.id.highestScore);
+        totalTime1 = (TextView) view9.findViewById(R.id.totalTime);
+
         linearLayout100=(LinearLayout) view1.findViewById(R.id.linearLayout100);
+        linearLayout300=(LinearLayout) view9.findViewById(R.id.linearLayout300);
         batchLinearLayout=(LinearLayout) view1.findViewById(R.id.batchdisplay);
+        batchdisplay1=(LinearLayout) view1.findViewById(R.id.batchdisplay1);
+
+        batch99=(ImageView) view9.findViewById(R.id.batch99);
+        levelText99=(TextView) view9.findViewById(R.id.levelText99);
+
         cardView5=(CardView) view1.findViewById(R.id.cardView5);
+        cardView11=(CardView) view9.findViewById(R.id.cardView11);
         list = new ArrayList<>();
         list123 = new ArrayList<>();
+
+
+        local.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
+                View view2 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.onevsone_local_mode_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
+                builder2.setView(view2);
+                builder2.setCancelable(false);
+                joinButton = ((Button) view2.findViewById(R.id.joinButton));
+                createButton = ((Button) view2.findViewById(R.id.createButton));
+
+
+
+                final AlertDialog alertDialog = builder2.create();
+                if (alertDialog.getWindow() != null) {
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
+
+
+                joinButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        alertDialog.dismiss();
+                        joinFunction();
+
+                    }
+                });
+
+                createButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                        createFunction();
+                    }
+                });
+            }
+        });
+
+
         buttonFunction();
         userData();
     }
@@ -121,12 +207,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         super.onResume();
         mShimmerViewContainer.startShimmerAnimation();
         shimmer1.startShimmerAnimation();
+        shimmer30.startShimmerAnimation();
+        shimmer40.startShimmerAnimation();
     }
 
     @Override
     protected void onPause() {
         mShimmerViewContainer.stopShimmerAnimation();
         shimmer1.stopShimmerAnimation();
+        shimmer30.stopShimmerAnimation();
+        shimmer40.stopShimmerAnimation();
         super.onPause();
     }
 
@@ -155,6 +245,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 if (num == 3) {
                     mShimmerViewContainer.stopShimmerAnimation();
                     mShimmerViewContainer.setVisibility(View.GONE);
+                    shimmer30.stopShimmerAnimation();
+                    shimmer30.setVisibility(View.GONE);
                     AdapterManupulation();
                 }
 
@@ -178,14 +270,10 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
         }
-        // Handle your other action bar items...
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -889,7 +977,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
             });
 
         } catch (Exception e) {
-
+            Toast.makeText(this, "mainer", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -981,7 +1069,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                   });
               }catch (Exception e){
                   highestScore.setText(" Higest Score : null");
-                  totalTime.setText("Total Time : null");
+                  totalTime.setText(" Total Time : null ");
                   oppoAccu.setText(" Accuracy : null");
                   oppoRatio.setText(" Correct/Wrong : null");
               }
@@ -1087,5 +1175,574 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void joinFunction(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
+        View view3 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.join_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
+        builder.setView(view3);
+        builder.setCancelable(false);
+        joinButtonFinal = ((Button) view3.findViewById(R.id.joinButton1));
+        roomCodeEditText=((TextInputEditText) view3.findViewById(R.id.password));
+
+
+
+        alertDialog123 = builder.create();
+        if (alertDialog123.getWindow() != null) {
+            alertDialog123.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog123.show();
+
+
+        joinButtonFinal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                roomCodeString=roomCodeEditText.getText().toString();
+                codeInteger= Integer.parseInt(roomCodeString);
+                joinTunedFunction();
+
+            }
+        });
+    }
+
+    public void joinTunedFunction(){
+
+        myRef.child("oneVsoneLocalPlayers").orderByChild("status").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                    list123.add(dataSnapshot1.getValue(onevsoneOnlinePlayerList.class));
+               }
+
+
+                try {
+                    opponentUID = list123.get(0).getUID();
+                    leader = 1;
+                    alertDialog123.dismiss();
+                    myRef.child("oneVsoneLocalPlayers").child(opponentUID).removeValue();
+
+
+                    randomNumberGeneratorFunction(opponentUID);
+
+
+                    myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").setValue(mAuth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            myRef.child("User").child(opponentUID).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                    opponentimageUrl = snapshot.getValue(String.class);
+
+                                    myRef.child("User").child(opponentUID).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            opponentUsername = snapshot.getValue(String.class);
+
+
+
+                                            builder.setView(view1);
+                                            builder.setCancelable(false);
+                                            cancelButton = ((Button) view1.findViewById(R.id.cancelButton));
+                                            userImage = (ImageView) view1.findViewById(R.id.exam_img_id);
+                                            userName123 = (TextView) view1.findViewById(R.id.userName123);
+                                            batch = (ImageView) view1.findViewById(R.id.batch4);
+                                            level = (TextView) view1.findViewById(R.id.levelText1234);
+                                            slideViewPager = (ViewPager) view1.findViewById(R.id.slideViewPager);
+                                            dotLayout = (LinearLayout) view1.findViewById(R.id.dotLayout);
+                                            secondplayerimg = (ImageView) view1.findViewById(R.id.secondplayerimg);
+                                            secondPlayername = (TextView) view1.findViewById(R.id.secondPlayername);
+                                            myLevel = (TextView) view1.findViewById(R.id.levelText1234);
+                                            myBatch = (ImageView) view1.findViewById(R.id.batch4);
+                                            oppoLevel = (TextView) view1.findViewById(R.id.levelText12341);
+                                            oppoBatch = (ImageView) view1.findViewById(R.id.batch41);
+
+
+                                            dataSetterForOneVsOne();
+                                            myDataSeeter();
+
+                                            for (int i = 1; i <= 3; i++) {
+                                                dataForHorizontalSlide();
+                                            }
+
+                                            final AlertDialog alertDialog = builder.create();
+                                            if (alertDialog.getWindow() != null) {
+                                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                                            }
+                                            alertDialog.show();
+
+
+                                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    try {
+                                                        myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+
+                                                    } catch (Exception e) {
+
+                                                    }
+
+                                                    alertDialog.dismiss();
+                                                    Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            });
+
+
+
+
+                                            Glide.with(getBaseContext())
+                                                    .load(opponentimageUrl)
+                                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                                                    .into(secondplayerimg);
+
+                                            myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("score").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                    try{
+                                                        score123 = snapshot.getValue(Integer.class);
+
+                                                        highestScore.setText(" Higest Score : " + score123 + " ");
+
+                                                        myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("totalTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                timeHolder = snapshot.getValue(Integer.class);
+
+                                                                if (timeHolder < 60) {
+                                                                    totalTime.setText("Total Time : " + totalTime + " sec ");
+                                                                } else {
+                                                                    int minutes = timeHolder / 60;
+                                                                    int sec = timeHolder % 60;
+                                                                    totalTime.setText("Total Time : " + minutes + " min " + sec + " sec ");
+                                                                }
+
+
+
+                                                                myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("correct").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                                        correct = snapshot.getValue(Integer.class);
+
+
+                                                                        myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("wrong").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                wrongfire = snapshot.getValue(Integer.class);
+
+                                                                                sumofq = correct + wrongfire;
+                                                                                jocker = (correct *100) / sumofq;
+
+                                                                                oppoAccu.setText(" Accuracy : " + jocker + "%");
+                                                                                oppoRatio.setText(" Correct/Wrong : " + correct + "/" + wrongfire);
+
+                                                                                myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("sumationScore").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                    @Override
+                                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                                                        sumationOfScore = snapshot.getValue(Integer.class);
+                                                                                        levelManupulation();
+
+                                                                                    }
+
+                                                                                    @Override
+                                                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                                    }
+                                                                                });
+
+
+                                                                            }
+
+
+                                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                            }
+                                                                        });
+
+
+                                                                    }
+
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                    }
+                                                                });
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                            }
+                                                        });
+                                                    }catch (Exception e){
+                                                        highestScore.setText(" Higest Score : null");
+                                                        totalTime.setText(" Total Time : null ");
+                                                        oppoAccu.setText(" Accuracy : null");
+                                                        oppoRatio.setText(" Correct/Wrong : null");
+                                                    }
+
+                                                }
+
+
+
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+
+                                            cardView5.setAlpha(1);
+                                            linearLayout100.setAlpha(1);
+                                            batchLinearLayout.setAlpha(1);
+                                            shimmer1.stopShimmerAnimation();
+                                            shimmer1.setVisibility(View.GONE);
+
+                                            secondPlayername.setText(opponentUsername);
+
+
+                                            cancelButton.setEnabled(false);
+                                            cancelButton.setAlpha(1);
+                                            countDownTimerFun();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+                        }
+                    });
+                }catch (Exception e){
+                    roomCodeEditText.setError("Room Code Is Wrong");
+
+                }
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public void roomCodeGenerator(){
+        Random rand = new Random();
+        // Generate random integers in range 0 to 29
+        roomCode = rand.nextInt(999999)+1;
+        myRef.child("onevsoneLocalPlayers").orderByChild("status").equalTo(roomCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(snapshot.getValue(Integer.class)!=null){
+                   roomCodeGenerator();
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public void createFunction(){
+
+        roomCodeGenerator();
+
+        onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), roomCode);
+        myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                builder9.setView(view9);
+                builder9.setCancelable(false);
+                cancelButton = ((Button) view9.findViewById(R.id.cancelButton));
+                userImage = (ImageView) view9.findViewById(R.id.exam_img_id);
+                userName123 = (TextView) view9.findViewById(R.id.userName123);
+                batch = (ImageView) view9.findViewById(R.id.batch4);
+                level = (TextView) view9.findViewById(R.id.levelText1234);
+                slideViewPager = (ViewPager) view9.findViewById(R.id.slideViewPager);
+                dotLayout = (LinearLayout) view9.findViewById(R.id.dotLayout);
+                secondplayerimg = (ImageView) view9.findViewById(R.id.secondplayerimg);
+                secondPlayername = (TextView) view9.findViewById(R.id.secondPlayername);
+                myLevel = (TextView) view9.findViewById(R.id.levelText1234);
+                myBatch = (ImageView) view9.findViewById(R.id.batch4);
+                oppoLevel = (TextView) view9.findViewById(R.id.levelText12341);
+                oppoBatch = (ImageView) view9.findViewById(R.id.batch41);
+                share=(CardView) view9.findViewById(R.id.share);
+
+                dataSetterForOneVsOne();
+                myDataSeeter();
+
+                for (int i = 1; i <= 3; i++) {
+                    dataForHorizontalSlide();
+                }
+
+                final AlertDialog alertDialog = builder9.create();
+                if (alertDialog.getWindow() != null) {
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
+
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try {
+                            myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+
+                        } catch (Exception e) {
+
+                        }
+
+                        myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                        Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                shareText.setText(" Room Code : "+roomCode);
+
+
+
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent shareIntent=new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plane");
+                        String shareBody=userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+roomCode+".";
+                        String sharesub="MindScape";
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                        startActivity(Intent.createChooser(shareIntent,"Room Code"));
+
+                    }
+                });
+
+
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        opponentUID = snapshot.getValue(String.class);
+                        if (opponentUID != null) {
+
+
+                            myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("score").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                    try{
+                                        score123 = snapshot.getValue(Integer.class);
+
+                                        highestScore1.setText(" Higest Score : " + score123 + " ");
+
+                                        myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("totalTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                timeHolder = snapshot.getValue(Integer.class);
+
+                                                if (timeHolder < 60) {
+                                                    totalTime1.setText("Total Time : " + totalTime + " sec ");
+                                                } else {
+                                                    int minutes = timeHolder / 60;
+                                                    int sec = timeHolder % 60;
+                                                    totalTime1.setText("Total Time : " + minutes + " min " + sec + " sec ");
+                                                }
+
+
+
+                                                myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("correct").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                        correct = snapshot.getValue(Integer.class);
+
+
+                                                        myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("wrong").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                wrongfire = snapshot.getValue(Integer.class);
+
+                                                                sumofq = correct + wrongfire;
+                                                                jocker = (correct *100) / sumofq;
+
+                                                                oppoAccu1.setText(" Accuracy : " + jocker + "%");
+                                                                oppoRatio1.setText(" Correct/Wrong : " + correct + "/" + wrongfire);
+
+                                                                myRef.child("leaderBoard").child("1vs1").child(opponentUID).child("sumationScore").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                                        sumationOfScore = snapshot.getValue(Integer.class);
+                                                                        levelManupulation99();
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                    }
+                                                                });
+
+
+                                                            }
+
+
+                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                            }
+                                                        });
+
+
+                                                    }
+
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }catch (Exception e){
+                                        highestScore.setText(" Higest Score : null");
+                                        totalTime.setText(" Total Time : null ");
+                                        oppoAccu.setText(" Accuracy : null");
+                                        oppoRatio.setText(" Correct/Wrong : null");
+                                    }
+
+                                }
+
+
+
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+
+                            myRef.child("User").child(opponentUID).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                    opponentimageUrl = snapshot.getValue(String.class);
+
+                                    myRef.child("User").child(opponentUID).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            opponentUsername = snapshot.getValue(String.class);
+
+
+
+
+                                            cardView5.setAlpha(1);
+                                            linearLayout300.setAlpha(1);
+                                            batchLinearLayout.setAlpha(1);
+                                            shimmer40.stopShimmerAnimation();
+                                            shimmer40.setVisibility(View.GONE);
+
+                                            Glide.with(getBaseContext())
+                                                    .load(opponentimageUrl)
+                                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                                                    .into(secondplayerimg);
+
+                                            secondPlayername.setText(opponentUsername);
+
+                                            cancelButton.setEnabled(false);
+                                            cancelButton.setAlpha(1);
+                                            countDownForArr();
+                                            countDownTimerFun();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        }
+                    });
+    }
+
+
+    public void levelManupulation99(){
+
+        if(sumationOfScore<100000){
+            if(sumationOfScore<50000){
+                levelText99.setText(" Lv. 1 ");
+            }else{
+                levelText99.setText(" Lv. 2 ");
+            }
+        }else{
+            int holder;
+            holder=sumationOfScore/50000;
+            levelText99.setText(" Lv. "+holder+" ");
+        }
+
+        if(sumationOfScore<50000){
+            batch99.setBackgroundResource(R.drawable.blackiron);
+        }else if(sumationOfScore<200000){
+            batch99.setBackgroundResource(R.drawable.bronze);
+        }else if(sumationOfScore<800000){
+            batch99.setBackgroundResource(R.drawable.silver);
+        }else if(sumationOfScore<1800000){
+            batch99.setBackgroundResource(R.drawable.gold);
+        }else if(sumationOfScore<3000000){
+            batch99.setBackgroundResource(R.drawable.platinum);
+        }else if(sumationOfScore<4000000){
+            batch99.setBackgroundResource(R.drawable.diamond);
+        }else if(sumationOfScore<8000000){
+            batch99.setBackgroundResource(R.drawable.amethyst);
+        }else if(sumationOfScore<12000000){
+            batch99.setBackgroundResource(R.drawable.master);
+        }else{
+            batch99.setBackgroundResource(R.drawable.king);
+        }
+    }
+
+
 
 }
