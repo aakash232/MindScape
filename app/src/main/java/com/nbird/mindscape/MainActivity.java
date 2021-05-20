@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /* ***Testing Intent Code*** */
-        //Intent intent = new Intent(this,MainActivity.class);
-        //startActivity(intent);
+        //Testing Intent Code
+        Intent intent = new Intent(this,mainMenuActivity.class);
+        startActivity(intent);
 
-       animation = findViewById(R.id.animationView);
+      /* animation = findViewById(R.id.animationView);
         title=(TextView) findViewById(R.id.textView);
         title1=(TextView) findViewById(R.id.textView1);
 
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }, SPLASH_TIME_OUT);
-
+    */
 
     }
 
-    public void Animation() {animation.setSpeed(2f);
-    }
+    //public void Animation() {animation.setSpeed(2f);
+    //}
 
 
 }

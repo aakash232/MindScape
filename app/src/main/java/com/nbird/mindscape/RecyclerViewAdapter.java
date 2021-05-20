@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.cardview.widget.CardView;
@@ -55,21 +56,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 a=position+1;
                 switch (a){
                     case 1:
-                        Intent intent = new Intent(mContext, singleModeListView.class);
-                        intent.putExtra("position", a);
-                        mContext.startActivity(intent);break;
+                        Intent intent1 = new Intent(mContext, singleModeListView.class);
+                        intent1.putExtra("position", a);
+                        mContext.startActivity(intent1);break;
                     case 2:
-                        Intent intent123 = new Intent(mContext, oneVsOneChoiceActivity.class);
-                        intent123.putExtra("position", a);
-                        mContext.startActivity(intent123);break;
+                        Intent intent2 = new Intent(mContext, oneVsOneChoiceActivity.class);
+                        intent2.putExtra("position", a);
+                        mContext.startActivity(intent2);break;
                     case 4:
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
                         mContext.startActivity(intent4);break;
                     case 5:
-                        Intent intent1 = new Intent(mContext, KbcWel.class);
-                        intent1.putExtra("position", a);
-                        mContext.startActivity(intent1);break;
+                        Intent intent5 = new Intent(mContext, KbcWel.class);
+                        intent5.putExtra("position", a);
+                        mContext.startActivity(intent5);break;
+                   /* case 6:
+                        Intent intent6 = new Intent(mContext, CustomQuiz_Property.class);
+                        intent6.putExtra("position", a);
+                        mContext.startActivity(intent6);break; */
                 }
 
             }

@@ -126,7 +126,7 @@
         app:layout_constraintTop_toBottomOf="@+id/continuebutton" />
 
     <Button
-        android:id="@+id/Text3"
+        android:id="@+id/tos"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginStart="5dp"
@@ -150,6 +150,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
+        android:id="@+id/ps"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:background="#00000000"

@@ -80,6 +80,8 @@ public class SlideActivity extends AppCompatActivity {
             mDots[position].setTextColor(getResources().getColor(R.color.colorPrimary));
         }
     }
+
+
     ViewPager.OnPageChangeListener viewListner=new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

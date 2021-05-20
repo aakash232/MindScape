@@ -329,8 +329,23 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 Intent intent1=new Intent(mainMenuActivity.this,loginActivity.class);
                 startActivity(intent1);
                 break;
-            default :
-                return true;
+            case R.id.nav_profile:
+                Intent intent2=new Intent(mainMenuActivity.this,profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_ps:
+                Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
+                startActivity(browserIntentps);
+                break;
+            case R.id.nav_tos:
+                Intent browserintenttos = new Intent(Intent.ACTION_VIEW,Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
+                startActivity(browserintenttos);
+                break;
+            case R.id.nav_ref:
+                Intent browserintentref = new Intent(Intent.ACTION_VIEW,Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FRefund%20Policy-converted.pdf?alt=media&token=2679a62d-0b1a-4b57-8eb0-903295225076"));
+                startActivity(browserintentref);
+                break;
+            default : return true;
 
 
         }
