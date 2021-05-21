@@ -17,13 +17,13 @@
 
     <TextView
         android:id="@+id/mailidtext"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="niftynile@gmail.com"
         android:textColor="#FFFFFF"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginBottom="15dp"/>
 

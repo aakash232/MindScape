@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -59,6 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class mainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -160,6 +163,21 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
+        //Navigation View: ProfilePic and Email fetch
+        final SharedPreferences mailreminder = this.getSharedPreferences("mailreminder123", 0);
+        final SharedPreferences.Editor editormailreminder = mailreminder.edit();
+
+        SharedPreferences propicurl = this.getSharedPreferences("propicurl123",0);
+        final SharedPreferences.Editor editorpropicurl = mailreminder.edit();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)hView.findViewById(R.id.mailidtext);
+        mailid123 = mailreminder.getString("123", "abc@gmail.com");
+        nav_user.setText(mailid123);
+        nav_image = (CircleImageView) hView.findViewById(R.id.proimage);
+
+
 
         try{
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCorrectAns").removeValue();
@@ -177,12 +195,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         }
 
 
-        final SharedPreferences mailreminder = this.getSharedPreferences("mailreminder123", 0);
-        final SharedPreferences.Editor editormailreminder = mailreminder.edit();
-
-
-        mailid123 = mailreminder.getString("123", "abc@gmail.com");
-
         list = new ArrayList<>();
 
          firstTimeFunction();
@@ -194,6 +206,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // convert the data back to the model
                 imageurl = (String) dataSnapshot.getValue();
+
 
             }
 
