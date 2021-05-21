@@ -826,59 +826,59 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         activity_picture_singlePlayer.super.onBackPressed();
         finish();
     }
-    public void expertAdviceImageManupulator() {    //Aakash changes in this functions are to be done
+    public void expertAdviceImageManupulator() {
         Random rand = new Random();
         int num = rand.nextInt(11) + 1;
 
         switch (num) {
-            case 1:
+            case 1:               //If possible, avatars can match the facial descriptions
                 expertImage.setBackgroundResource(R.drawable.expert1female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText(" Dorjana Sirola: Highest woman scorer in World Quizzing Championship, Croatian linguist and anglicist! is Expert for the day");
+                break;            //white complexion,short hair
             case 2:
                 expertImage.setBackgroundResource(R.drawable.expert2male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Dr.Neil deGrasse Tyson: Astrophysicist, Planetory scientist, Author and Science communicator! is Expert for the day");
+                break;            //Dark complexion
             case 3:
                 expertImage.setBackgroundResource(R.drawable.expert3male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Kevin Ashman: Six times World Quizzing Championship winner and Five times British Quizing Champion! is Expert for the day");
+                break;            //white complexion
             case 4:
                 expertImage.setBackgroundResource(R.drawable.expert4male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Derek O'Brian: Quiz Master, Indian politician and television personality! is Expert for the day");
+                break;            //white complexion, spects
             case 5:
                 expertImage.setBackgroundResource(R.drawable.expert5male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Pat Gibson: Multiple World champion in quizzing, Software developer and professional Irish quizzer! is Expert for the day");
+                break;             // white complexion, spectacles
             case 6:
                 expertImage.setBackgroundResource(R.drawable.expert6female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Elsie Kaufmann: Quiz mistress, Ghanaian academic and Biomedical engineer! is Expert for the day.");
+                break;          //Dark complexion
             case 7:
                 expertImage.setBackgroundResource(R.drawable.expert7male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Olav Bjortomt: Four time World champion and English international quiz star player! is Expert for the day");
+                break;          //White complexion
             case 8:
                 expertImage.setBackgroundResource(R.drawable.expert8female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Anne Hegerty: English quizzer and famous UK television personality! is Expert for the day");
+                break;              //White complexion,short hair,fat face
             case 9:
                 expertImage.setBackgroundResource(R.drawable.expert9female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Seema Chari: Quiz mistress, author, anchor and knowledge media professional! is Expert for the day");
+                break;          //curly hair
             case 10:
                 expertImage.setBackgroundResource(R.drawable.expert10male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Siddhartha Basu: Father of Indian television quizzing, producer-director and quiz show host! is Expert for the day");
+                break;          //almost no hair,fair complexion
             case 11:
                 expertImage.setBackgroundResource(R.drawable.expert11male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Tom Trogh: Belgian quiz player and European quizzing champion! is Expert for the day");
+                break;            //White complexion
             case 12:
                 expertImage.setBackgroundResource(R.drawable.expert12male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");
-                break;
+                titleText.setText("Ravi Avva: 2020 World Quizzing champion, Singaporean hailing from India and an Engineer! is Expert for the day");
+                break;          //Fair complexion,spectacles
 
         }
 
