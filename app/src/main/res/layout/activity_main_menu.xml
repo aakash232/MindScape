@@ -27,6 +27,36 @@
         app:lottie_rawRes="@raw/backlitemode"
         app:lottie_speed="0.8" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/party2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:lottie_rawRes="@raw/party3"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:lottie_speed="1" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/partypoper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/partypoppersanim"
+        app:lottie_speed="1" />
+
 
 
     <com.google.android.material.navigation.NavigationView
@@ -66,8 +96,8 @@
             android:layout_width="0dp"
             android:layout_height="180dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,6 +163,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:src="@drawable/profilepin"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/prizeMode"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/profilebutton"
+            app:layout_constraintEnd_toStartOf="@+id/profilebutton"
+            app:layout_constraintTop_toTopOf="@+id/profilebutton"
+            app:lottie_autoPlay="false"
+            app:lottie_rawRes="@raw/moneystackanim"
+            app:lottie_speed="2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

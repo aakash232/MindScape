@@ -234,6 +234,7 @@
         android:layout_height="0dp"
         android:elevation="5dp"
         android:scaleY="2.5"
+        android:layout_margin="10dp"
         cardview:layout_constraintBottom_toBottomOf="parent"
         cardview:layout_constraintEnd_toEndOf="parent"
         cardview:layout_constraintStart_toStartOf="parent"

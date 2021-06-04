@@ -104,7 +104,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     RecyclerView recyclerView;
     private ShimmerFrameLayout mShimmerViewContainer;
     recyclerViewLeaderBoardAdapter categoryAdapter;
-    int desider;
+    int desider,amin,asec;
 
 
     @Override
@@ -182,6 +182,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         minman=getIntent().getIntExtra("minman",0);
         secman=getIntent().getIntExtra("secman",0);
         desider=getIntent().getIntExtra("desider",0);
+        amin=getIntent().getIntExtra("actualmin",0);
+        asec=getIntent().getIntExtra("actualsec",0);
 
 
         timerSetter();
@@ -211,6 +213,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
                 myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+                deleteData();
                 Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
                 startActivity(intent);
                 finish();
@@ -246,6 +249,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                             intent.putExtra("opponentUserName",opponentUsername);
                                             intent.putExtra("mypropic",myProPicUrl);
                                             intent.putExtra("myName",myName123);
+                                            deleteData();
                                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                             startActivity(intent);
                                             finish();
@@ -256,6 +260,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                             intent.putExtra("opponentUserName",opponentUsername);
                                             intent.putExtra("mypropic",myProPicUrl);
                                             intent.putExtra("myName",myName123);
+                                            deleteData();
                                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                             startActivity(intent);
                                             finish();
@@ -284,6 +289,20 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
     }
 
+    public void deleteData(){
+        myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
+          myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
+           myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+        myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+        myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+        myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+        myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+        myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+
+    }
+
     public void dataSetterFun(){
 
         Glide.with(getBaseContext()).load(opponentimageUrl).apply(RequestOptions
@@ -294,12 +313,13 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 .bitmapTransform(new RoundedCorners(14)))
                 .into(onlineImage);
 
-        minrev=2-minman;
-        secriv=59-secman;
+        minrev=2-minutes;
+        secriv=59-second;
 
         totalSum= ((60*minrev)+secriv)*80;
+        totalSum=totalSum+2000;
         for(int i=1;i<=lifelineSum;i++){
-            totalSum=totalSum-1500;
+            totalSum=totalSum-500;
         }
         for (int i=1;i<=score;i++){
             totalSum=totalSum+1000;
@@ -639,6 +659,12 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 public void onClick(View view) {
                     alertDialog.dismiss();
 
+                    myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
+                    myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
+                    myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
+                    myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
+                    myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+
                     myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -651,6 +677,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 intent.putExtra("mypropic",myProPicUrl);
                                 intent.putExtra("myName",myName123);
                                 intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                deleteData();
                                 startActivity(intent);
                                 finish();
                             }else{
@@ -661,6 +688,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 intent.putExtra("mypropic",myProPicUrl);
                                 intent.putExtra("myName",myName123);
                                 intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                deleteData();
                                 startActivity(intent);
                                 finish();
                             }
@@ -1066,10 +1094,10 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
+               // myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
+               // myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
+               // myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
+              //  myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
             }
         }.start();
     }
@@ -1099,13 +1127,14 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 BarDataSet barDataSet=new BarDataSet(visitors,"Correct Answer");
                                 barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
-                                barDataSet.setValueTextSize(5f);
+                                barDataSet.setValueTextSize(3f);
 
                                 BarData barData=new BarData(barDataSet);
 
                                 barChart.setFitBars(true);
                                 barChart.setData(barData);
                                 barChart.getDescription().setText("Green Is Yours And Yellow Is For "+opponentUsername);
+                                barChart.getDescription().setTextSize(3f);
                                 barChart.animateY(2000);
 
 
@@ -1116,7 +1145,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 visitors1.add(new PieEntry(opponentScorebro,opponentUsername));
 
 
-                                PieDataSet pieDataSet=new PieDataSet(visitors1,"Score Distribution");
+                                PieDataSet pieDataSet=new PieDataSet(visitors1,"");
                                 pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
                                 pieDataSet.setValueTextColor(Color.BLACK);
                                 pieDataSet.setValueTextSize(5f);
@@ -1404,7 +1433,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                         wrong=10-score;
                                         int manu= (int) (minman*60)+secman;
                                         int sums=(int)totalSum;
-                                        leaderBoardHolder s1 = new leaderBoardHolder(username,sums,manu,score,wrong,myProPicUrl,sumationOfScore);
+                                        leaderBoardHolder s1 = new leaderBoardHolder(myName123,sums,manu,score,wrong,myProPicUrl,sumationOfScore);
 
                                         myRef.child("leaderBoard").child("1vs1").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override

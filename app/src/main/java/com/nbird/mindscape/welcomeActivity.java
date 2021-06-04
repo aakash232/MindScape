@@ -58,6 +58,17 @@ public class welcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome2);
+
+        FirebaseUser user=mAuth.getCurrentUser();
+        if(user!=null){
+            startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            finish();
+        }
+
+
+
+
         googsignin=(SignInButton) findViewById(R.id.googlesignin);
 
 
@@ -164,6 +175,24 @@ public class welcomeActivity extends AppCompatActivity {
 
                                                 }
                                             });
+
+                                            Random rand = new Random();
+
+                                            // Generate random integers in range 0 to 29
+
+                                            final int setNumber = rand.nextInt(95000)+1;
+                                            String so="Player"+setNumber;
+
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("userName").setValue(so).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+
+
+
+
                                             firstTime = 1;
                                             User s1 = new User(firstTime,onevsoneOnlineFinder);
 

@@ -75,7 +75,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     int roomCode;
     CardView cardView5;
     Button cancelButton;
-    int matcherStatus, timeHolder, correct, wrong, wrongfire, sumationOfScore;
+    int matcherStatus, timeHolder, correct, wrong, wrongfire, sumationOfScore=0;
     String opponentUID;
     int status = 1;
     int jocker;
@@ -99,10 +99,29 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     TextInputEditText roomCodeEditText;
     String roomCodeString;
     androidx.appcompat.widget.Toolbar toolbar;
+    int isHost=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_vs_one_choice);
+
+        try{
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCorrectAns").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCurrentScore").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineLifeLineUsed").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineTimeTaken").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
+            myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
+            myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").removeValue();
+        }catch (Exception e){
+
+        }
 
         online = (CardView) findViewById(R.id.online);
         local = (CardView) findViewById(R.id.local);
@@ -427,6 +446,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 }
                 try {
                     opponentUID = list123.get(0).getUID();
+
                     leader = 1;
                     myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
                     myRef.child("oneVsoneOnlinePlayers").child(opponentUID).removeValue();
@@ -503,6 +523,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
 
 
                                         opponentDataGetterFunction();
+                                        isHost=1;
 
                                         myRef.child("User").child(opponentUID).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
@@ -586,17 +607,70 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(isHost==0){
+                            if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
+                            Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
+                            intent.putExtra("opponentUID", opponentUID);
+                            intent.putExtra("opponentImageUrl", opponentimageUrl);
+                            intent.putExtra("opponentUserName", opponentUsername);
+                            intent.putExtra("mypropic", proPicUrl);
+                            intent.putExtra("myName", userName);
+                            intent.putExtra("leader", leader);
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                                if(countDownTimer!=null){
+                                    countDownTimer.cancel();
+                                }
+                                if(countDownTimer123!=null){
+                                    countDownTimer123.cancel();
+                                }
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer123!=null){
+                                countDownTimer123.cancel();
+                            }
+                                Toast.makeText(oneVsOneChoiceActivity.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        }else{
+                            Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
+                            intent.putExtra("opponentUID", opponentUID);
+                            intent.putExtra("opponentImageUrl", opponentimageUrl);
+                            intent.putExtra("opponentUserName", opponentUsername);
+                            intent.putExtra("mypropic", proPicUrl);
+                            intent.putExtra("myName", userName);
+                            intent.putExtra("leader", leader);
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer123!=null){
+                                countDownTimer123.cancel();
+                            }
+                            startActivity(intent);
+                            finish();
+                        }
 
-                Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
-                intent.putExtra("opponentUID", opponentUID);
-                intent.putExtra("opponentImageUrl", opponentimageUrl);
-                intent.putExtra("opponentUserName", opponentUsername);
-                intent.putExtra("mypropic", proPicUrl);
-                intent.putExtra("myName", userName);
-                intent.putExtra("leader", leader);
-                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
-                startActivity(intent);
-                finish();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
             }
         }.start();
 
@@ -1001,7 +1075,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                           timeHolder = snapshot.getValue(Integer.class);
 
                           if (timeHolder < 60) {
-                              totalTime.setText("Total Time : " + totalTime + " sec ");
+                              totalTime.setText("Total Time : " + timeHolder + " sec ");
                           } else {
                               int minutes = timeHolder / 60;
                               int sec = timeHolder % 60;
@@ -1068,6 +1142,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                       }
                   });
               }catch (Exception e){
+                  levelManupulation();
                   highestScore.setText(" Higest Score : null");
                   totalTime.setText(" Total Time : null ");
                   oppoAccu.setText(" Accuracy : null");

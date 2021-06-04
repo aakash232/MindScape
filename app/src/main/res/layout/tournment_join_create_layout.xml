@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:id="@+id/cardview_id"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginBottom="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        cardview:cardCornerRadius="5dp"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        cardview:layout_constraintBottom_toBottomOf="parent"
+        cardview:layout_constraintEnd_toEndOf="parent"
+        cardview:layout_constraintStart_toStartOf="parent"
+        cardview:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@drawable/cancelicon123"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/backlitemodeanim"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:elevation="-5dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    cardview:lottie_autoPlay="true"
+                    cardview:lottie_loop="true"
+                    cardview:lottie_rawRes="@raw/findingopponentanim"
+                    cardview:lottie_speed="1" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/blackwithwhitestroke"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:layout_margin="10dp"
+                        android:text="Either Join A Room Or Create One."/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:scaleY="0.8"
+                android:scaleX="0.8"
+                shimmer:cardBackgroundColor="@color/white"
+                android:foreground="?selectableItemBackground"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/whitewithblacklessradius"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Refresh"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/mouse_memoirs"/>
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/refresh3"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"/>
+
+
+
+                </LinearLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:elevation="10dp"
+                    shimmer:layout_constraintCircleRadius="5dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/head"
+                    shimmer:duration="800"
+                    shimmer:layout_constraintBottom_toBottomOf="parent"
+                    shimmer:layout_constraintEnd_toEndOf="parent"
+                    shimmer:layout_constraintStart_toStartOf="parent"
+                    shimmer:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/leader_board_pre_loading_screen" />
+
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/insidecardview"
+                    android:scrollbars="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/head"
+                    shimmer:layout_constraintBottom_toBottomOf="@+id/shimmer_view_container"
+                    shimmer:layout_constraintEnd_toStartOf="@+id/shimmer_view_container"
+                    shimmer:layout_constraintStart_toStartOf="@+id/shimmer_view_container"
+                    shimmer:layout_constraintTop_toTopOf="@+id/shimmer_view_container" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blackwithwhitestroke"
+        android:text="Create"
+        android:fontFamily="@font/mouse_memoirs"
+        android:textStyle="bold"
+        android:scaleY="0.9"
+        android:scaleX="0.9"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/joinPrivateRoom"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/whitewithblackstroke"
+        android:text="Join A Private Room"
+        android:fontFamily="@font/mouse_memoirs"
+        android:textStyle="bold"
+        android:scaleY="0.9"
+        android:scaleX="0.9"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

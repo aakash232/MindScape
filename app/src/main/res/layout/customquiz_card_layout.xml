@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/cardview_id"
+    android:layout_height="185dp"
+    android:clickable="true"
+    android:scaleY="0.85"
+    android:scaleX="0.85"
+    android:foreground="?selectableItemBackground"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    cardview:cardCornerRadius="5dp"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/whitewithblackstroke"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/exam_img_id"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            />
+
+        <TextView
+            android:id="@+id/exam_dis"
+            android:textSize="7sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/mouse_memoirs"
+            android:gravity="center"
+
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:background="@drawable/black_inner_back"
+            android:layout_margin="5dp"
+            android:text="Select to continue..."/>
+
+        <TextView
+            android:id="@+id/exam_title"
+            android:textSize="10dp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:fontFamily="@font/mouse_memoirs"
+            android:background="@drawable/only_black"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

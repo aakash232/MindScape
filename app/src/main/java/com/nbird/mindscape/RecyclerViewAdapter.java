@@ -2,12 +2,9 @@ package com.nbird.mindscape;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +19,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Modes> mData;
     int setter,a,b;
 
-    public RecyclerViewAdapter(Context mContext,List<Modes> mData,int setter){
+    public RecyclerViewAdapter(Context mContext, List<Modes> mData, int setter){
         this.mContext=mContext;
         this.mData=mData;
         this.setter=setter;
@@ -62,11 +59,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         Intent intent123 = new Intent(mContext, oneVsOneChoiceActivity.class);
                         intent123.putExtra("position", a);
                         mContext.startActivity(intent123);break;
+                    case 3:
+                        Intent intent2 = new Intent(mContext, tournamentChoiceActicity.class);
+                        intent2.putExtra("position", a);
+                        mContext.startActivity(intent2);break;
                     case 4:
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
                         mContext.startActivity(intent4);break;
                     case 5:
+                        Intent intent6 = new Intent(mContext, customQuizMainMenu.class);
+                        intent6.putExtra("position", a);
+                        mContext.startActivity(intent6);break;
+                    case 6:
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);
                         mContext.startActivity(intent1);break;

@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,6 +67,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     ActionBarDrawerToggle mToggle;
     androidx.appcompat.widget.Toolbar toolbar;
     List<Modes> lstExam;
+    List<prizeRecyclerHolder> lstExam123;
     List<Facts> facts;
     int setter=0;
     List<Avatar> avatarList;
@@ -135,13 +137,22 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     String urlAva25="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava25.png?alt=media&token=c2eec723-3f40-4dc6-a294-caa4db20cf66";
     String urlAva26="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava26.png?alt=media&token=2cd731f2-e525-49b3-ac81-dc939cbd82fe";
 
+    int removal;
+    String hostName10;
 
 
-
+    LottieAnimationView prizeModeAnim;
+    LottieAnimationView partypoper,party2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
+        party2=(LottieAnimationView) findViewById(R.id.party2);
+
+        partypoper.setVisibility(View.GONE);
+        party2.setVisibility(View.GONE);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -149,6 +160,9 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         slideViewPager=(ViewPager) findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+        prizeModeAnim=((LottieAnimationView) findViewById(R.id.prizeMode));
+
+        prizeModeAnim.setVisibility(View.GONE);
 
         //ProfileButton
         ImageView profilebutton = (ImageView) findViewById(R.id.profilebutton);
@@ -159,6 +173,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 startActivity(i);
             }
         });
+
+        lstExam123 = new ArrayList<>();
 
 
         try{
@@ -174,13 +190,19 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").removeValue();
             myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").removeValue();
+            myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
         }catch (Exception e){
 
         }
 
 
+
+
         final SharedPreferences mailreminder = this.getSharedPreferences("mailreminder123", 0);
         final SharedPreferences.Editor editormailreminder = mailreminder.edit();
+
+
 
 
         mailid123 = mailreminder.getString("123", "abc@gmail.com");
@@ -190,6 +212,50 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
          firstTimeFunction();
 
         fAuth = FirebaseAuth.getInstance();
+
+        prizeModeMain();
+
+
+        removal=getIntent().getIntExtra("removal",0);
+        hostName10=getIntent().getStringExtra("hostName");
+
+        if(removal==5){
+            AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+            View view=LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.removal_lobby_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+
+
+            TextView disText=(TextView) view.findViewById(R.id.textTitle);
+            final Button buttonYes=(Button) view.findViewById(R.id.buttonYes);
+
+            disText.setText(" Reasons For Getting Out Of The Room:\n* You Were Either Kicked By "+hostName10+"(Host).\n* "+hostName10+"(Host) Either Left The Room Or Was DisConnected Due To Which The Room Was Dissolved.\n* Or You Your Self-Left The Room");
+
+
+
+            builder.setView(view);
+            builder.setCancelable(true);
+
+            final AlertDialog alertDialog=builder.create();
+            if(alertDialog.getWindow()!=null){
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            alertDialog.show();
+
+            buttonYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
+
+
+        }
+
+
+
+
+
+
 
         myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("personal").child("propic").addValueEventListener(new ValueEventListener() {
             @Override
@@ -204,6 +270,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
+
+
+
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -225,7 +295,90 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
            for(int i=1;i<=3;i++){
                dataForHorizontalSlide();
            }
+        removalOfLastTournamentIfHost();
 
+    }
+
+    public void prizeModeMain(){
+        myRef.child("PrizeMode").child("indicator").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    int i=snapshot.getValue(Integer.class);
+                    if(i==1){
+                        prizeModeAnim.setVisibility(View.VISIBLE);
+                        prizeModeAnim.setAnimation(R.raw.moneystackanim);
+                        prizeModeAnim.playAnimation();
+                        prizeModeAnim.loop(true);
+
+
+                        prizeModeAnim.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialogForPrizeMode();
+                                partypoper.setVisibility(View.VISIBLE);
+                                partypoper.setAnimation(R.raw.partypoppersanim);
+                                partypoper.playAnimation();
+                                partypoper.loop(false);
+                                party2.setVisibility(View.VISIBLE);
+                                party2.setAnimation(R.raw.party3);
+                                party2.playAnimation();
+                                party2.loop(false);
+                            }
+                        });
+
+                    }
+                }catch (Exception e){
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void alertDialogForPrizeMode(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.prize_quiz_selector_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(true);
+
+        lstExam123.clear();
+
+        RecyclerView recyclerView=(RecyclerView) view1.findViewById(R.id.recyclerview);
+
+
+        final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(this,lstExam123);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setAdapter(myAdapter);
+
+
+
+        myRef.child("PrizeMode").child("Packets").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot1 : snapshot.getChildren() ){
+                    lstExam123.add(dataSnapshot1.getValue(prizeRecyclerHolder.class));
+                    myAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
     }
 
 
@@ -328,8 +481,34 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         switch (menuItem.getItemId()){
             case R.id.nav_logout:
-                Intent intent1=new Intent(mainMenuActivity.this,loginActivity.class);
-                startActivity(intent1);
+                fAuth = FirebaseAuth.getInstance();
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+                View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.logout_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                builder.setView(view1);
+                ((Button) view1.findViewById(R.id.buttonNo)).setText("No");
+                ((Button) view1.findViewById(R.id.buttonYes)).setText("Yes,Logout");
+
+                final AlertDialog alertDialog=builder.create();
+                if(alertDialog.getWindow()!=null){
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
+                view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(mainMenuActivity.this,welcomeActivity.class));
+                        finish();
+
+                    }
+                });
+                view1.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
                 break;
             default :
                 return true;
@@ -360,29 +539,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         RecyclerView myrv=(RecyclerView) findViewById(R.id.recyclerview);
         RecyclerViewAdapter myAdapter=new RecyclerViewAdapter(this,lstExam,setter);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
+
         myrv.setAdapter(myAdapter);
     }
 
-    /*public void HorizontalRecyclerView(){
-        facts=new ArrayList<Facts>();
-        marta();
-        RecyclerView myrv=(RecyclerView) findViewById(R.id.horizontalrecyclerview);
-        RecyclerViewAdapterHorizontal myAdapter=new RecyclerViewAdapterHorizontal(this,facts,setter);
-        myrv.setLayoutManager(new GridLayoutManager(this,2));
-        myrv.setAdapter(myAdapter);
-    }
-
-    public void horirecyclerview(){
-        RecyclerView recyclerView = findViewById(R.id.horizontalrecyclerview);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainMenuActivity.this);
-        linearLayoutManager.setOrientation(recyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        facts = new ArrayList<>();
-        marta();
-        final recyclerViewAdapterHori categoryAdapter = new recyclerViewAdapterHori(facts);
-        recyclerView.setAdapter(categoryAdapter);
-    }*/
 
     @Override
     public void onResume() {
@@ -397,13 +557,21 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
     public void parto(){
+
+
+
+
+
         lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
         lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
-        lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
+        //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"dfdjnfd d fdufn difn dfd fdufn udf"));
         lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
+        lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
+        lstExam.add(new Modes("League(Coming Soon)",R.drawable.league2,"dfdjnfd d fdufn difn dfd fdufn udf"));
     }
+
 
 
 
@@ -411,10 +579,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         firstTime=getIntent().getIntExtra("firstTime",1);
 
         if(firstTime==0){
-
-
-
-
                     AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.profile_selection_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -558,9 +722,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
                                             }
                                         });
-
-
-
                                         alertDialog.dismiss();
                                     }
 
@@ -569,6 +730,51 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                         }
                     });
 
+        }else{
+
+            myRef.child("PrizeMode").child("indicator").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    try {
+                        int i=snapshot.getValue(Integer.class);
+                        if(i==1){
+
+                            myRef.child("PrizeModePlayerData").child("1").child(mAuth.getCurrentUser().getUid()).child("attempts").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        int a=snapshot.getValue(Integer.class);
+                                        if(a==1){
+
+                                        }
+                                    }catch (Exception e){
+                                        alertDialogForPrizeMode();
+                                        partypoper.setVisibility(View.VISIBLE);
+                                        partypoper.setAnimation(R.raw.partypoppersanim);
+                                        partypoper.playAnimation();
+                                        partypoper.loop(false);
+                                        party2.setVisibility(View.VISIBLE);
+                                        party2.setAnimation(R.raw.party3);
+                                        party2.playAnimation();
+                                        party2.loop(false);
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }catch (Exception e){
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
     }
@@ -1287,6 +1493,46 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 SharedPreferences.Editor editor = propic.edit();
                 editor.putString("key", imageurl123);
                 editor.apply();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void removalOfLastTournamentIfHost(){
+        myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("roomCode").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int roomCode=snapshot.getValue(Integer.class);
+                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
+                }catch (Exception e){
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).child("roomCode").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int roomCode=snapshot.getValue(Integer.class);
+                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
+                }catch (Exception e){
+
+                }
+
             }
 
             @Override

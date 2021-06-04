@@ -135,7 +135,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     List<Integer> arrlist12345;
     int min12345,sec12345;
     int milliHolder47;
-
+    ValueEventListener listner;
+    int oppoStatus=5;
+    ImageView myPicImageView;
+    TextView myNameTextView;
+    LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
+    int myPosition=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,6 +171,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         mShimmerViewContainer = (ShimmerFrameLayout) view1.findViewById(R.id.shimmer_view_container);
         slideViewPager=(ViewPager) view1.findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) view1.findViewById(R.id.dotLayout);
+        myNameTextView=(TextView) findViewById(R.id.myName);
+        myPicImageView=(ImageView) findViewById(R.id.myPic);
 
         anim1=(LottieAnimationView) findViewById(R.id.anim1);
         anim2=(LottieAnimationView) findViewById(R.id.anim2);
@@ -177,6 +184,17 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         anim8=(LottieAnimationView) findViewById(R.id.anim8);
         anim9=(LottieAnimationView) findViewById(R.id.anim9);
         anim10=(LottieAnimationView) findViewById(R.id.anim10);
+
+        anim11=(LottieAnimationView) findViewById(R.id.anim11);
+        anim12=(LottieAnimationView) findViewById(R.id.anim12);
+        anim13=(LottieAnimationView) findViewById(R.id.anim13);
+        anim14=(LottieAnimationView) findViewById(R.id.anim14);
+        anim15=(LottieAnimationView) findViewById(R.id.anim15);
+        anim16=(LottieAnimationView) findViewById(R.id.anim16);
+        anim17=(LottieAnimationView) findViewById(R.id.anim17);
+        anim18=(LottieAnimationView) findViewById(R.id.anim18);
+        anim19=(LottieAnimationView) findViewById(R.id.anim19);
+        anim20=(LottieAnimationView) findViewById(R.id.anim20);
 
         arrlist = new ArrayList<>(12);
         arroppo = new ArrayList<>(12);
@@ -209,12 +227,22 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
 
 
+
+        opponentRemovedKnower();
+        myStatusSetter();
+
         opponentName.setText(opponentUsername);
+        myNameTextView.setText(myName);
 
         Glide.with(getBaseContext())
                 .load(opponentimageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(opponentPic);
+
+        Glide.with(getBaseContext())
+                .load(myProPicUrl)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                .into(myPicImageView);
 
 
 
@@ -833,6 +861,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
             //correct
 
 
+            myanimManuCorrect();
+
             num123=1;
             arrlist.add(1);
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
@@ -841,6 +871,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
             score++;
         }else {
             //incorrect
+
+            myanimManuWrong();
 
             num123=0;
             arrlist.add(2);
@@ -851,6 +883,99 @@ public class onevsoneQuizActivity extends AppCompatActivity {
             correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
             correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             correctOption.setShadowLayer(3,1,1,R.color.lightred);
+        }
+    }
+
+    public void myanimManuCorrect(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.tickanim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.tickanim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.tickanim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.tickanim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.tickanim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.tickanim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.tickanim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.tickanim);
+                anim18.playAnimation();
+                anim18.loop(false);break;
+            case 9:
+                anim19.setAnimation(R.raw.tickanim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.tickanim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
+        }
+    }
+
+    public void myanimManuWrong(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.wronganim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.wronganim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.wronganim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.wronganim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.wronganim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.wronganim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.wronganim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.wronganim);
+                anim18.playAnimation();
+                anim18.loop(false);
+                break;
+            case 9:
+                anim19.setAnimation(R.raw.wronganim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.wronganim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
         }
     }
 
@@ -903,16 +1028,16 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 Toast.makeText(onevsoneQuizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
 
-                myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
-                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+               // myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
+              //  myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
+             //   myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
                 opponentUID=getIntent().getStringExtra("opponentUID");
                 opponentimageUrl=getIntent().getStringExtra("opponentImageUrl");
                 opponentUsername=getIntent().getStringExtra("opponentUserName");
                 myProPicUrl=getIntent().getStringExtra("mypropic");
                 myName=getIntent().getStringExtra("myName");
-
-                myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+             //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                 scoreIntent.putExtra("opponentUID",opponentUID);
                 scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
                 scoreIntent.putExtra("opponentUserName",opponentUsername);
@@ -930,13 +1055,26 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 scoreIntent.putExtra("milliholder",milliHolder);
                 scoreIntent.putExtra("category",category);
                 scoreIntent.putExtra("imageurl",imageurl);
+                scoreIntent.putExtra("actualmin",a1);
+                scoreIntent.putExtra("actualsec",a2);
                 scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
                 scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                 scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(countDownTimerMine!=null){
+                    countDownTimerMine.cancel();}
                 if(countDownTimer47!=null){
                     countDownTimer47.cancel();}
+                if(countDownTimer50!=null){
+                    countDownTimer50.cancel();}
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();
+                }
+
+
+
+
                 finish();
 
             }
@@ -1006,11 +1144,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         });
     }
 
-    public void onBackPressed() {
-        onevsoneQuizActivity.super.onBackPressed();
-        finish();
 
-    }
 
     public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
         Random rand = new Random();
@@ -1100,7 +1234,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
                   if(bull==1&&binaryPosition==11){
                       try{
-                          myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                         // myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
 
 
                       }catch (Exception e){
@@ -1109,14 +1243,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
 
                       try{
-                          myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                     //     myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
                       }catch (Exception e){
 
                       }
 
-
+                      myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
                               Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
-                              myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                         //     myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                               scoreIntent.putExtra("opponentUID",opponentUID);
                               scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
                               scoreIntent.putExtra("opponentUserName",opponentUsername);
@@ -1124,16 +1258,18 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                               scoreIntent.putExtra("myName",myName);
                               scoreIntent.putExtra("score", score);
                               scoreIntent.putExtra("lifeline",lifelineSum);
-                              scoreIntent.putExtra("minutes",minman);
-                      scoreIntent.putExtra("mine",mine);
-                      scoreIntent.putExtra("minman",minman);
-                      scoreIntent.putExtra("secman",secman);
-                              scoreIntent.putExtra("seconds",secman);
+                              scoreIntent.putExtra("minutes",minutes);
+                              scoreIntent.putExtra("mine",mine);
+                              scoreIntent.putExtra("minman",minman);
+                              scoreIntent.putExtra("secman",secman);
+                              scoreIntent.putExtra("seconds",second);
                               scoreIntent.putExtra("minutestext",minutestext);
                               scoreIntent.putExtra("secondtext",secondtext);
                               scoreIntent.putExtra("milliholder",kong);
                               scoreIntent.putExtra("category",category);
                               scoreIntent.putExtra("imageurl",imageurl);
+                      scoreIntent.putExtra("actualmin",a1);
+                      scoreIntent.putExtra("actualsec",a2);
                               scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
                               scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                               scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
@@ -1141,8 +1277,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                               overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                       if(countDownTimerMine!=null){
                           countDownTimerMine.cancel();}
-                              if(countDownTimer47!=null){
-                                  countDownTimer47.cancel();}
+                      if(countDownTimer47!=null){
+                          countDownTimer47.cancel();}
+                      if(countDownTimer50!=null){
+                          countDownTimer50.cancel();}
+                      if(countDownTimer!=null){
+                          countDownTimer.cancel();
+                      }
+
                               finish();
 
 
@@ -1322,17 +1464,17 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
-                            myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                        //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
                             try{
-                                myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                       //         myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
                             }catch (Exception e){
 
                             }
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
-
-                            myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                            myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+                         //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                             scoreIntent.putExtra("opponentUID",opponentUID);
                             scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
                             scoreIntent.putExtra("opponentUserName",opponentUsername);
@@ -1348,8 +1490,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             scoreIntent.putExtra("category",category);
                             scoreIntent.putExtra("imageurl",imageurl);
                             scoreIntent.putExtra("mine",mine);
-                            scoreIntent.putExtra("minman",a1);
-                            scoreIntent.putExtra("secman",a2);
+                            scoreIntent.putExtra("actualmin",a1);
+                            scoreIntent.putExtra("actualsec",a2);
                             scoreIntent.putExtra("minman",minman);
                             scoreIntent.putExtra("secman",secman);
                             scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
@@ -1358,8 +1500,16 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                             startActivity(scoreIntent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            if(countDownTimerMine!=null){
+                                countDownTimerMine.cancel();}
                             if(countDownTimer47!=null){
                                 countDownTimer47.cancel();}
+                            if(countDownTimer50!=null){
+                                countDownTimer50.cancel();}
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+
                             finish();
                         }
                     });
@@ -1411,6 +1561,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
        timeTaken=((TextView) view1.findViewById(R.id.timeTaken));
        accuracy=((TextView) view1.findViewById(R.id.accuracy));
        lifeLines=((TextView) view1.findViewById(R.id.lifeLines));
+       if(countDownTimer47!=null){
+           countDownTimer47.cancel();}
 
        for(int i=1;i<=3;i++){
            dataForHorizontalSlide();
@@ -1443,6 +1595,73 @@ public class onevsoneQuizActivity extends AppCompatActivity {
            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
        }
        alertDialog.show();
+
+
+       myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               try{
+                   int catcher=snapshot.getValue(Integer.class);
+                   if(catcher==1){
+                       Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
+                       //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                       try{
+                           //         myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                       }catch (Exception e){
+
+                       }
+                       minman=2-minutes;
+                       secman=59-second;
+                       mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
+                       myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+                       //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                       scoreIntent.putExtra("opponentUID",opponentUID);
+                       scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+                       scoreIntent.putExtra("opponentUserName",opponentUsername);
+                       scoreIntent.putExtra("mypropic",myProPicUrl);
+                       scoreIntent.putExtra("myName",myName);
+                       scoreIntent.putExtra("score", score);
+                       scoreIntent.putExtra("lifeline",lifelineSum);
+                       scoreIntent.putExtra("minutes",minutes);
+                       scoreIntent.putExtra("seconds",second);
+                       scoreIntent.putExtra("minutestext",minutestext);
+                       scoreIntent.putExtra("secondtext",secondtext);
+                       scoreIntent.putExtra("milliholder",milliHolder);
+                       scoreIntent.putExtra("category",category);
+                       scoreIntent.putExtra("imageurl",imageurl);
+                       scoreIntent.putExtra("mine",mine);
+                       scoreIntent.putExtra("actualmin",a1);
+                       scoreIntent.putExtra("actualsec",a2);
+                       scoreIntent.putExtra("minman",minman);
+                       scoreIntent.putExtra("secman",secman);
+                       scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                       scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
+                       scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+                       scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+                       startActivity(scoreIntent);
+                       overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                       if(countDownTimerMine!=null){
+                           countDownTimerMine.cancel();}
+                       if(countDownTimer47!=null){
+                           countDownTimer47.cancel();}
+                       if(countDownTimer50!=null){
+                           countDownTimer50.cancel();}
+                       if(countDownTimer!=null){
+                           countDownTimer.cancel();
+                       }
+
+                       finish();
+                   }
+               }catch (Exception e){
+
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
 
    }
     @Override
@@ -1548,6 +1767,116 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         }
     };
 
+    public void onBackPressed() {
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(countDownTimerMine!=null){
+                    countDownTimerMine.cancel();}
+                if(countDownTimer47!=null){
+                    countDownTimer47.cancel();}
+                if(countDownTimer50!=null){
+                    countDownTimer50.cancel();}
+
+                onevsoneQuizActivity.super.onBackPressed();
+                finish();
+            }
+        });
+
+    }
+
+    public void leaveDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
+        View view =LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.removal_lobby_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view);
+        builder.setCancelable(false);
+
+
+        TextView disText=(TextView) view.findViewById(R.id.textTitle);
+        Button buttonYes=(Button) view.findViewById(R.id.buttonYes);
+        disText.setText("Your Opponent "+opponentUsername+" Is Either Disconnected Or Left The Game!");
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);
+                if(countDownTimerMine!=null){
+                    countDownTimerMine.cancel();}
+                if(countDownTimer47!=null){
+                    countDownTimer47.cancel();}
+                if(countDownTimer50!=null){
+                    countDownTimer50.cancel();}
+
+                startActivity(intent);
+                alertDialog.dismiss();
+               finish();
+            }
+        });
+
+
+
+
+
+
+    }
+
+    public void opponentRemovedKnower(){
+        listner=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    oppoStatus=snapshot.getValue(Integer.class);
+                    if(oppoStatus==0){
+                        leaveDialog();
+                    }
+                }catch (Exception e){
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        myRef.child("User").child(opponentUID).child("myStatus").addValueEventListener(listner);
+    }
+
+    public void myStatusSetter(){
+        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean connected = snapshot.getValue(Boolean.class);
+                if (connected) {
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").onDisconnect().setValue(0);
+
+                }
+                else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 }

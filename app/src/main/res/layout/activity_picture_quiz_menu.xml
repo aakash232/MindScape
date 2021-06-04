@@ -93,6 +93,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     app:cardCornerRadius="5dp"
+                    android:scaleY="0.9"
+                    android:scaleX="0.9"
                     android:foreground="?selectableItemBackground"
                     >
 

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/cardview_id"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    cardview:cardCornerRadius="5dp"
+    android:layout_margin="5dp">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?selectableItemBackground"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        cardview:cardCornerRadius="5dp"
+        cardview:layout_constraintEnd_toEndOf="parent"
+        cardview:layout_constraintStart_toEndOf="@+id/cardView5"
+        cardview:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    android:elevation="5dp" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:text="Anu Malik"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/insidecardview"
+                android:orientation="vertical"
+
+                >
+                <TextView
+                    android:id="@+id/quizName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fish"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
+
+                <TextView
+                    android:id="@+id/quizDis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fish dfneuf euiinfefueiwwfiwe feufn iwefneufn iw fiwuiiweufnwufnfwiw  efn wi fwinfiw wifn iwf nwnwif wfn wfwiif wifn "
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:textColor="@color/black"
+                    android:textSize="10dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/expert"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/expert"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        cardview:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutexpert"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/whitewithblackstroke">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/kaal"
+                                android:scaleX="0.85"
+                                android:scaleY="0.7" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/audience"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        cardview:cardCornerRadius="5dp">
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutAudience"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/whitewithblackstroke">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/audience1"
+                                android:scaleX="0.7"
+                                android:scaleY="0.75" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fiftyfifty"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        cardview:cardCornerRadius="5dp">
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutfiftyfifty"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/whitewithblackstroke">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:text="50:50"
+                                android:textColor="#000000"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/timesPlayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:gravity="left"
+                    android:text="Number Of Times Played : 19"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:gravity="left"
+                        android:text="Time : 2 Mins"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        />
+
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="right"
+                       android:layout_marginLeft="10dp"
+                       android:orientation="horizontal">
+
+                       <com.airbnb.lottie.LottieAnimationView
+                           android:id="@+id/anim1"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:elevation="-5dp"
+                           android:scaleType="centerCrop"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="parent"
+                           app:lottie_speed="1" />
+
+                       <com.airbnb.lottie.LottieAnimationView
+                           android:id="@+id/anim2"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:elevation="-5dp"
+                           android:scaleType="centerCrop"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="parent"
+                           app:lottie_speed="1" />
+
+                       <com.airbnb.lottie.LottieAnimationView
+                           android:id="@+id/anim3"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:elevation="-5dp"
+                           android:scaleType="centerCrop"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="parent"
+                           app:lottie_speed="1" />
+
+                       <com.airbnb.lottie.LottieAnimationView
+                           android:id="@+id/anim4"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:elevation="-5dp"
+                           android:scaleType="centerCrop"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="parent"
+                           app:lottie_speed="1" />
+
+                       <com.airbnb.lottie.LottieAnimationView
+                           android:id="@+id/anim5"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:elevation="-5dp"
+                           android:layout_marginRight="5dp"
+                           android:scaleType="centerCrop"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="parent"
+                           app:lottie_speed="1" />
+
+
+
+                   </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

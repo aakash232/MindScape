@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:id="@+id/cardview_id"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:layout_gravity="right"
+    android:foreground="?selectableItemBackground"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    cardview:cardCornerRadius="5dp"
+    android:layout_margin="5dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?selectableItemBackground"
+        cardview:cardCornerRadius="20dp"
+        cardview:layout_constraintEnd_toEndOf="parent"
+        cardview:layout_constraintStart_toEndOf="@+id/cardView5"
+        cardview:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:background="@drawable/my_chat_layout"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/black_inner_back"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/myName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sachu"
+                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mouse_memoirs"
+                        />
+
+                    <TextView
+                        android:id="@+id/myText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sachu"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mouse_memoirs"
+                        />
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/pic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:elevation="5dp" />
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

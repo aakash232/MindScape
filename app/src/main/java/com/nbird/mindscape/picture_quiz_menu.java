@@ -80,7 +80,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     TextInputEditText roomCodeEditText;
     AlertDialog alertDialog123;
     Button joinButton,createButton;
-
+    int isHost=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -486,7 +486,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                     opponentUID = snapshot.getValue(String.class);
                                     if (opponentUID != null) {
 
-
+                                        isHost=1;
                                         opponentDataGetterFunction();
 
                                         myRef.child("User").child(opponentUID).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -588,16 +588,68 @@ public class picture_quiz_menu extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
-                intent.putExtra("opponentUID", opponentUID);
-                intent.putExtra("opponentImageUrl", opponentimageUrl);
-                intent.putExtra("opponentUserName", opponentUsername);
-                intent.putExtra("mypropic", proPicUrl);
-                intent.putExtra("myName", userName);
-                intent.putExtra("leader", leader);
-                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
-                startActivity(intent);
-                finish();
+                myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(isHost==0){
+                            if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
+                                Intent intent = new Intent(picture_quiz_menu.this, onevsoneQuizActivity.class);
+                                intent.putExtra("opponentUID", opponentUID);
+                                intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                intent.putExtra("opponentUserName", opponentUsername);
+                                intent.putExtra("mypropic", proPicUrl);
+                                intent.putExtra("myName", userName);
+                                intent.putExtra("leader", leader);
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                                if(countDownTimer!=null){
+                                    countDownTimer.cancel();
+                                }
+                                if(countDownTimer123!=null){
+                                    countDownTimer123.cancel();
+                                }
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                if(countDownTimer!=null){
+                                    countDownTimer.cancel();
+                                }
+                                if(countDownTimer123!=null){
+                                    countDownTimer123.cancel();
+                                }
+                                Toast.makeText(picture_quiz_menu.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }else{
+                            Intent intent = new Intent(picture_quiz_menu.this, onevsoneQuizActivity.class);
+                            intent.putExtra("opponentUID", opponentUID);
+                            intent.putExtra("opponentImageUrl", opponentimageUrl);
+                            intent.putExtra("opponentUserName", opponentUsername);
+                            intent.putExtra("mypropic", proPicUrl);
+                            intent.putExtra("myName", userName);
+                            intent.putExtra("leader", leader);
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer123!=null){
+                                countDownTimer123.cancel();
+                            }
+                            startActivity(intent);
+                            finish();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
         }.start();
 

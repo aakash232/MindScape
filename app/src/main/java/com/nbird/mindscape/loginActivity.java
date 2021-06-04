@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class loginActivity extends AppCompatActivity {
 
     Dialog loadingDialog;
@@ -158,6 +160,23 @@ public class loginActivity extends AppCompatActivity {
 
                                                 }
                                             });
+
+                                            Random rand = new Random();
+
+                                            // Generate random integers in range 0 to 29
+
+                                            final int setNumber = rand.nextInt(95000)+1;
+                                            String so="Player"+setNumber;
+
+                                            table_user.child(mAuth.getCurrentUser().getUid()).child("userName").setValue(so).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+
+
+
                                             firstTime = 1;
                                             User s1 = new User(firstTime,onevsoneOnlineFinder);
 

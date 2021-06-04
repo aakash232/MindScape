@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:padding="20dp"
+    android:background="@color/transparent"
+    android:id="@+id/layoutDialogContainer">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDialog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/whitewithblackstroke"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="176dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cancelicon123"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/backlitemodeanim"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/removelobbyanim"
+                app:lottie_speed="1" />
+
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/insidecardviewlessradius"
+                android:fontFamily="@font/mouse_memoirs"
+                android:gravity="left"
+                android:padding="10dp"
+                android:text="Select A Player To Be Removed From The Room"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textTitle">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:alpha="0"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/whitewithblacklessradius">
+
+
+                        <ImageView
+                            android:id="@+id/img1"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            android:gravity="center"
+                             />
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:layout_gravity="center"/>
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:alpha="0"
+                    android:foreground="?selectableItemBackground">
+
+                    <LinearLayout
+                        android:id="@+id/linear2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/whitewithblacklessradius">
+
+
+                        <ImageView
+                            android:id="@+id/img2"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:id="@+id/text2"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:layout_gravity="center"/>
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:alpha="0"
+                    android:foreground="?selectableItemBackground">
+
+                    <LinearLayout
+                        android:id="@+id/linear3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/whitewithblacklessradius">
+
+
+                        <ImageView
+                            android:id="@+id/img3"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:layout_gravity="center"/>
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/doneButton"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/blackwithwhitestroke"
+                android:fontFamily="@font/mouse_memoirs"
+                android:gravity="center"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:text="Remove"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

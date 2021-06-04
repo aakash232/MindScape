@@ -82,7 +82,9 @@ public class recyclerViewLeaderBoardAdapter extends RecyclerView.Adapter<recycle
                     .into(imageUrl1);
 
             this.username.setText(username+" ");
-            this.score.setText(String.valueOf("Score : "+score+" "));
+            this.score.setText(String.valueOf("Highest Score : "+score+" "));
+
+
 
             if(totalTime<60){
                 this.totalTime.setText(String.valueOf("Total Time : "+totalTime+" sec "));
@@ -104,27 +106,25 @@ public class recyclerViewLeaderBoardAdapter extends RecyclerView.Adapter<recycle
                 levelTextView.setText(" Lv. "+holder+" ");
             }
 
-
-          if(sumationScore<50000){
-              levelImageView.setBackgroundResource(R.drawable.blackiron);
-          }else if(sumationScore<200000){
-              levelImageView.setBackgroundResource(R.drawable.bronze);
-          }else if(sumationScore<500000){
-              levelImageView.setBackgroundResource(R.drawable.silver);
-            }else if(sumationScore<1000000){
-              levelImageView.setBackgroundResource(R.drawable.gold);
-          }else if(sumationScore<1500000){
-              levelImageView.setBackgroundResource(R.drawable.platinum);
-          }else if(sumationScore<2500000){
-              levelImageView.setBackgroundResource(R.drawable.diamond);
-          }else if(sumationScore<4000000){
-              levelImageView.setBackgroundResource(R.drawable.amethyst);
-          }else if(sumationScore<6000000){
-              levelImageView.setBackgroundResource(R.drawable.master);
-          }else{
-              levelImageView.setBackgroundResource(R.drawable.king);
-          }
-
+            if(sumationScore<50000){
+                levelImageView.setBackgroundResource(R.drawable.blackiron);
+            }else if(sumationScore<200000){
+                levelImageView.setBackgroundResource(R.drawable.bronze);
+            }else if(sumationScore<800000){
+                levelImageView.setBackgroundResource(R.drawable.silver);
+            }else if(sumationScore<1800000){
+                levelImageView.setBackgroundResource(R.drawable.gold);
+            }else if(sumationScore<3000000){
+                levelImageView.setBackgroundResource(R.drawable.platinum);
+            }else if(sumationScore<4000000){
+                levelImageView.setBackgroundResource(R.drawable.diamond);
+            }else if(sumationScore<8000000){
+                levelImageView.setBackgroundResource(R.drawable.amethyst);
+            }else if(sumationScore<12000000){
+                levelImageView.setBackgroundResource(R.drawable.master);
+            }else{
+                levelImageView.setBackgroundResource(R.drawable.king);
+            }
 
             this.correctByWrong.setText("Correct/Wrong : "+correct+"/"+wrong+" ");
         }

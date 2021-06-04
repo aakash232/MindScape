@@ -28,6 +28,19 @@ public class SlideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
 
+        final SharedPreferences slidepermission = getBaseContext().getSharedPreferences("SlidePermission", 0);
+        final SharedPreferences.Editor editorslidepermission = slidepermission.edit();
+
+        Boolean slidername = slidepermission.getBoolean("sp", false);
+        if(slidername){
+            Intent intent=new Intent(getBaseContext(),welcomeActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
+        }
+
+        editorslidepermission.putBoolean("sp", true);
+        editorslidepermission.apply();
 
         slideViewPager=(ViewPager) findViewById(R.id.slideViewPager);
         dotLayout=(LinearLayout) findViewById(R.id.dotLayout);
