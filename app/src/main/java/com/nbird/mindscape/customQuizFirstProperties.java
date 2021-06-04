@@ -38,7 +38,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
     DatabaseReference myRef=database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
     int expertAdvise=0;
-    int swap=0;
+
     int fiftyfifty=0;
     int AudiencePoll=0;
     int NOS,quizType=-1;
@@ -66,7 +66,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
         radioGroup=(RadioGroup) findViewById(R.id.radioGroup);
 
          expertAdviseCB = (CheckBox) findViewById(R.id.expertAdvise);
-         swapCB = (CheckBox) findViewById(R.id.Swap);
+
          fiftyfiftyCB = (CheckBox) findViewById(R.id.fiftyfifty);
          AudiencePollCB = (CheckBox) findViewById(R.id.AudiencePoll);
 
@@ -331,7 +331,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                begin.putExtra("timeDuration",n);
                begin.putExtra("description",description.getText().toString());
                begin.putExtra("experLL",expertAdvise);
-               begin.putExtra("swapLL",swap);
+              // begin.putExtra("swapLL",swap);
                begin.putExtra("audienceLL",AudiencePoll);
                begin.putExtra("fiftyfiftyLL",fiftyfifty);
                begin.putExtra("quizCode",r);
