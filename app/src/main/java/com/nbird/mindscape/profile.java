@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
@@ -37,6 +38,7 @@ public class profile extends AppCompatActivity {
                 startActivity(back);
             }
         });
+
 
         vpVertical = findViewById(R.id.vp_vertical);
         vpHorizontal = findViewById(R.id.vp_horizontal);

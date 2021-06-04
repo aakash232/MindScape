@@ -181,7 +181,10 @@ public class loginActivity extends AppCompatActivity {
                                             User s1 = new User(firstTime,onevsoneOnlineFinder);
 
 
-
+                                            final SharedPreferences mailreminder = getBaseContext().getSharedPreferences("mailreminder123", 0);
+                                            final SharedPreferences.Editor editormailreminder = mailreminder.edit();
+                                            editormailreminder.putString("123", personEmail);
+                                            editormailreminder.commit();
 
 
 

@@ -2,4 +2,7 @@
     <string name="app_name">MindScape</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="title_activity_custom_quiz__questions">CustomQuiz_Questions</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

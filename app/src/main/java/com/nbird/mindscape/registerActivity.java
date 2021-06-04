@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -44,6 +45,28 @@ public class registerActivity extends AppCompatActivity {
                 startActivity(intentForgotPassword);
             }
         });
+
+        //Policy Buttons
+
+        Button tos = (Button) findViewById(R.id.tos);
+        tos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserintenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
+                startActivity(browserintenttos);
+            }
+        });
+
+        Button ps = (Button) findViewById(R.id.ps);
+        ps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
+                startActivity(browserIntentps);
+            }
+        });
+
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
