@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,56 +8,62 @@
     android:background="@drawable/kbc">
 
 
-    <ImageView
-        android:id="@+id/play"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="51dp"
-        android:background="@drawable/play"
-        android:onClick="playB"
-        app:layout_constraintBottom_toTopOf="@+id/exit"
-        app:layout_constraintEnd_toStartOf="@+id/highscore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <ImageView
-        android:id="@+id/exit"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="174dp"
-        android:layout_marginBottom="47dp"
-        android:onClick="exit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/play"
-        app:srcCompat="@drawable/exit" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLAY"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="30dp"
+            android:background="@drawable/play_option_border"
+            android:layout_marginTop="5dp"
+            android:onClick="playB"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HIGH SCORE"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/play_option_border"
+            android:onClick="score"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHARE"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/play_option_border"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXIT"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/play_option_border"
+            android:onClick="exit"/>
 
-    <ImageView
-        android:id="@+id/highscore"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="174dp"
-        android:onClick="score"
-        app:layout_constraintBottom_toTopOf="@+id/rate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/play"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/high_score" />
-
-    <ImageView
-        android:id="@+id/rate"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="174dp"
-        android:layout_marginBottom="47dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/exit"
-        app:layout_constraintTop_toBottomOf="@+id/highscore"
-        app:srcCompat="@drawable/rate" />
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

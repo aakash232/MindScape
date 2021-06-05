@@ -9,8 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class KbcPlay extends AppCompatActivity {
-
-    ImageView music;
+    KbcSetup kbcsetup = new KbcSetup();
 
     public void playB(View view){
         Intent intent = new Intent(getApplicationContext(),KbcSetup.class);
@@ -22,8 +21,11 @@ public class KbcPlay extends AppCompatActivity {
         startActivity(intent);
     }
     public void exit(View view){
-        Intent intent = new Intent(this,singleModeListView.class);
+        Intent intent = new Intent(this,mainMenuActivity.class);
         startActivity(intent);
+        kbcsetup.kbcCountMus.stop();
+        kbcsetup.kbcQueMus.stop();
+        finish();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
