@@ -61,7 +61,7 @@ public class KbcSetup extends AppCompatActivity {
     Button half,advice,audience,flip,quit;
     Button button1,button2,button3,button4;
     int category;
-    MediaPlayer kbcQueMus,kbcCountMus;
+    public MediaPlayer kbcQueMus,kbcCountMus;
 
     String wrongString;
 
