@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -45,8 +46,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class onevsoneOnlineScoreCard extends AppCompatActivity {
@@ -106,7 +110,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     recyclerViewLeaderBoardAdapter categoryAdapter;
     int desider,amin,asec;
 
-
+    barGroupHolder man;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +190,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         asec=getIntent().getIntExtra("actualsec",0);
 
 
+
+
         timerSetter();
         dataSetterFun();
         requestFinderFunction();
@@ -193,21 +199,138 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         oppoLevelFunction();
 
 
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    long i=snapshot.getValue(Integer.class);
+                    long k=((1000*60*3)-milliholder)/1000;
+                    i=i+k;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    long k=((1000*60*3)-milliholder)/1000;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(k).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        final String dayOfTheWeek = sdf.format(d);
+
+        man=new barGroupHolder();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    man=snapshot.getValue(barGroupHolder.class);
+                    int cA=man.getCorrect()+score;
+                    int wA=man.getWrong()+(10-score);
+
+
+                    barGroupHolder g1=new barGroupHolder(cA,wA);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                }catch (Exception e){
+                    int t=10-score;
+                    barGroupHolder g1=new barGroupHolder(score,t);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
         list=new ArrayList<>();
 
         categoryAdapter = new recyclerViewLeaderBoardAdapter(list);
 
+        numberOfTimesPlayed();
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    int s=snapshot.getValue(Integer.class);
+                    s++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(s).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
        leaderBoardButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                dialogFunctionLeaderBoard();
+               MediaPlayer musicNav;
+               musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+               musicNav.start();
            }
        });
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
@@ -223,6 +346,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         rematch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 randomNumberGeneratorFunction();
                 myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
@@ -345,7 +478,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         int mer=(100-accUser)/10;
         myRatio.setText("Correct/Wrong : "+score+"/"+mer);
 
+        final int f=10-score;
+        long k=(60*1000*10)-milliholder;
+        quizHistoryData s5 = new quizHistoryData((int) totalSum, k,score,f);
+        String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
 
+            }
+        });
     }
 
     public void animManu(){
@@ -569,6 +711,9 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     }
 
     public void dialogBoxForDisiderFunction(){
+        MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.popupmusic);
+        musicNav.start();
         AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneOnlineScoreCard.this,R.style.AlertDialogTheme);
 
         final View view1= LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -657,6 +802,9 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             buttonYes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
                     alertDialog.dismiss();
 
                     myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
@@ -704,6 +852,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             buttonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -1633,6 +1791,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -1664,6 +1832,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -1727,6 +1905,36 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         }else{
             oppoBatch.setBackgroundResource(R.drawable.king);
         }
+    }
+
+    public void numberOfTimesPlayed(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    i++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

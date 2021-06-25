@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class mainMenuFactsAdapter extends RecyclerView.Adapter<mainMenuFactsAdapter.viewholder> {
@@ -46,7 +50,7 @@ public class mainMenuFactsAdapter extends RecyclerView.Adapter<mainMenuFactsAdap
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        holder.setData(listItem.get(position).getTitle(),listItem.get(position).getDis(),listItem.get(position).getSet());
+        holder.setData(listItem.get(position).getTitle(),listItem.get(position).getDis(),listItem.get(position).getSet(),listItem.get(position).imageUrl);
     }
 
     @Override
@@ -59,35 +63,33 @@ public class mainMenuFactsAdapter extends RecyclerView.Adapter<mainMenuFactsAdap
         private TextView dis;
         int set;
         private ConstraintLayout constraintLayout;
-
+        ImageView image;
+        String str="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/FACTS%20PICTURE%2FHistory%2FA%20Jewish%20Monument%20Banned%20Jews%20From%20Walking%20Under%20It.jpg?alt=media&token=adc96c71-d5c8-40e7-9d6e-5b90cfb76d96";
         public viewholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.textView);
             dis=itemView.findViewById(R.id.textView2);
+            image=itemView.findViewById(R.id.image);
+
         }
 
-        public void setData(String title, String dis, final int set) {
+        public void setData(String title, String dis, final int set, String imageUrl123) {
             this.title.setText(title);
             this.dis.setText(dis);
-            setManupulation(set,constraintLayout);
+
+            Glide.with(itemView.getContext()).load(str).into(image);
+
+       /*     Glide.with(itemView.getContext())
+                    .load(str)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                    .into(image);
+*/
             addDotsIndicator(0);
             slideViewPager.addOnPageChangeListener(viewListner);
 
         }
     }
-    public void setManupulation(int set, ConstraintLayout constraintLayout){
-        for(int i=0;i<5;i++){
-            switch (set){
-                case 1:
-                    constraintLayout.setBackgroundResource(R.drawable.animalsdemo);
-                case 2:
-                    constraintLayout.setBackgroundResource(R.drawable.example);
-                case 3:
-                    constraintLayout.setBackgroundResource(R.drawable.animalsdemo);
-            }
-        }
 
-    }
 
 
     public void addDotsIndicator(int position){

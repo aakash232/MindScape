@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -52,6 +53,16 @@ public class registerActivity extends AppCompatActivity {
         tos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(registerActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent browserintenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
                 startActivity(browserintenttos);
             }
@@ -61,6 +72,16 @@ public class registerActivity extends AppCompatActivity {
         ps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(registerActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
                 startActivity(browserIntentps);
             }
@@ -79,6 +100,16 @@ public class registerActivity extends AppCompatActivity {
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(registerActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     switch (keyCode)
@@ -97,6 +128,16 @@ public class registerActivity extends AppCompatActivity {
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(registerActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     switch (keyCode)

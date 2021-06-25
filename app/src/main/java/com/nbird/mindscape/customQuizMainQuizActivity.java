@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -194,6 +195,16 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
@@ -287,13 +298,22 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     }
 
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(customQuizMainQuizActivity.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(customQuizMainQuizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your FIFTY-FIFTY Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your FIFTY-FIFTY Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -322,6 +342,16 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
@@ -374,7 +404,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     final View view1 = LayoutInflater.from(customQuizMainQuizActivity.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText(" MindScapers from across the world have casted their votes above. Choose your option! ");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     BarChart barChart = ((BarChart) view1.findViewById(R.id.barChart));
 
@@ -413,13 +443,22 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(customQuizMainQuizActivity.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(customQuizMainQuizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -450,6 +489,16 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
@@ -462,7 +511,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I Think It's : \n'"+answerByExpert+"'");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
                     expertAdviceImageManupulator();
@@ -483,12 +532,22 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
 
 
                 }else{
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(customQuizMainQuizActivity.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(customQuizMainQuizActivity.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    titleText=((TextView) view1.findViewById(R.id.textTitle));
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertAdviceImageManupulator();
 
@@ -512,9 +571,22 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
 
     }
 
+    public void buttonMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
+
     public void fireBaseData(int setNumber){
         if(privacy==0){
-            myRef.child("CustomQuiz").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).child(quizName).orderByChild("setNo").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.child("CustomQuiz").child(String.valueOf(0)).child("questions").child(key).orderByChild("setNo").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot snapshot1:snapshot.getChildren()){
@@ -542,6 +614,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     nextButton.setEnabled(false);
                                     nextButton.setAlpha(0.7f);
                                     enableOption(true);
@@ -578,6 +651,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                             view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    buttonMusic();
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
@@ -645,6 +719,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     nextButton.setEnabled(false);
                                     nextButton.setAlpha(0.7f);
                                     enableOption(true);
@@ -680,6 +755,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                             view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    buttonMusic();
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
@@ -838,12 +914,34 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
 
+              final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.correctmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
+
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
             score++;
         }else {
             //incorrect
+
+              final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.wrongansfinal);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
 
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));

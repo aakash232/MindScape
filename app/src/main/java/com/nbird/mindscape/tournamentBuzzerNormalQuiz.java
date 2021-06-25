@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -936,6 +937,17 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
 
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.correctmusic);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
+
             isAttempt=1;
 
             correctAns++;
@@ -1095,6 +1107,17 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
         }else {
             //incorrect
+
+             final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.wrongansfinal);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
 
             isAttempt=1;
 
@@ -2374,6 +2397,16 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 cancelLeaveFunction();
             }
         });
@@ -2381,6 +2414,16 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -2453,6 +2496,16 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}

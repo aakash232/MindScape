@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,8 +22,10 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.text.Html;
 import android.view.KeyEvent;
@@ -30,12 +33,20 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,6 +72,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static java.lang.Integer.parseInt;
+
 public class mainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -72,7 +87,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     int setter=0;
     List<Avatar> avatarList;
     TextInputEditText usernameEditText;
-    ImageView nav_image;
+    ImageView nav_image,nav_image123;
     int firstTime;
     Uri imageUri;
     public ViewPager slideViewPager;
@@ -143,6 +158,21 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
     LottieAnimationView prizeModeAnim;
     LottieAnimationView partypoper,party2;
+
+
+    MediaPlayer music,musicNav;
+
+    int surveyInt1=-1,surveyInt2=-1,surveyInt3=-1;
+    int surveyIntYesOrNo=-1;
+    String str1="",str2="",str3="";
+
+
+    ArrayList<Integer> l;
+    Boolean isInBackground;
+    Switch  switch1,switch2,switch3,switch4,switch5,switch6;
+    int rand_int1;
+    CountDownTimer countDownTimer;
+    String linkdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +192,9 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         prizeModeAnim=((LottieAnimationView) findViewById(R.id.prizeMode));
 
+
+
+
         prizeModeAnim.setVisibility(View.GONE);
 
         //ProfileButton
@@ -175,6 +208,181 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
 
         lstExam123 = new ArrayList<>();
+
+        l=new ArrayList<>(6);
+
+
+        final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("musicCollection",0);
+        final SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        
+
+            l.add(R.raw.music1);
+            l.add(R.raw.music2);
+            l.add(R.raw.music3);
+            l.add(R.raw.music4);
+            l.add(R.raw.music5);
+            l.add(R.raw.music6);
+
+
+            myRef.child("appMainLink").child("link").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    linkdata=snapshot.getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        
+
+        final Random rand = new Random();
+
+
+        try{
+             rand_int1 = rand.nextInt(6);
+        }catch (Exception e){
+            
+        }
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        final TextView nav_mail = (TextView)hView.findViewById(R.id.mailidtext);
+        nav_image123 = (ImageView) hView.findViewById(R.id.proimage);
+
+
+
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 String nameString=snapshot.getValue(String.class);
+                 nav_mail.setText(nameString);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String nav_img_url=snapshot.getValue(String.class);
+                  Glide.with(getBaseContext()).load(nav_img_url).apply(RequestOptions
+                        .bitmapTransform(new RoundedCorners(18)))
+                        .into(nav_image123);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        nav_image123.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                musicManu();
+                selectImage(mainMenuActivity.this);
+            }
+        });
+
+
+
+
+
+
+
+       /*  PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                // Test for incoming call, dialing call, active or on hold
+                if (state==TelephonyManager.CALL_STATE_RINGING || state==TelephonyManager.CALL_STATE_OFFHOOK)
+                {
+                    music.pause();  // Put here the code to stop your music
+                }
+                super.onCallStateChanged(state, incomingNumber);
+            }
+        };
+
+        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyMgr.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+*/
+        final SharedPreferences songHolder = this.getSharedPreferences("songHolder", 0);
+        final SharedPreferences.Editor editorsongHolder = songHolder.edit();
+
+        int pk=songHolder.getInt("songHolder",1);
+
+        if(pk==1) {
+            editorsongHolder.putInt("songHolder",0);
+
+            editorsongHolder.commit();
+
+            try { 
+                music = MediaPlayer.create(mainMenuActivity.this, l.get(rand_int1));
+            music.start();
+
+
+
+
+
+
+                countDownTimer=new CountDownTimer(1000 * 60 * 24 * 30, 1000) {
+                ArrayList<Integer> r=l;
+                @Override
+                public void onTick(long l) {
+                    ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
+                    ActivityManager.getMyMemoryState(myProcess);
+                    isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+                    if (isInBackground) {
+                        music.pause();
+                    } else {
+                        if (!music.isPlaying()) {
+                            music.start();
+
+                        }
+                    }
+                    music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+
+                            if (music.isPlaying()) {
+                                music.stop();
+                                mp.reset();
+                            } else {
+                                music.reset();
+                            }
+
+                            int rand_int1 = rand.nextInt(6);
+                            music = MediaPlayer.create(mainMenuActivity.this, r.get(rand_int1));
+                            music.start();
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+            }.start();
+            }catch (Exception e){
+                
+            }
+        }
+
+
+
 
 
         try{
@@ -198,6 +406,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
+        numberOfTimesPlayed();
 
         final SharedPreferences mailreminder = this.getSharedPreferences("mailreminder123", 0);
         final SharedPreferences.Editor editormailreminder = mailreminder.edit();
@@ -254,9 +463,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-
-
-
         myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("personal").child("propic").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -297,6 +503,321 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
            }
         removalOfLastTournamentIfHost();
 
+    }
+
+
+
+    public void speakersAlertDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.music_manu,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        SeekBar seekBar=(SeekBar) view1.findViewById(R.id.determinateBar);
+
+        CardView musicCard1=(CardView) view1.findViewById(R.id.card31);
+        CardView musicCard2=(CardView) view1.findViewById(R.id.card7);
+        CardView musicCard3=(CardView) view1.findViewById(R.id.card8);
+        CardView musicCard4=(CardView) view1.findViewById(R.id.card32);
+        CardView musicCard5=(CardView) view1.findViewById(R.id.card50);
+        CardView musicCard6=(CardView) view1.findViewById(R.id.card51);
+        final TextView progressTextView=(TextView) view1.findViewById(R.id.progressTextView);
+
+        LinearLayout linear1=(LinearLayout) view1.findViewById(R.id.linear31);
+        LinearLayout linear2=(LinearLayout) view1.findViewById(R.id.linear7);
+        LinearLayout linear3=(LinearLayout) view1.findViewById(R.id.linear8);
+        LinearLayout linear4=(LinearLayout) view1.findViewById(R.id.linear32);
+        LinearLayout linear5=(LinearLayout) view1.findViewById(R.id.buzzerNormalLinear);
+        LinearLayout linear6=(LinearLayout) view1.findViewById(R.id.buzzerPictureLinear);
+        switch1=(Switch) view1.findViewById(R.id.switch1);
+        switch2=(Switch) view1.findViewById(R.id.switch2);
+        switch3=(Switch) view1.findViewById(R.id.switch3);
+        switch4=(Switch) view1.findViewById(R.id.switch4);
+        switch5=(Switch) view1.findViewById(R.id.switch5);
+        switch6=(Switch) view1.findViewById(R.id.switch6);
+
+        cardOnSetClickListner(musicCard1,musicCard2,musicCard3,musicCard4,musicCard5,musicCard6,linear1,linear2,linear3,linear4,linear5,linear6);
+
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+                progressTextView.setText(progressChangedValue+"% ");
+              
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Toast.makeText(mainMenuActivity.this, "Volume At :" + progressChangedValue,
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("musicCollection",0);
+        final SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        final Boolean switchState1 = switch1.isChecked();
+        final Boolean switchState2 = switch2.isChecked();
+        final Boolean switchState3 = switch3.isChecked();
+        final Boolean switchState4 = switch4.isChecked();
+        final Boolean switchState5 = switch5.isChecked();
+        final Boolean switchState6 = switch6.isChecked();
+
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+        int k1=sharedPreferences.getInt("m1",1);
+        int k2=sharedPreferences.getInt("m2",1);
+        int k3=sharedPreferences.getInt("m3",1);
+        int k4=sharedPreferences.getInt("m4",1);
+        int k5=sharedPreferences.getInt("m5",1);
+        int k6=sharedPreferences.getInt("m6",1);
+
+        if(k1==0){
+            Toast.makeText(this, "fine", Toast.LENGTH_SHORT).show();
+            switch1.setChecked(false);
+        }
+        if(k2==0){
+            switch2.setChecked(false);
+        }
+        if(k3==0){
+            switch3.setChecked(false);
+        }
+        if(k4==0){
+            switch4.setChecked(false);
+        }
+        if(k5==0){
+            switch5.setChecked(false);
+        }
+        if(k6==0){
+            switch6.setChecked(false);
+        }
+
+
+
+        view1.findViewById(R.id.doneButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(switch1.isChecked()){
+                    myEdit.putInt("m1", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m1", 0);
+                    myEdit.commit();
+                }
+                if(switch2.isChecked()){
+                    myEdit.putInt("m2", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m2", 0);
+                    myEdit.commit();
+
+                }
+                if(switch3.isChecked()){
+                    myEdit.putInt("m3", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m3", 0);
+                    myEdit.commit();
+
+                }
+                if(switch4.isChecked()){
+                    myEdit.putInt("m4", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m4", 0);
+                    myEdit.commit();
+
+                }
+                if(switch5.isChecked()){
+                    myEdit.putInt("m5", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m5", 0);
+                    myEdit.commit();
+
+                }
+                if(switch6.isChecked()){
+                    myEdit.putInt("m6", 1);
+                    myEdit.commit();
+
+                }else{
+                    myEdit.putInt("m6", 0);
+                    myEdit.commit();
+
+                }
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+
+
+    private void stopPlaying() {
+        if (music != null) {
+            music.stop();
+            music.release();
+            music = null;
+        }
+    }
+    
+    public void musicChangerFunction(int n){
+        try{
+             if (music.isPlaying()) {
+            music.stop();
+            music.reset();
+        } else {
+            music.reset();
+        }
+        }catch (Exception e){
+
+        }
+
+        music = MediaPlayer.create(mainMenuActivity.this, n);
+        music.start();
+
+    }
+
+
+
+
+
+    public void cardOnSetClickListner(final CardView musicCard1, final CardView musicCard2, final CardView musicCard3, final CardView musicCard4, final CardView musicCard5, final CardView musicCard6, final LinearLayout linear1, final LinearLayout linear2, final LinearLayout linear3, final LinearLayout linear4, final LinearLayout linear5, final LinearLayout linear6){
+        final SharedPreferences kali = getBaseContext().getSharedPreferences("kali",0);
+        final SharedPreferences.Editor editkali = kali.edit();
+
+        musicCard1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m1", 1);
+                if(a==1){
+                    editkali.putInt("m1", 0);
+                    editkali.commit();
+                    linear1.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music1);
+                }else{
+                    editkali.putInt("m1", 1);
+                    editkali.commit();
+                    linear1.setAlpha(1f);
+
+                }
+
+            }
+        });
+        musicCard2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m2", 1);
+                if(a==1){
+                    editkali.putInt("m2", 0);
+                    editkali.commit();
+                    linear2.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music2);
+                }else{
+                    editkali.putInt("m2", 1);
+                    editkali.commit();
+                    linear2.setAlpha(1f);
+
+                }
+            }
+        });
+        musicCard3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m3", 1);
+                if(a==1){
+                    editkali.putInt("m3", 0);
+                    editkali.commit();
+                    linear3.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music3);
+                }else{
+                    editkali.putInt("m3", 1);
+                    editkali.commit();
+                    linear3.setAlpha(1f);
+
+                }
+            }
+        });
+        musicCard4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m4", 1);
+                if(a==1){
+                    editkali.putInt("m4", 0);
+                    editkali.commit();
+                    linear4.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music4);
+                }else{
+                    editkali.putInt("m4", 1);
+                    editkali.commit();
+                    linear4.setAlpha(1f);
+
+                }
+            }
+        });
+        musicCard5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m5", 1);
+                if(a==1){
+                    editkali.putInt("m5", 0);
+                    editkali.commit();
+                    linear5.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music5);
+                }else{
+                    editkali.putInt("m5", 1);
+                    editkali.commit();
+                    linear5.setAlpha(1f);
+
+                }
+            }
+        });
+        musicCard6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
+                int a = kali.getInt("m6", 1);
+                if(a==1){
+                    editkali.putInt("m6", 0);
+                    editkali.commit();
+                    linear6.setAlpha(0.5f);
+                    musicChangerFunction(R.raw.music6);
+                }else{
+                    editkali.putInt("m6", 1);
+                    editkali.commit();
+                    linear6.setAlpha(1f);
+
+                }
+            }
+        });
+    }
+
+    public void cardManu47(LinearLayout musicCard1, LinearLayout musicCard2, LinearLayout musicCard3, LinearLayout musicCard4, LinearLayout musicCard5, LinearLayout musicCard6){
+        musicCard1.setAlpha(1);
+        musicCard2.setAlpha(1);
+        musicCard3.setAlpha(1);
+        musicCard4.setAlpha(1);
+        musicCard5.setAlpha(1);
+        musicCard6.setAlpha(1);
     }
 
     public void prizeModeMain(){
@@ -390,8 +911,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         // Generate random integers in range 0 to 999
 
-        final int categoryRandomNumber = rand.nextInt(3)+1;  //NEED TO CHANGE HERE
-        int setRandomNumber = rand.nextInt(4)+1;   //NEED TO CHANGE HERE
+        final int categoryRandomNumber = rand.nextInt(4)+1;  //NEED TO CHANGE HERE
+        int setRandomNumber = rand.nextInt(50)+1;   //NEED TO CHANGE HERE
 
 
 
@@ -478,7 +999,15 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-
+            musicNav = MediaPlayer.create(mainMenuActivity.this, R.raw.navclick);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
         switch (menuItem.getItemId()){
             case R.id.nav_logout:
                 fAuth = FirebaseAuth.getInstance();
@@ -510,6 +1039,39 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     }
                 });
                 break;
+            case R.id.nav_profile:
+                Intent intent=new Intent(mainMenuActivity.this,profile.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_about:
+                Intent intent12=new Intent(mainMenuActivity.this,AboutUsActivity.class);
+                startActivity(intent12);
+                break;
+            case R.id.nav_rate:
+                Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(linkdata));
+                startActivity(browserIntent);
+                break;
+            case R.id.nav_tos:
+                Intent browserIntenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
+                startActivity(browserIntenttos);
+                break;
+            case R.id.nav_ref:
+                Intent browserIntenttos1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FRefund%20Policy-converted.pdf?alt=media&token=2679a62d-0b1a-4b57-8eb0-903295225076"));
+                startActivity(browserIntenttos1);
+                break;
+            case R.id.nav_ps:
+                Intent browserIntenttos2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
+                startActivity(browserIntenttos2);
+                break;
+            case R.id.nav_contact:
+                String[] TO = {"niftynile@gmail.com"};
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("*/*");
+                email.putExtra(Intent.EXTRA_EMAIL, TO);
+                if(email.resolveActivity(getPackageManager()) != null)
+                    startActivity(email);
+                break;
             default :
                 return true;
 
@@ -537,7 +1099,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam=new ArrayList<>();
         parto();
         RecyclerView myrv=(RecyclerView) findViewById(R.id.recyclerview);
-        RecyclerViewAdapter myAdapter=new RecyclerViewAdapter(this,lstExam,setter);
+        RecyclerViewAdapter myAdapter=new RecyclerViewAdapter(this,lstExam,setter,music,countDownTimer);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
 
         myrv.setAdapter(myAdapter);
@@ -548,12 +1110,15 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     public void onResume() {
         super.onResume();
         mShimmerViewContainer.startShimmerAnimation();
+      //  music.start();
+
     }
 
     @Override
     protected void onPause() {
         mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
+       // music.pause();
     }
 
     public void parto(){
@@ -653,6 +1218,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     nav_image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            musicManu();
                             selectImage(mainMenuActivity.this);
                         }
                     });
@@ -825,7 +1391,12 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                             imageUri = data.getData();
                             final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                            nav_image.setImageBitmap(selectedImage);
+                            try{
+                                nav_image.setImageBitmap(selectedImage);
+                            }catch (Exception e){
+                                nav_image123.setImageBitmap(selectedImage);
+                            }
+
 
                             uploadImage();
                         } catch (FileNotFoundException e) {
@@ -848,7 +1419,12 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         if (imageUri != null) {
 
-            settingBlack();
+            try {
+                settingBlack();
+            }catch (Exception e){
+
+            }
+
 
             // Code for showing progressDialog while uploading
             final ProgressDialog progressDialog
@@ -999,6 +1575,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout1.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1017,6 +1594,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout2.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva2).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1035,6 +1613,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout3.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva2).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1053,6 +1632,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout4.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva4).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1071,6 +1651,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout5.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva5).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1090,6 +1671,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout6.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva6).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1109,6 +1691,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout7.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva7).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1128,6 +1711,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout8.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva8).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1147,6 +1731,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout9.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva9).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1166,6 +1751,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout10.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva10).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1185,6 +1771,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout11.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva11).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1204,6 +1791,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout12.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva12).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1222,6 +1810,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout13.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva13).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1241,6 +1830,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout14.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva14).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1260,6 +1850,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout15.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva15).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1278,6 +1869,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView16.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout16.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva16).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1296,6 +1888,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView17.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout17.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva17).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1315,6 +1908,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView18.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout18.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva18).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1334,6 +1928,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView19.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout19.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva19).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1353,6 +1948,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout20.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva20).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1371,6 +1967,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout21.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva21).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1390,6 +1987,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout22.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva22).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1409,6 +2007,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout23.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva23).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1428,6 +2027,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView24.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout24.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva24).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1446,6 +2046,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView25.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout25.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva25).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1464,6 +2065,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         cardView26.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardMusic();
                 settingBlack();
                 linearLayout26.setBackgroundResource(R.drawable.whitewithblackstroke);
                 myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva26).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1542,5 +2144,535 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
+    public void alertDialogForSurvey(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+        View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.survey_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+
+        final LottieAnimationView starA1,starA2,starA3,starA4,starA5;
+        final LottieAnimationView starB1,starB2,starB3,starB4,starB5;
+        final LottieAnimationView starC1,starC2,starC3,starC4,starC5;
+        final CheckBox check1_No,check1_Yes;
+        final TextInputEditText text1,text2,text3;
+        final RadioGroup radioGroup;
+
+        starA1=(LottieAnimationView) view1.findViewById(R.id.star1);
+        starA2=(LottieAnimationView) view1.findViewById(R.id.star2);
+        starA3=(LottieAnimationView) view1.findViewById(R.id.star3);
+        starA4=(LottieAnimationView) view1.findViewById(R.id.star4);
+        starA5=(LottieAnimationView) view1.findViewById(R.id.star5);
+
+        starB1=(LottieAnimationView) view1.findViewById(R.id.star21);
+        starB2=(LottieAnimationView) view1.findViewById(R.id.star22);
+        starB3=(LottieAnimationView) view1.findViewById(R.id.star23);
+        starB4=(LottieAnimationView) view1.findViewById(R.id.star24);
+        starB5=(LottieAnimationView) view1.findViewById(R.id.star25);
+
+        starC1=(LottieAnimationView) view1.findViewById(R.id.star31);
+        starC2=(LottieAnimationView) view1.findViewById(R.id.star32);
+        starC3=(LottieAnimationView) view1.findViewById(R.id.star33);
+        starC4=(LottieAnimationView) view1.findViewById(R.id.star34);
+        starC5=(LottieAnimationView) view1.findViewById(R.id.star35);
+
+        radioGroup=(RadioGroup) view1.findViewById(R.id.radioGroup);
+
+        text1=(TextInputEditText) view1.findViewById(R.id.question1);
+        text2=(TextInputEditText) view1.findViewById(R.id.question2);
+        text3=(TextInputEditText) view1.findViewById(R.id.question3);
+
+        Button doneButton=(Button) view1.findViewById(R.id.doneButton);
+
+
+
+
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+        starA1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt1=1;
+
+                animPlayer(starA1);
+                starA1.setEnabled(false);
+                starA2.setEnabled(false);
+                starA3.setEnabled(false);
+                starA4.setEnabled(false);
+                starA5.setEnabled(false);
+                
+            }
+        });
+
+        starA2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt1=2;animPlayer(starA1);animPlayer(starA2);
+                starA1.setEnabled(false);
+                starA2.setEnabled(false);
+                starA3.setEnabled(false);
+                starA4.setEnabled(false);
+                starA5.setEnabled(false);
+            }
+        });
+
+        starA3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt1=3;animPlayer(starA1);animPlayer(starA2);animPlayer(starA3);
+                starA1.setEnabled(false);
+                starA2.setEnabled(false);
+                starA3.setEnabled(false);
+                starA4.setEnabled(false);
+                starA5.setEnabled(false);
+            }
+        });
+
+        starA4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt1=4;animPlayer(starA1);animPlayer(starA2);animPlayer(starA3);animPlayer(starA4);
+                starA1.setEnabled(false);
+                starA2.setEnabled(false);
+                starA3.setEnabled(false);
+                starA4.setEnabled(false);
+                starA5.setEnabled(false);
+            }
+        });
+
+        starA5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt1=5;animPlayer(starA1);animPlayer(starA2);animPlayer(starA3);animPlayer(starA4);animPlayer(starA5);
+                starA1.setEnabled(false);
+                starA2.setEnabled(false);
+                starA3.setEnabled(false);
+                starA4.setEnabled(false);
+                starA5.setEnabled(false);
+            }
+        });
+
+
+        starB1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt2=1;animPlayer(starB1);
+                starB1.setEnabled(false);
+                starB2.setEnabled(false);
+                starB3.setEnabled(false);
+                starB4.setEnabled(false);
+                starB5.setEnabled(false);
+            }
+        });
+
+        starB2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt2=2;animPlayer(starB1);animPlayer(starB2);
+                starB1.setEnabled(false);
+                starB2.setEnabled(false);
+                starB3.setEnabled(false);
+                starB4.setEnabled(false);
+                starB5.setEnabled(false);
+            }
+        });
+
+        starB3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt2=3;animPlayer(starB1);animPlayer(starB2);animPlayer(starB3);
+                starB1.setEnabled(false);
+                starB2.setEnabled(false);
+                starB3.setEnabled(false);
+                starB4.setEnabled(false);
+                starB5.setEnabled(false);
+            }
+        });
+
+        starB4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt2=4;animPlayer(starB1);animPlayer(starB2);animPlayer(starB3);animPlayer(starB4);
+                starB1.setEnabled(false);
+                starB2.setEnabled(false);
+                starB3.setEnabled(false);
+                starB4.setEnabled(false);
+                starB5.setEnabled(false);
+            }
+        });
+
+        starB5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt2=5;animPlayer(starB1);animPlayer(starB2);animPlayer(starB3);animPlayer(starB4);animPlayer(starB5);
+                starB1.setEnabled(false);
+                starB2.setEnabled(false);
+                starB3.setEnabled(false);
+                starB4.setEnabled(false);
+                starB5.setEnabled(false);
+            }
+        });
+
+
+
+        starC1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt3=1;animPlayer(starC1);
+                starC1.setEnabled(false);
+                starC2.setEnabled(false);
+                starC3.setEnabled(false);
+                starC4.setEnabled(false);
+                starC5.setEnabled(false);
+            }
+        });
+
+        starC2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt3=2;animPlayer(starC1);animPlayer(starC2);
+                starC1.setEnabled(false);
+                starC2.setEnabled(false);
+                starC3.setEnabled(false);
+                starC4.setEnabled(false);
+                starC5.setEnabled(false);
+            }
+        });
+
+        starC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt3=3;animPlayer(starC1);animPlayer(starC2);animPlayer(starC3);
+                starC1.setEnabled(false);
+                starC2.setEnabled(false);
+                starC3.setEnabled(false);
+                starC4.setEnabled(false);
+                starC5.setEnabled(false);
+            }
+        });
+
+        starC4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt3=4;animPlayer(starC1);animPlayer(starC2);animPlayer(starC3);animPlayer(starC4);
+                starC1.setEnabled(false);
+                starC2.setEnabled(false);
+                starC3.setEnabled(false);
+                starC4.setEnabled(false);
+                starC5.setEnabled(false);
+            }
+        });
+
+        starC5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starManuMusic();
+                surveyInt3=5;animPlayer(starC1);animPlayer(starC2);animPlayer(starC3);animPlayer(starC4);animPlayer(starC5);
+                starC1.setEnabled(false);
+                starC2.setEnabled(false);
+                starC3.setEnabled(false);
+                starC4.setEnabled(false);
+                starC5.setEnabled(false);
+            }
+        });
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                musicManu();
+
+
+
+                int i;
+
+                i = radioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton=(RadioButton) radioGroup.findViewById(i);
+
+                try {
+                    if(radioButton.getText().toString().equals("Yes")){
+                        surveyIntYesOrNo=1;
+                    }else{
+                        surveyIntYesOrNo=0;
+                    }
+                }catch (Exception e){
+
+                }
+
+
+                str1=text1.getText().toString();
+                str2=text2.getText().toString();
+                str3=text3.getText().toString();
+
+
+
+                surveyDataSetter(starA1,starA2,starA3,starA4,starA5,starB1,starB2,starB3,starB4,starB5,starC1,starC2,starC3,starC4,starC5,radioGroup,text1,text2,text3);
+                alertDialog.cancel();
+                Toast.makeText(mainMenuActivity.this, "Thankyou,For Your FeedBack!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void animPlayer(LottieAnimationView anim){
+        anim.setAnimation(R.raw.ratequizsanim);
+        anim.playAnimation();
+        anim.loop(false);
+    }
+
+
+
+    public void surveyDataSetter(LottieAnimationView starA1, LottieAnimationView starA2, LottieAnimationView starA3, LottieAnimationView starA4, LottieAnimationView starA5, LottieAnimationView starB1, LottieAnimationView starB2, LottieAnimationView starB3, LottieAnimationView starB4, LottieAnimationView starB5, LottieAnimationView starC1, LottieAnimationView starC2, LottieAnimationView starC3, LottieAnimationView starC4, LottieAnimationView starC5, RadioGroup radioGroup, TextInputEditText text1, TextInputEditText text2, TextInputEditText text3){
+
+
+
+        if(surveyInt1==-1){
+            Toast.makeText(mainMenuActivity.this, "Please Rate You Experience Using Stars", Toast.LENGTH_SHORT).show();return;
+        }else if(surveyInt2==-1){
+            Toast.makeText(mainMenuActivity.this, "Please Rate The Interface Using Stars", Toast.LENGTH_SHORT).show();return;
+        }else if(surveyInt3==-1){
+            Toast.makeText(mainMenuActivity.this, "Please Rate The Quality Of Questions Using Stars", Toast.LENGTH_SHORT).show();return;
+        }else if(surveyIntYesOrNo==-1){
+            Toast.makeText(mainMenuActivity.this, "Please Select The Radio Button", Toast.LENGTH_SHORT).show();return;
+        }
+
+
+
+
+        SurveyHolder surveyHolder=new SurveyHolder(surveyInt1,surveyInt2,surveyInt3,surveyIntYesOrNo,str1,str2,str3);
+
+        myRef.child("Survey1").child(mAuth.getCurrentUser().getUid()).setValue(surveyHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+
+        myRef.child("Survey1").child("SURVEYSTARINT1").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    surveyAvgHolder i=snapshot.getValue(surveyAvgHolder.class);
+
+                    int numberOfTimesPlayed=i.getNumberOfSurvey()+1;
+                    int ratingNum=i.getStarAvgNum();
+
+                    ratingNum=(ratingNum+surveyInt1)/2;
+
+                    i.setNumberOfSurvey(numberOfTimesPlayed);
+                    i.setStarAvgNum(ratingNum);
+
+                    myRef.child("Survey1").child("SURVEYSTARINT1").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+
+
+                }catch (Exception e){
+                    surveyAvgHolder i = new surveyAvgHolder(surveyInt1,1);
+                    myRef.child("Survey1").child("SURVEYSTARINT1").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        myRef.child("Survey1").child("SURVEYSTARINT2").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    surveyAvgHolder J=snapshot.getValue(surveyAvgHolder.class);
+
+                    int numberOfTimesPlayed=J.getNumberOfSurvey()+1;
+                    int ratingNum=J.getStarAvgNum();
+
+                    ratingNum=(ratingNum+surveyInt2)/2;
+
+                    J.setNumberOfSurvey(numberOfTimesPlayed);
+                    J.setStarAvgNum(ratingNum);
+
+                    myRef.child("Survey1").child("SURVEYSTARINT2").setValue(J).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+
+
+                }catch (Exception e){
+                    surveyAvgHolder i = new surveyAvgHolder(surveyInt2,1);
+                    myRef.child("Survey1").child("SURVEYSTARINT2").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        myRef.child("Survey1").child("SURVEYSTARINT3").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    surveyAvgHolder K=snapshot.getValue(surveyAvgHolder.class);
+
+                    int numberOfTimesPlayed=K.getNumberOfSurvey()+1;
+                    int ratingNum=K.getStarAvgNum();
+
+                    ratingNum=(ratingNum+surveyInt3)/2;
+
+                    K.setNumberOfSurvey(numberOfTimesPlayed);
+                    K.setStarAvgNum(ratingNum);
+
+                    myRef.child("Survey1").child("SURVEYSTARINT3").setValue(K).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+
+
+                }catch (Exception e){
+                    surveyAvgHolder i = new surveyAvgHolder(surveyInt3,1);
+                    myRef.child("Survey1").child("SURVEYSTARINT3").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    public void numberOfTimesPlayed(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    if(i>=10){
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("isSurveyOfVersion1").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                try {
+                                    int i=snapshot.getValue(Integer.class);
+                                    if(i==0){
+                                        alertDialogForSurvey();
+                                    }
+                                }catch (Exception e){
+                                    alertDialogForSurvey();
+                                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("isSurveyOfVersion1").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                }catch (Exception e){
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void musicManu(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(mainMenuActivity.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
+
+    public void starManuMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(mainMenuActivity.this, R.raw.correctmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
+
+    public void cardMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(mainMenuActivity.this, R.raw.navclick);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
 
 }

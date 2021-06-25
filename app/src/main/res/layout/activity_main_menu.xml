@@ -68,9 +68,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/side_menu"
-        android:background="@drawable/navback"
         app:itemIconTint="#000000"
-        android:theme="@style/Theme.Design.Light"/>
+        android:theme="@style/Theme.Design.Light">
+
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/mainanim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="-20dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/backlitemode"
+            app:lottie_speed="1.4" />
+
+    </com.google.android.material.navigation.NavigationView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainfield"
@@ -174,9 +192,12 @@
             app:layout_constraintBottom_toBottomOf="@+id/profilebutton"
             app:layout_constraintEnd_toStartOf="@+id/profilebutton"
             app:layout_constraintTop_toTopOf="@+id/profilebutton"
+            app:layout_constraintVertical_bias="0.0"
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/moneystackanim"
             app:lottie_speed="2" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

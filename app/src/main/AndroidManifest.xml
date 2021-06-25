@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".customPublicQuiz"></activity>
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".customPublicQuiz" />
         <activity android:name=".customCategoryListActivity" />
         <activity android:name=".customQuizMainQuizActivity" />
         <activity android:name=".customFlipperMain" />

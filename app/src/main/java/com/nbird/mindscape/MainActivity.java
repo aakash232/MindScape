@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -31,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final SharedPreferences mailreminder123 = this.getSharedPreferences("isPlaying", 0);
+        final SharedPreferences.Editor isPlaying1 = mailreminder123.edit();
+
+
+            isPlaying1.putInt("I",1);
+
+        final SharedPreferences songHolder = this.getSharedPreferences("songHolder", 0);
+        final SharedPreferences.Editor editorsongHolder = songHolder.edit();
+
+        editorsongHolder.putInt("songHolder",1);
+        editorsongHolder.commit();
+
 
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         final int s1 = sh.getInt("codeRemove", 0);

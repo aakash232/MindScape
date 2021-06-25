@@ -159,7 +159,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(picture_quiz_menu.this, R.style.AlertDialogTheme);
                 View view2 = LayoutInflater.from(picture_quiz_menu.this).inflate(R.layout.onevsone_local_mode_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
                 builder2.setView(view2);
-                builder2.setCancelable(false);
+                builder2.setCancelable(true);
                 joinButton = ((Button) view2.findViewById(R.id.joinButton));
                 createButton = ((Button) view2.findViewById(R.id.createButton));
 
@@ -1215,7 +1215,7 @@ public class picture_quiz_menu extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(picture_quiz_menu.this, R.style.AlertDialogTheme);
         View view3 = LayoutInflater.from(picture_quiz_menu.this).inflate(R.layout.join_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
         builder.setView(view3);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         joinButtonFinal = ((Button) view3.findViewById(R.id.joinButton1));
         roomCodeEditText=((TextInputEditText) view3.findViewById(R.id.password));
 

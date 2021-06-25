@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -12,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -45,13 +49,16 @@ public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
         layoutInflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view =layoutInflater.inflate(R.layout.mainmenuhorizontalslide,container,false);
 
-        ConstraintLayout constraintLayout=(ConstraintLayout) view.findViewById(R.id.constrainmain);
         TextView slideHeading=(TextView) view.findViewById(R.id.textView);
         TextView slideDiscription=(TextView) view.findViewById(R.id.textView2);
+        ImageView image=(ImageView) view.findViewById(R.id.image);
 
-        setManupulation(listItem.get(position).getCategory(),constraintLayout);
+
         slideHeading.setText(listItem.get(position).getTitle());
         slideDiscription.setText(listItem.get(position).getDis());
+        Glide.with(context).load(listItem.get(position).getImageUrl()).into(image);
+        Animation imgAnim1 = AnimationUtils.loadAnimation(context, R.anim.scaleincanim);
+        image.setAnimation(imgAnim1);
 
         container.addView(view);
 
@@ -60,19 +67,7 @@ public class slideAdapterMainMenuHorizontalSlide extends PagerAdapter {
         return view;
     }
 
-    public void setManupulation(int category, ConstraintLayout constraintLayout){
-            switch (category){
-                case 1:
-                    constraintLayout.setBackgroundResource(R.drawable.monumentsimage);
-                    break;
-                case 2:
-                    constraintLayout.setBackgroundResource(R.drawable.animalsdemo);
-                    break;
-                case 3:
-                    constraintLayout.setBackgroundResource(R.drawable.placesimage);
-                    break;
-            }
-    }
+
 
 
     public void destroyItem(ViewGroup container,int position,Object object){

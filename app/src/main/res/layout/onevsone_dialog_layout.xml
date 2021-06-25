@@ -3,33 +3,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="180dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constrainmain"
-        android:layout_width="250dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView123"
+        android:layout_width="200dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:scaleX="0.90"
-        android:scaleY="0.90"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:elevation="-2dp"
+        android:foreground="?selectableItemBackground"
+        app:cardBackgroundColor="@color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        cardview:cardCornerRadius="5dp">
 
-
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/transparentbox"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionTip" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 
 
     <ImageView
@@ -60,7 +75,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="3dp"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/comfortaa"
+            android:fontFamily="@font/mouse_memoirs"
             android:gravity="left"
             android:text="Mind scape"
             android:textColor="#000000"
@@ -76,12 +91,12 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/comfortaa"
+            android:fontFamily="@font/mouse_memoirs"
             android:gravity="left"
             android:text="This is to inform you that i the great will never quit in this brutal world .. i can win any game any battle at any time. i am the legend oomar bin soleman."
-            android:textColor="#000000"
+            android:textColor="#2B2B2B"
             android:background="@drawable/insidecardview"
-            android:textSize="8sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

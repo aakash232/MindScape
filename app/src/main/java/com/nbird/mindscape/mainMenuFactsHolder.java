@@ -5,25 +5,24 @@ public class mainMenuFactsHolder {
     String title;
     String dis;
     int set;
-    int category;
-
+    String imageUrl;
     public mainMenuFactsHolder() {
     }
 
 
-    public mainMenuFactsHolder(String title, String dis, int set,int category) {
+    public mainMenuFactsHolder(String title, String dis, int set,String imageUrl) {
         this.title = title;
         this.dis = dis;
         this.set = set;
-        this.category=category;
+        this.imageUrl=imageUrl;
     }
 
-    public int getCategory() {
-        return category;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {

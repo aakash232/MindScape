@@ -3,6 +3,7 @@ package com.nbird.mindscape;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    musicManu();
                     Toast.makeText(getBaseContext(), "Start Quiz!", Toast.LENGTH_LONG).show();
 
                 }
@@ -34,6 +35,7 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    musicManu();
                     Intent back = new Intent(Lobby.this, mainMenuActivity.class);
                     startActivity(back);
                 }
@@ -44,7 +46,7 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    musicManu();
                     Intent chat = new Intent(Lobby.this, ChatRoom.class);
                     startActivity(chat);
 
@@ -56,7 +58,7 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    musicManu();
                     Toast.makeText(getBaseContext(), "View Facts.", Toast.LENGTH_LONG).show();
 
                 }
@@ -67,7 +69,7 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    musicManu();
                     Toast.makeText(getBaseContext(), "Switch PUBLIC or PRIVATE.", Toast.LENGTH_LONG).show();
 
                 }
@@ -78,15 +80,24 @@ public class Lobby extends AppCompatActivity {
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    musicManu();
                     Toast.makeText(getBaseContext(), "Host can change Settings.", Toast.LENGTH_LONG).show();
 
                 }
             });
-
-
-
-
-
     }
+
+    public void musicManu(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(Lobby.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
+
 }

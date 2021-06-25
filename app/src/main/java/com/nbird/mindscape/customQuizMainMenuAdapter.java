@@ -2,6 +2,7 @@ package com.nbird.mindscape;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,16 @@ public class customQuizMainMenuAdapter extends RecyclerView.Adapter<customQuizMa
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(mContext, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 a=position;
                 Intent intent = new Intent(mContext, customCategoryListActivity.class);
                 intent.putExtra("position", a + 1);

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -388,6 +389,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
@@ -481,13 +492,22 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     }
 
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(tournamentPictureQuiz.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(tournamentPictureQuiz.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your FIFTY-FIFTY Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your FIFTY-FIFTY Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -500,6 +520,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -516,6 +546,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
@@ -603,17 +643,36 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(tournamentPictureQuiz.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(tournamentPictureQuiz.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your AUDIENCE POLL Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -626,6 +685,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -641,6 +710,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
@@ -654,13 +733,22 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     count = 0;
                     playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(tournamentPictureQuiz.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(tournamentPictureQuiz.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your SWAP Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your SWAP Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -673,6 +761,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -691,6 +789,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
@@ -718,18 +826,38 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
 
 
                 }else{
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(tournamentPictureQuiz.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(tournamentPictureQuiz.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    titleText=((TextView) view1.findViewById(R.id.textTitle));
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertAdviceImageManupulator();
 
@@ -742,6 +870,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -1282,6 +1420,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                             @Override
                             public void onClick(View view) {
+                                final MediaPlayer musicNav;
+                                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                                musicNav.start();
+                                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mediaPlayer) {
+                                        musicNav.reset();
+                                        musicNav.release();
+                                    }
+                                });
                                 nextButton.setEnabled(false);
                                 nextButton.setAlpha(0.7f);
                                 enableOption(true);
@@ -1354,6 +1502,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                             @Override
                             public void onClick(View view) {
+                                final MediaPlayer musicNav;
+                                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                                musicNav.start();
+                                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mediaPlayer) {
+                                        musicNav.reset();
+                                        musicNav.release();
+                                    }
+                                });
                                 nextButton.setEnabled(false);
                                 nextButton.setAlpha(0.7f);
                                 enableOption(true);
@@ -1426,6 +1584,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                             @Override
                             public void onClick(View view) {
+                                final MediaPlayer musicNav;
+                                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                                musicNav.start();
+                                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mediaPlayer) {
+                                        musicNav.reset();
+                                        musicNav.release();
+                                    }
+                                });
                                 nextButton.setEnabled(false);
                                 nextButton.setAlpha(0.7f);
                                 enableOption(true);
@@ -1826,6 +1994,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
 
+             final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.correctmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -1858,7 +2036,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
         }else {
             //incorrect
-
+                    final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.wrongansfinal);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -2118,42 +2305,54 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         int num = rand.nextInt(11)+1;
 
         switch (num){
-            case 1:
+            case 1:               //If possible, avatars can match the facial descriptions
                 expertImage.setBackgroundResource(R.drawable.expert1female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText(" Dorjana Sirola: Highest woman scorer in World Quizzing Championship, Croatian linguist and anglicist! is Expert for the day");
+                break;            //white complexion,short hair
             case 2:
                 expertImage.setBackgroundResource(R.drawable.expert2male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Dr.Neil deGrasse Tyson: Astrophysicist, Planetory scientist, Author and Science communicator! is Expert for the day");
+                break;            //Dark complexion
             case 3:
                 expertImage.setBackgroundResource(R.drawable.expert3male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Kevin Ashman: Six times World Quizzing Championship winner and Five times British Quizing Champion! is Expert for the day");
+                break;            //white complexion
             case 4:
                 expertImage.setBackgroundResource(R.drawable.expert4male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Derek O'Brian: Quiz Master, Indian politician and television personality! is Expert for the day");
+                break;            //white complexion, spects
             case 5:
                 expertImage.setBackgroundResource(R.drawable.expert5male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Pat Gibson: Multiple World champion in quizzing, Software developer and professional Irish quizzer! is Expert for the day");
+                break;             // white complexion, spectacles
             case 6:
                 expertImage.setBackgroundResource(R.drawable.expert6female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Elsie Kaufmann: Quiz mistress, Ghanaian academic and Biomedical engineer! is Expert for the day.");
+                break;          //Dark complexion
             case 7:
                 expertImage.setBackgroundResource(R.drawable.expert7male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Olav Bjortomt: Four time World champion and English international quiz star player! is Expert for the day");
+                break;          //White complexion
             case 8:
                 expertImage.setBackgroundResource(R.drawable.expert8female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Anne Hegerty: English quizzer and famous UK television personality! is Expert for the day");
+                break;              //White complexion,short hair,fat face
             case 9:
                 expertImage.setBackgroundResource(R.drawable.expert9female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Seema Chari: Quiz mistress, author, anchor and knowledge media professional! is Expert for the day");
+                break;          //curly hair
             case 10:
                 expertImage.setBackgroundResource(R.drawable.expert10male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Siddhartha Basu: Father of Indian television quizzing, producer-director and quiz show host! is Expert for the day");
+                break;          //almost no hair,fair complexion
             case 11:
                 expertImage.setBackgroundResource(R.drawable.expert11male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Tom Trogh: Belgian quiz player and European quizzing champion! is Expert for the day");
+                break;            //White complexion
             case 12:
                 expertImage.setBackgroundResource(R.drawable.expert12male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Ravi Avva: 2020 World Quizzing champion, Singaporean hailing from India and an Engineer! is Expert for the day");
+                break;          //Fair complexion,spectacles
 
         }
     }
@@ -2188,6 +2387,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 cancelLeaveFunction();
             }
         });
@@ -2195,6 +2404,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -2268,6 +2487,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent=new Intent(tournamentPictureQuiz.this,mainMenuActivity.class);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}

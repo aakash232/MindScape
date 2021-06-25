@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -83,6 +84,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     TextView titleText;
     String userName;
     int starter=0,starterQuestion=0;
+    CountDownTimer c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +121,31 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         loadingDialog.show();
 
         proPicFunction();
-        countDownTimerFun();
         userNameFunction();
+
+
+        c=new CountDownTimer(1000*180,1000) {
+            @Override
+            public void onTick(long l) {
+                if(questionImage.getDrawable() != null){
+                    try {
+                        if(c!=null){
+                            c.cancel();
+                        }
+                        countDownTimerFun();
+                        loadingDialog.dismiss();
+                    }catch (Exception e){
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
 
         //LIFELINES
 
@@ -130,6 +155,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
@@ -223,7 +258,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     }
 
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -242,6 +286,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -255,6 +309,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
@@ -342,11 +406,30 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -365,6 +448,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -380,6 +473,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(swapnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
@@ -393,7 +496,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     count = 0;
                     playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -412,6 +524,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -428,6 +550,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
@@ -440,7 +572,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n'"+answerByExpert+"'");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
                     expertAdviceImageManupulator();
@@ -460,6 +592,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
                 }else{
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -478,6 +620,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -492,7 +644,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
             // Generate random integers in range 0 to 14
 
-            final int setNumber = rand.nextInt(13)+1;  //NEED TO CHANGE HERE
+            final int setNumber = rand.nextInt(999)+1;  //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
 
             fireBaseData(setNumber);
@@ -531,6 +683,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                             @Override
                             public void onClick(View view) {
+                                final MediaPlayer musicNav;
+                                musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                                musicNav.start();
+                                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mediaPlayer) {
+                                        musicNav.reset();
+                                        musicNav.release();
+                                    }
+                                });
                                 nextButton.setEnabled(false);
                                 nextButton.setAlpha(0.7f);
                                 enableOption(true);
@@ -726,14 +888,32 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
-
+                final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.correctmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
             score++;
         }else {
             //incorrect
-
+            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.wrongansfinal);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -762,7 +942,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
 
-                picWaiter();
+
 
                 milliHolder=millisUntilFinished;
                 if(second==60){
@@ -906,16 +1086,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         });
     }
 
-    public void picWaiter(){
-        if(questionImage.getDrawable() != null){
-            try {
-                loadingDialog.dismiss();
-            }catch (Exception e){
 
-            }
-
-        }
-    }
 
 
 

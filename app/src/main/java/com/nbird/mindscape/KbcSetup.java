@@ -24,15 +24,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +55,7 @@ public class KbcSetup extends AppCompatActivity {
     TextView kbc_que;
     private List<questionHolder> list,listsecondary;
     private int setNo;
-
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
     TextView timerText;
     CountDownTimer countDownTimer;
     Button half,advice,audience,flip,quit;
@@ -79,7 +82,10 @@ public class KbcSetup extends AppCompatActivity {
     int yo2;
     int yo3;
     int yo4;
-
+    LottieAnimationView  partypoper1,partypoper2;
+    ImageView expertImage;
+    TextView titleText;
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,11 +111,19 @@ public class KbcSetup extends AppCompatActivity {
         kbc_que = findViewById(R.id.kbc_que);
         timerText = findViewById(R.id.timerText);
 
+        partypoper1=(LottieAnimationView) findViewById(R.id.partypoper);
+        partypoper2=(LottieAnimationView) findViewById(R.id.party2);
+
+        partypoper1.setVisibility(View.GONE);
+        partypoper2.setVisibility(View.GONE);
+
         list = new ArrayList<>();
         listsecondary=new ArrayList<>();
 
         category=getIntent().getIntExtra("category",1);
         setNo=getIntent().getIntExtra("setNo",10);
+
+        userNameFunction();
 
         if(loadingDialog!=null)
             loadingDialog.show();
@@ -117,7 +131,12 @@ public class KbcSetup extends AppCompatActivity {
         countDownTimer = new CountDownTimer(31000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                kbcCountMus.start();
+                try{
+                    kbcCountMus.start();
+                }catch (Exception e){
+
+                }
+
                 if(millisUntilFinished<=9)
                     timerText.setText("0" + millisUntilFinished / 1000);
                 else
@@ -127,27 +146,37 @@ public class KbcSetup extends AppCompatActivity {
                 countDownTimer.cancel();
 
                 wrongString = "Time's Up!";
-                moveToScore();
+                moveToScore1();
             }
 
         }.start();
 
-        for(int i=0;i<11;i++){
+        for(int i=1;i<=14;i++){
             // create instance of Random class
             Random rand = new Random();
+            final int setNumber = rand.nextInt(29)+1;
+
+            fireBaseData(setNumber, i);
 
             // Generate random integers in range 0 to 29
 
-            final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
-            //NEED TO CHANGE HERE
-
-
-            fireBaseData(setNumber);
         }
+
+        linearLayoutPrice.getChildAt(12-score).setBackgroundResource(R.drawable.border);
 
         half.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelinemusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
 
                 if(halfnum==0) {
                     halfnum = 1;
@@ -242,12 +271,23 @@ public class KbcSetup extends AppCompatActivity {
 
                 }else{
 
+                    final MediaPlayer musicNav2;
+                    musicNav2 = MediaPlayer.create(KbcSetup.this, R.raw.lifelineused);
+                    musicNav2.start();
+                    musicNav2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav2.reset();
+                            musicNav2.release();
+                        }
+                    });
+
                     AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your FIFTY-FIFTY Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your FIFTY-FIFTY Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -271,11 +311,22 @@ public class KbcSetup extends AppCompatActivity {
             }
         });
 
+
         audience.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     audiencenum=1;
                     lifelineLayout.getChildAt(1).setBackgroundResource(R.drawable.audience_used);
 
@@ -283,7 +334,7 @@ public class KbcSetup extends AppCompatActivity {
                         manupulator = 1;
                     } else if (button2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 2;
-                    } else if (button2.getText().toString().equals(list.get(position).getCorrectAnswer())) {
+                    } else if (button3.getText().toString().equals(list.get(position).getCorrectAnswer())) {
                         manupulator = 3;
                     } else {
                         manupulator = 4;
@@ -327,7 +378,7 @@ public class KbcSetup extends AppCompatActivity {
                     final View view1 = LayoutInflater.from(KbcSetup.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText(" MindScapers from across the world have casted their votes above. Choose your option! ");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     BarChart barChart = ((BarChart) view1.findViewById(R.id.barChart));
 
@@ -362,17 +413,36 @@ public class KbcSetup extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your AUDIENCE POLL Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your AUDIENCE POLL Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -385,6 +455,16 @@ public class KbcSetup extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final MediaPlayer musicNav;
+                            musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                            musicNav.start();
+                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    musicNav.reset();
+                                    musicNav.release();
+                                }
+                            });
                             alertDialog.dismiss();
                         }
                     });
@@ -400,6 +480,16 @@ public class KbcSetup extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(flipnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     flipnum=1;
                     lifelineLayout.getChildAt(2).setBackgroundResource(R.drawable.flip_used);
                     enableOption(true);
@@ -410,13 +500,22 @@ public class KbcSetup extends AppCompatActivity {
                     count = 0;
                     playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
                 }else{
-
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your SWAP Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your SWAP Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -447,6 +546,16 @@ public class KbcSetup extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
 
                     expertnum=1;
                     lifelineLayout.getChildAt(3).setBackgroundResource(R.drawable.expert_used);
@@ -458,16 +567,18 @@ public class KbcSetup extends AppCompatActivity {
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText("I Think It's : \n'"+answerByExpert+"'");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
-
+                    expertImage=(ImageView) view1.findViewById(R.id.imageIcon);
+                    titleText=(TextView) view1.findViewById(R.id.textTitle);
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
                     alertDialog.show();
+
+                    expertAdviceImageManupulator();
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -478,12 +589,22 @@ public class KbcSetup extends AppCompatActivity {
 
 
                 }else{
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(KbcSetup.this, R.raw.lifelineused);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Sorry Lucy! You Have Used Your EXPERT ADVICE Life Line Once.");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Oops! You Have Used Your EXPERT ADVICE Life Line Once.");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
 
@@ -506,7 +627,7 @@ public class KbcSetup extends AppCompatActivity {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kbcCountMus.stop();
+                stopPlaying();
                 wrongString = "";
                 moveToScore();
             }
@@ -514,15 +635,28 @@ public class KbcSetup extends AppCompatActivity {
 
     }
 
-    public void fireBaseData(int setNumber){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void musicManu(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
+
+    public void fireBaseData(int setNumber, int i){
+        myRef.child("KBC").child(String.valueOf(i)).orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     list.add(snapshot1.getValue(questionHolder.class));
                     num++;
                 }
-                if(num==10) {
+                if(num==13) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
                             linearLayoutButton.getChildAt(i).setOnClickListener(new View.OnClickListener() {
@@ -580,6 +714,9 @@ public class KbcSetup extends AppCompatActivity {
                         button4.setTextColor(Color.parseColor("#ffffff"));
                         linearLayoutButton.getChildAt(3).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }
+
+
+
                     playAnim(linearLayoutButton.getChildAt(count),0,option);
                     count++;
                 }
@@ -615,23 +752,26 @@ public class KbcSetup extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void checkAnswer(Button selectedOption){
         enableOption(false);
-        kbcCountMus.stop();
+        stopPlaying();
 
         LLFalseManupulator();
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             nextQue();
             countDownTimer.cancel();
-            countDownTimer.start();
-            kbcCountMus.start();
-            if(score==0){
-                linearLayoutPrice.getChildAt(12-score).setBackgroundResource(R.drawable.border);
+
+
+            try{
                 score++;
-            }
-            else {
                 linearLayoutPrice.getChildAt(12 - score).setBackgroundResource(R.drawable.border);
                 linearLayoutPrice.getChildAt(12 - score + 1).setBackgroundResource(R.drawable.border_removed);
-                score++;
+
+            }catch (Exception e){
+
             }
+
+
+
+
 
 
         }else {
@@ -698,35 +838,323 @@ public class KbcSetup extends AppCompatActivity {
         LLTrueManupulator();
 
         if(flipnum==0){
-            if (position == 10) {
-                Intent scoreIntent = new Intent(KbcSetup.this, scoreActivity.class);
-                scoreIntent.putExtra("score", score);
-                startActivity(scoreIntent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return;
+            if (position == 13) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+
+                final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.kbc_alertdialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                builder.setView(view1);
+                builder.setCancelable(false);
+                ((TextView) view1.findViewById(R.id.textTitle)).setText("You Won");
+                ((Button) view1.findViewById(R.id.buttonYes)).setText("NEXT");
+
+                LottieAnimationView lottieAnimationView=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+                lottieAnimationView.setAnimation(R.raw.animcongratulation);
+
+
+                final AlertDialog alertDialog=builder.create();
+                if(alertDialog.getWindow()!=null){
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
+                partypoper1.setVisibility(View.VISIBLE);
+                partypoper1.setAnimation(R.raw.partypoppersanim);
+                partypoper1.playAnimation();
+                partypoper1.loop(false);
+                partypoper2.setVisibility(View.VISIBLE);
+                partypoper2.setAnimation(R.raw.partypoppersanim);
+                partypoper2.playAnimation();
+                partypoper2.loop(false);
+
+                view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        musicManu();
+                        Intent scoreIntent = new Intent(KbcSetup.this, KbcScoreActivity.class);
+                        scoreIntent.putExtra("score", score);
+                        startActivity(scoreIntent);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();
+                        }
+                        kbcCountMus.pause();
+                        alertDialog.dismiss();
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+
+                    }
+                });
+
+
             }
 
         }else {
-            if (position == 11) {
-                Intent scoreIntent = new Intent(KbcSetup.this, scoreActivity.class);
-                scoreIntent.putExtra("score", score);
-                startActivity(scoreIntent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return;
+            if (position == 14) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+
+                final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.kbc_alertdialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                builder.setView(view1);
+                builder.setCancelable(false);
+                ((TextView) view1.findViewById(R.id.textTitle)).setText("You Won");
+                ((Button) view1.findViewById(R.id.buttonYes)).setText("NEXT");
+                LottieAnimationView lottieAnimationView=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+                lottieAnimationView.setAnimation(R.raw.animcongratulation);
+
+
+
+                partypoper1.setVisibility(View.VISIBLE);
+                partypoper1.setAnimation(R.raw.partypoppersanim);
+                partypoper1.playAnimation();
+                partypoper1.loop(false);
+                partypoper2.setVisibility(View.VISIBLE);
+                partypoper2.setAnimation(R.raw.partypoppersanim);
+                partypoper2.playAnimation();
+                partypoper2.loop(false);
+
+                final AlertDialog alertDialog=builder.create();
+                if(alertDialog.getWindow()!=null){
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
+
+                view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        musicManu();
+                        Intent scoreIntent = new Intent(KbcSetup.this, KbcScoreActivity.class);
+                        scoreIntent.putExtra("score", score);
+
+                        startActivity(scoreIntent);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();
+                        }
+                        kbcCountMus.pause();
+                        alertDialog.dismiss();
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                        finish();
+
+                    }
+                });
             }
         }
 
-        count = 0;
-        playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
+        AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.kbc_alertdialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        ((TextView) view1.findViewById(R.id.textTitle)).setText("Correct Answer");
+        ((Button) view1.findViewById(R.id.buttonYes)).setText("NEXT");
+        LottieAnimationView lottieAnimationView=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+        lottieAnimationView.setAnimation(R.raw.animcongratulation);
+
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+        partypoper1.setVisibility(View.VISIBLE);
+        partypoper1.setAnimation(R.raw.partypoppersanim);
+        partypoper1.playAnimation();
+        partypoper1.loop(false);
+        partypoper2.setVisibility(View.VISIBLE);
+        partypoper2.setAnimation(R.raw.partypoppersanim);
+        partypoper2.playAnimation();
+        partypoper2.loop(false);
+
+        view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                musicManu();
+                try{
+                    count = 0;
+                    countDownTimer.start();
+                    stopPlaying();
+                    kbcCountMus = MediaPlayer.create(KbcSetup.this, R.raw.kb_tick);
+                    playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
+                    kbcCountMus.start();
+                    alertDialog.dismiss();
+                }catch (Exception e){
+                    stopPlaying();
+                    alertDialog.dismiss();
+                }
+
+            }
+        });
+
+
+
+    }
+
+    private void stopPlaying() {
+        if (kbcCountMus != null) {
+            kbcCountMus.stop();
+            kbcCountMus.release();
+            kbcCountMus = null;
+        }
     }
 
     public void moveToScore()
     {
-        Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
-        i.putExtra("string",wrongString);
-        i.putExtra("score",score);
-        startActivity(i);
+
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.kbc_alertdialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        ((TextView) view1.findViewById(R.id.textTitle)).setText("Wrong Answer");
+        ((Button) view1.findViewById(R.id.buttonYes)).setText("Finish");
+
+        LottieAnimationView lottieAnimationView=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+        lottieAnimationView.setAnimation(R.raw.wrong123anim);
+
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+        view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                musicManu();
+                Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
+                i.putExtra("string",wrongString);
+                i.putExtra("score",score);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();
+                }
+                startActivity(i);
+                alertDialog.cancel();
+                finish();
+
+            }
+        });
+
+
+    }
+
+
+    public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
+        Random rand = new Random();
+        int num = rand.nextInt(11)+1;
+
+        switch (num){
+            case 1:               //If possible, avatars can match the facial descriptions
+                expertImage.setBackgroundResource(R.drawable.expert1female);
+                titleText.setText(" Dorjana Sirola: Highest woman scorer in World Quizzing Championship, Croatian linguist and anglicist! is Expert for the day");
+                break;            //white complexion,short hair
+            case 2:
+                expertImage.setBackgroundResource(R.drawable.expert2male);
+                titleText.setText("Dr.Neil deGrasse Tyson: Astrophysicist, Planetory scientist, Author and Science communicator! is Expert for the day");
+                break;            //Dark complexion
+            case 3:
+                expertImage.setBackgroundResource(R.drawable.expert3male);
+                titleText.setText("Kevin Ashman: Six times World Quizzing Championship winner and Five times British Quizing Champion! is Expert for the day");
+                break;            //white complexion
+            case 4:
+                expertImage.setBackgroundResource(R.drawable.expert4male);
+                titleText.setText("Derek O'Brian: Quiz Master, Indian politician and television personality! is Expert for the day");
+                break;            //white complexion, spects
+            case 5:
+                expertImage.setBackgroundResource(R.drawable.expert5male);
+                titleText.setText("Pat Gibson: Multiple World champion in quizzing, Software developer and professional Irish quizzer! is Expert for the day");
+                break;             // white complexion, spectacles
+            case 6:
+                expertImage.setBackgroundResource(R.drawable.expert6female);
+                titleText.setText("Elsie Kaufmann: Quiz mistress, Ghanaian academic and Biomedical engineer! is Expert for the day.");
+                break;          //Dark complexion
+            case 7:
+                expertImage.setBackgroundResource(R.drawable.expert7male);
+                titleText.setText("Olav Bjortomt: Four time World champion and English international quiz star player! is Expert for the day");
+                break;          //White complexion
+            case 8:
+                expertImage.setBackgroundResource(R.drawable.expert8female);
+                titleText.setText("Anne Hegerty: English quizzer and famous UK television personality! is Expert for the day");
+                break;              //White complexion,short hair,fat face
+            case 9:
+                expertImage.setBackgroundResource(R.drawable.expert9female);
+                titleText.setText("Seema Chari: Quiz mistress, author, anchor and knowledge media professional! is Expert for the day");
+                break;          //curly hair
+            case 10:
+                expertImage.setBackgroundResource(R.drawable.expert10male);
+                titleText.setText("Siddhartha Basu: Father of Indian television quizzing, producer-director and quiz show host! is Expert for the day");
+                break;          //almost no hair,fair complexion
+            case 11:
+                expertImage.setBackgroundResource(R.drawable.expert11male);
+                titleText.setText("Tom Trogh: Belgian quiz player and European quizzing champion! is Expert for the day");
+                break;            //White complexion
+            case 12:
+                expertImage.setBackgroundResource(R.drawable.expert12male);
+                titleText.setText("Ravi Avva: 2020 World Quizzing champion, Singaporean hailing from India and an Engineer! is Expert for the day");
+                break;          //Fair complexion,spectacles
+
+        }
+
+
+    }
+
+
+
+    public void moveToScore1()
+    {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.kbc_alertdialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        ((TextView) view1.findViewById(R.id.textTitle)).setText("Time Up");
+        ((Button) view1.findViewById(R.id.buttonYes)).setText("Finish");
+
+        LottieAnimationView lottieAnimationView=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+        lottieAnimationView.setAnimation(R.raw.timesupanim);
+
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+        view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                musicManu();
+                Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
+                i.putExtra("string",wrongString);
+                i.putExtra("score",score);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();
+                }
+                startActivity(i);
+                alertDialog.cancel();
+                finish();
+
+            }
+        });
+    }
+    public void userNameFunction(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

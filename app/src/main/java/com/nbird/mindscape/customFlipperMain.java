@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -188,6 +189,7 @@ public class customFlipperMain extends AppCompatActivity {
         choosepic1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 imgButtonInt=1;
                 selectImage(customFlipperMain.this,questionImage1);
 
@@ -197,6 +199,7 @@ public class customFlipperMain extends AppCompatActivity {
         choosepic2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 imgButtonInt=2;
                 selectImage(customFlipperMain.this,questionImage2);
 
@@ -206,6 +209,7 @@ public class customFlipperMain extends AppCompatActivity {
         choosepic3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 imgButtonInt=3;
                 selectImage(customFlipperMain.this,questionImage3);
 
@@ -215,6 +219,7 @@ public class customFlipperMain extends AppCompatActivity {
         choosepic4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 imgButtonInt=4;
                 selectImage(customFlipperMain.this,questionImage4);
 
@@ -224,6 +229,7 @@ public class customFlipperMain extends AppCompatActivity {
         choosepic5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 imgButtonInt=5;
                 selectImage(customFlipperMain.this,questionImage5);
 
@@ -236,6 +242,7 @@ public class customFlipperMain extends AppCompatActivity {
         cancel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 questionImage1.setImageBitmap(null);
                 imgU1="";
                 cancel1.setAlpha(0);
@@ -246,6 +253,7 @@ public class customFlipperMain extends AppCompatActivity {
         cancel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 questionImage2.setImageBitmap(null);
                 imgU2="";
                 cancel2.setAlpha(0);
@@ -256,6 +264,7 @@ public class customFlipperMain extends AppCompatActivity {
         cancel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 questionImage3.setImageBitmap(null);
                 imgU3="";
                 cancel3.setAlpha(0);
@@ -266,6 +275,7 @@ public class customFlipperMain extends AppCompatActivity {
         cancel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 questionImage4.setImageBitmap(null);
                 imgU4="";
                 cancel4.setAlpha(0);
@@ -276,6 +286,7 @@ public class customFlipperMain extends AppCompatActivity {
         cancel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 questionImage5.setImageBitmap(null);
                 imgU5="";
                 cancel5.setAlpha(0);
@@ -296,7 +307,7 @@ public class customFlipperMain extends AppCompatActivity {
                     @Override
                     public void onClick(View v)
                     {
-
+                        buttonMusic();
                         switch (pInt){
                             case 1:
                                 if(!errorFinder(question1,optionA1,optionB1,optionC1,optionD1)){
@@ -479,6 +490,7 @@ public class customFlipperMain extends AppCompatActivity {
                             yesButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     fireBaseSetter();
                                     codeProviderAlertDialog();
                                 }
@@ -487,6 +499,7 @@ public class customFlipperMain extends AppCompatActivity {
                             noButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                   alertDialog.dismiss();
                                 }
                             });
@@ -564,6 +577,7 @@ public class customFlipperMain extends AppCompatActivity {
                     @Override
                     public void onClick(View v)
                     {
+                        buttonMusic();
                         if(pInt>1){
                             pInt--;
                             questionNumber.setText("Question : "+pInt+"/5");
@@ -654,7 +668,7 @@ public class customFlipperMain extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                buttonMusic();
                 Intent intent=new Intent(customFlipperMain.this,customQuizMainQuizActivity.class);
 
                     intent.putExtra("quizName",quizName);
@@ -680,6 +694,7 @@ public class customFlipperMain extends AppCompatActivity {
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 Intent intent=new Intent(customFlipperMain.this,mainMenuActivity.class);
                 alertDialog.dismiss();
                 startActivity(intent);
@@ -690,6 +705,7 @@ public class customFlipperMain extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMusic();
                 Intent shareIntent=new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plane");
                 String shareBody=userName+" Has Created A Quiz .Try Once\n"+"Username : "+userName+"\nQuiz Code : "+quizCode+".";
@@ -910,15 +926,16 @@ public class customFlipperMain extends AppCompatActivity {
 
 
                 if(privacy==0){
+                    key = database.getReference().child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").push().getKey();
                     customQuizPropertiesSetter s1=new customQuizPropertiesSetter(quizName,timeDuration,experLL,swapLL,audienceLL,fiftyfiftyLL,quizCode,privacy,userName,rate,report,description,proPic,key,"",0);
 
-                    myRef.child("CustomQuiz").child(String.valueOf(privacy)).child(mAuth.getCurrentUser().getUid()).child("QuizProperties").child(quizName).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("QuizProperties").child(key).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
                             for (int i=0;i<5;i++){
                                 mainHolder=listItem.get(i);
-                                myRef.child("CustomQuiz").child(String.valueOf(privacy)).child(mAuth.getCurrentUser().getUid()).child(quizName).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("questions").child(key).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(customFlipperMain.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
@@ -977,6 +994,19 @@ public class customFlipperMain extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public void buttonMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(customFlipperMain.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
     }
 
 }

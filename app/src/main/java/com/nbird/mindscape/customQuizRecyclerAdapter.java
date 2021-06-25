@@ -2,6 +2,7 @@ package com.nbird.mindscape;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -72,6 +73,16 @@ public class customQuizRecyclerAdapter extends RecyclerView.Adapter<customQuizRe
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(context, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 for(int i=0;i<numberOfQuestions;i++){
                     String questionString=holder.question.getText().toString();
                     if(questionString.isEmpty()){

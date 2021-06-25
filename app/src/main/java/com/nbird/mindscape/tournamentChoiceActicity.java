@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,13 +78,33 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         onlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   roomSelectionDialog();
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                roomSelectionDialog();
             }
         });
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 roomListView();
             }
         });
@@ -91,7 +112,16 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         joinPrivateRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 privateRoomJoinAlertDialog();
             }
         });
@@ -103,7 +133,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         AlertDialog.Builder builderJoin=new AlertDialog.Builder(tournamentChoiceActicity.this,R.style.AlertDialogTheme);
         View viewJoin=LayoutInflater.from(tournamentChoiceActicity.this).inflate(R.layout.join_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
         builderJoin.setView(viewJoin);
-        builderJoin.setCancelable(false);
+        builderJoin.setCancelable(true);
 
         joinButton=(Button) viewJoin.findViewById(R.id.joinButton1);
         password=(TextInputEditText) viewJoin.findViewById(R.id.password);
@@ -117,6 +147,16 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 roomCodeString=password.getText().toString();
                 codeInteger= Integer.parseInt(roomCodeString);
 
@@ -257,6 +297,16 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                  roomCodeGenerator();
                  Intent intent=new Intent(tournamentChoiceActicity.this,tournamentLobbyActivity.class);
                  intent.putExtra("Playernum",1);
@@ -270,6 +320,16 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent=new Intent(tournamentChoiceActicity.this,mainMenuActivity.class);
                 startActivity(intent);
                 alertDialog.dismiss();

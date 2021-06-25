@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,6 +61,7 @@ public class loginActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                musicManu();
                 Intent intentForgotPassword=new Intent(loginActivity.this,welcomeActivity.class);
                 startActivity(intentForgotPassword);
             }
@@ -68,6 +70,7 @@ public class loginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                musicManu();
                 Intent intentForgotPassword=new Intent(loginActivity.this,forgotPasswordActivity.class);
                 startActivity(intentForgotPassword);
             }
@@ -84,6 +87,7 @@ public class loginActivity extends AppCompatActivity {
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
+                musicManu();
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     switch (keyCode)
@@ -102,6 +106,7 @@ public class loginActivity extends AppCompatActivity {
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
+                musicManu();
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     switch (keyCode)
@@ -278,6 +283,19 @@ public class loginActivity extends AppCompatActivity {
         else
             password.setError(null);
         return true;
+    }
+
+    public void musicManu(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(loginActivity.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
     }
 
 }

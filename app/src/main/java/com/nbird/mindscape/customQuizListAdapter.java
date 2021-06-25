@@ -1,7 +1,9 @@
 package com.nbird.mindscape;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,19 @@ public class customQuizListAdapter extends RecyclerView.Adapter<customQuizListAd
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(context, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+
+
                 Intent intent=new Intent(context,customPublicQuiz.class);
 
                 intent.putExtra("quizName",listItem.get(position).getQuizName());
@@ -68,6 +83,7 @@ public class customQuizListAdapter extends RecyclerView.Adapter<customQuizListAd
                 intent.putExtra("myKey",listItem.get(position).getMyKey());
                 intent.putExtra("numberOfTimesPlayed",listItem.get(position).getNumberOfTimesPlayed());
                 context.startActivity(intent);
+                ((Activity)context).finish();
             }
         });
 

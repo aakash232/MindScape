@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -144,6 +145,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card1.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(1);
                                     alertDialog.dismiss();
                                 }
@@ -152,6 +154,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card2.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(2);alertDialog.dismiss();
                                 }
                             });
@@ -159,6 +162,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card3.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(3);alertDialog.dismiss();
                                 }
                             });
@@ -166,6 +170,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card4.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(4);alertDialog.dismiss();
                                 }
                             });
@@ -173,6 +178,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card5.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(5);alertDialog.dismiss();
                                 }
                             });
@@ -180,6 +186,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card6.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(6);alertDialog.dismiss();
                                 }
                             });
@@ -188,6 +195,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card7.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(7);alertDialog.dismiss();
                                 }
                             });
@@ -196,6 +204,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card8.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(8);alertDialog.dismiss();
                                 }
                             });
@@ -204,6 +213,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card9.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(9);alertDialog.dismiss();
                                 }
                             });
@@ -212,6 +222,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card10.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(10);alertDialog.dismiss();
                                 }
                             });
@@ -220,6 +231,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card11.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(11);alertDialog.dismiss();
                                 }
                             });
@@ -228,6 +240,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card12.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(12);alertDialog.dismiss();
                                 }
                             });
@@ -236,6 +249,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card13.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(13);alertDialog.dismiss();
                                 }
                             });
@@ -244,6 +258,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card14.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(14);alertDialog.dismiss();
                                 }
                             });
@@ -252,6 +267,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card15.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(15);alertDialog.dismiss();
                                 }
                             });
@@ -260,6 +276,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card16.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(16);alertDialog.dismiss();
                                 }
                             });
@@ -268,6 +285,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card17.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(17);alertDialog.dismiss();
                                 }
                             });
@@ -276,6 +294,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card18.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(18);alertDialog.dismiss();
                                 }
                             });
@@ -283,6 +302,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             card19.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     intentFunction(19);alertDialog.dismiss();
                                 }
                             });
@@ -383,6 +403,19 @@ public class customQuizFirstProperties extends AppCompatActivity {
             timeDuration.setError(null);
         }
         return true;
+    }
+
+    public void buttonMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(customQuizFirstProperties.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
     }
 
 }

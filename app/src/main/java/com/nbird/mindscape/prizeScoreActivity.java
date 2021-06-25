@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -155,6 +156,16 @@ public class prizeScoreActivity extends AppCompatActivity {
         cardViewHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(prizeScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent=new Intent(prizeScoreActivity.this,mainMenuActivity.class);
                 startActivity(intent);
                 finish();
@@ -165,7 +176,16 @@ public class prizeScoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(prizeScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                     AlertDialog.Builder builder=new AlertDialog.Builder(prizeScoreActivity.this,R.style.AlertDialogTheme);
 
                     final View view1= LayoutInflater.from(prizeScoreActivity.this).inflate(R.layout.prize_quiz_selector_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));

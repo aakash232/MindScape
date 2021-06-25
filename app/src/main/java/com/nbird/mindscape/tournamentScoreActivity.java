@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -32,8 +33,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class tournamentScoreActivity extends AppCompatActivity {
     ImageView img1,img2,img3,img4,propic1,propic2,propic3,propic4;
@@ -75,6 +79,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
     ValueEventListener listner99;
     LottieAnimationView partypoper,party2;
     ShimmerFrameLayout headShimmer,player1ShimmerPic,player2ShimmerPic,player3ShimmerPic,player4ShimmerPic,player1Shimmer,player2Shimmer,player3Shimmer,player4Shimmer;
+    barGroupHolder man;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -271,6 +276,127 @@ public class tournamentScoreActivity extends AppCompatActivity {
         party2.loop(false);
 
 
+
+        numberOfTimesPlayed();
+
+
+
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    long i=snapshot.getValue(Integer.class);
+                    long k=counter;
+                    i=i+k;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    long k=counter;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(k).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        final String dayOfTheWeek = sdf.format(d);
+
+        man=new barGroupHolder();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    man=snapshot.getValue(barGroupHolder.class);
+                    int cA=man.getCorrect()+correctNum;
+                    int wA;
+                    switch (questionNum){
+                        case 0:
+                             wA=man.getWrong()+(10-correctNum);break;
+                        case 1:
+                            wA=man.getWrong()+(15-correctNum);break;
+                        default:
+                            wA=man.getWrong()+(20-correctNum);break;
+                    }
+
+                    barGroupHolder g1=new barGroupHolder(cA,wA);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                }catch (Exception e){
+                    int t;
+                    switch (questionNum){
+                        case 0:
+                            t=10-correctNum;break;
+                        case 1:
+                            t=15-correctNum;break;
+                        default:
+                            t=20-correctNum;break;
+                    }
+
+                    barGroupHolder g1=new barGroupHolder(correctNum,t);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    int s=snapshot.getValue(Integer.class);
+                    s++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(s).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         if(playerNum==2||playerNum==3||playerNum==4){
@@ -633,7 +759,22 @@ public class tournamentScoreActivity extends AppCompatActivity {
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                try {
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                }catch (Exception e){
+
+                }
+
                if(playerNum==1){
                    del(mAuth.getCurrentUser().getUid());
                }else{
@@ -653,6 +794,16 @@ public class tournamentScoreActivity extends AppCompatActivity {
             lobbyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                      myRef.child("room").child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                          @Override
                          public void onComplete(@NonNull Task<Void> task) {
@@ -728,6 +879,16 @@ public class tournamentScoreActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if(playerNum==1){
                     del(mAuth.getCurrentUser().getUid());
                 }else{
@@ -739,6 +900,16 @@ public class tournamentScoreActivity extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -1463,7 +1634,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
         switch (numberOfPlayers){
             case 1:
                 if(roomEntry==1){
-                    alertDialog123(myName+"\nYour Alone",R.drawable.alone);
+                    alertDialog123(myName+"\nYour Are Alone",R.drawable.alonetournament);
                     headShimmer.stopShimmerAnimation();
                     headShimmer.setVisibility(View.GONE);
                     pos1.setText("1st");
@@ -2358,6 +2529,16 @@ public class tournamentScoreActivity extends AppCompatActivity {
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -2382,6 +2563,16 @@ public class tournamentScoreActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -2603,15 +2794,107 @@ public class tournamentScoreActivity extends AppCompatActivity {
         }
         if(numberOfPlayers==1){
             sco1=totalSum;
+
+            int wA;
+            switch (questionNum){
+                case 0:
+                    wA=(10-correctNum);break;
+                case 1:
+                    wA=(15-correctNum);break;
+                default:
+                    wA=(20-correctNum);break;
+            }
+
+            long k=counter;
+            quizHistoryData s5 = new quizHistoryData((int) totalSum, k,correctNum,wA);
+            String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
         }else{
             if(playerNum==1){
                 sco1=totalSum;
+                int wA;
+                switch (questionNum){
+                    case 0:
+                        wA=(10-correctNum);break;
+                    case 1:
+                        wA=(15-correctNum);break;
+                    default:
+                        wA=(20-correctNum);break;
+                }
+                long k=counter;
+                quizHistoryData s5 = new quizHistoryData((int) totalSum, k,correctNum,wA);
+                String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
             }else if(playerNum==2){
                 sco2=totalSum;
+                int wA;
+                switch (questionNum){
+                    case 0:
+                        wA=(10-correctNum);break;
+                    case 1:
+                        wA=(15-correctNum);break;
+                    default:
+                        wA=(20-correctNum);break;
+                }
+                long k=counter;
+                quizHistoryData s5 = new quizHistoryData((int) totalSum, k,correctNum,wA);
+                String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
             }else if(playerNum==3){
                 sco3=totalSum;
+                int wA;
+                switch (questionNum){
+                    case 0:
+                        wA=(10-correctNum);break;
+                    case 1:
+                        wA=(15-correctNum);break;
+                    default:
+                        wA=(20-correctNum);break;
+                }
+                long k=counter;
+                quizHistoryData s5 = new quizHistoryData((int) totalSum, k,correctNum,wA);
+                String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
             }else if(playerNum==4){
                 sco4=totalSum;
+                int wA;
+                switch (questionNum){
+                    case 0:
+                        wA=(10-correctNum);break;
+                    case 1:
+                        wA=(15-correctNum);break;
+                    default:
+                        wA=(20-correctNum);break;
+                }
+                long k=counter;
+                quizHistoryData s5 = new quizHistoryData((int) totalSum, k,correctNum,wA);
+                String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
             }
         }
 
@@ -3309,6 +3592,36 @@ public class tournamentScoreActivity extends AppCompatActivity {
         player3Shimmer.stopShimmerAnimation();
         player4Shimmer.stopShimmerAnimation();
         super.onPause();
+    }
+
+    public void numberOfTimesPlayed(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    i++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,9 +45,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -86,6 +90,8 @@ public class scoreActivity extends AppCompatActivity {
     ImageView image1,image2;
     int collider;
     TextView disDialog;
+    int timeInt;
+    barGroupHolder man;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +114,10 @@ public class scoreActivity extends AppCompatActivity {
         levelText=(TextView) findViewById(R.id.levelText);
 
         partypoper.loop(false);
+        MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(scoreActivity.this, R.raw.partypoppermusic);
+        musicNav.start();
+
 
         category=getIntent().getIntExtra("category",1);
 
@@ -124,12 +134,80 @@ public class scoreActivity extends AppCompatActivity {
         milliholder=getIntent().getLongExtra("milliholder",0);
 
 
+
+
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("LineChartGradient").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    long i=snapshot.getValue(Integer.class);
+                    long k=((1000*60*10)-milliholder)/1000;
+                    i=i+k;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("LineChartGradient").child(date).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    long k=((1000*60*10)-milliholder)/1000;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("LineChartGradient").child(date).setValue(k).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         if(collider==100){
             cardViewChangeCategory.setAlpha(0);
             cardViewChangeCategory.setEnabled(false);
             cardViewChangeCategory.setClickable(false);
+        }else{
+
+            final int mm= (int) ((1000*60*10)-milliholder);
+
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("pieChart").child(String.valueOf(category)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        int y=snapshot.getValue(Integer.class);
+                        y=y+mm;
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("pieChart").child(String.valueOf(category)).setValue(y).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                            }
+                        });
+                    }catch (Exception e){
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("pieChart").child(String.valueOf(category)).setValue(mm).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
         }
 
+        numberOfTimesPlayed();
 
         recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -161,12 +239,12 @@ public class scoreActivity extends AppCompatActivity {
                 totalSum=totalSum-1500;
             }
             for (int i=1;i<=score;i++){
-                totalSum=totalSum+950;
+                totalSum=totalSum+1000;
             }
             totalScoreNumber.setText(" Total Score : "+totalSum+" ");
 
         }else{
-            totalSum= milliholder/100;
+            totalSum= milliholder/150;
             for(int i=1;i<=lifelineSum;i++){
                 totalSum=totalSum-1500;
             }
@@ -182,6 +260,52 @@ public class scoreActivity extends AppCompatActivity {
         highestScoreSet();
         highScorePushInLeaderBoard();
 
+        final int f=10-score;
+        long k=(60*1000*10)-milliholder;
+        quizHistoryData s5 = new quizHistoryData((int) totalSum, k,score,f);
+        String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("SinglePlayerQuizHistory").push().getKey();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("SinglePlayerQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        final String dayOfTheWeek = sdf.format(d);
+
+        man=new barGroupHolder();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("barGroupData").child(dayOfTheWeek).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    man=snapshot.getValue(barGroupHolder.class);
+                    int cA=man.getCorrect()+score;
+                    int wA=man.getWrong()+f;
+                    barGroupHolder g1=new barGroupHolder(cA,wA);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                }catch (Exception e){
+                    barGroupHolder g1=new barGroupHolder(score,f);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("ProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -251,6 +375,8 @@ public class scoreActivity extends AppCompatActivity {
 
                                                                     }
                                                                 });
+
+
                                                             }
 
                                                             @Override
@@ -399,6 +525,16 @@ public class scoreActivity extends AppCompatActivity {
             cardViewRematch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,activity_picture_singlePlayer.class);
                     startActivity(intent);
                     finish();
@@ -407,6 +543,16 @@ public class scoreActivity extends AppCompatActivity {
             cardViewHome.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
                     startActivity(intent);
                     finish();
@@ -416,6 +562,16 @@ public class scoreActivity extends AppCompatActivity {
             cardViewRematch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,quizActivity.class);
                     startActivity(intent);
                     finish();
@@ -425,6 +581,16 @@ public class scoreActivity extends AppCompatActivity {
             cardViewHome.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
                     startActivity(intent);
                     finish();
@@ -434,6 +600,16 @@ public class scoreActivity extends AppCompatActivity {
             cardViewChangeCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,singleModeListView.class);
                     startActivity(intent);
                     finish();
@@ -654,6 +830,67 @@ public class scoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+            }
+        });
+    }
+
+    public void numberOfTimesPlayed(){
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfSingleModePlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    i++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfSingleModePlayed").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfSingleModePlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    i++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

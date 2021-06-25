@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -193,6 +194,8 @@ public class customPublicQuiz extends AppCompatActivity {
         countDownTimerFun();
 
 
+
+
         for(int i=1;i<=5;i++){
             // create instance of Random class
             // Generate random integers in range 0 to 29
@@ -205,6 +208,16 @@ public class customPublicQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(fiftyfiftynum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
@@ -313,6 +326,16 @@ public class customPublicQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
@@ -365,7 +388,7 @@ public class customPublicQuiz extends AppCompatActivity {
                     final View view1 = LayoutInflater.from(customPublicQuiz.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText(" MindScapers from across the world have casted their votes above. Choose your option! ");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     BarChart barChart = ((BarChart) view1.findViewById(R.id.barChart));
 
@@ -400,6 +423,7 @@ public class customPublicQuiz extends AppCompatActivity {
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            buttonMusic();
                             alertDialog.dismiss();
                         }
                     });
@@ -422,6 +446,16 @@ public class customPublicQuiz extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
@@ -434,7 +468,7 @@ public class customPublicQuiz extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I Think It's : \n'"+answerByExpert+"'");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
                     expertAdviceImageManupulator();
@@ -464,7 +498,7 @@ public class customPublicQuiz extends AppCompatActivity {
 
     public void fireBaseData(int setNumber){
         if(privacy==0){
-            myRef.child("CustomQuiz").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).child(quizName).orderByChild("setNo").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.child("CustomQuiz").child(String.valueOf(0)).child("questions").child(key).orderByChild("setNo").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot snapshot1:snapshot.getChildren()){
@@ -492,6 +526,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
+                                    buttonMusic();
                                     nextButton.setEnabled(false);
                                     nextButton.setAlpha(0.7f);
                                     enableOption(true);
@@ -503,21 +538,181 @@ public class customPublicQuiz extends AppCompatActivity {
                                         if (position == 5) {
                                             AlertDialog.Builder builder=new AlertDialog.Builder(customPublicQuiz.this,R.style.AlertDialogTheme);
 
-                                            final View view1= LayoutInflater.from(customPublicQuiz.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                                            final View view1= LayoutInflater.from(customPublicQuiz.this).inflate(R.layout.rate_quiz_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                                             builder.setView(view1);
                                             builder.setCancelable(false);
-                                            titleText=((TextView) view1.findViewById(R.id.textTitle));
-                                            ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
-                                            TextView textTitle=(TextView) view1.findViewById(R.id.textTitle);
-                                            LottieAnimationView imageIcon=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+
+                                            final LottieAnimationView star1=(LottieAnimationView) view1.findViewById(R.id.star1);
+                                            final LottieAnimationView star2=(LottieAnimationView) view1.findViewById(R.id.star2);
+                                            final LottieAnimationView star3=(LottieAnimationView) view1.findViewById(R.id.star3);
+                                            final LottieAnimationView star4=(LottieAnimationView) view1.findViewById(R.id.star4);
+                                            final LottieAnimationView star5=(LottieAnimationView) view1.findViewById(R.id.star5);
 
 
 
-                                            imageIcon.setAnimation(R.raw.thanksanim);
-                                            imageIcon.playAnimation();
-                                            imageIcon.loop(true);
 
-                                            textTitle.setText("Thankyou For Uploading You Own Custom Quiz!You Can Track Your Quiz Performance In Your Profile Section.");
+                                            star1.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
+                                                    raterSetter(1);
+                                                    star1.setVisibility(View.VISIBLE);
+                                                    star1.setAnimation(R.raw.ratequizsanim);
+                                                    star1.playAnimation();
+                                                    star1.loop(false);
+                                                }
+                                            });
+
+                                            star2.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
+                                                    raterSetter(2);
+                                                    star1.setVisibility(View.VISIBLE);
+                                                    star1.setAnimation(R.raw.ratequizsanim);
+                                                    star1.playAnimation();
+                                                    star1.loop(false);
+
+                                                    star2.setVisibility(View.VISIBLE);
+                                                    star2.setAnimation(R.raw.ratequizsanim);
+                                                    star2.playAnimation();
+                                                    star2.loop(false);
+                                                }
+                                            });
+
+                                            star3.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
+                                                    raterSetter(3);
+                                                    star1.setVisibility(View.VISIBLE);
+                                                    star1.setAnimation(R.raw.ratequizsanim);
+                                                    star1.playAnimation();
+                                                    star1.loop(false);
+
+                                                    star2.setVisibility(View.VISIBLE);
+                                                    star2.setAnimation(R.raw.ratequizsanim);
+                                                    star2.playAnimation();
+                                                    star2.loop(false);
+
+                                                    star3.setVisibility(View.VISIBLE);
+                                                    star3.setAnimation(R.raw.ratequizsanim);
+                                                    star3.playAnimation();
+                                                    star3.loop(false);
+                                                }
+                                            });
+
+                                            star4.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
+                                                    raterSetter(4);
+                                                    star1.setVisibility(View.VISIBLE);
+                                                    star1.setAnimation(R.raw.ratequizsanim);
+                                                    star1.playAnimation();
+                                                    star1.loop(false);
+
+                                                    star2.setVisibility(View.VISIBLE);
+                                                    star2.setAnimation(R.raw.ratequizsanim);
+                                                    star2.playAnimation();
+                                                    star2.loop(false);
+
+                                                    star3.setVisibility(View.VISIBLE);
+                                                    star3.setAnimation(R.raw.ratequizsanim);
+                                                    star3.playAnimation();
+                                                    star3.loop(false);
+
+                                                    star4.setVisibility(View.VISIBLE);
+                                                    star4.setAnimation(R.raw.ratequizsanim);
+                                                    star4.playAnimation();
+                                                    star4.loop(false);
+                                                }
+                                            });
+
+                                            star5.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
+                                                    raterSetter(5);
+
+                                                    star1.setVisibility(View.VISIBLE);
+                                                    star1.setAnimation(R.raw.ratequizsanim);
+                                                    star1.playAnimation();
+                                                    star1.loop(false);
+
+                                                    star2.setVisibility(View.VISIBLE);
+                                                    star2.setAnimation(R.raw.ratequizsanim);
+                                                    star2.playAnimation();
+                                                    star2.loop(false);
+
+                                                    star3.setVisibility(View.VISIBLE);
+                                                    star3.setAnimation(R.raw.ratequizsanim);
+                                                    star3.playAnimation();
+                                                    star3.loop(false);
+
+                                                    star4.setVisibility(View.VISIBLE);
+                                                    star4.setAnimation(R.raw.ratequizsanim);
+                                                    star4.playAnimation();
+                                                    star4.loop(false);
+
+                                                    star5.setVisibility(View.VISIBLE);
+                                                    star5.setAnimation(R.raw.ratequizsanim);
+                                                    star5.playAnimation();
+                                                    star5.loop(false);
+                                                }
+                                            });
+
+
+
+
+
+                                            Button buttonHome=(Button) view1.findViewById(R.id.buttonYes);
+                                            Button selectQuiz=(Button) view1.findViewById(R.id.buttonNo);
 
                                             final AlertDialog alertDialog=builder.create();
                                             if(alertDialog.getWindow()!=null){
@@ -525,14 +720,24 @@ public class customPublicQuiz extends AppCompatActivity {
                                             }
                                             alertDialog.show();
 
-                                            view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                                            buttonHome.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    buttonMusic();
                                                     Intent intent=new Intent(customPublicQuiz.this,mainMenuActivity.class);
                                                     startActivity(intent);
-                                                    alertDialog.dismiss();
                                                     finish();
+                                                }
+                                            });
 
+                                            selectQuiz.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    buttonMusic();
+                                                    Intent intent=new Intent(customPublicQuiz.this,customQuizMainMenu.class);
+                                                    intent.putExtra("position",cat);
+                                                    startActivity(intent);
+                                                    finish();
                                                 }
                                             });
 
@@ -623,6 +828,16 @@ public class customPublicQuiz extends AppCompatActivity {
                                             star1.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     raterSetter(1);
                                                     star1.setVisibility(View.VISIBLE);
                                                     star1.setAnimation(R.raw.ratequizsanim);
@@ -634,6 +849,16 @@ public class customPublicQuiz extends AppCompatActivity {
                                             star2.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     raterSetter(2);
                                                     star1.setVisibility(View.VISIBLE);
                                                     star1.setAnimation(R.raw.ratequizsanim);
@@ -650,6 +875,16 @@ public class customPublicQuiz extends AppCompatActivity {
                                             star3.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     raterSetter(3);
                                                     star1.setVisibility(View.VISIBLE);
                                                     star1.setAnimation(R.raw.ratequizsanim);
@@ -671,6 +906,16 @@ public class customPublicQuiz extends AppCompatActivity {
                                             star4.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     raterSetter(4);
                                                     star1.setVisibility(View.VISIBLE);
                                                     star1.setAnimation(R.raw.ratequizsanim);
@@ -697,6 +942,16 @@ public class customPublicQuiz extends AppCompatActivity {
                                             star5.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     raterSetter(5);
 
                                                     star1.setVisibility(View.VISIBLE);
@@ -742,6 +997,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                            buttonHome.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
+                                                   buttonMusic();
                                                    Intent intent=new Intent(customPublicQuiz.this,mainMenuActivity.class);
                                                    startActivity(intent);
                                                    finish();
@@ -751,6 +1007,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                             selectQuiz.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    buttonMusic();
                                                     Intent intent=new Intent(customPublicQuiz.this,customCategoryListActivity.class);
                                                     intent.putExtra("position",cat);
                                                     startActivity(intent);
@@ -792,20 +1049,39 @@ public class customPublicQuiz extends AppCompatActivity {
     }
 
     public void raterSetter(int i){
-              numberOfTimesPlayed++;
-              rate=rate+i;
-                    myRef.child("CustomQuiz").child(String.valueOf(1)).child("category").child(String.valueOf(cat)).child("questionsPack").child(myKey).child("rate").setValue(rate).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(customPublicQuiz.this, "Thanks For Your Rating!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        myRef.child("CustomQuiz").child(String.valueOf(1)).child("category").child(String.valueOf(cat)).child("questionsPack").child(myKey).child("numberOfTimesPlayed").setValue(numberOfTimesPlayed).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
 
-            }
-        });
+        if(privacy==0){
+            numberOfTimesPlayed++;
+            rate=rate+i;
+            myRef.child("CustomQuiz").child(String.valueOf(0)).child("questions").child(key).child("rate").setValue(rate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(customPublicQuiz.this, "Thanks For Your Rating!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            myRef.child("CustomQuiz").child(String.valueOf(0)).child("questions").child(key).child("numberOfTimesPlayed").setValue(numberOfTimesPlayed).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }else{
+            numberOfTimesPlayed++;
+            rate=rate+i;
+            myRef.child("CustomQuiz").child(String.valueOf(1)).child("category").child(String.valueOf(cat)).child("questionsPack").child(myKey).child("rate").setValue(rate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(customPublicQuiz.this, "Thanks For Your Rating!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            myRef.child("CustomQuiz").child(String.valueOf(1)).child("category").child(String.valueOf(cat)).child("questionsPack").child(myKey).child("numberOfTimesPlayed").setValue(numberOfTimesPlayed).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
+
     }
 
 
@@ -924,6 +1200,17 @@ public class customPublicQuiz extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.correctmusic);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
+
 
             if(audiencenum==1){
                 audienceLL.setClickable(false);
@@ -953,6 +1240,17 @@ public class customPublicQuiz extends AppCompatActivity {
             score++;
         }else {
             //incorrect
+
+              final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.wrongansfinal);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
 
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
@@ -1042,42 +1340,54 @@ public class customPublicQuiz extends AppCompatActivity {
         int num = rand.nextInt(11)+1;
 
         switch (num){
-            case 1:
+            case 1:               //If possible, avatars can match the facial descriptions
                 expertImage.setBackgroundResource(R.drawable.expert1female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText(" Dorjana Sirola: Highest woman scorer in World Quizzing Championship, Croatian linguist and anglicist! is Expert for the day");
+                break;            //white complexion,short hair
             case 2:
                 expertImage.setBackgroundResource(R.drawable.expert2male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Dr.Neil deGrasse Tyson: Astrophysicist, Planetory scientist, Author and Science communicator! is Expert for the day");
+                break;            //Dark complexion
             case 3:
                 expertImage.setBackgroundResource(R.drawable.expert3male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Kevin Ashman: Six times World Quizzing Championship winner and Five times British Quizing Champion! is Expert for the day");
+                break;            //white complexion
             case 4:
                 expertImage.setBackgroundResource(R.drawable.expert4male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Derek O'Brian: Quiz Master, Indian politician and television personality! is Expert for the day");
+                break;            //white complexion, spects
             case 5:
                 expertImage.setBackgroundResource(R.drawable.expert5male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Pat Gibson: Multiple World champion in quizzing, Software developer and professional Irish quizzer! is Expert for the day");
+                break;             // white complexion, spectacles
             case 6:
                 expertImage.setBackgroundResource(R.drawable.expert6female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Elsie Kaufmann: Quiz mistress, Ghanaian academic and Biomedical engineer! is Expert for the day.");
+                break;          //Dark complexion
             case 7:
                 expertImage.setBackgroundResource(R.drawable.expert7male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Olav Bjortomt: Four time World champion and English international quiz star player! is Expert for the day");
+                break;          //White complexion
             case 8:
                 expertImage.setBackgroundResource(R.drawable.expert8female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Anne Hegerty: English quizzer and famous UK television personality! is Expert for the day");
+                break;              //White complexion,short hair,fat face
             case 9:
                 expertImage.setBackgroundResource(R.drawable.expert9female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Seema Chari: Quiz mistress, author, anchor and knowledge media professional! is Expert for the day");
+                break;          //curly hair
             case 10:
                 expertImage.setBackgroundResource(R.drawable.expert10male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Siddhartha Basu: Father of Indian television quizzing, producer-director and quiz show host! is Expert for the day");
+                break;          //almost no hair,fair complexion
             case 11:
                 expertImage.setBackgroundResource(R.drawable.expert11male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Tom Trogh: Belgian quiz player and European quizzing champion! is Expert for the day");
+                break;            //White complexion
             case 12:
                 expertImage.setBackgroundResource(R.drawable.expert12male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Ravi Avva: 2020 World Quizzing champion, Singaporean hailing from India and an Engineer! is Expert for the day");
+                break;          //Fair complexion,spectacles
 
         }
 
@@ -1097,7 +1407,18 @@ public class customPublicQuiz extends AppCompatActivity {
             }
         });
     }
-
+    public void buttonMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
 
 
 }

@@ -2,6 +2,8 @@ package com.nbird.mindscape;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private List<Modes> mData;
     int setter,a,b;
+    CountDownTimer countDownTimer;
+    MediaPlayer music,musicNav;
 
-    public RecyclerViewAdapter(Context mContext, List<Modes> mData, int setter){
+    public RecyclerViewAdapter(Context mContext, List<Modes> mData, int setter, MediaPlayer music, CountDownTimer countDownTimer){
         this.mContext=mContext;
         this.mData=mData;
         this.setter=setter;
+        this.music=music;
+        this.countDownTimer=countDownTimer;
     }
 
 
@@ -49,6 +55,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                musicNav = MediaPlayer.create(mContext, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 a=position+1;
                 switch (a){
                     case 1:
@@ -72,6 +87,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent6.putExtra("position", a);
                         mContext.startActivity(intent6);break;
                     case 6:
+                        try {
+                            countDownTimer.cancel();
+                        }catch (Exception e){
+
+                        }
+
+                        music.stop();
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);
                         mContext.startActivity(intent1);break;

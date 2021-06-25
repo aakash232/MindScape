@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -108,6 +109,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     ValueEventListener listner10,listener31,listener32,listener33,listener34,removeListener;
     DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
     CardView buzzerNormalCard,buzzerPictureCard;
+    List<pictureQuizHolder> list100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +118,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         list = new ArrayList<>();
         listChat = new ArrayList<>();
         arrlist = new ArrayList<>(13);
-
+        list100=new ArrayList<>();
 
 
         myAdapter= new chatMyAdapter(listChat);
@@ -203,7 +205,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent shareIntent=new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plane");
                 String shareBody="MindScape\nA Tournament Room Has Been Created\n"+"Here's Your Room Code : "+roomCode1+".";
@@ -283,6 +294,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         factsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 factButtonFunction();
             }
         });
@@ -290,6 +311,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         privacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 privacyButtonFunction();
             }
         });
@@ -297,6 +328,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 settingButtonFunction();
             }
         });
@@ -304,6 +345,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 chatFunction();
             }
         });
@@ -311,6 +362,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 randomNumberGeneratorFunction();
                 countDownSarter();
             }
@@ -318,12 +379,34 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         removePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 removePlayerFunction();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+
                 cancelDialogFunction();
 
             }
@@ -345,6 +428,17 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         factsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+
                 factButtonFunction();
             }
         });
@@ -352,6 +446,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 chatFunction();
             }
         });
@@ -359,6 +463,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 cancelDialogFunction();
 
             }
@@ -399,6 +513,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 cancelLeaveFunction();
             }
         });
@@ -406,6 +530,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -1057,7 +1191,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 }else if(numMode==2){
                     setNumber = rand.nextInt(29) + 1;
                 }else{
-                    setNumber = rand.nextInt(12) + 1;
+                    setNumber = rand.nextInt(999) + 1;
                 }
              //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
@@ -1105,6 +1239,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             arrlist.add(setNumber);
             try{
                 final int finalI = i;
+                final int finalI1 = i;
                 myRef.child("Lobby").child(String.valueOf(roomCode1)).child("questionPack").child(String.valueOf(i)).setValue(arrlist.get(i-1)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -1113,6 +1248,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         myRef.child("Lobby").child(String.valueOf(roomCode1)).child("OnCompleteHolder").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+
+
 
                         }
                     });
@@ -1204,6 +1341,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 removeInt1=removeInt2=removeInt3=0;
                 alertDialog.dismiss();
             }
@@ -1212,6 +1359,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if(removeInt1==0){
                     linearLayout1.setAlpha(0.5f);
                     removeInt1=1;
@@ -1246,6 +1403,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if(removeInt2==0){
                     linearLayout2.setAlpha(0.5f);
                     removeInt2=1;
@@ -1276,6 +1443,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.navclick);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if(removeInt3==0){
                     linearLayout3.setAlpha(0.5f);
                     removeInt3=1;
@@ -1299,6 +1476,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 removeActualFunction();
 
                 alertDialog.dismiss();
@@ -1920,6 +2107,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 listChat.clear();
                 alertDialog.dismiss();
 
@@ -1940,6 +2137,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 if(myText.isEmpty()){
                     Toast.makeText(tournamentLobbyActivity.this, "Please Enter Some Text!!", Toast.LENGTH_SHORT).show();
                 }else{
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.navclick);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     chatHolder s1=new chatHolder(myImageUrl,myName,myText,playerNum,position);
                     listChat.add(s1);
                     position++;
@@ -1958,6 +2165,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 alertDialog.dismiss();
@@ -2332,7 +2549,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 switch (numQuestion){
                     case 0:
                         questionNumberTextView.setText(" Questions : 10");
@@ -2634,6 +2860,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 // When submit button is clicked,
                 // Ge the Radio Button which is set
                 // If no Radio Button is set, -1 will be returned
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 int selectedId = radioGroup.getCheckedRadioButtonId();
 
 
@@ -2777,7 +3013,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // alertDialog.cancel();
 
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentLobbyActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });

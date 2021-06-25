@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -179,10 +180,20 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         local.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
                 View view2 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.onevsone_local_mode_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
                 builder2.setView(view2);
-                builder2.setCancelable(false);
+                builder2.setCancelable(true);
                 joinButton = ((Button) view2.findViewById(R.id.joinButton));
                 createButton = ((Button) view2.findViewById(R.id.createButton));
 
@@ -199,7 +210,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         alertDialog.dismiss();
                         joinFunction();
 
@@ -209,6 +229,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 createButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         alertDialog.dismiss();
                         createFunction();
                     }
@@ -365,6 +395,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 findingOponentFunction();
                 builder.setView(view1);
                 builder.setCancelable(false);
@@ -404,7 +444,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                         } catch (Exception e) {
 
                         }
-
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         alertDialog.dismiss();
                         Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
                         startActivity(intent);
@@ -1255,7 +1304,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(oneVsOneChoiceActivity.this, R.style.AlertDialogTheme);
         View view3 = LayoutInflater.from(oneVsOneChoiceActivity.this).inflate(R.layout.join_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
         builder.setView(view3);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         joinButtonFinal = ((Button) view3.findViewById(R.id.joinButton1));
         roomCodeEditText=((TextInputEditText) view3.findViewById(R.id.password));
 
@@ -1356,7 +1405,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                                     } catch (Exception e) {
 
                                                     }
-
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
                                                     alertDialog.dismiss();
                                                     Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
@@ -1587,6 +1645,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                         } catch (Exception e) {
 
                         }
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
 
                         myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
                         Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
@@ -1602,7 +1670,16 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 share.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         Intent shareIntent=new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plane");
                         String shareBody=userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+roomCode+".";
