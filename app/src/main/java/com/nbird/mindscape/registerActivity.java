@@ -65,6 +65,7 @@ public class registerActivity extends AppCompatActivity {
                 });
                 Intent browserintenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
                 startActivity(browserintenttos);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }
         });
 
@@ -84,6 +85,7 @@ public class registerActivity extends AppCompatActivity {
                 });
                 Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
                 startActivity(browserIntentps);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }
         });
 
@@ -189,6 +191,7 @@ public class registerActivity extends AppCompatActivity {
 
                                         FirebaseAuth.getInstance().signOut();
                                         startActivity(new Intent(getApplicationContext(),loginActivity.class));
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
 
                                     }

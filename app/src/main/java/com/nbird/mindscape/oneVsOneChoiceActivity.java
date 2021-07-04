@@ -455,8 +455,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             }
                         });
                         alertDialog.dismiss();
-                        Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
-                        startActivity(intent);
+                        oneVsOneChoiceActivity.super.onBackPressed();
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
                 });
@@ -676,6 +676,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                     countDownTimer123.cancel();
                                 }
                             startActivity(intent);
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }else{
                             if(countDownTimer!=null){
@@ -687,6 +688,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                 Toast.makeText(oneVsOneChoiceActivity.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
                             startActivity(intent);
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
                         }else{
@@ -705,6 +707,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                 countDownTimer123.cancel();
                             }
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
 
@@ -1657,8 +1660,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                         });
 
                         myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
-                        Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
-                        startActivity(intent);
+                        oneVsOneChoiceActivity.super.onBackPressed();
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
                 });

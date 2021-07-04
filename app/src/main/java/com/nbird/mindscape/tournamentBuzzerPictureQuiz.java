@@ -844,7 +844,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             }
         }
         startActivity(scoreIntent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
 
     }
@@ -2695,12 +2695,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                Intent intent = new Intent(tournamentBuzzerPictureQuiz.this, mainMenuActivity.class);
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
-                startActivity(intent);
                 alertDialog.dismiss();
+                tournamentBuzzerPictureQuiz.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });

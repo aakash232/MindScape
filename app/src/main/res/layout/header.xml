@@ -12,16 +12,16 @@
         android:id="@+id/proimage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/mailidtext"
+        app:layout_constraintStart_toStartOf="@+id/mailidtext"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/mailidtext"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/poppins"

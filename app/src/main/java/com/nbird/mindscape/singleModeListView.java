@@ -70,6 +70,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",1);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -83,6 +84,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",2);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -96,6 +98,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",3);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -110,6 +113,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",4);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -123,6 +127,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",5);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -137,6 +142,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",6);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -151,6 +157,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",7);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -165,6 +172,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",8);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -178,6 +186,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",9);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -192,6 +201,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",10);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -206,6 +216,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",11);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -219,6 +230,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",12);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -233,6 +245,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",13);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -247,6 +260,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",14);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -261,6 +275,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",15);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -275,6 +290,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",16);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -289,6 +305,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",17);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -303,6 +320,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",18);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -317,6 +335,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",19);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -331,6 +350,7 @@ public class singleModeListView extends AppCompatActivity {
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",20);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });

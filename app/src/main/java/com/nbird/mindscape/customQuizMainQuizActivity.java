@@ -655,6 +655,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
+                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
 
                                                 }
@@ -759,6 +760,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
+                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
 
                                                 }
@@ -1020,9 +1022,72 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void onBackPressed() {
-        customQuizMainQuizActivity.super.onBackPressed();
-        finish();
+
+        cancelDialogFunction();
+
+
+    }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(customQuizMainQuizActivity.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(customQuizMainQuizActivity.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                customQuizMainQuizActivity.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
 
     }
 

@@ -32,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final SharedPreferences songStopper = this.getSharedPreferences("SongStopperManu", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
+
+        editorsongStopper.putInt("songStopper", 1);
+        editorsongStopper.commit();
+
+
+
+
         final SharedPreferences mailreminder123 = this.getSharedPreferences("isPlaying", 0);
         final SharedPreferences.Editor isPlaying1 = mailreminder123.edit();
 
@@ -48,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         final int s1 = sh.getInt("codeRemove", 0);
 
+        final SharedPreferences songHolder1 = this.getSharedPreferences("songKnowe", 0);
+        final SharedPreferences.Editor editorsongHolder1 = songHolder1.edit();
+
+        editorsongHolder1.putInt("timerStarterInt",0);
+        editorsongHolder1.commit();
 
         myRef.child("Lobby").child(String.valueOf(s1)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

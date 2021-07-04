@@ -91,6 +91,7 @@ public class welcomeActivity extends AppCompatActivity {
                 });
                 Intent loginIntent=new Intent(welcomeActivity.this,loginActivity.class);
                 startActivity(loginIntent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }
         });
 
@@ -109,6 +110,7 @@ public class welcomeActivity extends AppCompatActivity {
                 });
                 Intent registerIntent=new Intent(welcomeActivity.this,registerActivity.class);
                 startActivity(registerIntent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }
         });
 
@@ -242,6 +244,7 @@ public class welcomeActivity extends AppCompatActivity {
                                                         intent.putExtra("firstTime", 0);
                                                         startActivity(intent);
                                                         loadingDialog.dismiss();
+                                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                         finish();
                                                     } else {
                                                         Toast.makeText(welcomeActivity.this, "Record Not Saved!", Toast.LENGTH_LONG).show();
@@ -264,6 +267,7 @@ public class welcomeActivity extends AppCompatActivity {
                             intent.putExtra("firstTime", 1);
                             startActivity(intent);
                             loadingDialog.dismiss();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
 
 

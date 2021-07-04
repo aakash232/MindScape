@@ -40,7 +40,7 @@ public class KbcScoreActivity extends AppCompatActivity {
             }
         });
         Intent intent=new Intent(KbcScoreActivity.this,KbcPlay.class);
-        startActivity(intent);
+        startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
     }
 
@@ -56,7 +56,7 @@ public class KbcScoreActivity extends AppCompatActivity {
             }
         });
         Intent intent=new Intent(KbcScoreActivity.this,KbcSetup.class);
-        startActivity(intent);
+        startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
     }
 

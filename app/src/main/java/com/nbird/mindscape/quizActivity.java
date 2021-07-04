@@ -92,6 +92,7 @@ public class quizActivity extends AppCompatActivity {
     int second=0;
     String minutestext;
     String secondtext;
+    int mainfinder=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class quizActivity extends AppCompatActivity {
 
         category=getIntent().getIntExtra("category",1);
         setNo=getIntent().getIntExtra("setNo",10);
+        mainfinder=getIntent().getIntExtra("mainfinder",0);
 
         loadingDialog.show();
         proPicFunction();
@@ -141,8 +143,26 @@ public class quizActivity extends AppCompatActivity {
             Random rand = new Random();
 
             // Generate random integers in range 0 to 29
+            int setNumber;
+            switch (category){
+                case 1:
+                case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
+                      setNumber = rand.nextInt(299)+1;break;
+                case 2: case 14:
+                    setNumber = rand.nextInt(499)+1;break;
+                case 7:
+                    setNumber = rand.nextInt(401)+1;break;
+                case 8: case 18:
+                    setNumber = rand.nextInt(339)+1;break;
+                case 13: case 15: case 16:
+                    setNumber = rand.nextInt(249)+1;break;
+                case 19:
+                    setNumber = rand.nextInt(399)+1;break;
+                default:
+                    setNumber = rand.nextInt(199)+1;break;
 
-            final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+            }
+            //NEED TO CHANGE HERE
               //NEED TO CHANGE HERE
 
 
@@ -656,6 +676,7 @@ public class quizActivity extends AppCompatActivity {
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                        return;
                                     }
@@ -676,6 +697,7 @@ public class quizActivity extends AppCompatActivity {
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                         return;
                                     }
@@ -930,11 +952,7 @@ public class quizActivity extends AppCompatActivity {
         });
     }
 
-    public void onBackPressed() {
-        quizActivity.super.onBackPressed();
-        finish();
 
-    }
 
     public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
         Random rand = new Random();
@@ -998,6 +1016,70 @@ public class quizActivity extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
+            cancelDialogFunction();
+    }
 
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(quizActivity.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(quizActivity.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(quizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                alertDialog.cancel();
+                quizActivity.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(quizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
+    }
 
 }

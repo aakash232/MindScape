@@ -46,10 +46,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'   //editTextView
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-
-
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'  //Shimmer Animation
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' // Charts
+    implementation 'com.github.bumptech.glide:glide:4.11.0'  //Glide For Images
+      //Audio Visualizer Animation
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+    implementation 'com.gauravk.audiovisualizer:audiovisualizer:0.9.2'
 
 }

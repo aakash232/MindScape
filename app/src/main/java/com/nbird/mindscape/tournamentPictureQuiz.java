@@ -1683,7 +1683,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         if(countDownTimer!=null){
             countDownTimer.cancel();}
         startActivity(scoreIntent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
 
     }
@@ -2293,6 +2293,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
 
@@ -2497,11 +2498,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                Intent intent=new Intent(tournamentPictureQuiz.this,mainMenuActivity.class);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
-                startActivity(intent);
+
                 alertDialog.dismiss();
+                tournamentPictureQuiz.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
