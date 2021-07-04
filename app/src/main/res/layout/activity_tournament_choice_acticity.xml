@@ -40,14 +40,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:gravity="center"
             android:padding="10dp">
 
 
             <com.airbnb.lottie.LottieAnimationView
+                android:layout_margin="10dp"
                 android:id="@+id/online"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/onlineanim1"
@@ -70,9 +72,9 @@
                     android:background="@drawable/insidecardview"
                     android:layout_gravity="left"
                     android:gravity="left"
-                    android:text="Compete Against Time! Challenge your visuals and complete the quiz as soon as possible with utmost accuracy!"
+                    android:text="It's Tournament time! \n\n Join or Create Lobbies across the world and meet the greatest quizzers from across the world. \n\n The mode covers a wide range of mode BUZZER ROUNDS, PICTURE, NORMAL to make your gameplay exciting. \n\n Enjoy cool features like ONLINE CHAT in the lobby and have fun with your friends. \n\n Note: Make sure you practice a neat behaviour while interacting and follow the community guidelines. \n\n Have Fun!"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="20dp" />
 
 
 
@@ -97,7 +99,7 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:text="Online"
+                            android:text="Begin"
                             android:gravity="center"
                             android:fontFamily="@font/mouse_memoirs"
                             android:textStyle="bold"

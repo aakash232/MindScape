@@ -1,0 +1,538 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mainConstraint"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/backimage"
+    android:backgroundTintMode="screen"
+    android:backgroundTint="@color/transparentwhite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title=""
+        />
+
+    <TextView
+        android:id="@+id/skip1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:alpha="0.85"
+        android:background="@drawable/blackwithwhitestroke"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="Skip >>"
+        android:textSize="16dp"
+        android:textAlignment="center"/>
+
+
+    <ImageView
+        android:id="@+id/profilebutton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/profilepin"/>
+
+    <ImageView
+        android:id="@+id/hamburger"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/hamburger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/facts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="180dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainmain"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleX="0.90"
+            android:scaleY="0.90"
+            app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/animalsdemo"
+                android:scaleType="fitXY"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.98"
+            android:background="@drawable/whitewithblackstroke"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/mouse_memoirs"
+                android:gravity="left"
+                android:text="Giraffe"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/mouse_memoirs"
+                android:gravity="left"
+                android:text="Did you know? Giraffe's dpots are unique like human fingerprints. No two giraffes have the same dpot pattern! "
+                android:textColor="#000000"
+                android:background="@drawable/insidecardview"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:id="@+id/modegrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facts"
+        android:columnCount="2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:id="@+id/cardview_id"
+            android:layout_height="190dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            cardview:cardCornerRadius="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/whitewithblackstroke"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/exam_img_id"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="left"
+                    android:layout_width="70dp"
+                    android:src="@drawable/singleicon"
+                    android:elevation="5dp"
+                    android:layout_height="70dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/insidecardview"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/exam_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:gravity="left"
+                        android:text="Single Mode"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/exam_dis"
+                        android:textSize="12dp"
+                        android:elevation="3dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:text="Test your knowledge and compute against time. Score points for accuracy and achieve ranks."/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:id="@+id/cardview_id2"
+            android:layout_height="190dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            cardview:cardCornerRadius="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/whitewithblackstroke"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/exam_img_id2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="left"
+                    android:layout_width="70dp"
+                    android:src="@drawable/versusicon"
+                    android:elevation="5dp"
+                    android:layout_height="70dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/insidecardview"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/exam_title2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:gravity="left"
+                        android:text="1 Vs 1"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/exam_dis2"
+                        android:textSize="12dp"
+                        android:elevation="3dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:text="Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:id="@+id/cardview_id3"
+            android:layout_height="210dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            cardview:cardCornerRadius="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/whitewithblackstroke"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/exam_img_id3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="left"
+                    android:layout_width="70dp"
+                    android:elevation="5dp"
+                    android:src="@drawable/tournament"
+                    android:layout_height="70dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/insidecardview"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/exam_title3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:gravity="left"
+                        android:text="Tournament Mode"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/exam_dis3"
+                        android:textSize="12dp"
+                        android:elevation="3dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:text="Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:id="@+id/cardview_id4"
+            android:layout_height="210dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            cardview:cardCornerRadius="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout44"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/whitewithblackstroke"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/exam_img_id4"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="left"
+                    android:layout_width="70dp"
+                    android:elevation="5dp"
+                    android:src="@drawable/picturequizicon"
+                    android:layout_height="70dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/insidecardview"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/exam_title4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:gravity="left"
+                        android:text="Picture Quiz"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/exam_dis4"
+                        android:textSize="12dp"
+                        android:elevation="3dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:text="Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </GridLayout>
+
+
+    <LinearLayout
+        android:id="@+id/help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:layout_gravity="end"
+            android:background="@drawable/circular_shape_view"
+            android:fontFamily="@font/mouse_memoirs"
+            android:gravity="center"
+            android:text="Hello! I am Dr. Brain"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="70dp"
+                android:layout_gravity="end"
+                android:background="@drawable/circular_shape_view" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/circular_shape_view" />
+
+
+            <ImageView
+                android:id="@+id/drlogo"
+                android:layout_width="200dp"
+                android:layout_gravity="end"
+                android:layout_height="200dp"
+                android:src="@drawable/logodr" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/profilearrow"
+        android:visibility="invisible"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/arrowcurve"
+        android:rotation="180"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/profilebutton"/>
+
+    <ImageView
+        android:id="@+id/hamburgerarrow"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:rotation="190"
+        android:scaleX="-1"
+        android:scaleType="fitXY"
+        android:src="@drawable/arrowcurve"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/hamburger" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

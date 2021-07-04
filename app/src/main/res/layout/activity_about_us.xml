@@ -138,9 +138,9 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="App Developer | UI/UX Designer | Data Analyst"
-                        android:textColor="#E4E4E4"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        android:textStyle="normal" />
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -194,8 +194,8 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="105dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/aakashpic" />
@@ -223,9 +223,9 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="App Developer | UI/UX Designer | Data Analyst"
-                        android:textColor="#E4E4E4"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        android:textStyle="normal" />
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -305,9 +305,9 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="App Developer | UI/UX Designer | Data Analyst"
-                        android:textColor="#E4E4E4"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        android:textStyle="normal" />
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -391,9 +391,9 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="UI/UX Designer | Data Analyst"
-                        android:textColor="#E4E4E4"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        android:textStyle="normal" />
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -476,9 +476,9 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="UI/UX Designer | Data Analyst"
-                        android:textColor="#E4E4E4"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        android:textStyle="normal" />
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"

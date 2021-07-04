@@ -54,73 +54,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/linear123"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/blackwithwhitestroke"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/backlitemodeanim"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="-5dp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/selecticon"
+                    app:lottie_speed="0.5" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mouse_memoirs"
+                    android:text="Select Your Category"
+                    android:textColor="#000000"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/backlitemodeanim"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_margin="10dp"
-                        android:elevation="-5dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/selectlocal"
-                        app:lottie_speed="0.5" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/black_inner_back"
-                        android:padding="7dp"
-                       android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:scaleX="0.95"
-                        android:scaleY="0.95"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:text="Select Your Category"
-                            android:textColor="#ffffff"
-                            android:textSize="25sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
-
-                        <TextView
-                            android:id="@+id/dis"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:text="dfne eufn eiwnIN I UEFNE UFEN FEUFN EFEFN UNU NEUFN EUNFE UFEUFN EUF "
-                            android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
+                    app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewHistoricalMonuments"
@@ -135,7 +96,7 @@
                     android:scaleY="0.95"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linear123"
+                    app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim"
                     cardview:cardCornerRadius="5dp">
 
                     <LinearLayout
@@ -186,7 +147,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:text="Check out the Quiz on historical monuments all over the world and test your trivia facts about the rich culture in various places and explore the essence of history. Get aboard for the fun-filled yet challenging tour you've ever experienced."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -256,7 +217,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Do you have the green thumbs and know about plants and animals? Ace the wild quiz and be the king of the jungle!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -328,7 +289,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="The mystery of space never stops to amze us. All aboard on the spacecraft! Time to inspire some out-of-the-world fantasy."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -399,7 +360,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Earth is an amazing planet. Take a spin around the Globe and test how much do you know about your Home!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -469,7 +430,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Take your mind on a jog across fields and tracks. Time to turn the Game Mode ON!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -541,7 +502,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="The big game is here! Check out your skills and ace it all the way down!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -614,7 +575,7 @@
                                 android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:text="Bonjour quizzers! Get your compass aligned as we take a voyage across the globe scalling every landmass! Test your mind with capitals, currency and more things right here. Guide your ship to victory!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -687,7 +648,7 @@
                                 android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:text="Life is a long journey and gave us many prominent people. Those who stood up and change the world's perspective forever in their own ways. Scan through different time eras and know abut these famous personalities."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -758,7 +719,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="You won't need a PhD degree for these questions - though it would certainly help to ace it. Fire up your skills whith the magic that bloomed life."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -831,7 +792,7 @@
                                 android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Did you know? The first quiz was made in 1782! Do you know those several crucial dates in human history and want to test your knowledge about facts and events that changed the entire world? Its your time then! prove it who's the greatest quizzer right here!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -902,7 +863,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Two terms with overlapping concepts considered even older than the universe! Time to put your spiritual skills to test."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -971,7 +932,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="History is who we are and why we are the way we are! Get on your time machine for we are going way back to storm your brain with these quiz questions!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -1040,7 +1001,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="From Bollywood to Hollywood, from the Kardashians to Friends! and from The Oscars to Grammy! this quiz will make sure you have kept an eye on the world of TV,film,music and the intenet."
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -1112,7 +1073,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:text="Long, long time ago... Our earliest human ancestors invented the wheel, but who invented the ball bearing that reduces the friction in it? Let the wheels in your brain roll for the ultimate quiz has just walked in! "
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -1155,7 +1116,7 @@
 
                             <ImageView
                                 android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_height="65dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="7dp"
                                 android:layout_marginTop="7dp"
@@ -1194,7 +1155,7 @@
                                     android:elevation="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:gravity="left"
-                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:text="Many things in the world that took place for the first time. Ranging from adventures, expeditions, discoveries and inventions!"
                                     android:textColor="#000000"
                                     android:textSize="12sp" />
 
@@ -1266,7 +1227,7 @@
                                     android:elevation="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:gravity="left"
-                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:text="The soul and heart of a country. In this diverse world, quiz your mind about these varse events and ace up to the top!"
                                     android:textColor="#000000"
                                     android:textSize="12sp" />
 
@@ -1338,7 +1299,7 @@
                                     android:elevation="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:gravity="left"
-                                    android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                    android:text="Order! Order! Test your knowlege about the ultimate essence that rules and guides a country ahead. "
                                     android:textColor="#000000"
                                     android:textSize="12sp" />
 
@@ -1371,11 +1332,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="left"
-                            android:layout_marginLeft="7dp"
-                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="5dp"
                             android:background="@drawable/literature"
                             android:elevation="5dp" />
@@ -1411,7 +1372,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="Take a break from the busy life and get involved in the beautiful world of literature. Full of imagination, creativity and inspiration. Open doors to this new world and ace the questions right ahead!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -1481,7 +1442,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, Flora is all the plant life present in a particular region or time,"
+                                android:text="From your nose to toes, do you know how your body works? Are you aware of the physical and mental well-being? Test your doctor skills right here!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -1552,7 +1513,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="Flora is all the plant life present in a particular region or time, generally the naturally occurring native plants. The corresponding term for animal life is fauna. Flora, fauna, and other forms of life."
+                                android:text="Life is full of miscellaneous surprises and so are we! Prepare your mind for the chamber of secrets is soon to be opened. Again!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 

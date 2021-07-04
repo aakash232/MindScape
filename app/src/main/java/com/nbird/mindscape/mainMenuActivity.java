@@ -1063,6 +1063,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 Intent browserIntenttos2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
                 startActivity(browserIntenttos2);
                 break;
+            case R.id.nav_help:
+                Intent helpguide = new Intent(mainMenuActivity.this,HelpGuide1.class);
+                startActivity(helpguide);
+                break;
             case R.id.nav_contact:
                 String[] TO = {"niftynile@gmail.com"};
 
@@ -1131,10 +1135,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
         lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
-        //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"dfdjnfd d fdufn difn dfd fdufn udf"));
+        //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"Buzzzz! A knowledgeable and alert mind is the one which rules. Buzz with players across the world in this mode of knowledge and Agility!"));
         lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
         lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
-        lstExam.add(new Modes("League(Coming Soon)",R.drawable.league2,"dfdjnfd d fdufn difn dfd fdufn udf"));
+        lstExam.add(new Modes("League (Coming Soon)",R.drawable.league2,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
     }
 
 
@@ -1150,8 +1154,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     builder.setView(view1);
                     builder.setCancelable(false);
                     ((TextView) view1.findViewById(R.id.textTitle)).setText(" Enter Username ");
-                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
-                    ((TextView) view1.findViewById(R.id.textView6)).setText(" Either Select An Avatar Or Upload Your Pic ");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
+                    ((TextView) view1.findViewById(R.id.textView6)).setText("Select An Avatar Or Upload Your Pic ");
                     nav_image=((ImageView) view1.findViewById(R.id.propic));
                     usernameEditText=((TextInputEditText) view1.findViewById(R.id.username));
 

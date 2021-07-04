@@ -1782,7 +1782,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                             }
                                         });
                                     }catch (Exception e){
-                                        highestScore.setText(" Higest Score : null");
+                                        highestScore.setText(" Highest Score : null");
                                         totalTime.setText(" Total Time : null ");
                                         oppoAccu.setText(" Accuracy : null");
                                         oppoRatio.setText(" Correct/Wrong : null");
