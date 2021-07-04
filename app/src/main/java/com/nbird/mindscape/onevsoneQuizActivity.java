@@ -1173,9 +1173,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();
                 }
-
-
-
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
 
                 finish();
 
@@ -1623,7 +1621,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             if(countDownTimer!=null){
                                 countDownTimer.cancel();
                             }
-
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
                     });
@@ -1763,7 +1761,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                        if(countDownTimer!=null){
                            countDownTimer.cancel();
                        }
-
+                       overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                        finish();
                    }
                }catch (Exception e){
@@ -1882,22 +1880,81 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     };
 
     public void onBackPressed() {
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(countDownTimerMine!=null){
-                    countDownTimerMine.cancel();}
-                if(countDownTimer47!=null){
-                    countDownTimer47.cancel();}
-                if(countDownTimer50!=null){
-                    countDownTimer50.cancel();}
 
-                onevsoneQuizActivity.super.onBackPressed();
-                finish();
+        cancelDialogFunction();
+
+
+    }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneQuizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(countDownTimerMine!=null){
+                            countDownTimerMine.cancel();}
+                        if(countDownTimer47!=null){
+                            countDownTimer47.cancel();}
+                        if(countDownTimer50!=null){
+                            countDownTimer50.cancel();}
+
+                        onevsoneQuizActivity.super.onBackPressed();
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                        finish();
+                    }
+                });
             }
         });
 
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneQuizActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
     }
+
+
 
     public void leaveDialog(){
         AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
@@ -1920,17 +1977,18 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);
-                if(countDownTimerMine!=null){
+                  if(countDownTimerMine!=null){
                     countDownTimerMine.cancel();}
                 if(countDownTimer47!=null){
                     countDownTimer47.cancel();}
                 if(countDownTimer50!=null){
                     countDownTimer50.cancel();}
 
-                startActivity(intent);
+
                 alertDialog.dismiss();
-               finish();
+                onevsoneQuizActivity.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
             }
         });
 

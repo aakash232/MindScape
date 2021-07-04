@@ -92,6 +92,7 @@ public class scoreActivity extends AppCompatActivity {
     TextView disDialog;
     int timeInt;
     barGroupHolder man;
+    int mainfinder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +133,7 @@ public class scoreActivity extends AppCompatActivity {
         secondtext=getIntent().getStringExtra("secondtext");
         imageurl=getIntent().getStringExtra("imageurl");
         milliholder=getIntent().getLongExtra("milliholder",0);
-
+        mainfinder=getIntent().getIntExtra("mainfinder",0);
 
 
 
@@ -168,7 +169,7 @@ public class scoreActivity extends AppCompatActivity {
         });
 
 
-        if(collider==100){
+        if(collider==100||collider==200||collider==300){
             cardViewChangeCategory.setAlpha(0);
             cardViewChangeCategory.setEnabled(false);
             cardViewChangeCategory.setClickable(false);
@@ -536,7 +537,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,activity_picture_singlePlayer.class);
-                    startActivity(intent);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             });
@@ -553,8 +554,88 @@ public class scoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
+                    scoreActivity.super.onBackPressed();
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
+                }
+            });
+        }else if(collider==200){
+            cardViewRematch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
+                    Intent intent=new Intent(scoreActivity.this,AudioQuizSinglePlayer.class);
+                    intent.putExtra("mainfinder",1);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
+                }
+            });
+
+            cardViewHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
-                    startActivity(intent);
+                    intent.putExtra("mainfinder",1);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
+                }
+            });
+        }else if(collider==300){
+            cardViewRematch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
+                    Intent intent=new Intent(scoreActivity.this,VideoQuizSinglePlayer.class);
+                    intent.putExtra("mainfinder",1);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
+                }
+            });
+
+            cardViewHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(scoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
+                    Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
+                    intent.putExtra("mainfinder",1);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             });
@@ -573,7 +654,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,quizActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             });
@@ -591,8 +672,8 @@ public class scoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-                    Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
-                    startActivity(intent);
+                    scoreActivity.super.onBackPressed();
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             });
@@ -611,7 +692,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,singleModeListView.class);
-                    startActivity(intent);
+                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             });

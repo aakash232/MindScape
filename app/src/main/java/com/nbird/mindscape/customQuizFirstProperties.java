@@ -364,6 +364,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
 
                //begin.putExtra("quizType", quizType);
                startActivity(begin);
+               overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
            }
 
     public void StartButtonFun(){

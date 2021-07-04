@@ -772,7 +772,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 countDownTimer.cancel();}
         }
         startActivity(scoreIntent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
 
     }
@@ -2506,11 +2506,13 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                Intent intent=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
-                if(countDownTimer!=null){
+                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
-                startActivity(intent);
+
                 alertDialog.dismiss();
+                tournamentBuzzerNormalQuiz.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+
                 finish();
             }
         });

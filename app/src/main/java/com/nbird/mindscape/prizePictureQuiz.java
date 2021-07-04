@@ -694,6 +694,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                         return;
                                     }
@@ -715,7 +716,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
-                                            countDownTimer.cancel();}
+                                            countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                         return;
                                     }
@@ -954,7 +955,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 if(countDownTimer!=null){
-                    countDownTimer.cancel();}
+                    countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
 
@@ -981,8 +982,68 @@ public class prizePictureQuiz extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        prizePictureQuiz.super.onBackPressed();
-        finish();
+
+        cancelDialogFunction();
+
+
+    }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(prizePictureQuiz.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(prizePictureQuiz.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(prizePictureQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                prizePictureQuiz.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(prizePictureQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
 
     }
 

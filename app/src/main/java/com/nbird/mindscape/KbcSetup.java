@@ -878,7 +878,7 @@ public class KbcSetup extends AppCompatActivity {
                         }
                         kbcCountMus.pause();
                         alertDialog.dismiss();
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
 
                     }
@@ -930,7 +930,7 @@ public class KbcSetup extends AppCompatActivity {
                         }
                         kbcCountMus.pause();
                         alertDialog.dismiss();
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
 
                         finish();
 

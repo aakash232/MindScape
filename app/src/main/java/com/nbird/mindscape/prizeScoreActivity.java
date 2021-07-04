@@ -166,8 +166,8 @@ public class prizeScoreActivity extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                Intent intent=new Intent(prizeScoreActivity.this,mainMenuActivity.class);
-                startActivity(intent);
+                prizeScoreActivity.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });

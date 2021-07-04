@@ -22,12 +22,15 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.text.Html;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -66,6 +69,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -173,11 +177,99 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     int rand_int1;
     CountDownTimer countDownTimer;
     String linkdata;
+    String musicURLString;
+
+    int timerStarterInt;
+
+
+
+    private class DownloadData extends AsyncTask<String,Void,String> {
+        private static final String TAG = "DownloadData";
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            return;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+            try {
+                music.setDataSource(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+
+                    music.start();
+
+                    lol=1;
+                    music.setVolume(0.5f,0.5f);
+                    finalManu=0;
+
+                    final SharedPreferences songHolder1 = getSharedPreferences("songKnowe", 0);
+                    final SharedPreferences.Editor editorsongHolder1 = songHolder1.edit();
+
+                    timerStarterInt=songHolder1.getInt("timerStarterInt",0);
+
+
+
+
+                    timerStarterInt++;
+                    editorsongHolder1.putInt("timerStarterInt",timerStarterInt);
+                    editorsongHolder1.commit();
+
+                    if(timerStarterInt==1){
+
+                        try {
+                            countDownTimer.start();
+                        }catch (Exception e){
+
+                        }
+
+                    }
+                }
+            });
+            music.prepareAsync();
+
+
+            return null;
+        }
+    }
+
+    int lol=0;
+    int finalManu=0;
+    int mainfinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        final SharedPreferences songStopper = this.getSharedPreferences("SongStopperManu", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
+        int p=songStopper.getInt("songStopper",1);
+
+        mainfinder=getIntent().getIntExtra("mainfinder",0);
+
+        if(p==1||mainfinder==1) {
+
+            RecyclerCardView();
+        }else if(mainfinder==0){
+            lstExam=new ArrayList<>();
+            parto();
+            RecyclerView myrv=(RecyclerView) findViewById(R.id.recyclerview);
+            RecyclerViewSecondary myAdapter=new RecyclerViewSecondary(this,lstExam,setter);
+            myrv.setLayoutManager(new GridLayoutManager(this,2));
+            myrv.setAdapter(myAdapter);
+        }
         partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
         party2=(LottieAnimationView) findViewById(R.id.party2);
 
@@ -192,6 +284,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         prizeModeAnim=((LottieAnimationView) findViewById(R.id.prizeMode));
 
+        lstExam123 = new ArrayList<>();
 
 
 
@@ -207,7 +300,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
-        lstExam123 = new ArrayList<>();
+
 
         l=new ArrayList<>(6);
 
@@ -302,21 +395,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-       /*  PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
-            @Override
-            public void onCallStateChanged(int state, String incomingNumber) {
-                // Test for incoming call, dialing call, active or on hold
-                if (state==TelephonyManager.CALL_STATE_RINGING || state==TelephonyManager.CALL_STATE_OFFHOOK)
-                {
-                    music.pause();  // Put here the code to stop your music
-                }
-                super.onCallStateChanged(state, incomingNumber);
-            }
-        };
 
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        mTelephonyMgr.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-*/
         final SharedPreferences songHolder = this.getSharedPreferences("songHolder", 0);
         final SharedPreferences.Editor editorsongHolder = songHolder.edit();
 
@@ -327,57 +406,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
             editorsongHolder.commit();
 
-            try { 
-                music = MediaPlayer.create(mainMenuActivity.this, l.get(rand_int1));
-            music.start();
-
-
-
-
-
-
-                countDownTimer=new CountDownTimer(1000 * 60 * 24 * 30, 1000) {
-                ArrayList<Integer> r=l;
-                @Override
-                public void onTick(long l) {
-                    ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
-                    ActivityManager.getMyMemoryState(myProcess);
-                    isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
-                    if (isInBackground) {
-                        music.pause();
-                    } else {
-                        if (!music.isPlaying()) {
-                            music.start();
-
-                        }
-                    }
-                    music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-
-                            if (music.isPlaying()) {
-                                music.stop();
-                                mp.reset();
-                            } else {
-                                music.reset();
-                            }
-
-                            int rand_int1 = rand.nextInt(6);
-                            music = MediaPlayer.create(mainMenuActivity.this, r.get(rand_int1));
-                            music.start();
-
-                        }
-                    });
-
-                }
-
-                @Override
-                public void onFinish() {
-
-                }
-            }.start();
+            try {
+                songURLDownload();
             }catch (Exception e){
-                
+
             }
         }
 
@@ -496,7 +528,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
                 navigationView.setCheckedItem(R.id.nav_view);
-         RecyclerCardView();
+
 
            for(int i=1;i<=3;i++){
                dataForHorizontalSlide();
@@ -506,6 +538,63 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
 
+    public void timerStarter(){
+
+        countDownTimer=new CountDownTimer(1000 * 60 * 24 * 30, 1000) {
+            ArrayList<Integer> r=l;
+            @Override
+            public void onTick(long l) {
+                ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
+                ActivityManager.getMyMemoryState(myProcess);
+                isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+                if (isInBackground) {
+                    music.pause();
+                } else {
+                    if (!music.isPlaying()) {
+                        music.start();
+                        music.setVolume(0.4f,0.4f);
+                    }
+                }
+                music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+                        if(finalManu==0){
+                            if (music.isPlaying()) {
+                                music.stop();
+                                music.release();
+                                mp.reset();
+                            } else {
+                                music.reset();
+                                music.release();
+                            }
+
+
+                            songURLDownload();
+                        }
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+
+    }
+
+    public void releaseSong(){
+        try {
+            music.pause();
+            music.release();
+            music=null;
+        }catch (Exception e){
+
+        }
+    }
 
     public void speakersAlertDialog(){
         AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
@@ -1102,6 +1191,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         lstExam=new ArrayList<>();
         parto();
+        music = new MediaPlayer();
+        timerStarter();
         RecyclerView myrv=(RecyclerView) findViewById(R.id.recyclerview);
         RecyclerViewAdapter myAdapter=new RecyclerViewAdapter(this,lstExam,setter,music,countDownTimer);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
@@ -1136,7 +1227,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
         //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"Buzzzz! A knowledgeable and alert mind is the one which rules. Buzz with players across the world in this mode of knowledge and Agility!"));
-        lstExam.add(new Modes("Custom Quiz",R.drawable.customicon,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
+        lstExam.add(new Modes("Audio And Video",R.drawable.svfinal,"dfdjnfd d fdufn difn dfd fdufn udf"));
+        lstExam.add(new Modes("Custom Quiz",R.drawable.customquizfinal3,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
         lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
         lstExam.add(new Modes("League (Coming Soon)",R.drawable.league2,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
     }
@@ -2678,5 +2770,65 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
     }
+    public void songURLDownload(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongStopperManu", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
+        int p=songStopper.getInt("songStopper",1);
+
+        if(p==1) {
+            editorsongStopper.putInt("songStopper", 0);
+            editorsongStopper.commit();
+        }else{
+            music = new MediaPlayer();
+        }
+
+
+
+        finalManu=1;
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
+        final Random rand = new Random();
+
+        int i = 1;
+
+        try{
+            i = rand.nextInt(29)+1;
+        }catch (Exception e){
+
+        }
+
+
+        /* */
+
+
+        String musicNameString="Song"+i+".mp3";
+
+        try{
+
+            StorageReference urlref = storageRef.child("Songs/" + musicNameString);
+            urlref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+            {
+                @Override
+                public void onSuccess(Uri downloadUrl)
+                {
+
+                    musicURLString=downloadUrl.toString();
+
+
+
+                    DownloadData downloadData=new DownloadData();
+                    downloadData.execute(musicURLString);
+
+                }
+            });
+
+        }catch (Exception e) {
+
+        }
+
+    }
 }

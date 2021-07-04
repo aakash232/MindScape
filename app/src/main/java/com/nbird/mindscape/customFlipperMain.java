@@ -297,9 +297,9 @@ public class customFlipperMain extends AppCompatActivity {
 
 
 
-      //  RadioButton radioButton = (RadioButton)radioGroup1.findViewById(selectedId);
+        //  RadioButton radioButton = (RadioButton)radioGroup1.findViewById(selectedId);
 
-     //   privacyTextView.setText(" Privacy : "+radioButton.getText()+" ");
+        //   privacyTextView.setText(" Privacy : "+radioButton.getText()+" ");
 
 
         next_Button.setOnClickListener(
@@ -500,7 +500,7 @@ public class customFlipperMain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     buttonMusic();
-                                  alertDialog.dismiss();
+                                    alertDialog.dismiss();
                                 }
                             });
 
@@ -647,7 +647,7 @@ public class customFlipperMain extends AppCompatActivity {
         final View view1= LayoutInflater.from(customFlipperMain.this).inflate(R.layout.code_share_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
         builder.setView(view1);
         builder.setCancelable(false);
-    //    ((TextView) view1.findViewById(R.id.textTitle)).setText("Are You Sure You Want to Submit?");
+        //    ((TextView) view1.findViewById(R.id.textTitle)).setText("Are You Sure You Want to Submit?");
         TextView nameText=(TextView) view1.findViewById(R.id.nameText);
         TextView codeText=(TextView) view1.findViewById(R.id.codeText);
 
@@ -671,22 +671,21 @@ public class customFlipperMain extends AppCompatActivity {
                 buttonMusic();
                 Intent intent=new Intent(customFlipperMain.this,customQuizMainQuizActivity.class);
 
-                    intent.putExtra("quizName",quizName);
-                    intent.putExtra("privacy",privacy);
-                    intent.putExtra("time",timeDuration);
-                    intent.putExtra("audienceLL",audienceLL);
-                    intent.putExtra("fiftyfiftyLL",fiftyfiftyLL);
-                    intent.putExtra("expertLL",experLL);
-
-                    intent.putExtra("key",key);
-                    intent.putExtra("category",cat);
-
-                    startActivity(intent);
-                    finish();
-
+                intent.putExtra("quizName",quizName);
+                intent.putExtra("privacy",privacy);
+                intent.putExtra("time",timeDuration);
+                intent.putExtra("audienceLL",audienceLL);
+                intent.putExtra("fiftyfiftyLL",fiftyfiftyLL);
+                intent.putExtra("expertLL",experLL);
+                intent.putExtra("key",key);
+                intent.putExtra("category",cat);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
 
 
-              // intent.putExtra("list")
+
+                // intent.putExtra("list")
 
             }
         });
@@ -695,9 +694,9 @@ public class customFlipperMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 buttonMusic();
-                Intent intent=new Intent(customFlipperMain.this,mainMenuActivity.class);
                 alertDialog.dismiss();
-                startActivity(intent);
+                customFlipperMain.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -925,52 +924,52 @@ public class customFlipperMain extends AppCompatActivity {
 
 
 
-                if(privacy==0){
-                    key = database.getReference().child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").push().getKey();
-                    customQuizPropertiesSetter s1=new customQuizPropertiesSetter(quizName,timeDuration,experLL,swapLL,audienceLL,fiftyfiftyLL,quizCode,privacy,userName,rate,report,description,proPic,key,"",0);
+        if(privacy==0){
+            key = database.getReference().child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").push().getKey();
+            customQuizPropertiesSetter s1=new customQuizPropertiesSetter(quizName,timeDuration,experLL,swapLL,audienceLL,fiftyfiftyLL,quizCode,privacy,userName,rate,report,description,proPic,key,"",0);
 
-                    myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("QuizProperties").child(key).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+            myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("QuizProperties").child(key).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
 
-                            for (int i=0;i<5;i++){
-                                mainHolder=listItem.get(i);
-                                myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("questions").child(key).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(customFlipperMain.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
+                    for (int i=0;i<5;i++){
+                        mainHolder=listItem.get(i);
+                        myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("questions").child(key).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(customFlipperMain.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
                             }
+                        });
+
+                    }
 
 
-                        }
-                    });
-                }else {
-                     key = database.getReference().child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").push().getKey();
-                     String mykey=myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("category").child(String.valueOf(cat)).child("questionsPack").push().getKey();
-                    customQuizPropertiesSetter s1=new customQuizPropertiesSetter(quizName,timeDuration,experLL,swapLL,audienceLL,fiftyfiftyLL,quizCode,privacy,userName,rate,report,description,proPic,key,mykey,0);
-
-                    myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("category").child(String.valueOf(cat)).child("questionsPack").child(mykey).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            for (int i=0;i<5;i++){
-                                mainHolder=listItem.get(i);
-                                myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").child(key).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(customFlipperMain.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                            }
-
-
-                        }
-                    });
                 }
+            });
+        }else {
+            key = database.getReference().child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").push().getKey();
+            String mykey=myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("category").child(String.valueOf(cat)).child("questionsPack").push().getKey();
+            customQuizPropertiesSetter s1=new customQuizPropertiesSetter(quizName,timeDuration,experLL,swapLL,audienceLL,fiftyfiftyLL,quizCode,privacy,userName,rate,report,description,proPic,key,mykey,0);
+
+            myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("category").child(String.valueOf(cat)).child("questionsPack").child(mykey).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    for (int i=0;i<5;i++){
+                        mainHolder=listItem.get(i);
+                        myRef.child("CustomQuiz").child(String.valueOf(privacy)).child("QuestionBank").child(key).child(String.valueOf(i+1)).setValue(mainHolder).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(customFlipperMain.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+
+                }
+            });
+        }
 
 
     }

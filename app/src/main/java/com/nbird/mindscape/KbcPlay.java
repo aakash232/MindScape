@@ -70,7 +70,7 @@ public class KbcPlay extends AppCompatActivity {
             }
         });
         Intent intent = new Intent(getApplicationContext(),KbcSetup.class);
-        startActivity(intent);
+        startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
     }
 
@@ -156,7 +156,7 @@ public class KbcPlay extends AppCompatActivity {
                         musicNav.reset();
                         musicNav.release();
                     }
-                });
+                });overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 alertDialog.dismiss();
             }
         });
@@ -173,7 +173,7 @@ public class KbcPlay extends AppCompatActivity {
             }
         });
         Intent intent = new Intent(this,mainMenuActivity.class);
-        startActivity(intent);
+        startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
     }
 

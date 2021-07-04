@@ -185,6 +185,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                                             intent.putExtra("roomCode",list123.get(0).getRoomCode());
                                             intent.putExtra("Playernum", finalNum);
                                             startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
                                     });
@@ -232,6 +233,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                                             intent.putExtra("roomCode",list123.get(0).getRoomCode());
                                             intent.putExtra("Playernum", finalNum);
                                             startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
                                     });
@@ -313,6 +315,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                  intent.putExtra("roomCode",roomCode);
                  startActivity(intent);
                  alertDialog.dismiss();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                  finish();
             }
         });

@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -156,6 +157,18 @@ public class picture_quiz_menu extends AppCompatActivity {
         localButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+
+
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(picture_quiz_menu.this, R.style.AlertDialogTheme);
                 View view2 = LayoutInflater.from(picture_quiz_menu.this).inflate(R.layout.onevsone_local_mode_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);
                 builder2.setView(view2);
@@ -176,7 +189,16 @@ public class picture_quiz_menu extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         alertDialog.dismiss();
                         joinFunction();
 
@@ -186,6 +208,16 @@ public class picture_quiz_menu extends AppCompatActivity {
                 createButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
                         alertDialog.dismiss();
                         createFunction();
                     }
@@ -381,10 +413,19 @@ public class picture_quiz_menu extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
-
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
-                Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
-                startActivity(intent);
+                picture_quiz_menu.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -618,7 +659,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                 }
                                 Toast.makeText(picture_quiz_menu.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
-                                startActivity(intent);
+                                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
                             }
                         }else{
@@ -636,7 +677,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                             if(countDownTimer123!=null){
                                 countDownTimer123.cancel();
                             }
-                            startActivity(intent);
+                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
 
@@ -1231,6 +1272,16 @@ public class picture_quiz_menu extends AppCompatActivity {
         joinButtonFinal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 roomCodeString=roomCodeEditText.getText().toString();
                 codeInteger= Integer.parseInt(roomCodeString);
                 joinTunedFunction();
@@ -1316,6 +1367,17 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                     } catch (Exception e) {
 
                                                     }
+
+                                                    final MediaPlayer musicNav;
+                                                    musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                                                    musicNav.start();
+                                                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                                        @Override
+                                                        public void onCompletion(MediaPlayer mediaPlayer) {
+                                                            musicNav.reset();
+                                                            musicNav.release();
+                                                        }
+                                                    });
 
                                                     alertDialog.dismiss();
                                                     Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
@@ -1548,9 +1610,20 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                         }
 
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(picture_quiz_menu.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
+
                         myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
-                        Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
-                        startActivity(intent);
+                        picture_quiz_menu.super.onBackPressed();
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
                 });

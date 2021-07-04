@@ -819,16 +819,15 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
                 myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
                 myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player1Status").onDisconnect().cancel();
-                Intent intent47=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
-            if(counterRemovalDownTimer!=null){
+             if(counterRemovalDownTimer!=null){
                 counterRemovalDownTimer.cancel();}
             if(countDownTimer!=null){
                 countDownTimer.cancel();}
             if(countDownHost!=null){
                 countDownHost.cancel();}
-                startActivity(intent47);
-
-                finish();
+            tournamentLobbyActivity.super.onBackPressed();
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+            finish();
 
         } else if(playerNum==2){
             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Status").removeValue();
@@ -1005,6 +1004,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             intent.putExtra("numberOfPlayers",numberOfPlayers);
                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
                     }.start();
@@ -1081,8 +1081,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     intent.putExtra("timerNum",numTime);
                     intent.putExtra("numberOfPlayers",numberOfPlayers);
                     intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
-
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
             }.start();
@@ -1565,6 +1565,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     if(countDownHost!=null){
                         countDownHost.cancel();
                     }
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
 
@@ -1617,7 +1618,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             if(countDownHost!=null){
                                 countDownHost.cancel();
                             }
-
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
                     }
@@ -1780,7 +1781,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                 countDownTimer.cancel();}
                             if(countDownHost!=null){
                                 countDownHost.cancel();
-                            }
+                            }   overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
                     } else if(playerNum==4){
@@ -1840,11 +1841,6 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             }
         };
         myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").addValueEventListener(listener3);
-
-
-
-
-
 
     }
 

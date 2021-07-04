@@ -346,15 +346,15 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                         intent.putExtra("roomCode",roomCode);
                                                         intent.putExtra("Playernum",m1+1);
                                                         //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
-                                                        startActivity(intent);
+                                                        startActivity(intent);    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                         finish();
 
                                                     }
                                                 });
                                             }else{
-                                                Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
-                                                startActivity(intent);
                                                 Toast.makeText(tournamentBuzzerScoreCard.this, "Room Is Full!", Toast.LENGTH_LONG).show();
+                                                tournamentBuzzerScoreCard.super.onBackPressed();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
 
@@ -916,7 +916,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     if(num==0){
                         if(playerNum==1){
 
-                            Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
 
                             holeDeleteIfRoomIsEmpty(mAuth.getCurrentUser().getUid());
                             if(countDownTimer!=null){
@@ -926,11 +925,12 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 countDownTimer1234.cancel();
                             }
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                            startActivity(intent);
+                            tournamentBuzzerScoreCard.super.onBackPressed();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+
                             finish();
                         }else{
 
-                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
 
                             holeDeleteIfRoomIsEmpty(hostUid);
                             if(countDownTimer!=null){
@@ -949,7 +949,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
 
                             }
-                            startActivity(intent);
+                            tournamentBuzzerScoreCard.super.onBackPressed();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
 
                         }
@@ -971,7 +972,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
                                     });
@@ -1006,8 +1008,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 if(countDownTimer1234!=null){
                                                     countDownTimer1234.cancel();
                                                 }
-                                                Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
-                                                startActivity(intent);
+                                                tournamentBuzzerScoreCard.super.onBackPressed();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
                                         });
@@ -1024,7 +1026,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(playerNum==2){
-                                            Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
 
                                             deleter("player2Answer","player2Data","player2Status","player2Uid");
                                             if(countDownTimer!=null){
@@ -1034,10 +1035,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+
                                             finish();
                                         }else if(playerNum==3){
-                                            Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
 
                                             deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
                                             if(countDownTimer!=null){
@@ -1047,10 +1049,10 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }else{
-                                            Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
                                             deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
                                             if(countDownTimer!=null){
                                                 countDownTimer.cancel();
@@ -1059,7 +1061,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
 
@@ -1073,8 +1076,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     }
 
                 }catch (Exception e){
-                    Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
-                    startActivity(intent);
+
                     switch (playerNum){
                         case 2:
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
@@ -1083,6 +1085,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         case 4:
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
                     }
+                    tournamentBuzzerScoreCard.super.onBackPressed();
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
 
@@ -1104,8 +1108,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     if (num == 0) {
                         if (playerNum == 1) {
 
-                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
-
                             holeDeleteIfRoomIsEmpty(mAuth.getCurrentUser().getUid());
                             if (countDownTimer != null) {
                                 countDownTimer.cancel();
@@ -1115,11 +1117,10 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             }
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
 
-                            startActivity(intent);
+                            tournamentBuzzerScoreCard.super.onBackPressed();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         } else {
-
-                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
 
                             holeDeleteIfRoomIsEmpty(hostUid);
                             if (countDownTimer != null) {
@@ -1138,7 +1139,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
 
                             }
-                            startActivity(intent);
+                            tournamentBuzzerScoreCard.super.onBackPressed();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
 
                         }
@@ -1151,7 +1153,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                     myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
 
                                             if (countDownTimer != null) {
                                                 countDownTimer.cancel();
@@ -1161,7 +1162,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
 
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
                                     });
@@ -1200,9 +1202,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 if (countDownTimer1234 != null) {
                                                     countDownTimer1234.cancel();
                                                 }
-                                                Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
-
-                                                startActivity(intent);
+                                                tournamentBuzzerScoreCard.super.onBackPressed();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
                                         });
@@ -1220,7 +1221,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (playerNum == 2) {
-                                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
 
                                             deleter("player2Answer", "player2Data", "player2Status", "player2Uid");
                                             if (countDownTimer != null) {
@@ -1230,10 +1230,10 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         } else if (playerNum == 3) {
-                                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
 
                                             deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
                                             if (countDownTimer != null) {
@@ -1243,11 +1243,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         } else {
-                                            Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
-                                            deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                              deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
                                             if (countDownTimer != null) {
                                                 countDownTimer.cancel();
                                             }
@@ -1255,7 +1255,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
-                                            startActivity(intent);
+                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
 

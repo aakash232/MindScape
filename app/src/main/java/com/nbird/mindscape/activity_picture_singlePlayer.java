@@ -66,10 +66,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
     CountDownTimer countDownTimer,countDownTimerForPic;
-    private List<pictureQuizHolder> list, listsecondary;
     String imageurl;
-    private int position=0, score=0, count;
-    private int setNo;
     ImageView expertImage;
     int category,num=0, expertnum=0, swapnum=0, audiencenum=0, fiftyfiftynum=0, selectNum;
     int yo1,yo2,yo3,yo4;
@@ -85,6 +82,10 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     String userName;
     int starter=0,starterQuestion=0;
     CountDownTimer c;
+    private List<pictureQuizHolder> list, listsecondary;
+    private int position=0, score=0, count;
+    private int setNo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -717,7 +718,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         if (countDownTimer != null) {
                                             countDownTimer.cancel();
                                         }
-                                        finish();
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                         return;
                                     }
@@ -733,12 +734,13 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         scoreIntent.putExtra("secondtext", secondtext);
                                         scoreIntent.putExtra("milliholder", milliHolder);
                                         scoreIntent.putExtra("imageurl", imageurl);
+                                        scoreIntent.putExtra("Collider", 100);
                                         startActivity(scoreIntent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if (countDownTimer != null) {
                                             countDownTimer.cancel();
                                         }
-                                        finish();
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
                                         return;
                                     }
@@ -888,16 +890,16 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
-                final MediaPlayer musicNav;
-                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.correctmusic);
-                            musicNav.start();
-                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mediaPlayer) {
-                                    musicNav.reset();
-                                    musicNav.release();
-                                }
-                            });
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.correctmusic);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -905,15 +907,15 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         }else {
             //incorrect
             final MediaPlayer musicNav;
-                            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.wrongansfinal);
-                            musicNav.start();
-                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mediaPlayer) {
-                                    musicNav.reset();
-                                    musicNav.release();
-                                }
-                            });
+            musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.wrongansfinal);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -982,6 +984,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 scoreIntent.putExtra("milliholder",milliHolder);
                 scoreIntent.putExtra("category",category);
                 scoreIntent.putExtra("imageurl",imageurl);
+                scoreIntent.putExtra("Collider", 100);
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 if(countDownTimer!=null){
@@ -1010,10 +1013,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             }
         });
     }
-    public void onBackPressed() {
-        activity_picture_singlePlayer.super.onBackPressed();
-        finish();
-    }
+
     public void expertAdviceImageManupulator() {
         Random rand = new Random();
         int num = rand.nextInt(11) + 1;
@@ -1087,7 +1087,74 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
 
+        cancelDialogFunction();
+
+
+    }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(activity_picture_singlePlayer.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(activity_picture_singlePlayer.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+
+                activity_picture_singlePlayer.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
+    }
 
 
 

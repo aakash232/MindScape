@@ -724,8 +724,8 @@ public class customPublicQuiz extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
                                                     buttonMusic();
-                                                    Intent intent=new Intent(customPublicQuiz.this,mainMenuActivity.class);
-                                                    startActivity(intent);
+                                                    customPublicQuiz.super.onBackPressed();
+                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
                                                 }
                                             });
@@ -737,6 +737,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                                     Intent intent=new Intent(customPublicQuiz.this,customQuizMainMenu.class);
                                                     intent.putExtra("position",cat);
                                                     startActivity(intent);
+                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
                                                 }
                                             });
@@ -998,8 +999,8 @@ public class customPublicQuiz extends AppCompatActivity {
                                                @Override
                                                public void onClick(View view) {
                                                    buttonMusic();
-                                                   Intent intent=new Intent(customPublicQuiz.this,mainMenuActivity.class);
-                                                   startActivity(intent);
+                                                   customPublicQuiz.super.onBackPressed();
+                                                   overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                    finish();
                                                }
                                            });
@@ -1330,10 +1331,76 @@ public class customPublicQuiz extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        customPublicQuiz.super.onBackPressed();
-        finish();
+
+        cancelDialogFunction();
+
 
     }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(customPublicQuiz.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(customPublicQuiz.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                customPublicQuiz.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
+    }
+
+
+
+
+
 
     public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
         Random rand = new Random();

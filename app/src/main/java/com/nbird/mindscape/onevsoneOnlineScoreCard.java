@@ -337,8 +337,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
                 myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
                 deleteData();
-                Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
-                startActivity(intent);
+                onevsoneOnlineScoreCard.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
         });
@@ -385,6 +385,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                             deleteData();
                                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                             startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }else{
                                             Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
@@ -396,6 +397,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                             deleteData();
                                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                             startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
 
@@ -826,7 +828,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 intent.putExtra("myName",myName123);
                                 intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                 deleteData();
-                                startActivity(intent);
+                                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
                             }else{
                                 Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
@@ -837,7 +839,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 intent.putExtra("myName",myName123);
                                 intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
                                 deleteData();
-                                startActivity(intent);
+                                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
                             }
 
