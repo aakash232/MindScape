@@ -645,7 +645,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
             // Generate random integers in range 0 to 14
 
-            final int setNumber = rand.nextInt(999)+1;  //NEED TO CHANGE HERE
+            int setNumber = rand.nextInt(4999)+1;
+
+            if(setNumber>1210&&setNumber<2000){
+                setNumber=setNumber-1000;
+            }
+            //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
 
             fireBaseData(setNumber);
@@ -656,7 +661,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
     //Firebase Fetch
     public void fireBaseData(int setNumber){
-        myRef.child("PictureQuiz").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){

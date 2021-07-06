@@ -13,10 +13,12 @@
                     <item
                         android:id="@+id/nav_help"
                         android:title="Help Guide"
+                        android:color="#ffffff"
                         />
                     <item
                         android:id="@+id/nav_logout"
                         android:title="Logout"
+                        android:color="#ffffff"
                         />
 
                 </group>
@@ -34,15 +36,18 @@
                 <item
                     android:id="@+id/nav_contact"
                     android:title="Contact Us"
+                    android:color="#ffffff"
                     />
 
                 <item
                     android:id="@+id/nav_about"
                     android:title="About Us"
+                    android:color="#ffffff"
                     />
                 <item
                     android:id="@+id/nav_rate"
                     android:title="Rate Us"
+                    android:color="#ffffff"
                     />
             </group>
 
@@ -62,16 +67,19 @@
             <item
                 android:id="@+id/nav_tos"
                 android:title="Terms of Service"
+                android:color="#ffffff"
                />
 
                 <item
                     android:id="@+id/nav_ref"
                     android:title="Refund Policy"
+                    android:color="#ffffff"
                     />
 
                 <item
                     android:id="@+id/nav_ps"
                     android:title="Privacy statement"
+                    android:color="#ffffff"
                     />
 
             </group>

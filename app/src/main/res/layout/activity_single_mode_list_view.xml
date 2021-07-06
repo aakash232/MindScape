@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backimage"
     tools:context=".singleModeListView">
 
 
@@ -18,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/backlitemode"
@@ -28,18 +27,18 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/officialcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         android:layout_marginTop="2dp"
         android:orientation="vertical"
-        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,34 +53,76 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/backlitemodeanim"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="10dp"
-                    android:elevation="-5dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/title"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/selecticon"
-                    app:lottie_speed="0.5" />
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="200dp"
+                <LinearLayout
+                    android:id="@+id/linear123"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/mouse_memoirs"
-                    android:text="Select Your Category"
-                    android:textColor="#000000"
-                    android:textSize="45sp"
-                    android:textStyle="bold"
+                    android:orientation="horizontal"
+                    android:scaleY="0.9"
+                    android:scaleX="0.9"
+                    android:background="@drawable/white"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/backlitemodeanim"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        android:elevation="-5dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/selectlocal"
+                        app:lottie_speed="0.5" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/insidecardview"
+                        android:orientation="vertical"
+                        android:padding="7dp"
+                        android:scaleX="0.95"
+                        android:scaleY="0.95">
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:text="Select Your Category"
+                            android:textColor="#000000"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
+
+                        <TextView
+                            android:id="@+id/dis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:text="Choose among 20 categories and begin your quest!"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardviewHistoricalMonuments"
@@ -96,7 +137,7 @@
                     android:scaleY="0.95"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim"
+                    app:layout_constraintTop_toBottomOf="@+id/linear123"
                     cardview:cardCornerRadius="5dp">
 
                     <LinearLayout
@@ -134,7 +175,7 @@
                                 android:gravity="left"
                                 android:text="Historical Monuments"
                                 android:textColor="#000000"
-                                android:textSize="25sp"
+                                android:textSize="23sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -260,7 +301,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="5dp"
@@ -278,7 +319,7 @@
                                 android:gravity="left"
                                 android:text="Astronomy And Space"
                                 android:textColor="#000000"
-                                android:textSize="22sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -289,7 +330,7 @@
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
-                                android:text="The mystery of space never stops to amze us. All aboard on the spacecraft! Time to inspire some out-of-the-world fantasy."
+                                android:text="The mystery of space never stops to amze us. All aboard on the spacecraft!"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 
@@ -562,7 +603,7 @@
                                 android:gravity="left"
                                 android:text="Conuntry,Capitals And Currencies"
                                 android:textColor="#000000"
-                                android:textSize="25sp"
+                                android:textSize="23sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -570,9 +611,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
-                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Bonjour quizzers! Get your compass aligned as we take a voyage across the globe scalling every landmass! Test your mind with capitals, currency and more things right here. Guide your ship to victory!"
@@ -635,7 +676,7 @@
                                 android:gravity="left"
                                 android:text="Famous Personalities"
                                 android:textColor="#000000"
-                                android:textSize="25sp"
+                                android:textSize="23sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -643,9 +684,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
-                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Life is a long journey and gave us many prominent people. Those who stood up and change the world's perspective forever in their own ways. Scan through different time eras and know abut these famous personalities."
@@ -690,7 +731,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="5dp"
@@ -780,16 +821,16 @@
                                 android:gravity="left"
                                 android:text="Important Dates And Events"
                                 android:textColor="#000000"
-                                android:textSize="25sp"
+                                android:textSize="22sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
-                                android:layout_marginRight="10dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
                                 android:text="Did you know? The first quiz was made in 1782! Do you know those several crucial dates in human history and want to test your knowledge about facts and events that changed the entire world? Its your time then! prove it who's the greatest quizzer right here!"
@@ -858,8 +899,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginBottom="5dp"
                                 android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:gravity="left"
@@ -990,7 +1031,7 @@
                                 android:gravity="left"
                                 android:text="Film And Entertainment"
                                 android:textColor="#000000"
-                                android:textSize="17sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1098,7 +1139,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardviewFirstInDifferentFields"
                         android:layout_width="120dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:foreground="?selectableItemBackground"
@@ -1116,7 +1157,7 @@
 
                             <ImageView
                                 android:layout_width="80dp"
-                                android:layout_height="65dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="7dp"
                                 android:layout_marginTop="7dp"
@@ -1126,7 +1167,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
@@ -1144,7 +1185,7 @@
                                     android:gravity="left"
                                     android:text="First In Different Fields"
                                     android:textColor="#000000"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -1169,7 +1210,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardviewFestivalArtAndCulture"
                         android:layout_width="120dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:foreground="?selectableItemBackground"
@@ -1198,7 +1239,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
@@ -1216,7 +1257,7 @@
                                     android:gravity="left"
                                     android:text="Festival,Art And Culture"
                                     android:textColor="#000000"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -1241,7 +1282,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardviewPolityAndConstitution"
                         android:layout_width="120dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:foreground="?selectableItemBackground"
@@ -1270,7 +1311,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
@@ -1288,7 +1329,7 @@
                                     android:gravity="left"
                                     android:text="Polity And Constitution"
                                     android:textColor="#000000"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -1361,7 +1402,7 @@
                                 android:gravity="left"
                                 android:text="Literature"
                                 android:textColor="#000000"
-                                android:textSize="30sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1413,7 +1454,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="5dp"
@@ -1431,7 +1472,7 @@
                                 android:gravity="left"
                                 android:text="Health And Disease"
                                 android:textColor="#000000"
-                                android:textSize="22sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView

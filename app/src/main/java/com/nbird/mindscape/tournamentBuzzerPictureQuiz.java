@@ -665,7 +665,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber) {
-        myRef.child("PictureQuiz").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {

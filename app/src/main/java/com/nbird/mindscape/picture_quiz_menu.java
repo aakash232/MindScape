@@ -948,7 +948,12 @@ public class picture_quiz_menu extends AppCompatActivity {
 
             // Generate random integers in range 1 to 14
 
-            int setNumber = rand.nextInt(13) + 1;  //NEED TO CHANGE HERE
+
+            int setNumber = rand.nextInt(4999)+1;
+
+            if(setNumber>1210&&setNumber<2000){
+                setNumber=setNumber-1000;
+            }  //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
             arrlist.add(setNumber);
         }

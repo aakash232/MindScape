@@ -109,6 +109,7 @@ public class tournamentQuiz extends AppCompatActivity {
     int numberOfPlayers;
     ValueEventListener listner;
     int oppoStatus=5;
+    int setNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -289,8 +290,25 @@ public class tournamentQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
-                    //NEED TO CHANGE HERE
+                    Random rand1 = new Random();
+                    int category=rand1.nextInt(19)+1;
+                    switch (category){
+                        case 1:
+                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
+                            setNumber = rand.nextInt(299)+1;break;
+                        case 2: case 14:
+                            setNumber = rand.nextInt(499)+1;break;
+                        case 7:
+                            setNumber = rand.nextInt(401)+1;break;
+                        case 8: case 18:
+                            setNumber = rand.nextInt(339)+1;break;
+                        case 13: case 15: case 16:
+                            setNumber = rand.nextInt(249)+1;break;
+                        case 19:
+                            setNumber = rand.nextInt(399)+1;break;
+                        default:
+                            setNumber = rand.nextInt(199)+1;break;
+                    }  //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
 
@@ -303,8 +321,25 @@ public class tournamentQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
-                    //NEED TO CHANGE HERE
+                    Random rand1 = new Random();
+                    int category=rand1.nextInt(19)+1;
+                    switch (category){
+                        case 1:
+                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
+                            setNumber = rand.nextInt(299)+1;break;
+                        case 2: case 14:
+                            setNumber = rand.nextInt(499)+1;break;
+                        case 7:
+                            setNumber = rand.nextInt(401)+1;break;
+                        case 8: case 18:
+                            setNumber = rand.nextInt(339)+1;break;
+                        case 13: case 15: case 16:
+                            setNumber = rand.nextInt(249)+1;break;
+                        case 19:
+                            setNumber = rand.nextInt(399)+1;break;
+                        default:
+                            setNumber = rand.nextInt(199)+1;break;
+                    }  //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
 
@@ -317,7 +352,25 @@ public class tournamentQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+                    Random rand1 = new Random();
+                    int category=rand1.nextInt(19)+1;
+                    switch (category){
+                        case 1:
+                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
+                            setNumber = rand.nextInt(299)+1;break;
+                        case 2: case 14:
+                            setNumber = rand.nextInt(499)+1;break;
+                        case 7:
+                            setNumber = rand.nextInt(401)+1;break;
+                        case 8: case 18:
+                            setNumber = rand.nextInt(339)+1;break;
+                        case 13: case 15: case 16:
+                            setNumber = rand.nextInt(249)+1;break;
+                        case 19:
+                            setNumber = rand.nextInt(399)+1;break;
+                        default:
+                            setNumber = rand.nextInt(199)+1;break;
+                    }  //NEED TO CHANGE HERE
                     //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }

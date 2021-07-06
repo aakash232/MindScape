@@ -243,7 +243,6 @@ public class scoreActivity extends AppCompatActivity {
                 totalSum=totalSum+1000;
             }
             totalScoreNumber.setText(" Total Score : "+totalSum+" ");
-
         }else{
             totalSum= milliholder/150;
             for(int i=1;i<=lifelineSum;i++){
@@ -255,6 +254,8 @@ public class scoreActivity extends AppCompatActivity {
             totalScoreNumber.setText(" Total Score : "+totalSum+" ");
 
         }
+
+
 
 
         buttonFunction();

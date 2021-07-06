@@ -766,7 +766,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
             // Generate random integers in range 0 to 14
 
-            final int setNumber = rand.nextInt(5)+1;  //NEED TO CHANGE HERE
+            final int setNumber = rand.nextInt(156)+1;  //NEED TO CHANGE HERE
             //NEED TO CHANGE HERE
 
             fireBaseData(setNumber);

@@ -160,7 +160,6 @@ public class quizActivity extends AppCompatActivity {
                     setNumber = rand.nextInt(399)+1;break;
                 default:
                     setNumber = rand.nextInt(199)+1;break;
-
             }
             //NEED TO CHANGE HERE
               //NEED TO CHANGE HERE

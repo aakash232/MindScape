@@ -291,7 +291,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(12)+1;  //NEED TO CHANGE HERE
+
+                    int setNumber = rand.nextInt(4999)+1;
+
+                    if(setNumber>1210&&setNumber<2000){
+                        setNumber=setNumber-1000;
+                    }//NEED TO CHANGE HERE
                     //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
@@ -305,7 +310,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(12)+1;  //NEED TO CHANGE HERE
+                    int setNumber = rand.nextInt(4999)+1;
+
+                    if(setNumber>1210&&setNumber<2000){
+                        setNumber=setNumber-1000;
+                    } //NEED TO CHANGE HERE
                     //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
@@ -319,7 +328,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 }catch (Exception e){
                     Random rand = new Random();
                     // Generate random integers in range 0 to 29
-                    final int setNumber = rand.nextInt(12)+1;  //NEED TO CHANGE HERE
+                    int setNumber = rand.nextInt(4999)+1;
+
+                    if(setNumber>1210&&setNumber<2000){
+                        setNumber=setNumber-1000;
+                    }//NEED TO CHANGE HERE
                     //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
@@ -1374,7 +1387,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("PictureQuiz").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
