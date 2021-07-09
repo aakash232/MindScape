@@ -1437,7 +1437,7 @@ public class profile extends AppCompatActivity {
             pieChart.setEntryLabelTextSize(5);
             pieChart.setEntryLabelColor(R.color.black);
             pieChart.getDescription().setEnabled(false);
-            pieChart.setCenterText("Subjects");
+            pieChart.setCenterText("Total Seconds");
             pieChart.animate();
         }
 

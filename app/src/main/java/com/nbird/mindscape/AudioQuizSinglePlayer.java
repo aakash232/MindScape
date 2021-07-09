@@ -45,6 +45,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -108,7 +111,14 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     String musicURLString;
+    private InterstitialAd mInterstitialAd;
 
+    private void loadAds(){
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
 
     private class DownloadData extends AsyncTask<String,Void,String> {
         private static final String TAG = "DownloadData";
@@ -177,7 +187,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_quiz_single_player);
 
-
+        loadAds();
         linearFun1=(LinearLayout) findViewById(R.id.linearFun1);
         playOrPauseButton=(CardView) findViewById(R.id.mainButton);
         seekBar=(SeekBar) findViewById(R.id.determinateBar);
@@ -924,6 +934,42 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
                                 if (swapnum == 0) {
                                     if (position == 10) {
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(AudioQuizSinglePlayer.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline", lifelineSum);
+                                                scoreIntent.putExtra("minutes", minutes);
+                                                scoreIntent.putExtra("seconds", second);
+                                                scoreIntent.putExtra("minutestext", minutestext);
+                                                scoreIntent.putExtra("secondtext", secondtext);
+                                                scoreIntent.putExtra("milliholder", milliHolder);
+                                                scoreIntent.putExtra("imageurl", imageurl);
+                                                scoreIntent.putExtra("Collider", 200);
+                                                scoreIntent.putExtra("mainfinder",1);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if (countDownTimer != null) {
+                                                    countDownTimer.cancel();
+                                                }
+                                                clearMediaPlayer();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+
+
                                         Intent scoreIntent = new Intent(AudioQuizSinglePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline", lifelineSum);
@@ -948,6 +994,43 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
                                 } else {
                                     if (position == 11) {
+
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(AudioQuizSinglePlayer.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline", lifelineSum);
+                                                scoreIntent.putExtra("minutes", minutes);
+                                                scoreIntent.putExtra("seconds", second);
+                                                scoreIntent.putExtra("minutestext", minutestext);
+                                                scoreIntent.putExtra("secondtext", secondtext);
+                                                scoreIntent.putExtra("milliholder", milliHolder);
+                                                scoreIntent.putExtra("imageurl", imageurl);
+                                                scoreIntent.putExtra("Collider", 200);
+                                                scoreIntent.putExtra("mainfinder",1);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if (countDownTimer != null) {
+                                                    countDownTimer.cancel();
+                                                }
+                                                clearMediaPlayer();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+
+
                                         Intent scoreIntent = new Intent(AudioQuizSinglePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline", lifelineSum);

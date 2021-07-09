@@ -42,6 +42,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -146,10 +149,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     int myPosition=0;
     CountDownTimer c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_player_picture_quiz);
+
+
+
         builder=new AlertDialog.Builder(multiPlayerPictureQuiz.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(multiPlayerPictureQuiz.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
         arrlist12345 = new ArrayList<>(11);
@@ -1074,9 +1081,16 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
             }
             public void onFinish() {
+
+
+
+
+
+
+
+
                 Toast.makeText(multiPlayerPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
-
                 myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
                 myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
@@ -1116,6 +1130,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     countDownTimer47.cancel();}
                 if(countDownTimer50!=null){
                     countDownTimer50.cancel();}
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
 
@@ -1302,6 +1318,10 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                         }
 
+
+
+
+
                         myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
                         Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                         myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
@@ -1327,13 +1347,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                         scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                         startActivity(scoreIntent);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         if(countDownTimerMine!=null){
                             countDownTimerMine.cancel();}
                         if(countDownTimer47!=null){
                             countDownTimer47.cancel();}
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
 
@@ -1606,6 +1627,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+
+
+
+
+
                             Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                             myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
                             try{
@@ -1643,13 +1669,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                             scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                             startActivity(scoreIntent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             if(countDownTimerMine!=null){
                                 countDownTimerMine.cancel();}
                             if(countDownTimer47!=null){
                                 countDownTimer47.cancel();}
                             if(countDownTimer50!=null){
                                 countDownTimer50.cancel();}
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();}
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
@@ -1742,6 +1769,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                 try{
                     int catcher=snapshot.getValue(Integer.class);
                     if(catcher==1){
+
+
+
+
+
+
+
+
                         Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                         //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
                         try{
@@ -1773,18 +1808,20 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         scoreIntent.putExtra("secman",a2);
                         scoreIntent.putExtra("minman",minman);
                         scoreIntent.putExtra("secman",secman);
+                        scoreIntent.putExtra("desider",desider);
                         scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
                         scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
                         scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                         scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                         startActivity(scoreIntent);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         if(countDownTimerMine!=null){
                             countDownTimerMine.cancel();}
                         if(countDownTimer47!=null){
                             countDownTimer47.cancel();}
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
@@ -1949,7 +1986,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             countDownTimerMine.cancel();}
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
-
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
                         multiPlayerPictureQuiz.super.onBackPressed();
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
@@ -2012,8 +2050,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     }
                 });
 
-                  if(countDownTimer47!=null){
+                if(countDownTimer47!=null){
                     countDownTimer47.cancel();}
+                if(countDownTimerMine!=null){
+                    countDownTimerMine.cancel();}
+                if(countDownTimer50!=null){
+                    countDownTimer50.cancel();}
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
                 alertDialog.dismiss();
                 multiPlayerPictureQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

@@ -41,6 +41,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -136,17 +138,20 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     List<Integer> arrlist12345;
     int min12345,sec12345;
     int milliHolder47;
-    ValueEventListener listner;
+    ValueEventListener listner,listner1;
     int oppoStatus=5;
     ImageView myPicImageView;
     TextView myNameTextView;
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     int myPosition=0;
     int setNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onevsone_quiz);
+
+
 
         builder=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -1148,6 +1153,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();
                 }
+
+                try {
+                    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                }catch (Exception e){
+
+                }
+
                 scoreIntent.putExtra("opponentUID",opponentUID);
                 scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
                 scoreIntent.putExtra("opponentUserName",opponentUsername);
@@ -1365,6 +1377,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                       if(countDownTimer!=null){
                           countDownTimer.cancel();
                       }
+
+                      try {
+                          myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                      }catch (Exception e){
+
+                      }
+
                       myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
                               Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
                          //     myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
@@ -1580,6 +1599,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             if(countDownTimer!=null){
                                 countDownTimer.cancel();
                             }
+
+                            try {
+                                myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                            }catch (Exception e){
+
+                            }
+
+
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
@@ -1697,7 +1724,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
        alertDialog.show();
 
 
-       myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").addValueEventListener(new ValueEventListener() {
+       listner1=new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
                try{
@@ -1723,6 +1750,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                        secman=59-second;
                        mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
                        myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+
+
+                       try {
+                           myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                       }catch (Exception e){
+
+                       }
+
                        //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                        scoreIntent.putExtra("opponentUID",opponentUID);
                        scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -1760,8 +1795,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
            public void onCancelled(@NonNull DatabaseError error) {
 
            }
-       });
-
+       };
+       myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").addValueEventListener(listner1);
    }
     @Override
     public void onResume() {
@@ -1913,7 +1948,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
 
-                        onevsoneQuizActivity.super.onBackPressed();
+                        try {
+                            myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                        }catch (Exception e){
+
+                        }
+
+                        Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);
+                        startActivity(intent);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
@@ -1971,9 +2013,16 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 if(countDownTimer50!=null){
                     countDownTimer50.cancel();}
 
+                try {
+                    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                }catch (Exception e){
+
+                }
+
 
                 alertDialog.dismiss();
-                onevsoneQuizActivity.super.onBackPressed();
+                Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }

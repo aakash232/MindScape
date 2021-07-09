@@ -53,6 +53,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -619,16 +621,23 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             ArrayList<Integer> r=l;
             @Override
             public void onTick(long l) {
-                ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
+
+                try{
+                      ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
                 ActivityManager.getMyMemoryState(myProcess);
                 isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
                 if (isInBackground) {
                     music.pause();
                 } else {
-                    if (!music.isPlaying()) {
+                    try{
+                        if (!music.isPlaying()) {
                         music.start();
                         music.setVolume(0.4f,0.4f);
                     }
+                    }catch (Exception e){
+
+                    }
+
                 }
                 music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
@@ -655,6 +664,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
                     }
                 });
+                }catch (Exception e){
+
+                }
+
 
             }
 
@@ -1114,6 +1127,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
+
+
     public void alertDialogForPrizeMode(){
         AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
 
@@ -1136,6 +1151,9 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         recyclerView.setAdapter(myAdapter);
 
 
+        AdView mAdView = view1.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         myRef.child("PrizeMode").child("Packets").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

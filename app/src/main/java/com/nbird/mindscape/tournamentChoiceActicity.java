@@ -422,8 +422,8 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         recyclerView = view1.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(recyclerView.VERTICAL);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(false);
+        linearLayoutManager.setStackFromEnd(false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         listRoom = new ArrayList<>();
@@ -432,7 +432,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         final roomListAdapter categoryAdapter = new roomListAdapter(listRoom,this);
         recyclerView.setAdapter(categoryAdapter);
 
-        myRef.child("room").child("1").orderByChild("numberOfPlayers").limitToFirst(30).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("room").child("1").orderByChild("numberOfPlayers").limitToFirst(40).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

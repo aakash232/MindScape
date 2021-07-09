@@ -34,6 +34,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -97,12 +101,25 @@ public class prizePictureQuiz extends AppCompatActivity {
     int sets;
     int type;
     ImageView questionImage;
+    private InterstitialAd mInterstitialAd;
+
+    private void loadAds(){
+
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_picture_quiz);
 
+        loadAds();
 
 
         questionTextView=findViewById(R.id.questionTip);
@@ -678,6 +695,40 @@ public class prizePictureQuiz extends AppCompatActivity {
 
                                 if(swapnum==0){
                                     if (position == 10) {
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                scoreIntent.putExtra("sets",sets);
+                                                scoreIntent.putExtra("type",type);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
                                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -701,6 +752,41 @@ public class prizePictureQuiz extends AppCompatActivity {
 
                                 }else {
                                     if (position == 11) {
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                scoreIntent.putExtra("sets",sets);
+                                                scoreIntent.putExtra("type",type);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+
                                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -938,6 +1024,38 @@ public class prizePictureQuiz extends AppCompatActivity {
                 }
             }
             public void onFinish() {
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Toast.makeText(prizePictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
+                        Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
+                        scoreIntent.putExtra("score", score);
+                        scoreIntent.putExtra("lifeline",lifelineSum);
+                        scoreIntent.putExtra("minutes",minutes);
+                        scoreIntent.putExtra("seconds",second);
+                        scoreIntent.putExtra("minutestext",minutestext);
+                        scoreIntent.putExtra("secondtext",secondtext);
+                        scoreIntent.putExtra("milliholder",milliHolder);
+                        scoreIntent.putExtra("category",category);
+                        scoreIntent.putExtra("imageurl",imageurl);
+                        scoreIntent.putExtra("sets",sets);
+                        scoreIntent.putExtra("type",type);
+                        startActivity(scoreIntent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                        finish();
+
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return;
+                }
 
                 Toast.makeText(prizePictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);

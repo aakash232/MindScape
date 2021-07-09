@@ -340,7 +340,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
         android:clickable="true"
         android:elevation="10dp"
         android:foreground="?selectableItemBackground"
@@ -380,7 +379,6 @@
         android:id="@+id/cardView600"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:clickable="true"
         android:elevation="10dp"
@@ -471,7 +469,7 @@
         android:layout_marginEnd="5dp"
         android:background="@drawable/transparent_white"
         android:scrollbars="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/shimmer_view_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -481,22 +479,37 @@
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/head"
-        android:layout_margin="5dp"
         shimmer:duration="800">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <include layout="@layout/leader_board_pre_loading_screen" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="@string/bannerID"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.gms.ads.AdView>
 
 
 

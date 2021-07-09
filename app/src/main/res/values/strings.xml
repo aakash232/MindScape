@@ -6,4 +6,5 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="interstitialAd_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="bannerID">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -409,7 +409,7 @@ public class picture_quiz_menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
 
                 } catch (Exception e) {
 
@@ -445,7 +445,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
     public void findingOponentFunction() {
 
-        myRef.child("oneVsoneOnlinePlayers").orderByChild("status").equalTo(1).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("oneVsonePicture").orderByChild("status").equalTo(1).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -455,8 +455,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                 try {
                     opponentUID = list123.get(0).getUID();
                     leader = 1;
-                    myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
-                    myRef.child("oneVsoneOnlinePlayers").child(opponentUID).removeValue();
+                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("oneVsonePicture").child(opponentUID).removeValue();
 
                     randomNumberGeneratorFunction(opponentUID);
 
@@ -517,7 +517,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                 } catch (Exception e) {
                     onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), 1);
-                    myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
@@ -1298,7 +1298,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
     public void joinTunedFunction(){
 
-        myRef.child("oneVsoneLocalPlayers").orderByChild("status").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("oneVsoneLocalPicture").orderByChild("status").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
@@ -1310,7 +1310,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                     opponentUID = list123.get(0).getUID();
                     leader = 1;
                     alertDialog123.dismiss();
-                    myRef.child("oneVsoneLocalPlayers").child(opponentUID).removeValue();
+                    myRef.child("oneVsoneLocalPicture").child(opponentUID).removeValue();
 
 
                     randomNumberGeneratorFunction(opponentUID);
@@ -1368,7 +1368,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
                                                     try {
-                                                        myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                                                        myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
 
                                                     } catch (Exception e) {
 
@@ -1551,7 +1551,7 @@ public class picture_quiz_menu extends AppCompatActivity {
         Random rand = new Random();
         // Generate random integers in range 0 to 29
         roomCode = rand.nextInt(999999)+1;
-        myRef.child("onevsoneLocalPlayers").orderByChild("status").equalTo(roomCode).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("oneVsoneLocalPicture").orderByChild("status").equalTo(roomCode).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(Integer.class)!=null){
@@ -1572,7 +1572,7 @@ public class picture_quiz_menu extends AppCompatActivity {
         roomCodeGenerator();
 
         onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), roomCode);
-        myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+        myRef.child("oneVsoneLocalPicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 builder9.setView(view9);
@@ -1610,7 +1610,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         try {
-                            myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                            myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
 
                         } catch (Exception e) {
 
@@ -1627,7 +1627,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                             }
                         });
 
-                        myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                        myRef.child("oneVsoneLocalPicture").child(mAuth.getCurrentUser().getUid()).removeValue();
                         picture_quiz_menu.super.onBackPressed();
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();

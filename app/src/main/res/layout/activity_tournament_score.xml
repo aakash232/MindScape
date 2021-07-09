@@ -56,35 +56,37 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/headShimmer"
-                    shimmer:duration="800"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:elevation="10dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
+                    android:elevation="10dp"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    shimmer:duration="800">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -96,177 +98,177 @@
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
-            <LinearLayout
-                android:id="@+id/linear123"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="15dp"
-                android:weightSum="4"
-                android:background="@drawable/blackwithwhitestroke"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/linear123"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_inner_back"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/img1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:elevation="-5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/headtext1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:gravity="center"
-                        android:textSize="13dp"/>
+                    android:layout_margin="15dp"
+                    android:background="@drawable/blackwithwhitestroke"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/pos1"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_inner_back"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/img2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:elevation="-5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/headtext2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:gravity="center"
-                        android:textSize="13dp"/>
+                        android:layout_weight="1"
+                        android:background="@drawable/black_inner_back"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/pos2"
+                        <ImageView
+                            android:id="@+id/img1"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:elevation="-5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/headtext1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/pos1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_inner_back"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/img3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:elevation="-5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/headtext3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:gravity="center"
-                        android:textSize="13dp"/>
+                        android:layout_weight="1"
+                        android:background="@drawable/black_inner_back"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/pos3"
+                        <ImageView
+                            android:id="@+id/img2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:elevation="-5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/headtext2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/pos2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"/>
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_inner_back"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/img4"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:elevation="-5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/headtext4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:gravity="center"
-                        android:textSize="13dp"/>
+                        android:layout_weight="1"
+                        android:background="@drawable/black_inner_back"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/pos4"
+                        <ImageView
+                            android:id="@+id/img3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:elevation="-5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/headtext3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/pos3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"/>
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/black_inner_back"
+                        android:orientation="vertical">
 
+                        <ImageView
+                            android:id="@+id/img4"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:elevation="-5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/headtext4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/pos4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/mouse_memoirs"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <LinearLayout
@@ -278,7 +280,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linear123">
-
 
 
                 <LinearLayout
@@ -294,12 +295,11 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/player1ShimmerPic"
-                            shimmer:duration="800"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_gravity="center"
@@ -307,7 +307,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            shimmer:duration="800">
 
                             <LinearLayout
                                 android:layout_width="50dp"
@@ -332,8 +333,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -346,122 +345,119 @@
                             android:layout_height="wrap_content">
 
 
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/player1Shimmer"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="@+id/score1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                shimmer:duration="800">
 
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/player1Shimmer"
-                            shimmer:duration="800"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/score1"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
-                            <LinearLayout
+                                    <include layout="@layout/data_placeholder_layout" />
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                            <TextView
+                                android:id="@+id/name1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <include layout="@layout/data_placeholder_layout" />
-                            </LinearLayout>
-
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-                        <TextView
-                            android:id="@+id/name1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        <TextView
-                            android:id="@+id/totalTimeTaken1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/name1" />
+                            <TextView
+                                android:id="@+id/totalTimeTaken1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/name1" />
 
 
-                        <TextView
-                            android:id="@+id/accuracy1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalTimeTaken1" />
+                            <TextView
+                                android:id="@+id/accuracy1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalTimeTaken1" />
 
-                        <TextView
-                            android:id="@+id/correctvswrong1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/accuracy1" />
+                            <TextView
+                                android:id="@+id/correctvswrong1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/accuracy1" />
 
-                        <TextView
-                            android:id="@+id/totalLifeLines1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/correctvswrong1" />
-
-
+                            <TextView
+                                android:id="@+id/totalLifeLines1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/correctvswrong1" />
 
 
-
-                        <TextView
-                            android:id="@+id/score1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="23sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalLifeLines1" />
+                            <TextView
+                                android:id="@+id/score1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="23sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalLifeLines1" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -504,6 +500,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim4"
                                 android:layout_width="13dp"
@@ -539,6 +536,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim7"
                                 android:layout_width="13dp"
@@ -632,6 +630,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/animz4"
                                 android:layout_width="13dp"
@@ -667,6 +666,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/animz7"
                                 android:layout_width="13dp"
@@ -719,10 +719,6 @@
                         </LinearLayout>
 
 
-
-
-
-
                     </LinearLayout>
 
 
@@ -741,12 +737,11 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/player2ShimmerPic"
-                            shimmer:duration="800"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_gravity="center"
@@ -754,7 +749,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            shimmer:duration="800">
 
                             <LinearLayout
                                 android:layout_width="50dp"
@@ -779,7 +775,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                     <LinearLayout
                         android:id="@+id/linear20"
                         android:layout_width="match_parent"
@@ -794,7 +789,6 @@
 
                             <com.facebook.shimmer.ShimmerFrameLayout
                                 android:id="@+id/player2Shimmer"
-                                shimmer:duration="800"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:layout_gravity="center"
@@ -802,7 +796,8 @@
                                 app:layout_constraintBottom_toBottomOf="@+id/score2"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                app:layout_constraintTop_toTopOf="parent"
+                                shimmer:duration="800">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -826,10 +821,9 @@
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
                             <TextView
@@ -908,8 +902,6 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -952,6 +944,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim14"
                                 android:layout_width="13dp"
@@ -987,6 +980,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim17"
                                 android:layout_width="13dp"
@@ -1080,6 +1074,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/animz14"
                                 android:layout_width="13dp"
@@ -1115,6 +1110,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
                                 app:lottie_speed="1" />
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/animz17"
                                 android:layout_width="13dp"
@@ -1198,12 +1194,11 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/player3ShimmerPic"
-                            shimmer:duration="800"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_gravity="center"
@@ -1211,7 +1206,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            shimmer:duration="800">
 
                             <LinearLayout
                                 android:layout_width="50dp"
@@ -1236,7 +1232,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1249,127 +1244,123 @@
                             android:layout_height="wrap_content">
 
 
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/player3Shimmer"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="@+id/score3"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                shimmer:duration="800">
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
+                                    <include layout="@layout/data_placeholder_layout" />
+                                </LinearLayout>
 
+                            </com.facebook.shimmer.ShimmerFrameLayout>
 
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/player3Shimmer"
-                            shimmer:duration="800"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/score3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/name3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <include layout="@layout/data_placeholder_layout" />
-                            </LinearLayout>
-
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-
-                        <TextView
-                            android:id="@+id/name3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        <TextView
-                            android:id="@+id/totalTimeTaken3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
+                            <TextView
+                                android:id="@+id/totalTimeTaken3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
 
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/name3" />
-
-
-                        <TextView
-                            android:id="@+id/accuracy3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalTimeTaken3" />
-
-                        <TextView
-                            android:id="@+id/correctvswrong3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/accuracy3" />
-
-                        <TextView
-                            android:id="@+id/totalLifeLines3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/correctvswrong3" />
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/name3" />
 
 
+                            <TextView
+                                android:id="@+id/accuracy3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
 
-                        <TextView
-                            android:id="@+id/score3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalTimeTaken3" />
 
-                            android:textColor="@color/black"
-                            android:textSize="23sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalLifeLines3" />
+                            <TextView
+                                android:id="@+id/correctvswrong3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/accuracy3" />
+
+                            <TextView
+                                android:id="@+id/totalLifeLines3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/correctvswrong3" />
+
+
+                            <TextView
+                                android:id="@+id/score3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="23sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalLifeLines3" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1649,12 +1640,11 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/player4ShimmerPic"
-                            shimmer:duration="800"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_gravity="center"
@@ -1662,7 +1652,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            shimmer:duration="800">
 
                             <LinearLayout
                                 android:layout_width="50dp"
@@ -1687,7 +1678,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1698,124 +1688,124 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/player4Shimmer"
-                            shimmer:duration="800"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/score4"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
 
-                            <LinearLayout
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/player4Shimmer"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="@+id/score4"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                shimmer:duration="800">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <include layout="@layout/data_placeholder_layout" />
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                            <TextView
+                                android:id="@+id/name4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
 
-                                <include layout="@layout/data_placeholder_layout" />
-                            </LinearLayout>
-
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-                        <TextView
-                            android:id="@+id/name4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        <TextView
-                            android:id="@+id/totalTimeTaken4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
+                            <TextView
+                                android:id="@+id/totalTimeTaken4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
 
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/name4" />
-
-
-                        <TextView
-                            android:id="@+id/accuracy4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalTimeTaken4" />
-
-                        <TextView
-                            android:id="@+id/correctvswrong4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/accuracy4" />
-
-                        <TextView
-                            android:id="@+id/totalLifeLines4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
-
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/correctvswrong4" />
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/name4" />
 
 
+                            <TextView
+                                android:id="@+id/accuracy4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
 
-                        <TextView
-                            android:id="@+id/score4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/mouse_memoirs"
-                            android:gravity="left"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalTimeTaken4" />
 
-                            android:textColor="@color/black"
-                            android:textSize="23sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/totalLifeLines4" />
+                            <TextView
+                                android:id="@+id/correctvswrong4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/accuracy4" />
+
+                            <TextView
+                                android:id="@+id/totalLifeLines4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/correctvswrong4" />
+
+
+                            <TextView
+                                android:id="@+id/score4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="10dp"
+                                android:fontFamily="@font/mouse_memoirs"
+                                android:gravity="left"
+
+                                android:textColor="@color/black"
+                                android:textSize="23sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/totalLifeLines4" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <LinearLayout

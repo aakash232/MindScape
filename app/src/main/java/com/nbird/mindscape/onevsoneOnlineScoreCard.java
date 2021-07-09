@@ -37,6 +37,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -111,11 +114,17 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     int desider,amin,asec;
 
     barGroupHolder man;
+    ValueEventListener listener1;
+    private void loadAds(){
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onevsone_online_score_card);
-
+        loadAds();
         arrlist30 = new ArrayList<>(13);
 
          onlineImage=(ImageView) findViewById(R.id.onlineImage);
@@ -368,12 +377,13 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(onevsoneOnlineScoreCard.this, "Request Send To "+opponentUsername, Toast.LENGTH_LONG).show();
 
-                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").addValueEventListener(new ValueEventListener() {
+                        listener1= new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 try{
                                     acceptInt=snapshot.getValue(Integer.class);
                                     if(acceptInt==1){
+                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
                                         myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
                                         myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
                                         if(desider==0){
@@ -388,6 +398,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
+
                                         }else{
                                             Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
                                             intent.putExtra("opponentUID",opponentUID);
@@ -415,7 +426,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                        });
+                        };
+                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").addValueEventListener(listener1);
 
                     }
                 });
@@ -887,9 +899,9 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 // create instance of Random class
                 Random rand = new Random();
 
-                // Generate random integers in range 0 to 29
+                // Generate random integers in range 0 to 6326
 
-                int setNumber = rand.nextInt(29)+1;  //NEED TO CHANGE HERE
+                int setNumber=rand.nextInt(6326)+1; //NEED TO CHANGE HERE
                 //NEED TO CHANGE HERE
                 arrlist30.add(setNumber);
             }
@@ -898,9 +910,14 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 // create instance of Random class
                 Random rand = new Random();
 
-                // Generate random integers in range 0 to 29
 
-                int setNumber = rand.nextInt(13)+1;  //NEED TO CHANGE HERE
+
+
+                int setNumber = rand.nextInt(4999)+1;
+
+                if(setNumber>1210&&setNumber<2000){
+                    setNumber=setNumber-1000;
+                }  //NEED TO CHANGE HERE
                 //NEED TO CHANGE HERE
                 arrlist30.add(setNumber);
             }

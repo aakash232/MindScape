@@ -35,6 +35,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,10 +113,20 @@ public class tournamentQuiz extends AppCompatActivity {
     ValueEventListener listner;
     int oppoStatus=5;
     int setNumber;
+    private InterstitialAd mInterstitialAd;
+
+    private void loadAds(){
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_quiz);
+
+        loadAds();
 
         anim1=(LottieAnimationView) findViewById(R.id.anim1);
         anim2=(LottieAnimationView) findViewById(R.id.anim2);
@@ -1590,6 +1603,54 @@ public class tournamentQuiz extends AppCompatActivity {
         if(playerNum==2||playerNum==3||playerNum==4){
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
         }
+
+        mInterstitialAd.setAdListener(new AdListener(){
+            public void onAdClosed(){
+                super.onAdClosed();
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                Intent scoreIntent = new Intent(tournamentQuiz.this, tournamentScoreActivity.class);
+                scoreIntent.putExtra("score", score);
+                scoreIntent.putExtra("lifeline",lifelineSum);
+                scoreIntent.putExtra("minutes",minutes);
+                scoreIntent.putExtra("seconds",second);
+                scoreIntent.putExtra("milliHolder47",milliHolder47);
+                scoreIntent.putExtra("minutestext",minutestext);
+                scoreIntent.putExtra("secondtext",secondtext);
+                scoreIntent.putExtra("milliholder",milliHolder);
+                scoreIntent.putExtra("category",category);
+                scoreIntent.putExtra("counter",counter);
+                scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
+                scoreIntent.putExtra("myName",myName);
+                scoreIntent.putExtra("myImageUrl",myImageUrl);
+                scoreIntent.putExtra("hostUID",hostUid);
+                scoreIntent.putExtra("hostName",hostName);
+                scoreIntent.putExtra("hostImageUrl",hostImageUrl);
+                scoreIntent.putExtra("player2Name",name2String);
+                scoreIntent.putExtra("player3Name",name3String);
+                scoreIntent.putExtra("player4Name",name4String);
+                scoreIntent.putExtra("player2ImageUrl",image2Url);
+                scoreIntent.putExtra("player3ImageUrl",image3Url);
+                scoreIntent.putExtra("player4ImageUrl",image4Url);
+                scoreIntent.putExtra("playerNumber",playerNum);
+                scoreIntent.putExtra("roomCode",roomCode);
+                scoreIntent.putExtra("questionNum",questionNum);
+                scoreIntent.putExtra("timerNum",timerNum);
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+            }
+
+        });
+
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+            return;
+        }
+
+
         Intent scoreIntent = new Intent(tournamentQuiz.this, tournamentScoreActivity.class);
         scoreIntent.putExtra("score", score);
         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -2184,6 +2245,54 @@ public class tournamentQuiz extends AppCompatActivity {
                 if(playerNum==2||playerNum==3||playerNum==4){
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
                 }
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Toast.makeText(tournamentQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
+                        Intent scoreIntent = new Intent(tournamentQuiz.this, tournamentScoreActivity.class);
+                        scoreIntent.putExtra("score", score);
+                        scoreIntent.putExtra("lifeline",lifelineSum);
+                        scoreIntent.putExtra("minutes",minutes);
+                        scoreIntent.putExtra("seconds",second);
+                        scoreIntent.putExtra("milliHolder47",milliHolder47);
+                        scoreIntent.putExtra("minutestext",minutestext);
+                        scoreIntent.putExtra("secondtext",secondtext);
+                        scoreIntent.putExtra("milliholder",milliHolder);
+                        scoreIntent.putExtra("category",category);
+                        scoreIntent.putExtra("counter",counter);
+                        scoreIntent.putExtra("myName",myName);
+                        scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
+                        scoreIntent.putExtra("myImageUrl",myImageUrl);
+                        scoreIntent.putExtra("hostUID",hostUid);
+                        scoreIntent.putExtra("hostName",hostName);
+                        scoreIntent.putExtra("hostImageUrl",hostImageUrl);
+                        scoreIntent.putExtra("player2Name",name2String);
+                        scoreIntent.putExtra("player3Name",name3String);
+                        scoreIntent.putExtra("player4Name",name4String);
+                        scoreIntent.putExtra("player2ImageUrl",image2Url);
+                        scoreIntent.putExtra("player3ImageUrl",image3Url);
+                        scoreIntent.putExtra("player4ImageUrl",image4Url);
+                        scoreIntent.putExtra("playerNumber",playerNum);
+                        scoreIntent.putExtra("roomCode",roomCode);
+                        scoreIntent.putExtra("questionNum",questionNum);
+                        scoreIntent.putExtra("timerNum",timerNum);
+                        startActivity(scoreIntent);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
+                        finish();
+
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return;
+                }
+
 
                 Toast.makeText(tournamentQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(tournamentQuiz.this, tournamentScoreActivity.class);

@@ -29,6 +29,9 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -99,10 +102,20 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
     ValueEventListener listner;
     int oppoStatus;
     int isAttempt=0;
+    private InterstitialAd mInterstitialAd;
+
+    private void loadAds(){
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_buzzer_normal_quiz);
+
+        loadAds();
 
         partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
         party2=(LottieAnimationView) findViewById(R.id.party2);
@@ -794,6 +807,50 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         if(playerNum==2||playerNum==3||playerNum==4){
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
         }
+
+
+        mInterstitialAd.setAdListener(new AdListener(){
+            public void onAdClosed(){
+                super.onAdClosed();
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                Intent scoreIntent = new Intent(tournamentBuzzerNormalQuiz.this, tournamentBuzzerScoreCard.class);
+                scoreIntent.putExtra("score", myScore);
+                scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
+                scoreIntent.putExtra("myName",myName);
+                scoreIntent.putExtra("myImageUrl",myImageUrl);
+                scoreIntent.putExtra("hostUID",hostUid);
+                scoreIntent.putExtra("hostName",hostName);
+                scoreIntent.putExtra("hostImageUrl",hostImageUrl);
+                scoreIntent.putExtra("player2Name",name2String);
+                scoreIntent.putExtra("player3Name",name3String);
+                scoreIntent.putExtra("player4Name",name4String);
+                scoreIntent.putExtra("player2ImageUrl",image2Url);
+                scoreIntent.putExtra("player3ImageUrl",image3Url);
+                scoreIntent.putExtra("player4ImageUrl",image4Url);
+                scoreIntent.putExtra("playerNumber",playerNum);
+                scoreIntent.putExtra("roomCode",roomCode);
+                scoreIntent.putExtra("questionNum",questionNum);
+                scoreIntent.putExtra("timerNum",timerNum);
+                scoreIntent.putExtra("correctMy",correctAns);
+                scoreIntent.putExtra("wrongMy",wrongAns);
+                for(int i=0;i<=20;i++){
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+                }
+                startActivity(scoreIntent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+            }
+
+        });
+
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+            return;
+        }
+
+
         Intent scoreIntent = new Intent(tournamentBuzzerNormalQuiz.this, tournamentBuzzerScoreCard.class);
         scoreIntent.putExtra("score", myScore);
         scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);

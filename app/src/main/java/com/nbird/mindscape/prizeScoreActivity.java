@@ -22,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -76,6 +78,10 @@ public class prizeScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_score);
+
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         totalScoreNumber=(TextView) findViewById(R.id.totalPoins);
         totalTimeTaken=(TextView) findViewById(R.id.totalTimeTaken);
@@ -186,6 +192,10 @@ public class prizeScoreActivity extends AppCompatActivity {
                     final View view1= LayoutInflater.from(prizeScoreActivity.this).inflate(R.layout.prize_quiz_selector_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(true);
+
+                AdView mAdView = view1.findViewById(R.id.adView);
+                AdRequest adRequest = new AdRequest.Builder().build();
+                mAdView.loadAd(adRequest);
 
                     lstExam123.clear();
 
