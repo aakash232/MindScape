@@ -24,6 +24,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -211,7 +213,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     music.start();
 
                     lol=1;
-                    music.setVolume(0.5f,0.5f);
+                    music.setVolume(0.7f,0.7f);
                     finalManu=0;
 
                     final SharedPreferences songHolder1 = getSharedPreferences("songKnowe", 0);
@@ -247,11 +249,83 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     int lol=0;
     int finalManu=0;
     int mainfinder;
+    CountDownTimer countIsInternet;
+    Boolean connected=false;
+     AlertDialog alertDialog6;
+     int wanted=1;
+
+     //String To Be Changed After Each Update
+     String version="Version1";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+
+
+
+        myRef.child("UpdateString").child("version").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!version.equals(snapshot.getValue(String.class))){
+                    UpdateAsker();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        countIsInternet=new CountDownTimer(1000*60*30,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
+                    try {
+                        alertDialog6.dismiss();
+                    }catch (Exception e){
+
+                    }
+
+                }
+                else {
+                    connected = false;
+                    if(wanted==1){
+                        InternetDialog();
+                        wanted=0;
+                    }
+
+
+                }
+
+                if(connected){
+
+                    if(countIsInternet!=null){
+                        countIsInternet.cancel();
+                        wanted=1;
+                    }
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
+
+
+
         final SharedPreferences songStopper = this.getSharedPreferences("SongStopperManu", 0);
         final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
@@ -291,12 +365,13 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         prizeModeAnim.setVisibility(View.GONE);
 
         //ProfileButton
-        ImageView profilebutton = (ImageView) findViewById(R.id.profilebutton);
+        LottieAnimationView profilebutton = (LottieAnimationView) findViewById(R.id.profilebutton);
         profilebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mainMenuActivity.this,profile.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }
         });
 
@@ -562,8 +637,13 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                         if(finalManu==0){
                             if (music.isPlaying()) {
                                 music.stop();
+                                try {
+                                    music.reset();
+                                }catch (Exception e){
+
+                                }
                                 music.release();
-                                mp.reset();
+
                             } else {
                                 music.reset();
                                 music.release();
@@ -586,6 +666,45 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
     }
 
+    public void InternetDialog(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.nointernetlayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+
+
+
+         alertDialog6=builderRemove.create();
+        if(alertDialog6.getWindow()!=null){
+            alertDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog6.show();
+
+
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(mainMenuActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog6.dismiss();
+            }
+        });
+
+
+    }
+
     public void releaseSong(){
         try {
             music.pause();
@@ -594,6 +713,50 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         }catch (Exception e){
 
         }
+    }
+
+
+
+    public void UpdateAsker(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.update_app_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        Button noButton=(Button) view1.findViewById(R.id.buttonYes);
+        Button yesButton=(Button) view1.findViewById(R.id.buttonNo);
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+       noButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               alertDialog.dismiss();
+               int pid = android.os.Process.myPid();
+               android.os.Process.killProcess(pid);
+               Intent intent = new Intent(Intent.ACTION_MAIN);
+               intent.addCategory(Intent.CATEGORY_HOME);
+               startActivity(intent);
+               finish();
+           }
+       });
+
+       yesButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               try{
+                   Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(linkdata));
+                   startActivity(browserIntent);
+               }catch (Exception e){
+
+               }
+
+           }
+       });
     }
 
     public void speakersAlertDialog(){
@@ -957,13 +1120,18 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.prize_quiz_selector_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
         builder.setView(view1);
         builder.setCancelable(true);
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
 
         lstExam123.clear();
 
         RecyclerView recyclerView=(RecyclerView) view1.findViewById(R.id.recyclerview);
 
 
-        final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(this,lstExam123);
+        final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(this,lstExam123,alertDialog);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setAdapter(myAdapter);
 
@@ -984,11 +1152,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
-        final AlertDialog alertDialog=builder.create();
-        if(alertDialog.getWindow()!=null){
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        alertDialog.show();
+
     }
 
 
@@ -1712,7 +1876,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 cardMusic();
                 settingBlack();
                 linearLayout3.setBackgroundResource(R.drawable.whitewithblackstroke);
-                myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva3).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){

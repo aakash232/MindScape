@@ -745,7 +745,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                             imageIcon.playAnimation();
                                             imageIcon.loop(true);
 
-                                            textTitle.setText("Thankyou For Uploading You Own Custom Quiz!You Can Track Your Quiz Performance In Your Profile Section.");
+                                            textTitle.setText("Thankyou For Uploading You Own Custom Quiz!Now You Can Share And Play Your Own Quiz.");
 
                                             final AlertDialog alertDialog=builder.create();
                                             if(alertDialog.getWindow()!=null){

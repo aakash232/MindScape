@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,11 +38,19 @@ public class customQuizMainMenu extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
     customQuizPropertiesSetter S;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_quiz_main_menu);
 
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Category");
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         customQuizMakerButton=(CardView) findViewById(R.id.onlineButton);
         joinPrivateButton=(CardView) findViewById(R.id.joinPrivateButton);
@@ -207,6 +216,16 @@ public class customQuizMainMenu extends AppCompatActivity {
         lstExam.add(new customQuizMainMenuHolder("Polity And Constitution",R.drawable.catlaws,"Order! Order! Test your knowlege about the ultimate essence that rules and guides a country ahead."));
         lstExam.add(new customQuizMainMenuHolder("Literature",R.drawable.literature,"Take a break from the busy life and get involved in the beautiful world of literature. Full of imagination, creativity and inspiration. Open doors to this new world and ace the questions right ahead!"));
         lstExam.add(new customQuizMainMenuHolder("Health And Disease",R.drawable.cathealthanddisease,"From your nose to toes, do you know how your body works? Are you aware of the physical and mental well-being? Test your doctor skills right here!"));
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
 

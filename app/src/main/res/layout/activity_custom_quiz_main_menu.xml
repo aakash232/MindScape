@@ -27,7 +27,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/officialcolor"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,8 +57,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/online"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/customquizfirstanim"
@@ -81,9 +81,9 @@
                     android:background="@drawable/insidecardview"
                     android:layout_gravity="left"
                     android:gravity="left"
-                    android:text="Create custom quiz created by players across the world! \n\nHave fun with private and Professional modes! Do your friends really know you? Do they have the right quiz-mind? TIme to find out..."
+                    android:text="Create custom quiz created by players across the world!\nHave fun with private and Professional modes! Do your friends really know you? Do they have the right quiz-mind? TIme to find out..."
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
 
 
@@ -157,8 +157,8 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/customPlay"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/customquizsecondanim"
@@ -180,9 +180,9 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:gravity="left"
                         android:padding="8dp"
-                        android:text="Play Quizzes created by players across the world! Select private quiz if you have a code. The Ultimate friendship test! \n\nElse, choose a mode from the great list below! \nHappy Quizzing!"
+                        android:text="Play Quizzes created by players across the world! Select private quiz if you have a code. The Ultimate friendship test! \nElse, choose a mode from the great list below! \nHappy Quizzing!"
                         android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/joinPrivateButton"
@@ -205,13 +205,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="Play Private Quiz"
+                                android:text=" Play Private Quiz "
                                 android:gravity="center"
                                 android:fontFamily="@font/mouse_memoirs"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:layout_margin="10dp"
-                                android:textSize="25sp"/>
+                                android:textSize="18sp"/>
 
                         </LinearLayout>
 

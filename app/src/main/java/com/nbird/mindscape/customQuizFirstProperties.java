@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -54,6 +55,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
     String nameUser;
     String proPic;
     int r;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +78,27 @@ public class customQuizFirstProperties extends AppCompatActivity {
         start = (Button) findViewById(R.id.start);
 
         StartButtonFun();
+
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Quiz Properties");
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void fireBaseDataSetter(){
         if(!numberValidator()){

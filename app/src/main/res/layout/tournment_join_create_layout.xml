@@ -131,12 +131,11 @@
                     android:id="@+id/shimmer"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_margin="5dp"
+
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:elevation="10dp"
-                    shimmer:layout_constraintCircleRadius="5dp"
+                    android:elevation="1dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -161,14 +160,11 @@
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_margin="10dp"
-                    android:layout_marginEnd="5dp"
                     android:background="@drawable/insidecardview"
                     android:scrollbars="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -179,7 +175,10 @@
                     shimmer:layout_constraintBottom_toBottomOf="@+id/shimmer_view_container"
                     shimmer:layout_constraintEnd_toStartOf="@+id/shimmer_view_container"
                     shimmer:layout_constraintStart_toStartOf="@+id/shimmer_view_container"
-                    shimmer:layout_constraintTop_toTopOf="@+id/shimmer_view_container" />
+                    shimmer:layout_constraintTop_toTopOf="@+id/shimmer_view_container">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

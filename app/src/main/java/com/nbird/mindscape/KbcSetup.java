@@ -154,7 +154,24 @@ public class KbcSetup extends AppCompatActivity {
         for(int i=1;i<=14;i++){
             // create instance of Random class
             Random rand = new Random();
-            final int setNumber = rand.nextInt(29)+1;
+            int setNumber;
+            switch (category){
+                case 1:
+                case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
+                    setNumber = rand.nextInt(299)+1;break;
+                case 2: case 14:
+                    setNumber = rand.nextInt(499)+1;break;
+                case 7:
+                    setNumber = rand.nextInt(401)+1;break;
+                case 8: case 18:
+                    setNumber = rand.nextInt(339)+1;break;
+                case 13: case 15: case 16:
+                    setNumber = rand.nextInt(249)+1;break;
+                case 19:
+                    setNumber = rand.nextInt(399)+1;break;
+                default:
+                    setNumber = rand.nextInt(199)+1;break;
+            }
 
             fireBaseData(setNumber, i);
 
@@ -627,9 +644,11 @@ public class KbcSetup extends AppCompatActivity {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
-                wrongString = "";
-                moveToScore();
+                Intent intent=new Intent(KbcSetup.this,KbcPlay.class);
+                startActivity(intent);
+                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
             }
         });
 
@@ -649,7 +668,7 @@ public class KbcSetup extends AppCompatActivity {
     }
 
     public void fireBaseData(int setNumber, int i){
-        myRef.child("KBC").child(String.valueOf(i)).orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
@@ -1157,4 +1176,73 @@ public class KbcSetup extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        cancelDialogFunction();
+    }
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(KbcSetup.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                kbcQueMus.reset();kbcQueMus.release();
+                kbcCountMus.reset();kbcCountMus.release();
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                alertDialog.cancel();
+                KbcSetup.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
+    }
+
 }

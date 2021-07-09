@@ -91,51 +91,21 @@ public class roomListAdapter extends RecyclerView.Adapter<roomListAdapter.viewho
                         musicNav.release();
                     }
                 });
-                holder.joinButton.setEnabled(false);
-                hostUid=listItem.get(position).getHostUid();
 
-                myRef.child("room").child(String.valueOf(1)).child(listItem.get(position).getHostUid()).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+                int roomCode1=listItem.get(position).getRoomCode();
+
+                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("gameFinder").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try{
-                            num=snapshot.getValue(Integer.class);
-                            if(num<4){
-                                if(num==1){
-                                    num=2;
-                                }else if(num==2){
-                                    num=3;
-                                }else if(num==3){
-                                    num=4;
-                                }
-                               // num++;
-                                myRef.child("room").child(String.valueOf(1)).child(listItem.get(position).getHostUid()).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(num==4){
-
-                                        }
-                                        Intent intent = new Intent(context, tournamentLobbyActivity.class);
-                                        intent.putExtra("hostUid", listItem.get(position).getHostUid());
-                                        intent.putExtra("hostImage",listItem.get(position).getHostImageUrl());
-                                        intent.putExtra("hostName",listItem.get(position).getHostName());
-                                        intent.putExtra("isHost",0);
-                                        intent.putExtra("roomCode",listItem.get(position).getRoomCode());
-                                        intent.putExtra("Playernum",num);
-                                        context.startActivity(intent);
-                                        ((Activity)context).finish();
-
-                                    }
-                                });
-                            }else{
-                                Toast.makeText(context, "Room Is Full! Please Refresh", Toast.LENGTH_SHORT).show();
-                            }
-
-
+                        try {
+                             if(snapshot.getValue(Integer.class)==0){
+                                 joiner(holder,position);
+                             }else{
+                                 Toast.makeText(context, "They Have Started Playing!!!Try Some Other Room", Toast.LENGTH_SHORT).show();
+                             }
                         }catch (Exception e){
-                            Toast.makeText(context, "Room Is Full! Please Refresh", Toast.LENGTH_SHORT).show();
+                            joiner(holder,position);
                         }
-
-
                     }
 
                     @Override
@@ -143,6 +113,10 @@ public class roomListAdapter extends RecyclerView.Adapter<roomListAdapter.viewho
 
                     }
                 });
+
+
+
+
             }
         });
 
@@ -182,5 +156,62 @@ public class roomListAdapter extends RecyclerView.Adapter<roomListAdapter.viewho
 
         }
     }
+
+
+    public void joiner(viewholder holder, final int position){
+        holder.joinButton.setEnabled(false);
+        hostUid=listItem.get(position).getHostUid();
+
+        myRef.child("room").child(String.valueOf(1)).child(listItem.get(position).getHostUid()).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    num=snapshot.getValue(Integer.class);
+                    if(num<4){
+                        if(num==1){
+                            num=2;
+                        }else if(num==2){
+                            num=3;
+                        }else if(num==3){
+                            num=4;
+                        }
+                        // num++;
+                        myRef.child("room").child(String.valueOf(1)).child(listItem.get(position).getHostUid()).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(num==4){
+
+                                }
+                                Intent intent = new Intent(context, tournamentLobbyActivity.class);
+                                intent.putExtra("hostUid", listItem.get(position).getHostUid());
+                                intent.putExtra("hostImage",listItem.get(position).getHostImageUrl());
+                                intent.putExtra("hostName",listItem.get(position).getHostName());
+                                intent.putExtra("isHost",0);
+                                intent.putExtra("roomCode",listItem.get(position).getRoomCode());
+                                intent.putExtra("Playernum",num);
+                                context.startActivity(intent);
+                                ((Activity)context).finish();
+
+                            }
+                        });
+                    }else{
+                        Toast.makeText(context, "Room Is Full! Please Refresh", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }catch (Exception e){
+                    Toast.makeText(context, "Room Is Full! Please Refresh", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
 

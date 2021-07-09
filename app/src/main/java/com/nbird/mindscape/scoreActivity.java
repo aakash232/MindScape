@@ -655,6 +655,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,quizActivity.class);
+                    intent.putExtra("category",category);
                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }

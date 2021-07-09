@@ -340,7 +340,30 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
                     totalQuestion = 10;
                     // create instance of Random class
+                if(arrlist12345.size()==12){
                     fireBaseData(arrlist12345.get(i));
+                }else{
+
+                    final int finalI = i;
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                arrlist12345.add(snapshot.getValue(Integer.class));
+                                fireBaseData(arrlist12345.get(finalI));
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+
 
 
 
@@ -374,7 +397,31 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
                     totalQuestion = 15;
                     // create instance of Random class
+                if(arrlist12345.size()==17){
+
+                    // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
+                } else{
+
+                    final int finalI = i;
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                arrlist12345.add(snapshot.getValue(Integer.class));
+                                fireBaseData(arrlist12345.get(finalI));
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
 
                 /*    final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -401,9 +448,13 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
                     totalQuestion = 20;
                     // create instance of Random class
-                    fireBaseData(arrlist12345.get(i));
+                if(arrlist12345.size()==22){
 
-                /*    final int finalI = i;
+                    // create instance of Random class
+                    fireBaseData(arrlist12345.get(i));
+                } else{
+
+                    final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -414,12 +465,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });*/
+                    });
+                }
+
+
 
 
             }

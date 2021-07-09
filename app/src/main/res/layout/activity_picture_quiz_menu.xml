@@ -27,45 +27,38 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/officialcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="3"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-    android:orientation="vertical">
-    
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:clickable="true"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:scaleX="0.9"
         android:scaleY="0.9"
         android:foreground="?selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         cardview:cardCornerRadius="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="16dp">
 
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/single_player"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/singleplayer"
@@ -89,7 +82,7 @@
                     android:gravity="left"
                     android:text="Compete Against Time! Challenge your visuals and complete the quiz as soon as possible with utmost accuracy!"
                     android:textColor="#000000"
-                    android:textSize="18dp" />
+                    android:textSize="15sp" />
 
 
 
@@ -111,14 +104,14 @@
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:text="Single Player"
                             android:fontFamily="@font/mouse_memoirs"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:layout_margin="10dp"
-                            android:textSize="20dp"/>
+                            android:textSize="25sp"/>
 
                     </LinearLayout>
 
@@ -136,27 +129,29 @@
         android:id="@+id/cardview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:clickable="true"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.9"
         android:scaleY="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview1"
         cardview:cardCornerRadius="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="16dp">
 
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/online"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/onlineanim1"
@@ -179,7 +174,7 @@
                     android:padding="8dp"
                     android:text="Compete with the world and ace your quizzing skills. It's not just time to beat now, it's the ultimate Arena!"
                     android:textColor="#000000"
-                    android:textSize="18dp" />
+                    android:textSize="15sp" />
 
 
                 <androidx.cardview.widget.CardView
@@ -201,7 +196,7 @@
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:text="Online"
                             android:gravity="center"
@@ -209,7 +204,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:layout_margin="10dp"
-                            android:textSize="20dp"/>
+                            android:textSize="25sp"/>
 
                     </LinearLayout>
 
@@ -225,27 +220,29 @@
         android:id="@+id/cardview3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:clickable="true"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.9"
         android:scaleY="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview2"
         cardview:cardCornerRadius="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="16dp">
 
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/localanim"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/localanim"
@@ -268,7 +265,7 @@
                     android:padding="8dp"
                     android:text="Play with your friends in custom rooms. Make the environment friendly yet fiercely competitive!"
                     android:textColor="#000000"
-                    android:textSize="18dp" />
+                    android:textSize="15sp" />
 
 
                 <androidx.cardview.widget.CardView
@@ -288,14 +285,14 @@
                         android:background="@drawable/blackwithwhitestroke">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:fontFamily="@font/mouse_memoirs"
                             android:gravity="center"
                             android:text="Local"
                             android:textColor="@color/white"
-                            android:textSize="20dp"
+                            android:textSize="25sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -309,7 +306,7 @@
     </androidx.cardview.widget.CardView>
 
 
-</LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

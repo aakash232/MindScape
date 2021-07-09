@@ -235,13 +235,17 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
         opponentName.setText(opponentUsername);
+        myNameTextView.setText(myName);
 
         Glide.with(getBaseContext())
                 .load(opponentimageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(opponentPic);
 
-
+        Glide.with(getBaseContext())
+                .load(myProPicUrl)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                .into(myPicImageView);
 
 
         loadingDialog.show();

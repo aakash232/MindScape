@@ -328,7 +328,32 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
                     totalQuestion=10;
                     // create instance of Random class
+
+                if(arrlist12345.size()==12){
                     fireBaseData(arrlist12345.get(i));
+                }else{
+
+                    final int finalI = i;
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                             @Override
+                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                 try {
+                                     arrlist12345.add(snapshot.getValue(Integer.class));
+                                     fireBaseData(arrlist12345.get(finalI));
+                                 } catch (Exception e) {
+
+                                 }
+                             }
+
+                             @Override
+                             public void onCancelled(@NonNull DatabaseError error) {
+
+                             }
+                         });
+
+                }
+
+
 
 
 
@@ -359,10 +384,32 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             }
         }else if(questionNum==1){
             for(int i=0;i<17;i++){
+                totalQuestion=15;
+                if(arrlist12345.size()==17){
 
-                    totalQuestion=15;
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
+                } else{
+
+                    final int finalI = i;
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                arrlist12345.add(snapshot.getValue(Integer.class));
+                                fireBaseData(arrlist12345.get(finalI));
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
 
                   /*  final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -386,12 +433,14 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             }
         }else{
             for(int i=0;i<22;i++){
+                totalQuestion=20;
+                    if(arrlist12345.size()==22){
 
-                    totalQuestion=20;
-                    // create instance of Random class
-                    fireBaseData(arrlist12345.get(i));
+                        // create instance of Random class
+                        fireBaseData(arrlist12345.get(i));
+                    } else{
 
-                 /*   final int finalI = i;
+                    final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -402,14 +451,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });*/
-
-
+                    });
+                }
             }
         }
 
@@ -606,7 +653,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("NormalQuizBIGJSON").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){

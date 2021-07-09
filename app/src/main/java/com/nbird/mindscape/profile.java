@@ -3,6 +3,8 @@ package com.nbird.mindscape;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -17,15 +19,21 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,6 +68,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,6 +89,40 @@ import java.util.UUID;
 
 public class profile extends AppCompatActivity {
 
+    CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,cardView9,cardView10;
+    CardView cardView11,cardView12,cardView13,cardView14,cardView15,cardView16,cardView17,cardView18,cardView19,cardView20;
+    CardView cardView21,cardView22,cardView23,cardView24,cardView25,cardView26;
+
+    LinearLayout linearLayout1,linearLayout2,linearLayout3,linearLayout4,linearLayout5,linearLayout6,linearLayout7,linearLayout8,linearLayout9,linearLayout10;
+    LinearLayout linearLayout11,linearLayout12,linearLayout13,linearLayout14,linearLayout15,linearLayout16,linearLayout17,linearLayout18,linearLayout19,linearLayout20;
+    LinearLayout linearLayout21,linearLayout22,linearLayout23,linearLayout24,linearLayout25,linearLayout26;
+
+    String urlAva1="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava1.png?alt=media&token=39fc4486-0021-443f-974d-daa3fc17bec2";
+    String urlAva2="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava2.png?alt=media&token=e19cd95b-6012-4fe7-94bb-003c1b9f92c0";
+    String urlAva3="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava3.png?alt=media&token=d0a90643-c6f3-446e-a386-8de3dc052765";
+    String urlAva4="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava4.png?alt=media&token=ff5f2d52-eb31-4d55-af59-2de2ecda6a51";
+    String urlAva5="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava5.png?alt=media&token=6a354ce9-d45a-4bfa-8c26-6d1db00ceb84";
+    String urlAva6="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava6.png?alt=media&token=445f480e-c646-45b1-b55c-8ff86469e97f";
+    String urlAva7="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava7.png?alt=media&token=41f409b7-6c19-4827-9723-fbd8856215f2";
+    String urlAva8="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava8.png?alt=media&token=4a3682cc-3242-4582-b3c3-fff6591b7af5";
+    String urlAva9="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava9.png?alt=media&token=f9048bb1-fd25-48fe-95ed-65f70f0607b3";
+    String urlAva10="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava10.png?alt=media&token=881f92b8-973a-462a-8a3c-8c6f70cd888b";
+    String urlAva11="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava11.png?alt=media&token=26a5711e-2a8c-449e-bc3a-4a2d98811cc1";
+    String urlAva12="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava12.png?alt=media&token=e09e3572-c79d-4bb3-9756-29f18967f0db";
+    String urlAva13="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava13.png?alt=media&token=82a5dece-0e9a-4e2c-824a-1c4b441073bc";
+    String urlAva14="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava14.png?alt=media&token=bb2e7b65-2709-432b-add4-cac32bf3cd6d";
+    String urlAva15="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava15.png?alt=media&token=fea2cbe9-2359-4577-a113-562e54341031";
+    String urlAva16="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava16.png?alt=media&token=f31d2368-92f4-4e82-a384-aaabf11c6dc3";
+    String urlAva17="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava17.png?alt=media&token=4d7eacfd-d75e-432d-bf6d-bc95acdb3ebf";
+    String urlAva18="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava18.png?alt=media&token=2e1493eb-905a-47cc-b86c-0540d5a7561c";
+    String urlAva19="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava19.png?alt=media&token=faa84af3-2195-46b7-a44f-d6b272698443";
+    String urlAva20="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava20.png?alt=media&token=b7aee3f8-a774-4ceb-9be9-4bd4dba39b04";
+    String urlAva21="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava21.png?alt=media&token=d32fccfd-57c3-4f07-99c6-0da9cc921d5e";
+    String urlAva22="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava22.png?alt=media&token=37793d6e-55bf-4be6-9c3e-b49f69cb25f8";
+    String urlAva23="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava23.png?alt=media&token=c4fe300d-b6cb-4102-b956-082c89ed6bcb";
+    String urlAva24="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava24.png?alt=media&token=35520f68-1000-4c84-b8ed-56b2bf64b14f";
+    String urlAva25="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava25.png?alt=media&token=c2eec723-3f40-4dc6-a294-caa4db20cf66";
+    String urlAva26="https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/avatarIcons%2Fava26.png?alt=media&token=2cd731f2-e525-49b3-ac81-dc939cbd82fe";
 
     LineChart lineChart,lineChart2;
     LineData lineData,lineData2;
@@ -123,6 +166,10 @@ public class profile extends AppCompatActivity {
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     String mailid123,randomuid;
     StorageReference ref;
+    androidx.appcompat.widget.Toolbar toolbar;
+    ImageView pencilImage,nav_image,nav_image123;
+    String nameString,imageurl123;
+
     @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -132,7 +179,15 @@ public class profile extends AppCompatActivity {
         final SharedPreferences.Editor editormailreminder = mailreminder.edit();
 
 
-      
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Profile");
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 
         mailid123 = mailreminder.getString("123", "abc@gmail.com");
@@ -165,6 +220,7 @@ public class profile extends AppCompatActivity {
         profilepic=(ImageView) findViewById(R.id.profilepic);
 
         lineChart2=findViewById(R.id.lineChart2);
+        pencilImage=findViewById(R.id.pencilImage);
 
         loadingDialog=new Dialog(this);
         loadingDialog.setContentView(R.layout.loading_screen);
@@ -190,29 +246,758 @@ public class profile extends AppCompatActivity {
         correctArrFun2();
         barChart2();
         // Back Button
-        ImageView back = (ImageView) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+
+        pencilImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(profile.this, mainMenuActivity.class);
-                startActivity(back);
+                cardMusic();
+                editName();
             }
         });
 
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage(profile.this);
+              //  selectImage(profile.this);
+                cardMusic();
+                ProfileAndAVA();
             }
         });
 
         }
 
+
+        public void ProfileAndAVA(){
+            AlertDialog.Builder builder=new AlertDialog.Builder(profile.this,R.style.AlertDialogTheme);
+
+            final View view1= LayoutInflater.from(profile.this).inflate(R.layout.profileimageselector,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+            builder.setView(view1);
+            builder.setCancelable(true);
+            ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
+            ((TextView) view1.findViewById(R.id.textView6)).setText("Select An Avatar Or Upload Your Pic ");
+            nav_image123=((ImageView) view1.findViewById(R.id.propic));
+
+            cardView1= (CardView) view1.findViewById(R.id.cardview1);
+            cardView2= (CardView) view1.findViewById(R.id.cardview2);
+            cardView3= (CardView) view1.findViewById(R.id.cardview3);
+            cardView4= (CardView) view1.findViewById(R.id.cardview4);
+            cardView5= (CardView) view1.findViewById(R.id.cardview5);
+            cardView6= (CardView) view1.findViewById(R.id.cardview6);
+            cardView7= (CardView) view1.findViewById(R.id.cardview7);
+            cardView8= (CardView) view1.findViewById(R.id.cardview8);
+            cardView9= (CardView) view1.findViewById(R.id.cardview9);
+            cardView10= (CardView) view1.findViewById(R.id.cardview10);
+            cardView11= (CardView) view1.findViewById(R.id.cardview11);
+            cardView12= (CardView) view1.findViewById(R.id.cardview12);
+            cardView13= (CardView) view1.findViewById(R.id.cardview13);
+            cardView14= (CardView) view1.findViewById(R.id.cardview14);
+            cardView15= (CardView) view1.findViewById(R.id.cardview15);
+            cardView16= (CardView) view1.findViewById(R.id.cardview16);
+            cardView17= (CardView) view1.findViewById(R.id.cardview17);
+            cardView18= (CardView) view1.findViewById(R.id.cardview18);
+            cardView19= (CardView) view1.findViewById(R.id.cardview19);
+            cardView20= (CardView) view1.findViewById(R.id.cardview20);
+            cardView21= (CardView) view1.findViewById(R.id.cardview21);
+            cardView22= (CardView) view1.findViewById(R.id.cardview22);
+            cardView23= (CardView) view1.findViewById(R.id.cardview23);
+            cardView24= (CardView) view1.findViewById(R.id.cardview24);
+            cardView25= (CardView) view1.findViewById(R.id.cardview25);
+            cardView26= (CardView) view1.findViewById(R.id.cardview26);
+
+
+            linearLayout1=(LinearLayout) view1.findViewById(R.id.linearLayout1);
+            linearLayout2=(LinearLayout) view1.findViewById(R.id.linearLayout2);
+            linearLayout3=(LinearLayout) view1.findViewById(R.id.linearLayout3);
+            linearLayout4=(LinearLayout) view1.findViewById(R.id.linearLayout4);
+            linearLayout5=(LinearLayout) view1.findViewById(R.id.linearLayout5);
+            linearLayout6=(LinearLayout) view1.findViewById(R.id.linearLayout6);
+            linearLayout7=(LinearLayout) view1.findViewById(R.id.linearLayout7);
+            linearLayout8=(LinearLayout) view1.findViewById(R.id.linearLayout8);
+            linearLayout9=(LinearLayout) view1.findViewById(R.id.linearLayout9);
+            linearLayout10=(LinearLayout) view1.findViewById(R.id.linearLayout10);
+            linearLayout11=(LinearLayout) view1.findViewById(R.id.linearLayout11);
+            linearLayout12=(LinearLayout) view1.findViewById(R.id.linearLayout12);
+            linearLayout13=(LinearLayout) view1.findViewById(R.id.linearLayout13);
+            linearLayout14=(LinearLayout) view1.findViewById(R.id.linearLayout14);
+            linearLayout15=(LinearLayout) view1.findViewById(R.id.linearLayout15);
+            linearLayout16=(LinearLayout) view1.findViewById(R.id.linearLayout16);
+            linearLayout17=(LinearLayout) view1.findViewById(R.id.linearLayout17);
+            linearLayout18=(LinearLayout) view1.findViewById(R.id.linearLayout18);
+            linearLayout19=(LinearLayout) view1.findViewById(R.id.linearLayout19);
+            linearLayout20=(LinearLayout) view1.findViewById(R.id.linearLayout20);
+            linearLayout21=(LinearLayout) view1.findViewById(R.id.linearLayout21);
+            linearLayout22=(LinearLayout) view1.findViewById(R.id.linearLayout22);
+            linearLayout23=(LinearLayout) view1.findViewById(R.id.linearLayout23);
+            linearLayout24=(LinearLayout) view1.findViewById(R.id.linearLayout24);
+            linearLayout25=(LinearLayout) view1.findViewById(R.id.linearLayout25);
+            linearLayout26=(LinearLayout) view1.findViewById(R.id.linearLayout26);
+
+
+
+
+            avaMunupulator();
+
+            nav_image123.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cardMusic();
+                    selectImage(profile.this);
+                }
+            });
+
+
+            final AlertDialog alertDialog=builder.create();
+            if(alertDialog.getWindow()!=null){
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            alertDialog.show();
+
+            view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cardMusic();
+                    alertDialog.dismiss();
+                }
+            });
+        }
+
+    public void settingBlack(){
+        linearLayout1.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout2.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout3.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout4.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout5.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout6.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout7.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout8.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout9.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout10.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout11.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout12.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout13.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout14.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout15.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout16.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout17.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout18.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout19.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout20.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout21.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout22.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout23.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout24.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout25.setBackgroundResource(R.drawable.blackwithwhitestroke);
+        linearLayout26.setBackgroundResource(R.drawable.blackwithwhitestroke);
+    }
+
+    public void imageUploader(String urlAva,String Str){
+        myRef.child("leaderBoard").child(Str).child(mAuth.getCurrentUser().getUid()).setValue(urlAva).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+    }
+
+    public void glide(String url){
+        Glide.with(getBaseContext()).load(url).apply(RequestOptions
+                .bitmapTransform(new RoundedCorners(14)))
+                .into(profilepic);
+    }
+
+    public void avaMunupulator(){
+
+        cardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout1.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva1);
+
+
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva1,"1vs1");
+                imageUploader(urlAva1,"singlePlayer");
+
+            }
+        });
+
+        cardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout2.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva2);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva2,"1vs1");
+                imageUploader(urlAva2,"singlePlayer");
+            }
+        });
+
+        cardView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout3.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva3).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva3);
+                        }else{
+
+                        }
+                    }
+                });imageUploader(urlAva3,"1vs1");
+                imageUploader(urlAva3,"singlePlayer");
+            }
+        });
+
+        cardView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout4.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva4).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva4);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva4,"1vs1");
+                imageUploader(urlAva4,"singlePlayer");
+            }
+        });
+
+        cardView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout5.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva5);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva5,"1vs1");
+                imageUploader(urlAva5,"singlePlayer");
+            }
+        });
+
+
+        cardView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout6.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva6).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva6);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva6,"1vs1");
+                imageUploader(urlAva6,"singlePlayer");
+            }
+        });
+
+
+        cardView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout7.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva7).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva7);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva7,"1vs1");
+                imageUploader(urlAva7,"singlePlayer");
+            }
+        });
+
+
+        cardView8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout8.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva8).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva8);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva8,"1vs1");
+                imageUploader(urlAva8,"singlePlayer");
+            }
+        });
+
+
+        cardView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout9.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva9).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva9);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva9,"1vs1");
+                imageUploader(urlAva9,"singlePlayer");
+            }
+        });
+
+
+        cardView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout10.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva10).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva10);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva10,"1vs1");
+                imageUploader(urlAva10,"singlePlayer");
+            }
+        });
+
+
+        cardView11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout11.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva11).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva11);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva11,"1vs1");
+                imageUploader(urlAva11,"singlePlayer");
+            }
+        });
+
+
+        cardView12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout12.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva12).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva12);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva12,"1vs1");
+                imageUploader(urlAva12,"singlePlayer");
+            }
+        });
+
+        cardView13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout13.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva13).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva13);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva13,"1vs1");
+                imageUploader(urlAva13,"singlePlayer");
+            }
+        });
+
+
+        cardView14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout14.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva14).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva14);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva14,"1vs1");
+                imageUploader(urlAva14,"singlePlayer");
+            }
+        });
+
+
+        cardView15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout15.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva15).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva15);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva15,"1vs1");
+                imageUploader(urlAva15,"singlePlayer");
+            }
+        });
+
+        cardView16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout16.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva16).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva16);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva16,"1vs1");
+                imageUploader(urlAva16,"singlePlayer");
+            }
+        });
+
+        cardView17.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout17.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva17).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva17);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva17,"1vs1");
+                imageUploader(urlAva17,"singlePlayer");
+            }
+        });
+
+
+        cardView18.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout18.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva18).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva18);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva18,"1vs1");
+                imageUploader(urlAva18,"singlePlayer");
+            }
+        });
+
+
+        cardView19.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout19.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva19).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva19);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva19,"1vs1");
+                imageUploader(urlAva19,"singlePlayer");
+            }
+        });
+
+
+        cardView20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout20.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva20).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva20);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva20,"1vs1");
+                imageUploader(urlAva20,"singlePlayer");
+            }
+        });
+
+        cardView21.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout21.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva21).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva21);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva21,"1vs1");
+                imageUploader(urlAva21,"singlePlayer");
+            }
+        });
+
+
+        cardView22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout22.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva22).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva22);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva22,"1vs1");
+                imageUploader(urlAva22,"singlePlayer");
+            }
+        });
+
+
+        cardView23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout23.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva23).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva23);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva23,"1vs1");
+                imageUploader(urlAva23,"singlePlayer");
+            }
+        });
+
+
+        cardView24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout24.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva24).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva24);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva24,"1vs1");
+                imageUploader(urlAva24,"singlePlayer");
+            }
+        });
+
+        cardView25.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout25.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva25).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva25);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva25,"1vs1");
+                imageUploader(urlAva25,"singlePlayer");
+            }
+        });
+
+        cardView26.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardMusic();
+                settingBlack();
+                linearLayout26.setBackgroundResource(R.drawable.whitewithblackstroke);
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").setValue(urlAva26).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            glide(urlAva26);
+                        }else{
+
+                        }
+                    }
+                });
+                imageUploader(urlAva26,"1vs1");
+                imageUploader(urlAva26,"singlePlayer");
+            }
+        });
+
+
+    }
+
+    public void proPicFunction(){
+
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                imageurl123 = (String) snapshot.getValue();
+                SharedPreferences propic = getApplicationContext().getSharedPreferences("Propic", 0);
+                SharedPreferences.Editor editor = propic.edit();
+                editor.putString("key", imageurl123);
+                editor.apply();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
         public void proPicAndName(){
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String nameString=snapshot.getValue(String.class);
+                     nameString=snapshot.getValue(String.class);
                     name.setText(nameString);
                 }
 
@@ -279,7 +1064,101 @@ public class profile extends AppCompatActivity {
                 }
             });
 
+
+
+
         }
+
+        public void editName(){
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(profile.this, R.raw.lifelineused);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
+            AlertDialog.Builder builder=new AlertDialog.Builder(profile.this,R.style.AlertDialogTheme);
+
+            final View view1= LayoutInflater.from(profile.this).inflate(R.layout.rename,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+            builder.setView(view1);
+            builder.setCancelable(true);
+
+            final TextInputEditText userNameEditText=(TextInputEditText) view1.findViewById(R.id.userNameEditText);
+            Button doneButton=(Button) view1.findViewById(R.id.joinButton1);
+
+
+            final AlertDialog alertDialog=builder.create();
+            if(alertDialog.getWindow()!=null){
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            alertDialog.show();
+
+            doneButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    usernameUploader(userNameEditText,alertDialog);
+                }
+            });
+
+
+
+
+        }
+
+        public void usernameUploader(final TextInputEditText userNameEditText, final AlertDialog alertDialog){
+
+        if(!username(userNameEditText)){
+            return;
+        }
+
+        final String str=userNameEditText.getText().toString();
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").setValue(str).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                 alertDialog.dismiss();
+                Toast.makeText(profile.this, "Username Changed From "+nameString+" to "+str, Toast.LENGTH_LONG).show();
+                name.setText(str);
+            }
+        });
+
+            myRef.child("leaderBoard").child("1vs1").child(mAuth.getCurrentUser().getUid()).child("username").setValue(str).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+
+            myRef.child("leaderBoard").child("singlePlayer").child(mAuth.getCurrentUser().getUid()).child("username").setValue(str).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+
+
+
+        }
+
+    private boolean username(TextInputEditText usernameEditText){
+        String name1=usernameEditText.getText().toString();
+        //String noWhihteSpaces=("\\A\\w{4,20}\\z");
+
+        if(name1.isEmpty()){
+            usernameEditText.setError("Field cannot be empty");
+            return false;
+        }else if(name1.length()>30){
+            usernameEditText.setError("Username should be less than 30 characters");
+            return false;
+        }
+        else
+            usernameEditText.setError(null);
+        return true;
+    }
+
 
     public void levelManupulation(TextView level, ImageView levelicon, int sumationOfScoreFinal){
         if(sumationOfScoreFinal <100000){
@@ -1039,6 +1918,7 @@ public class profile extends AppCompatActivity {
                             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
                                 profilepic.setImageBitmap(selectedImage);
+                                nav_image123.setImageBitmap(selectedImage);
 
 
                             uploadImage();
@@ -1117,6 +1997,12 @@ public class profile extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
+
+
+                                                imageUploader(imageurl,"1vs1");
+                                                imageUploader(imageurl,"singlePlayer");
+
+
                                             }
                                         });
 
@@ -1161,5 +2047,27 @@ public class profile extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void cardMusic(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(profile.this, R.raw.navclick);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+    }
 }

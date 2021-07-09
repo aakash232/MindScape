@@ -82,6 +82,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     AlertDialog alertDialog123;
     Button joinButton,createButton;
     int isHost=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -634,7 +635,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(isHost==0){
                             if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
-                                Intent intent = new Intent(picture_quiz_menu.this, onevsoneQuizActivity.class);
+                                Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
                                 intent.putExtra("opponentUID", opponentUID);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
                                 intent.putExtra("opponentUserName", opponentUsername);
@@ -663,7 +664,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                 finish();
                             }
                         }else{
-                            Intent intent = new Intent(picture_quiz_menu.this, onevsoneQuizActivity.class);
+                            Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
                             intent.putExtra("opponentUID", opponentUID);
                             intent.putExtra("opponentImageUrl", opponentimageUrl);
                             intent.putExtra("opponentUserName", opponentUsername);

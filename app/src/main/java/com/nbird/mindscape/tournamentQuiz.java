@@ -279,7 +279,12 @@ public class tournamentQuiz extends AppCompatActivity {
         list=new ArrayList<>();
         category=getIntent().getIntExtra("category",1);
 
-        loadingDialog.show();
+        try{
+            loadingDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         if(questionNum==0){
@@ -288,27 +293,8 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand = new Random();
-                    // Generate random integers in range 0 to 29
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }  //NEED TO CHANGE HERE
+                    setNumber=rand1.nextInt(6326)+1; //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
 
@@ -319,27 +305,8 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand = new Random();
-                    // Generate random integers in range 0 to 29
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }  //NEED TO CHANGE HERE
+                    setNumber=rand1.nextInt(6326)+1;//NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
 
@@ -350,27 +317,8 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand = new Random();
-                    // Generate random integers in range 0 to 29
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }  //NEED TO CHANGE HERE
+                    setNumber=rand1.nextInt(6326)+1;  //NEED TO CHANGE HERE
                     //NEED TO CHANGE HERE
                     fireBaseData(setNumber);
                 }
@@ -883,9 +831,10 @@ public class tournamentQuiz extends AppCompatActivity {
         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswerStatusName).child(String.valueOf(questionCounter)).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                    questionCounter++;
+
             }
         });
+        questionCounter++;
     }
 
     public void playerCorrectAnim(int counterNum,LottieAnimationView a1, LottieAnimationView a2, LottieAnimationView a3, LottieAnimationView a4, LottieAnimationView a5, LottieAnimationView a6, LottieAnimationView a7, LottieAnimationView a8, LottieAnimationView a9, LottieAnimationView a10,LottieAnimationView a11, LottieAnimationView a12, LottieAnimationView a13, LottieAnimationView a14, LottieAnimationView a15, LottieAnimationView a16, LottieAnimationView a17, LottieAnimationView a18, LottieAnimationView a19, LottieAnimationView a20){
@@ -1365,7 +1314,7 @@ public class tournamentQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("NormalQuizBIGJSON").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
@@ -2026,13 +1975,16 @@ public class tournamentQuiz extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
-            selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
-            selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
-            Button correctOption = (Button) linearLayout.findViewWithTag(list.get(position).getCorrectAnswer());
-            correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
-            correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
-            correctOption.setShadowLayer(3,1,1,R.color.lightred);
+
+                        selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
+                        selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
+                        Button correctOption = (Button) linearLayout.findViewWithTag(list.get(position).getCorrectAnswer());
+                        correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
+                        correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        correctOption.setShadowLayer(3,1,1,R.color.lightred);
+
+          
             switch (playerNum){
                 case 1:
                     myWrongAnswerAnimManupulator1(anim1,anim2,anim3,anim4,anim5,anim6,anim7,anim8,anim9,anim10,animz1,animz2,animz3,animz4,animz5,animz6,animz7,animz8,animz9,animz10);break;

@@ -24,17 +24,26 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,11 +102,28 @@ public class quizActivity extends AppCompatActivity {
     String minutestext;
     String secondtext;
     int mainfinder=0;
+    int myPosition=0;
+    LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
+    ImageView myPic;
+    TextView myName;
+
+    GridView gridView;
+    private InterstitialAd mInterstitialAd;
+
+    private void loadAds(){
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        loadAds();
 
         questionTextView=findViewById(R.id.question);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -116,6 +142,19 @@ public class quizActivity extends AppCompatActivity {
         linearLayoutAudience=(LinearLayout) findViewById(R.id.linearLayoutAudience) ;
         linearLayoutFiftyFifty=(LinearLayout) findViewById(R.id.linearLayoutfiftyfifty) ;
         linearLayoutSwap=(LinearLayout) findViewById(R.id.linearLayoutSwap) ;
+        anim11=(LottieAnimationView) findViewById(R.id.anim11);
+        anim12=(LottieAnimationView) findViewById(R.id.anim12);
+        anim13=(LottieAnimationView) findViewById(R.id.anim13);
+        anim14=(LottieAnimationView) findViewById(R.id.anim14);
+        anim15=(LottieAnimationView) findViewById(R.id.anim15);
+        anim16=(LottieAnimationView) findViewById(R.id.anim16);
+        anim17=(LottieAnimationView) findViewById(R.id.anim17);
+        anim18=(LottieAnimationView) findViewById(R.id.anim18);
+        anim19=(LottieAnimationView) findViewById(R.id.anim19);
+        anim20=(LottieAnimationView) findViewById(R.id.anim20);
+        myName=(TextView) findViewById(R.id.myName);
+        myPic=(ImageView) findViewById(R.id.myPic);
+
         userNameFunction();
 
         loadingDialog=new Dialog(this);
@@ -615,6 +654,9 @@ public class quizActivity extends AppCompatActivity {
     }
 
 
+
+
+
     public void fireBaseData(int setNumber){
         myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -661,6 +703,39 @@ public class quizActivity extends AppCompatActivity {
 
                                 if(swapnum==0){
                                     if (position == 10) {
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+
+
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -682,6 +757,40 @@ public class quizActivity extends AppCompatActivity {
 
                                 }else {
                                     if (position == 11) {
+
+
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                startActivity(scoreIntent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -832,6 +941,8 @@ public class quizActivity extends AppCompatActivity {
         LLFalseManupulator();
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
+
+
             //correct
             final MediaPlayer musicNav;
             musicNav = MediaPlayer.create(quizActivity.this, R.raw.correctmusic);
@@ -843,6 +954,7 @@ public class quizActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
+            myanimManuCorrect();
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -859,6 +971,7 @@ public class quizActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
+            myanimManuWrong();
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -866,6 +979,99 @@ public class quizActivity extends AppCompatActivity {
             correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
             correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             correctOption.setShadowLayer(3,1,1,R.color.lightred);
+        }
+    }
+
+    public void myanimManuCorrect(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.tickanim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.tickanim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.tickanim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.tickanim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.tickanim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.tickanim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.tickanim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.tickanim);
+                anim18.playAnimation();
+                anim18.loop(false);break;
+            case 9:
+                anim19.setAnimation(R.raw.tickanim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.tickanim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
+        }
+    }
+
+    public void myanimManuWrong(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.wronganim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.wronganim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.wronganim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.wronganim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.wronganim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.wronganim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.wronganim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.wronganim);
+                anim18.playAnimation();
+                anim18.loop(false);
+                break;
+            case 9:
+                anim19.setAnimation(R.raw.wronganim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.wronganim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
         }
     }
 
@@ -1005,6 +1211,11 @@ public class quizActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userName=snapshot.getValue(String.class);
+                myName.setText(userName);
+
+
+
+
             }
 
             @Override
@@ -1012,6 +1223,23 @@ public class quizActivity extends AppCompatActivity {
 
             }
         });
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String str=snapshot.getValue(String.class);
+                Glide.with(getBaseContext())
+                        .load(str)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                        .into(myPic);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 
@@ -1078,6 +1306,10 @@ public class quizActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void adManu(){
 
     }
 

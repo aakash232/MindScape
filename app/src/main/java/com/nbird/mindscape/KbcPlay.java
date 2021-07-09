@@ -71,7 +71,6 @@ public class KbcPlay extends AppCompatActivity {
         });
         Intent intent = new Intent(getApplicationContext(),KbcSetup.class);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-        finish();
     }
 
     public void score(View view){

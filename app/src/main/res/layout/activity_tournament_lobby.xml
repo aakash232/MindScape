@@ -562,7 +562,7 @@
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
                                         android:gravity="center"
-                                        android:scaleType="centerCrop" />
+                                         />
 
 
                                     <LinearLayout
@@ -685,7 +685,7 @@
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
                                         android:gravity="center"
-                                        android:scaleType="centerCrop" />
+                                        />
 
 
                                     <LinearLayout
@@ -819,7 +819,7 @@
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
                                         android:gravity="center"
-                                        android:scaleType="centerCrop" />
+                                        />
 
 
                                     <LinearLayout
@@ -942,7 +942,7 @@
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
                                         android:gravity="center"
-                                        android:scaleType="centerCrop" />
+                                        />
 
 
                                     <LinearLayout

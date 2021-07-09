@@ -1,5 +1,6 @@
 package com.nbird.mindscape;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -8,11 +9,13 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.MenuItem;
 import android.view.View;
 
 public class SongChoiceActivity extends AppCompatActivity {
     CardView audioquiz,videoquiz;
     MediaPlayer mediaPlayer;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,17 @@ public class SongChoiceActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Category");
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void buttonClick(){
@@ -90,5 +104,17 @@ public class SongChoiceActivity extends AppCompatActivity {
         finish();
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

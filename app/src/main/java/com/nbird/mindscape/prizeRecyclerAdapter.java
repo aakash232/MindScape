@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -49,9 +48,11 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
     int highestScore,attempts;
     int isPlayed;
     String uid;
-    public prizeRecyclerAdapter(Context context,List<prizeRecyclerHolder> listItem) {
+    AlertDialog alertDialog1;
+    public prizeRecyclerAdapter(Context context, List<prizeRecyclerHolder> listItem, AlertDialog alertDialog1) {
         this.context=context;
         this.listItem = listItem;
+        this.alertDialog1=alertDialog1;
     }
 
     @NonNull
@@ -149,11 +150,13 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                                 if(type==1){
+                                                                                    alertDialog1.dismiss();
                                                                                     Intent intent=new Intent(itemView.getContext(),prizeQuizMain.class);
                                                                                     intent.putExtra("sets",sets);
                                                                                     intent.putExtra("type",type);
                                                                                     itemView.getContext().startActivity(intent);
                                                                                 }else if(type==2){
+                                                                                    alertDialog1.dismiss();
                                                                                     Intent intent=new Intent(itemView.getContext(),prizePictureQuiz.class);
                                                                                     intent.putExtra("sets",sets);
                                                                                     intent.putExtra("type",type);
@@ -266,7 +269,11 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
         Button buttonNo=(Button) view1.findViewById(R.id.buttonNo);
         Button buttonYes=(Button) view1.findViewById(R.id.buttonYes);
 
-
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
         allImpFuntion(sets);
 
 
@@ -295,11 +302,13 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(type==1){
+                                                    alertDialog.dismiss();
                                                     Intent intent=new Intent(itemView.getContext(),prizeQuizMain.class);
                                                     intent.putExtra("sets",sets);
                                                     intent.putExtra("type",type);
                                                     itemView.getContext().startActivity(intent);
                                                 }else if(type==2){
+                                                    alertDialog.dismiss();
                                                     Intent intent=new Intent(itemView.getContext(),prizePictureQuiz.class);
                                                     intent.putExtra("sets",sets);
                                                     intent.putExtra("type",type);
@@ -370,11 +379,13 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
 
 
                                                     if(type==1){
+                                                        alertDialog.dismiss();
                                                         Intent intent=new Intent(itemView.getContext(),prizeQuizMain.class);
                                                         intent.putExtra("sets",sets);
                                                         intent.putExtra("type",type);
                                                         itemView.getContext().startActivity(intent);
                                                     }else if(type==2){
+                                                        alertDialog.dismiss();
                                                         Intent intent=new Intent(itemView.getContext(),prizePictureQuiz.class);
                                                         intent.putExtra("sets",sets);
                                                         intent.putExtra("type",type);
@@ -414,11 +425,7 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
             }
         });
 
-        final AlertDialog alertDialog=builder.create();
-        if(alertDialog.getWindow()!=null){
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        alertDialog.show();
+
 
     }
 }

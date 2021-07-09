@@ -2495,7 +2495,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {

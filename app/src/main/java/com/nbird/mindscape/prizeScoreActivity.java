@@ -9,16 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -196,8 +191,13 @@ public class prizeScoreActivity extends AppCompatActivity {
 
                     RecyclerView recyclerView=(RecyclerView) view1.findViewById(R.id.recyclerview);
 
+                final AlertDialog alertDialog=builder.create();
+                if(alertDialog.getWindow()!=null){
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
 
-                final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(prizeScoreActivity.this,lstExam123);
+                final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(prizeScoreActivity.this,lstExam123, alertDialog);
                     recyclerView.setLayoutManager(new GridLayoutManager(prizeScoreActivity.this,2));
                     recyclerView.setAdapter(myAdapter);
 
@@ -221,11 +221,7 @@ public class prizeScoreActivity extends AppCompatActivity {
 
 
 
-                    final AlertDialog alertDialog=builder.create();
-                    if(alertDialog.getWindow()!=null){
-                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                    }
-                    alertDialog.show();
+
                 }
 
         });

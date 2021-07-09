@@ -935,6 +935,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("gameStarter").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+
+                    myRef.child("Lobby").child(String.valueOf(roomCode1)).child("gameFinder").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+
+
                     startButton.setEnabled(false);
                     chatButton.setEnabled(false);
                     factsButton.setEnabled(false);
@@ -1187,24 +1197,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
                 if(numMode==0){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else if(numMode==1){
                     setNumber = rand.nextInt(4999)+1;
 
@@ -1213,24 +1207,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     }
                 }else if(numMode==2){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else{
                     setNumber = rand.nextInt(4999)+1;
 
@@ -1273,24 +1251,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 int setNumber;
                 if(numMode==0){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else if(numMode==1){
                     setNumber = rand.nextInt(4999)+1;
 
@@ -1299,24 +1261,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     }
                 }else if(numMode==2){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else{
                     setNumber = rand.nextInt(4999)+1;
 
@@ -1361,24 +1307,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 int setNumber;
                 if(numMode==0){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else if(numMode==1){
                     setNumber = rand.nextInt(4999)+1;
 
@@ -1387,24 +1317,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     }
                 }else if(numMode==2){
                     Random rand1 = new Random();
-                    int category=rand1.nextInt(19)+1;
-                    switch (category){
-                        case 1:
-                        case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                            setNumber = rand.nextInt(299)+1;break;
-                        case 2: case 14:
-                            setNumber = rand.nextInt(499)+1;break;
-                        case 7:
-                            setNumber = rand.nextInt(401)+1;break;
-                        case 8: case 18:
-                            setNumber = rand.nextInt(339)+1;break;
-                        case 13: case 15: case 16:
-                            setNumber = rand.nextInt(249)+1;break;
-                        case 19:
-                            setNumber = rand.nextInt(399)+1;break;
-                        default:
-                            setNumber = rand.nextInt(199)+1;break;
-                    }
+
+                    setNumber=rand1.nextInt(6326)+1;
                 }else{
                     setNumber = rand.nextInt(4999)+1;
 

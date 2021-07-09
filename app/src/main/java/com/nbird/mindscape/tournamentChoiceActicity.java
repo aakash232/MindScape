@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
     roomDataHolder s;
     int mam=0;
     private List<roomDataHolder> list123;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +128,24 @@ public class tournamentChoiceActicity extends AppCompatActivity {
             }
         });
 
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Lobby Selection");
 
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void privateRoomJoinAlertDialog(){
@@ -158,7 +177,12 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                     }
                 });
                 roomCodeString=password.getText().toString();
-                codeInteger= Integer.parseInt(roomCodeString);
+                try{
+                    codeInteger= Integer.parseInt(roomCodeString);
+                }catch (Exception e){
+                    codeInteger= -100;
+                }
+
 
                     myRef.child("room").child(String.valueOf(1)).orderByChild("roomCode").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -292,7 +316,12 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         if (alertDialog.getWindow() != null) {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
         roomListView();
 
@@ -345,7 +374,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
     public void roomCodeGenerator(){
         Random rand = new Random();
 
-        roomCode = rand.nextInt(999999)+1;
+        roomCode = rand.nextInt(99999999)+1;
         myRef.child("Lobby").orderByChild("roomCode").equalTo(roomCode).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -366,6 +395,13 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                     });
 
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameStarter").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameFinder").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
@@ -400,15 +436,37 @@ public class tournamentChoiceActicity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    listRoom.add(dataSnapshot1.getValue(roomDataHolder.class));
+
+
+                try {
+                    for (final DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                        int i=dataSnapshot1.getValue(roomDataHolder.class).getRoomCode();
+                        myRef.child("Lobby").child(String.valueOf(i)).child("gameFinder").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.getValue(Integer.class)==0){
+                                    listRoom.add(dataSnapshot1.getValue(roomDataHolder.class));
+                                    categoryAdapter.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+
+                        });
+
+                    }
+                }finally {
+                  /*  if(listRoom.size()==0){
+                        Toast.makeText(tournamentChoiceActicity.this, "No Rooms Available!Please Create A Room.", Toast.LENGTH_LONG).show();
+                    }*/
+
+                    shimmer.stopShimmerAnimation();
+                    shimmer.setVisibility(View.GONE);
                 }
-                if(listRoom.size()==0){
-                    Toast.makeText(tournamentChoiceActicity.this, "No Rooms Available!Please Create A Room.", Toast.LENGTH_LONG).show();
-                }
-                categoryAdapter.notifyDataSetChanged();
-                shimmer.stopShimmerAnimation();
-                shimmer.setVisibility(View.GONE);
+
             }
 
             @Override

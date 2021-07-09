@@ -31,6 +31,7 @@ public class customCategoryListActivity extends AppCompatActivity {
 
     int position;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

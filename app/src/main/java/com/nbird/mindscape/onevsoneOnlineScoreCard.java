@@ -337,7 +337,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
                 myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
                 deleteData();
-                onevsoneOnlineScoreCard.super.onBackPressed();
+                Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
@@ -712,10 +713,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         }
     }
 
-    public void dialogBoxForDisiderFunction(){
-        MediaPlayer musicNav;
-        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.popupmusic);
-        musicNav.start();
+    public void dialogBoxForDisiderFunction(int opponentScorebro){
+
         AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneOnlineScoreCard.this,R.style.AlertDialogTheme);
 
         final View view1= LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.sorry_layout_for_helplines,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -725,11 +724,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
         animDialog=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
 
-        if(totalSum>opponentScorebro){
+        if(totalSum> opponentScorebro){
              titleDialog.setText(myName123+" You Won!!. You have Beaten "+opponentUsername);  // Aakash changes to be done here
             animDialog.setAnimation(R.raw.winneranim);
             animDialog.playAnimation();
-        }else if(totalSum==opponentScorebro){
+        }else if(totalSum== opponentScorebro){
             titleDialog.setText(myName123+" Match Is Draw!!");
             animDialog.setAnimation(R.raw.draawanim);
             animDialog.playAnimation();
@@ -1275,9 +1274,9 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             opponentScorebro=snapshot.getValue(Integer.class);
                             if(guard1==0){
                                 guard1=1;
+                                dialogBoxForDisiderFunction(opponentScorebro);
                                 oppoScore.setText(" Total Score : "+opponentScorebro);
 
-                                dialogBoxForDisiderFunction();
 
                                 final ArrayList<BarEntry> visitors=new ArrayList<>();
                                 visitors.add(new BarEntry(1,score));
