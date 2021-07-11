@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -32,9 +34,12 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -599,15 +604,37 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 navigationView.bringToFront();
 
 
-                drawerLayout.addDrawerListener(mToggle);
-                mToggle.syncState();
-                navigationView.setNavigationItemSelectedListener(mainMenuActivity.this);
+        drawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        navigationView.setNavigationItemSelectedListener(mainMenuActivity.this);
 
 
-                navigationView.setCheckedItem(R.id.nav_view);
+
+        Menu menu = navigationView.getMenu();
+
+        MenuItem com = menu.findItem(R.id.nav_com);
+        MenuItem legal = menu.findItem(R.id.nav_legal);
+
+        //Set Menu Titles White
+        SpannableString comSpanString = new SpannableString(com.getTitle().toString());
+        comSpanString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, comSpanString.length(), 0); // fix the color to white
+        com.setTitle(comSpanString);
+        SpannableString legalSpanString = new SpannableString(legal.getTitle().toString());
+        legalSpanString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, legalSpanString.length(), 0); // fix the color to white
+        legal.setTitle(legalSpanString);
+
+        //Set Menu Sub Titles White
+        navigationView.setNavigationItemSelectedListener(mainMenuActivity.this);
+        navigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.white));
+        navigationView.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.white));
+
+        navigationView.setCheckedItem(R.id.nav_view);
 
 
-           for(int i=1;i<=3;i++){
+
+
+
+        for(int i=1;i<=3;i++){
                dataForHorizontalSlide();
            }
         removalOfLastTournamentIfHost();
@@ -1409,7 +1436,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
         //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"Buzzzz! A knowledgeable and alert mind is the one which rules. Buzz with players across the world in this mode of knowledge and Agility!"));
-        lstExam.add(new Modes("Audio And Video",R.drawable.svfinal,"dfdjnfd d fdufn difn dfd fdufn udf"));
+        lstExam.add(new Modes("Audio And Video",R.drawable.svfinal,"The ultimate test of senses! A knowledgeable and alert mind is the one which rules. Fight and make your way up!"));
         lstExam.add(new Modes("Custom Quiz",R.drawable.customquizfinal3,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
         lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
         lstExam.add(new Modes("League (Coming Soon)",R.drawable.league2,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
