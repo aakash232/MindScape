@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -241,7 +242,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             }
                         });
                         alertDialog.dismiss();
-                        createFunction();
+                        roomCodeGenerator();
                     }
                 });
             }
@@ -661,7 +662,10 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(isHost==0){
-                            if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
+                            String str=snapshot.getValue(String.class);
+                            String uid=mAuth.getCurrentUser().getUid();
+                            try{
+                            if(str.equals(uid)){
                             Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
                             intent.putExtra("opponentUID", opponentUID);
                             intent.putExtra("opponentImageUrl", opponentimageUrl);
@@ -691,7 +695,25 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             startActivity(intent);
                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
-                        }
+                        }}catch (Exception e){
+                                Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
+                                intent.putExtra("opponentUID", opponentUID);
+                                intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                intent.putExtra("opponentUserName", opponentUsername);
+                                intent.putExtra("mypropic", proPicUrl);
+                                intent.putExtra("myName", userName);
+                                intent.putExtra("leader", leader);
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                                if(countDownTimer!=null){
+                                    countDownTimer.cancel();
+                                }
+                                if(countDownTimer123!=null){
+                                    countDownTimer123.cancel();
+                                }
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                finish();
+                            }
                         }else{
                             Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
                             intent.putExtra("opponentUID", opponentUID);
@@ -1582,6 +1604,12 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
 
 
     public void roomCodeGenerator(){
+        final Dialog loadingDialog;
+        loadingDialog=new Dialog(oneVsOneChoiceActivity.this);
+        loadingDialog.setContentView(R.layout.loading_screen);
+        loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        loadingDialog.setCancelable(true);
+        loadingDialog.show();
         Random rand = new Random();
         // Generate random integers in range 0 to 29
         roomCode = rand.nextInt(999999)+1;
@@ -1590,6 +1618,9 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                if(snapshot.getValue(Integer.class)!=null){
                    roomCodeGenerator();
+               }else{
+                   loadingDialog.dismiss();
+                   createFunction();
                }
             }
 
@@ -1603,7 +1634,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
 
     public void createFunction(){
 
-        roomCodeGenerator();
+       // roomCodeGenerator();
 
         onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), roomCode);
         myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {

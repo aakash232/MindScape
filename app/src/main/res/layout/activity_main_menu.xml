@@ -9,6 +9,7 @@
     tools:context=".mainMenuActivity"
     android:background="@drawable/backimage"
     android:fitsSystemWindows="true"
+    android:launchMode="singleTop"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     tools:openDrawer="start">
 

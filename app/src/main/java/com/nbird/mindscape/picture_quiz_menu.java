@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -220,7 +221,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                             }
                         });
                         alertDialog.dismiss();
-                        createFunction();
+                        roomCodeGenerator();
                     }
                 });
             }
@@ -634,7 +635,37 @@ public class picture_quiz_menu extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(isHost==0){
-                            if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
+                            try{
+                                if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
+                                    Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                                    intent.putExtra("opponentUID", opponentUID);
+                                    intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                    intent.putExtra("opponentUserName", opponentUsername);
+                                    intent.putExtra("mypropic", proPicUrl);
+                                    intent.putExtra("myName", userName);
+                                    intent.putExtra("leader", leader);
+                                    intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
+                                    if(countDownTimer!=null){
+                                        countDownTimer.cancel();
+                                    }
+                                    if(countDownTimer123!=null){
+                                        countDownTimer123.cancel();
+                                    }
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    if(countDownTimer!=null){
+                                        countDownTimer.cancel();
+                                    }
+                                    if(countDownTimer123!=null){
+                                        countDownTimer123.cancel();
+                                    }
+                                    Toast.makeText(picture_quiz_menu.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+                                    startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
+                                }
+                            }catch (Exception e){
                                 Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
                                 intent.putExtra("opponentUID", opponentUID);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
@@ -649,20 +680,10 @@ public class picture_quiz_menu extends AppCompatActivity {
                                 if(countDownTimer123!=null){
                                     countDownTimer123.cancel();
                                 }
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                if(countDownTimer!=null){
-                                    countDownTimer.cancel();
-                                }
-                                if(countDownTimer123!=null){
-                                    countDownTimer123.cancel();
-                                }
-                                Toast.makeText(picture_quiz_menu.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
                                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
                             }
+
                         }else{
                             Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
                             intent.putExtra("opponentUID", opponentUID);
@@ -1548,15 +1569,29 @@ public class picture_quiz_menu extends AppCompatActivity {
 
 
     public void roomCodeGenerator(){
+        final Dialog loadingDialog;
+        loadingDialog=new Dialog(picture_quiz_menu.this);
+        loadingDialog.setContentView(R.layout.loading_screen);
+        loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        loadingDialog.setCancelable(true);
+        loadingDialog.show();
         Random rand = new Random();
         // Generate random integers in range 0 to 29
-        roomCode = rand.nextInt(999999)+1;
+        roomCode = rand.nextInt(9999999)+1;
         myRef.child("oneVsoneLocalPicture").orderByChild("status").equalTo(roomCode).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(Integer.class)!=null){
-                    roomCodeGenerator();
+                try{
+                    if(snapshot.getValue(Integer.class)!=null){
+                        roomCodeGenerator();
+                    }else{
+                        loadingDialog.dismiss();
+                        createFunction();
+                    }
+                }catch (Exception e){
+
                 }
+
             }
 
             @Override
@@ -1569,7 +1604,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
     public void createFunction(){
 
-        roomCodeGenerator();
+
 
         onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), roomCode);
         myRef.child("oneVsoneLocalPicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1644,7 +1679,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                         Intent shareIntent=new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plane");
-                        String shareBody=userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+roomCode+".";
+                        String shareBody="MindScape\n"+userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+roomCode+".";
                         String sharesub="MindScape";
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
                         shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody);

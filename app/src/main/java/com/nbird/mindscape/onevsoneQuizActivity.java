@@ -260,7 +260,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
         countDownTimerFun();
         countDownTimerFun47();
-        countDownTimerFun50();
+
+
+        for(int i=0;i<12;i++){
+            opponentDataRetrieving(i);
+        }
+        //countDownTimerFun50();
         for(int i=0;i<12;i++){
             try{
                 // create instance of Random class
@@ -752,7 +757,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+                                       // Toast.makeText(onevsoneQuizActivity.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }
@@ -778,6 +787,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                                 position++;
                                 LLTrueManupulator();
                                 battleGroundFor1vs1Function(num123);
+
 
 
                                 if(swapnum==0){
@@ -1160,6 +1170,9 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
                 }
 
+
+                Toast.makeText(onevsoneQuizActivity.this, "Gate4", Toast.LENGTH_LONG).show();
+
                 scoreIntent.putExtra("opponentUID",opponentUID);
                 scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
                 scoreIntent.putExtra("opponentUserName",opponentUsername);
@@ -1219,7 +1232,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
 
-                opponentDataRetrieving();
+            //    opponentDataRetrieving();
 
 
 
@@ -1341,82 +1354,84 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
    }
 
-   public void opponentDataRetrieving(){
+   public void opponentDataRetrieving(final int i){
 
-       myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child(String.valueOf(binaryPosition)).addListenerForSingleValueEvent(new ValueEventListener() {
+       myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                try{
                    opponentAnswer=snapshot.getValue(Integer.class);
-                   animManupulation();
+                   animManupulation(opponentAnswer,i);
+
+
                    binaryPosition++;
 
-
-                  if(bull==1&&binaryPosition==11){
-                      try{
-                         // myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
-
-
-                      }catch (Exception e){
-
-                      }
+              /*     if(bull==1&&binaryPosition==11){
+                       try{
+                           // myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
 
 
-                      try{
-                     //     myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
-                      }catch (Exception e){
+                       }catch (Exception e){
 
-                      }
-                      if(countDownTimerMine!=null){
-                          countDownTimerMine.cancel();}
-                      if(countDownTimer47!=null){
-                          countDownTimer47.cancel();}
-                      if(countDownTimer50!=null){
-                          countDownTimer50.cancel();}
-                      if(countDownTimer!=null){
-                          countDownTimer.cancel();
-                      }
+                       }
 
-                      try {
-                          myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
-                      }catch (Exception e){
 
-                      }
+                       try{
+                           //     myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                       }catch (Exception e){
 
-                      myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
-                              Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
-                         //     myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
-                              scoreIntent.putExtra("opponentUID",opponentUID);
-                              scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
-                              scoreIntent.putExtra("opponentUserName",opponentUsername);
-                              scoreIntent.putExtra("mypropic",myProPicUrl);
-                              scoreIntent.putExtra("myName",myName);
-                              scoreIntent.putExtra("score", score);
-                              scoreIntent.putExtra("lifeline",lifelineSum);
-                              scoreIntent.putExtra("minutes",minutes);
-                              scoreIntent.putExtra("mine",mine);
-                              scoreIntent.putExtra("minman",minman);
-                              scoreIntent.putExtra("secman",secman);
-                              scoreIntent.putExtra("seconds",second);
-                              scoreIntent.putExtra("minutestext",minutestext);
-                              scoreIntent.putExtra("secondtext",secondtext);
-                              scoreIntent.putExtra("milliholder",kong);
-                              scoreIntent.putExtra("category",category);
-                              scoreIntent.putExtra("imageurl",imageurl);
-                      scoreIntent.putExtra("actualmin",a1);
-                      scoreIntent.putExtra("actualsec",a2);
-                              scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
-                              scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
-                              scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
-                              startActivity(scoreIntent);
-                      overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                       }
+                       if(countDownTimerMine!=null){
+                           countDownTimerMine.cancel();}
+                       if(countDownTimer47!=null){
+                           countDownTimer47.cancel();}
+                       if(countDownTimer50!=null){
+                           countDownTimer50.cancel();}
+                       if(countDownTimer!=null){
+                           countDownTimer.cancel();
+                       }
 
-                              finish();
-                  }
-                   }catch(Exception e){
+                       try {
+                           myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
+                       }catch (Exception e){
 
-                   }
+                       }
+                       Toast.makeText(onevsoneQuizActivity.this, "Gate3", Toast.LENGTH_LONG).show();
+
+                       myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+                       Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
+                       //     myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                       scoreIntent.putExtra("opponentUID",opponentUID);
+                       scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+                       scoreIntent.putExtra("opponentUserName",opponentUsername);
+                       scoreIntent.putExtra("mypropic",myProPicUrl);
+                       scoreIntent.putExtra("myName",myName);
+                       scoreIntent.putExtra("score", score);
+                       scoreIntent.putExtra("lifeline",lifelineSum);
+                       scoreIntent.putExtra("minutes",minutes);
+                       scoreIntent.putExtra("mine",mine);
+                       scoreIntent.putExtra("minman",minman);
+                       scoreIntent.putExtra("secman",secman);
+                       scoreIntent.putExtra("seconds",second);
+                       scoreIntent.putExtra("minutestext",minutestext);
+                       scoreIntent.putExtra("secondtext",secondtext);
+                       scoreIntent.putExtra("milliholder",kong);
+                       scoreIntent.putExtra("category",category);
+                       scoreIntent.putExtra("imageurl",imageurl);
+                       scoreIntent.putExtra("actualmin",a1);
+                       scoreIntent.putExtra("actualsec",a2);
+                       scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                       scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+                       scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+                       startActivity(scoreIntent);
+                       overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+
+                       finish();
+                   }*/
+               }catch(Exception e){
+
+               }
 
            }
 
@@ -1425,13 +1440,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
            }
        });
+    }
 
-   }
-
-   public void animManupulation(){
+   public void animManupulation(int opponentAnswer, int binaryPosition){
         switch (binaryPosition){
             case 1:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim1.setAnimation(R.raw.tickanim);
@@ -1445,7 +1459,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim1.loop(false);
                 }break;
             case 2:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim2.setAnimation(R.raw.tickanim);
@@ -1459,7 +1473,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim2.loop(false);
                 }break;
             case 3:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim3.setAnimation(R.raw.tickanim);
@@ -1473,7 +1487,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim3.loop(false);
                 }break;
             case 4:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim4.setAnimation(R.raw.tickanim);
@@ -1487,7 +1501,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim4.loop(false);
                 }break;
             case 5:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim5.setAnimation(R.raw.tickanim);
@@ -1501,7 +1515,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim5.loop(false);
                 }break;
             case 6:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim6.setAnimation(R.raw.tickanim);
@@ -1515,7 +1529,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim6.loop(false);
                 }break;
             case 7:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim7.setAnimation(R.raw.tickanim);
@@ -1529,7 +1543,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim7.loop(false);
                 }break;
             case 8:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim8.setAnimation(R.raw.tickanim);
@@ -1543,7 +1557,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim8.loop(false);
                 }break;
             case 9:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim9.setAnimation(R.raw.tickanim);
@@ -1557,7 +1571,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim9.loop(false);
                 }break;
             case 10:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim10.setAnimation(R.raw.tickanim);
@@ -1571,6 +1585,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     anim10.loop(false);
                 }break;
         }
+       // this.binaryPosition++;
    }
 
    public void waitingFunction(){
@@ -1606,6 +1621,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
                             }
 
+
+                            Toast.makeText(onevsoneQuizActivity.this, "Gate2", Toast.LENGTH_LONG).show();
 
                             minman=2-minutes;
                             secman=59-second;
@@ -1688,8 +1705,6 @@ public class onevsoneQuizActivity extends AppCompatActivity {
        timeTaken=((TextView) view1.findViewById(R.id.timeTaken));
        accuracy=((TextView) view1.findViewById(R.id.accuracy));
        lifeLines=((TextView) view1.findViewById(R.id.lifeLines));
-       if(countDownTimer47!=null){
-           countDownTimer47.cancel();}
 
        for(int i=1;i<=3;i++){
            dataForHorizontalSlide();
@@ -1757,6 +1772,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                        }catch (Exception e){
 
                        }
+
+
+
+
+
+                       Toast.makeText(onevsoneQuizActivity.this, "Gate1", Toast.LENGTH_LONG).show();
+
 
                        //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                        scoreIntent.putExtra("opponentUID",opponentUID);

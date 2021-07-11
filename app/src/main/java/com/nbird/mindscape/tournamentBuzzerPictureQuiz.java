@@ -793,7 +793,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view, finalI);
+
+                                    try{
+                                        checkAnswer((Button) view, finalI);
+                                    }catch (Exception e){
+                                        Toast.makeText(tournamentBuzzerPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }

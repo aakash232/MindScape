@@ -58,6 +58,7 @@
         <activity android:name=".SlideActivity" />
         <activity android:name=".loginActivity" />
         <activity android:name=".mainMenuActivity" />
+
         <activity android:name=".onevsoneOnlineScoreCard" />
         <activity android:name=".onevsoneQuizActivity" />
         <activity android:name=".oneVsOneChoiceActivity" />

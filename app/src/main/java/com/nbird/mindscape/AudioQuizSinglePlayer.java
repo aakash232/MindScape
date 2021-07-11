@@ -905,7 +905,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+                                        Toast.makeText(AudioQuizSinglePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }
@@ -1470,7 +1474,8 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                 });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
-                Intent intent=new Intent(AudioQuizSinglePlayer.this,AudioQuizSinglePlayer.class);
+                clearMediaPlayer();
+                Intent intent=new Intent(AudioQuizSinglePlayer.this,mainMenuActivity.class);
                 intent.putExtra("mainfinder",1);
                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();

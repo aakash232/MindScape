@@ -690,7 +690,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+                                        Toast.makeText(activity_picture_singlePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }

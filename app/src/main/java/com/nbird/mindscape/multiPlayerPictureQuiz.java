@@ -142,7 +142,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
     List<Integer> arrlist12345;
     int min12345,sec12345;
     int milliHolder47;
-    ValueEventListener listner;
+    ValueEventListener listner,listener1;
     int oppoStatus=5;
     ImageView myPicImageView;
     TextView myNameTextView;
@@ -261,7 +261,10 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
         countDownTimerFun47();
-        countDownTimerFun50();
+        for(int i=0;i<12;i++){
+            opponentDataRetrieving(i);
+        }
+        //countDownTimerFun50();
 
         c=new CountDownTimer(1000*180,1000) {
             @Override
@@ -793,7 +796,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+                                        Toast.makeText(multiPlayerPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }
@@ -818,7 +825,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                                 enableOption(true);
                                 position++;
                                 LLTrueManupulator();
-                                battleGroundFor1vs1Function(num123);
+
 
 
                                 if(swapnum==0){
@@ -1005,6 +1012,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                 });
             myanimManuCorrect();
             num123=1;
+            battleGroundFor1vs1Function(1);
             arrlist.add(1);
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
@@ -1024,6 +1032,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                 });
             myanimManuWrong();
             num123=0;
+            battleGroundFor1vs1Function(0);
             arrlist.add(2);
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
@@ -1085,10 +1094,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
 
+                try{
+                    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listener1);
+                }catch (Exception e){
+
+                }
 
 
-
-
+                Toast.makeText(multiPlayerPictureQuiz.this, "Gate4", Toast.LENGTH_LONG).show();
                 Toast.makeText(multiPlayerPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                 myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
@@ -1168,7 +1181,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
 
-                opponentDataRetrieving();
+               // opponentDataRetrieving();
 
 
 
@@ -1290,19 +1303,20 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
     }
 
-    public void opponentDataRetrieving(){
+    public void opponentDataRetrieving(final int i){
 
-        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child(String.valueOf(binaryPosition)).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 try{
                     opponentAnswer=snapshot.getValue(Integer.class);
-                    animManupulation();
+                    animManupulation(opponentAnswer,i);
+
                     binaryPosition++;
 
 
-                    if(bull==1&&binaryPosition==11){
+           /*         if(bull==1&&binaryPosition==11){
                         try{
                             myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
 
@@ -1311,7 +1325,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                         }
 
-
+                        if(countDownTimer47!=null){
+                            countDownTimer47.cancel();}
                         try{
                             myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
                         }catch (Exception e){
@@ -1319,9 +1334,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         }
 
 
+                        try{
+                            myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listener1);
+                        }catch (Exception e){
+
+                        }
 
 
-
+                        Toast.makeText(multiPlayerPictureQuiz.this, "Gate3", Toast.LENGTH_LONG).show();
                         myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
                         Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                         myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
@@ -1349,8 +1369,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         startActivity(scoreIntent);
                         if(countDownTimerMine!=null){
                             countDownTimerMine.cancel();}
-                        if(countDownTimer47!=null){
-                            countDownTimer47.cancel();}
+
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
                         if(countDownTimer!=null){
@@ -1360,7 +1379,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
 
-                    }
+                    }*/
 
 
 
@@ -1472,10 +1491,10 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
         }
     }
 
-    public void animManupulation(){
-        switch (binaryPosition){
+    public void animManupulation(int opponentAnswer, int i){
+        switch (i){
             case 1:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim1.setAnimation(R.raw.tickanim);
@@ -1489,7 +1508,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim1.loop(false);
                 }break;
             case 2:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim2.setAnimation(R.raw.tickanim);
@@ -1503,7 +1522,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim2.loop(false);
                 }break;
             case 3:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim3.setAnimation(R.raw.tickanim);
@@ -1517,7 +1536,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim3.loop(false);
                 }break;
             case 4:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim4.setAnimation(R.raw.tickanim);
@@ -1531,7 +1550,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim4.loop(false);
                 }break;
             case 5:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim5.setAnimation(R.raw.tickanim);
@@ -1545,7 +1564,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim5.loop(false);
                 }break;
             case 6:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim6.setAnimation(R.raw.tickanim);
@@ -1559,7 +1578,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim6.loop(false);
                 }break;
             case 7:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim7.setAnimation(R.raw.tickanim);
@@ -1573,7 +1592,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim7.loop(false);
                 }break;
             case 8:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim8.setAnimation(R.raw.tickanim);
@@ -1587,7 +1606,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim8.loop(false);
                 }break;
             case 9:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim9.setAnimation(R.raw.tickanim);
@@ -1601,7 +1620,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     anim9.loop(false);
                 }break;
             case 10:
-                if(this.opponentAnswer ==1){
+                if(opponentAnswer ==1){
                     arroppo.add(1);
                     oppoScoreCounter++;
                     anim10.setAnimation(R.raw.tickanim);
@@ -1629,7 +1648,13 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
 
 
+                            try{
+                                myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listener1);
+                            }catch (Exception e){
 
+                            }
+                            if(countDownTimer47!=null){
+                                countDownTimer47.cancel();}
 
 
                             Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
@@ -1639,6 +1664,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             }catch (Exception e){
 
                             }
+                            Toast.makeText(multiPlayerPictureQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
@@ -1671,8 +1697,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             startActivity(scoreIntent);
                             if(countDownTimerMine!=null){
                                 countDownTimerMine.cancel();}
-                            if(countDownTimer47!=null){
-                                countDownTimer47.cancel();}
+
                             if(countDownTimer50!=null){
                                 countDownTimer50.cancel();}
                             if(countDownTimer!=null){
@@ -1733,8 +1758,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
         for(int i=1;i<=3;i++){
             dataForHorizontalSlide();
         }
-        if(countDownTimer47!=null){
-            countDownTimer47.cancel();}
+
 
         Glide.with(getBaseContext())
                 .load(myProPicUrl)
@@ -1763,7 +1787,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
         }
         alertDialog.show();
 
-        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").addValueEventListener(new ValueEventListener() {
+        listener1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -1772,6 +1796,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
 
+                        if(countDownTimer47!=null){
+                            countDownTimer47.cancel();}
 
 
 
@@ -1788,6 +1814,15 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         secman=59-second;
                         mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
                         myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
+
+                        try{
+                            myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listener1);
+                        }catch (Exception e){
+
+                        }
+
+                        Toast.makeText(multiPlayerPictureQuiz.this, "Gate1", Toast.LENGTH_LONG).show();
+
                         //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                         scoreIntent.putExtra("opponentUID",opponentUID);
                         scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -1816,8 +1851,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         startActivity(scoreIntent);
                         if(countDownTimerMine!=null){
                             countDownTimerMine.cancel();}
-                        if(countDownTimer47!=null){
-                            countDownTimer47.cancel();}
+
                         if(countDownTimer50!=null){
                             countDownTimer50.cancel();}
                         if(countDownTimer!=null){
@@ -1834,8 +1868,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
+        };
+        myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").addValueEventListener(listener1);
 
     }
     @Override

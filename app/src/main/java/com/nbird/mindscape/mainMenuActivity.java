@@ -203,7 +203,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
             try {
                 music.setDataSource(strings[0]);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -426,7 +426,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                  String nameString=snapshot.getValue(String.class);
@@ -439,7 +439,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

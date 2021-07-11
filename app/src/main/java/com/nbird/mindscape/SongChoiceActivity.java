@@ -14,12 +14,15 @@ import android.view.View;
 
 public class SongChoiceActivity extends AppCompatActivity {
     CardView audioquiz,videoquiz;
-    MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer,mp;
     androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_choice);
+
+
+
 
         mainMenuActivity menuActivity=new mainMenuActivity();
         menuActivity.releaseSong();
