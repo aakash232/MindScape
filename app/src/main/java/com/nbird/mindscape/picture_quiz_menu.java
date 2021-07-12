@@ -1170,6 +1170,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                         }
                     });
                 }catch (Exception e){
+                    levelManupulation();
                     highestScore.setText(" Higest Score : null");
                     totalTime.setText(" Total Time : null ");
                     oppoAccu.setText(" Accuracy : null");

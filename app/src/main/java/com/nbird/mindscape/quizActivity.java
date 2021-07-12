@@ -116,7 +116,7 @@ public class quizActivity extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
-
+    songActivity songActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +124,9 @@ public class quizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         loadAds();
+
+        songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         questionTextView=findViewById(R.id.question);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -724,7 +727,11 @@ public class quizActivity extends AppCompatActivity {
                                                 scoreIntent.putExtra("category",category);
                                                 scoreIntent.putExtra("imageurl",imageurl);
                                                 startActivity(scoreIntent);
-                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
                                                 if(countDownTimer!=null){
                                                     countDownTimer.cancel();}
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -739,7 +746,11 @@ public class quizActivity extends AppCompatActivity {
                                         }
 
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
 
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
@@ -752,7 +763,6 @@ public class quizActivity extends AppCompatActivity {
                                         scoreIntent.putExtra("category",category);
                                         scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -764,7 +774,11 @@ public class quizActivity extends AppCompatActivity {
                                     if (position == 11) {
 
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
                                         mInterstitialAd.setAdListener(new AdListener(){
                                             public void onAdClosed(){
                                                 super.onAdClosed();
@@ -780,7 +794,6 @@ public class quizActivity extends AppCompatActivity {
                                                 scoreIntent.putExtra("category",category);
                                                 scoreIntent.putExtra("imageurl",imageurl);
                                                 startActivity(scoreIntent);
-                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                 if(countDownTimer!=null){
                                                     countDownTimer.cancel();}
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -794,6 +807,11 @@ public class quizActivity extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
+
+                                        }
 
 
                                         Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
@@ -807,7 +825,6 @@ public class quizActivity extends AppCompatActivity {
                                         scoreIntent.putExtra("milliholder",milliHolder);
                                         scoreIntent.putExtra("imageurl",imageurl);
                                         startActivity(scoreIntent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -1124,6 +1141,11 @@ public class quizActivity extends AppCompatActivity {
 
                 Toast.makeText(quizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 scoreIntent.putExtra("score", score);
                 scoreIntent.putExtra("lifeline",lifelineSum);
                 scoreIntent.putExtra("minutes",minutes);
@@ -1300,6 +1322,11 @@ public class quizActivity extends AppCompatActivity {
                     countDownTimer.cancel();}
                 alertDialog.cancel();
                 quizActivity.super.onBackPressed();
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }

@@ -149,13 +149,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     int myPosition=0;
     CountDownTimer c;
-
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_player_picture_quiz);
 
-
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         builder=new AlertDialog.Builder(multiPlayerPictureQuiz.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(multiPlayerPictureQuiz.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -1101,7 +1102,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                 }
 
 
-                Toast.makeText(multiPlayerPictureQuiz.this, "Gate4", Toast.LENGTH_LONG).show();
+             //   Toast.makeText(multiPlayerPictureQuiz.this, "Gate4", Toast.LENGTH_LONG).show();
                 Toast.makeText(multiPlayerPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(multiPlayerPictureQuiz.this, onevsoneOnlineScoreCard.class);
                 myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
@@ -1145,6 +1146,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     countDownTimer50.cancel();}
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
 
@@ -1664,7 +1670,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             }catch (Exception e){
 
                             }
-                            Toast.makeText(multiPlayerPictureQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
+                      //      Toast.makeText(multiPlayerPictureQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
@@ -1702,6 +1708,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                                 countDownTimer50.cancel();}
                             if(countDownTimer!=null){
                                 countDownTimer.cancel();}
+                            try{
+                                songActivity.songStop();
+                            }catch (Exception e){
+
+                            }
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                         }
@@ -1821,7 +1832,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                         }
 
-                        Toast.makeText(multiPlayerPictureQuiz.this, "Gate1", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(multiPlayerPictureQuiz.this, "Gate1", Toast.LENGTH_LONG).show();
 
                         //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                         scoreIntent.putExtra("opponentUID",opponentUID);
@@ -1856,6 +1867,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             countDownTimer50.cancel();}
                         if(countDownTimer!=null){
                             countDownTimer.cancel();}
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
@@ -2011,6 +2027,8 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
+
+
                 myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -2022,6 +2040,11 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                             countDownTimer50.cancel();}
                         if(countDownTimer!=null){
                             countDownTimer.cancel();}
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
                         multiPlayerPictureQuiz.super.onBackPressed();
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
@@ -2083,6 +2106,12 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+
 
                 if(countDownTimer47!=null){
                     countDownTimer47.cancel();}

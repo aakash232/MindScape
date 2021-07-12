@@ -1591,6 +1591,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
                 }catch (Exception e){
+                  //  Toast.makeText(tournamentLobbyActivity.this, "Gate 1", Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
                     intent.putExtra("removal",5);
                     intent.putExtra("hostName",hostName);
@@ -1643,6 +1644,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
                    if(playerNum==2){
                         if(!playerStatus89.equals(mAuth.getCurrentUser().getUid())){
+                          //  Toast.makeText(tournamentLobbyActivity.this, "Gate 2", Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
                             intent.putExtra("removal",5);
                             intent.putExtra("hostName",hostName);
@@ -1678,6 +1680,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                 findplayerSatus("player3Status",listener33);
                            //        connectedRef.removeEventListener(listener33);
                         playerNum--;
+                        try{
+                            connectedRef.removeEventListener(listener34);
+                        }catch (Exception e1){
+
+                        }
                    //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
                      //      myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener1);
                        //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener3);
@@ -1698,10 +1705,15 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeValue();
 
                                     deletingPlayerFromLayout(main2Image,image2,name2,accuracy2,totalTimeTaken2,score2);
-                             //       connectedRef.removeEventListener(listener33);
+                                    //connectedRef.removeEventListener(listener33);
                                     findplayerSatus("player2Status",listener32);
-
                                     playerNum--;
+                                    try{
+                                        connectedRef.removeEventListener(listener33);
+                                    }catch (Exception e){
+
+                                    }
+
 
                                //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
                                  //   myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener1);
@@ -1727,6 +1739,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                                     findplayerSatus("player2Status",listener32);
 
                                                     playerNum--;
+
                                         //            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
                                         //            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener1);
                                          //           myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener3);
@@ -1809,6 +1822,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     removeInt2=1;
                     if(playerNum==3){
                         if(!name4.getText().toString().isEmpty()){
+                      //      Toast.makeText(tournamentLobbyActivity.this, "Gate 1", Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
                             intent.putExtra("removal",5);
                             intent.putExtra("hostName",hostName);

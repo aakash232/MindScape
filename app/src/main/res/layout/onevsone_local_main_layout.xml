@@ -285,17 +285,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="200dp"
+                    android:alpha="0"
                     android:clickable="true"
                     android:elevation="1dp"
-                    android:alpha="0"
                     android:foreground="?selectableItemBackground"
                     app:cardCornerRadius="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     cardview:cardBackgroundColor="@color/transparent"
                     cardview:cardElevation="5dp"
-                    cardview:layout_constraintEnd_toEndOf="@+id/linearLayout100"
-                    cardview:layout_constraintStart_toStartOf="@+id/linearLayout100">
+                    shimmer:layout_constraintEnd_toEndOf="@+id/shimmer40"
+                    shimmer:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:id="@+id/batchdisplay1"
@@ -310,8 +310,7 @@
                         <ImageView
                             android:id="@+id/batch99"
                             android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            />
+                            android:layout_height="30dp" />
 
                         <TextView
                             android:id="@+id/levelText99"

@@ -104,12 +104,15 @@ public class prizeQuizMain extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_quiz_main);
 
         loadAds();
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -668,6 +671,11 @@ public class prizeQuizMain extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
                                                 Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -695,7 +703,11 @@ public class prizeQuizMain extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
                                         Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -724,6 +736,11 @@ public class prizeQuizMain extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
                                                 Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -751,7 +768,11 @@ public class prizeQuizMain extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
                                         Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -985,6 +1006,11 @@ final MediaPlayer musicNav;
                     public void onAdClosed(){
                         super.onAdClosed();
                         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
                         Toast.makeText(prizeQuizMain.this, "Time Over", Toast.LENGTH_SHORT).show();
                         Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                         scoreIntent.putExtra("score", score);
@@ -1014,7 +1040,11 @@ final MediaPlayer musicNav;
                     return;
                 }
 
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
                 Toast.makeText(prizeQuizMain.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(prizeQuizMain.this, prizeScoreActivity.class);
                 scoreIntent.putExtra("score", score);
@@ -1097,6 +1127,11 @@ final MediaPlayer musicNav;
                 });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 prizeQuizMain.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();

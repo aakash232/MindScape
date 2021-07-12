@@ -104,10 +104,14 @@ public class customPublicQuiz extends AppCompatActivity {
 
     int rater;
     int rate,ratess,numberOfTimesPlayed;
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_public_quiz);
+
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
@@ -728,6 +732,12 @@ public class customPublicQuiz extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
                                                     buttonMusic();
+                                                    try{
+                                                        songActivity.songStop();
+                                                    }catch (Exception e){
+
+                                                    }
+
                                                     customPublicQuiz.super.onBackPressed();
                                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
@@ -737,7 +747,14 @@ public class customPublicQuiz extends AppCompatActivity {
                                             selectQuiz.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+
                                                     buttonMusic();
+                                                    try{
+                                                        songActivity.songStop();
+                                                    }catch (Exception e){
+
+                                                    }
+
                                                     Intent intent=new Intent(customPublicQuiz.this,customQuizMainMenu.class);
                                                     intent.putExtra("position",cat);
                                                     startActivity(intent);
@@ -1002,6 +1019,12 @@ public class customPublicQuiz extends AppCompatActivity {
                                            buttonHome.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
+                                                   try{
+                                                       songActivity.songStop();
+                                                   }catch (Exception e){
+
+                                                   }
+
                                                    buttonMusic();
                                                    customPublicQuiz.super.onBackPressed();
                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -1012,6 +1035,12 @@ public class customPublicQuiz extends AppCompatActivity {
                                             selectQuiz.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    try{
+                                                        songActivity.songStop();
+                                                    }catch (Exception e){
+
+                                                    }
+
                                                     buttonMusic();
                                                     Intent intent=new Intent(customPublicQuiz.this,customCategoryListActivity.class);
                                                     intent.putExtra("position",cat);
@@ -1361,6 +1390,12 @@ public class customPublicQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(customPublicQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();

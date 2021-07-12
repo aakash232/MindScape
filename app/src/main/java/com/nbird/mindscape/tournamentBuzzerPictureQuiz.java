@@ -90,7 +90,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
     int totalQuestion;
     private int position = 0;
     private int count;
-    CountDownTimer countDownTimer;
+    CountDownTimer countDownTimer,countDownTimeralerDialog;
 
     String minutestext, secondtext;
     int secondSecond;
@@ -115,12 +115,15 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_buzzer_picture_quiz);
 
         loadAds();
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         partypoper = (LottieAnimationView) findViewById(R.id.partypoper);
         party2 = (LottieAnimationView) findViewById(R.id.party2);
@@ -607,23 +610,57 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         }
         timePerQuestion = totalSecond / totalQuestion;
         secondSecond = timePerQuestion;
-        quizTime(timePerQuestion);
-        new CountDownTimer(1000*5000,1000){
+
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(tournamentBuzzerPictureQuiz.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(tournamentBuzzerPictureQuiz.this).inflate(R.layout.buzzerpicturedialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        final TextView textView=view1.findViewById(R.id.textTitle);
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        countDownTimeralerDialog=new CountDownTimer(1000*20,1000){
             @Override
-            public void onTick(long l) {
-                picWaiter();
+            public void onTick(long millisUntilFinished) {
+                textView.setText("Quiz Starts In "+ millisUntilFinished/1000 + " Seconds. Picture Is Getting Loaded!!!Please Wait.");
             }
 
             @Override
             public void onFinish() {
+                alertDialog.dismiss();
+                quizTime(timePerQuestion);
+                new CountDownTimer(1000*5000,1000){
+                    @Override
+                    public void onTick(long l) {
+                        picWaiter();
+                    }
 
+                    @Override
+                    public void onFinish() {
+
+                    }
+                }.start();
             }
         }.start();
 
 
 
 
+
+
     }
+
+
+
+
 
 
 
@@ -894,6 +931,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             public void onAdClosed(){
                 super.onAdClosed();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+                if(countDownTimeralerDialog!=null){
+                    countDownTimeralerDialog.cancel();
+                }
                 Intent scoreIntent = new Intent(tournamentBuzzerPictureQuiz.this, tournamentBuzzerScoreCard.class);
                 scoreIntent.putExtra("score", myScore);
                 scoreIntent.putExtra("numberOfPlayers", numberOfPlayers);
@@ -932,7 +977,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             return;
         }
 
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
 
+        }
+        if(countDownTimeralerDialog!=null){
+            countDownTimeralerDialog.cancel();
+        }
         Intent scoreIntent = new Intent(tournamentBuzzerPictureQuiz.this, tournamentBuzzerScoreCard.class);
         scoreIntent.putExtra("score", myScore);
         scoreIntent.putExtra("numberOfPlayers", numberOfPlayers);
@@ -2700,6 +2752,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+                if(countDownTimeralerDialog!=null){
+                    countDownTimeralerDialog.cancel();
+                }
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentBuzzerPictureQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -2812,6 +2872,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                 });
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
+                }
+                if(countDownTimeralerDialog!=null){
+                    countDownTimeralerDialog.cancel();
+                }
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
                 }
                 alertDialog.dismiss();
                 tournamentBuzzerPictureQuiz.super.onBackPressed();

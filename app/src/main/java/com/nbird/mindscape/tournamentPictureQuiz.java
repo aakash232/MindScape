@@ -123,12 +123,15 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_picture_quiz);
 
         loadAds();
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         anim1=(LottieAnimationView) findViewById(R.id.anim1);
         anim2=(LottieAnimationView) findViewById(R.id.anim2);
@@ -1688,6 +1691,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onAdClosed(){
                 super.onAdClosed();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
                 scoreIntent.putExtra("score", score);
                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -2344,6 +2352,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     public void onAdClosed(){
                         super.onAdClosed();
                         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
                         Toast.makeText(tournamentPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                         Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
                         scoreIntent.putExtra("score", score);
@@ -2388,7 +2401,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     return;
                 }
 
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
                 Toast.makeText(tournamentPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
                 scoreIntent.putExtra("score", score);
@@ -2516,6 +2533,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -2621,6 +2643,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();

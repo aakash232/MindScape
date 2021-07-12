@@ -97,11 +97,14 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_singleplayer);
         loadAds();
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -729,6 +732,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
+
                                                 Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline", lifelineSum);
@@ -756,6 +765,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         }
 
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
+
+                                        }
 
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                         scoreIntent.putExtra("score", score);
@@ -785,6 +799,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
+
                                                 Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline", lifelineSum);
@@ -811,6 +831,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
+
+                                        }
 
 
                                         Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
@@ -1060,6 +1085,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 }
             }
             public void onFinish() {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
 
                 Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
@@ -1217,6 +1247,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
 
                 activity_picture_singlePlayer.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

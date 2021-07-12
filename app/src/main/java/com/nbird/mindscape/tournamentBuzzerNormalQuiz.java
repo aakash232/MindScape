@@ -110,12 +110,15 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_buzzer_normal_quiz);
 
         loadAds();
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
         party2=(LottieAnimationView) findViewById(R.id.party2);
@@ -818,6 +821,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             public void onAdClosed(){
                 super.onAdClosed();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 Intent scoreIntent = new Intent(tournamentBuzzerNormalQuiz.this, tournamentBuzzerScoreCard.class);
                 scoreIntent.putExtra("score", myScore);
                 scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
@@ -855,7 +863,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             return;
         }
 
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
 
+        }
         Intent scoreIntent = new Intent(tournamentBuzzerNormalQuiz.this, tournamentBuzzerScoreCard.class);
         scoreIntent.putExtra("score", myScore);
         scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
@@ -2506,6 +2518,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -2617,7 +2634,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 });
                  if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
                 alertDialog.dismiss();
                 tournamentBuzzerNormalQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

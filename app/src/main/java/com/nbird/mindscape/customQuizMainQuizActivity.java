@@ -99,10 +99,14 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
     CountDownTimer c;
     int cat;
     String key;
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_quiz_main_quiz);
+
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
@@ -652,6 +656,12 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
                                                     buttonMusic();
+                                                    try{
+                                                        songActivity.songStop();
+                                                    }catch (Exception e){
+
+                                                    }
+
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
@@ -761,6 +771,12 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
                                                     buttonMusic();
+                                                    try{
+                                                        songActivity.songStop();
+                                                    }catch (Exception e){
+
+                                                    }
+
                                                     Intent intent=new Intent(customQuizMainQuizActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
@@ -1067,6 +1083,12 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                 });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+
                 customQuizMainQuizActivity.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();

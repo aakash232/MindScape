@@ -145,13 +145,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     int myPosition=0;
     int setNumber;
-
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onevsone_quiz);
 
-
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         builder=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -1169,9 +1170,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
 
-                Toast.makeText(onevsoneQuizActivity.this, "Gate4", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(onevsoneQuizActivity.this, "Gate4", Toast.LENGTH_LONG).show();
 
                 scoreIntent.putExtra("opponentUID",opponentUID);
                 scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -1622,8 +1627,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             }
 
 
-                            Toast.makeText(onevsoneQuizActivity.this, "Gate2", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(onevsoneQuizActivity.this, "Gate2", Toast.LENGTH_LONG).show();
+                            try{
+                                songActivity.songStop();
+                            }catch (Exception e){
 
+                            }
                             minman=2-minutes;
                             secman=59-second;
                             mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
@@ -1777,9 +1786,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
 
 
-                       Toast.makeText(onevsoneQuizActivity.this, "Gate1", Toast.LENGTH_LONG).show();
+                      // Toast.makeText(onevsoneQuizActivity.this, "Gate1", Toast.LENGTH_LONG).show();
 
+                       try{
+                           songActivity.songStop();
+                       }catch (Exception e){
 
+                       }
                        //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
                        scoreIntent.putExtra("opponentUID",opponentUID);
                        scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -1975,6 +1988,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                         }catch (Exception e){
 
                         }
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
 
                         Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);
                         startActivity(intent);
@@ -2040,7 +2058,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
 
                 alertDialog.dismiss();
                 Intent intent=new Intent(onevsoneQuizActivity.this,mainMenuActivity.class);

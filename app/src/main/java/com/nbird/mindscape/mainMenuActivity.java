@@ -24,7 +24,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -36,7 +35,6 @@ import android.provider.MediaStore;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,14 +76,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static java.lang.Integer.parseInt;
 
@@ -190,7 +185,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
     int timerStarterInt;
 
-
+    int highjack=0;
 
     private class DownloadData extends AsyncTask<String,Void,String> {
         private static final String TAG = "DownloadData";
@@ -205,9 +200,23 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         @Override
         protected String doInBackground(String... strings) {
 
+            final Random rand = new Random();
+
+            int i = 1;
+
+            try{
+                i = rand.nextInt(5)+1;
+            }catch (Exception e){
+
+            }
+
+
+
 
             try {
-                music.setDataSource(strings[0]);
+               // music.setDataSource(strings[0]);
+                music = MediaPlayer.create(mainMenuActivity.this, l.get(i));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -246,7 +255,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     }
                 }
             });
-            music.prepareAsync();
+            try {
+                music.prepare();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
             return null;
@@ -489,7 +502,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             editorsongHolder.commit();
 
             try {
-                songURLDownload();
+             //   songURLDownload();
             }catch (Exception e){
 
             }
@@ -639,6 +652,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
            }
         removalOfLastTournamentIfHost();
 
+
+
     }
 
 
@@ -686,7 +701,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                             }
 
 
-                            songURLDownload();
+                           // songURLDownload();
                         }
 
                     }
@@ -1401,7 +1416,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam=new ArrayList<>();
         parto();
         music = new MediaPlayer();
-        timerStarter();
+     //   timerStarter();
         RecyclerView myrv=(RecyclerView) findViewById(R.id.recyclerview);
         RecyclerViewAdapter myAdapter=new RecyclerViewAdapter(this,lstExam,setter,music,countDownTimer);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
@@ -1433,13 +1448,13 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
         lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
-        lstExam.add(new Modes("Tournament Mode",R.drawable.tournament,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
+        lstExam.add(new Modes("Tournament Mode",R.drawable.leaguefinalfinal,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
         //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"Buzzzz! A knowledgeable and alert mind is the one which rules. Buzz with players across the world in this mode of knowledge and Agility!"));
         lstExam.add(new Modes("Audio And Video",R.drawable.svfinal,"The ultimate test of senses! A knowledgeable and alert mind is the one which rules. Fight and make your way up!"));
         lstExam.add(new Modes("Custom Quiz",R.drawable.customquizfinal3,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
         lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
-        lstExam.add(new Modes("League (Coming Soon)",R.drawable.league2,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
+        lstExam.add(new Modes("League (Coming Soon)",R.drawable.tournament,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
     }
 
 
@@ -2979,65 +2994,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             }
         });
     }
-    public void songURLDownload(){
-        final SharedPreferences songStopper = this.getSharedPreferences("SongStopperManu", 0);
-        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
-
-        int p=songStopper.getInt("songStopper",1);
-
-        if(p==1) {
-            editorsongStopper.putInt("songStopper", 0);
-            editorsongStopper.commit();
-        }else{
-            music = new MediaPlayer();
-        }
 
 
-
-        finalManu=1;
-
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
-
-        final Random rand = new Random();
-
-        int i = 1;
-
-        try{
-            i = rand.nextInt(29)+1;
-        }catch (Exception e){
-
-        }
-
-
-        /* */
-
-
-        String musicNameString="Song"+i+".mp3";
-
-        try{
-
-            StorageReference urlref = storageRef.child("Songs/" + musicNameString);
-            urlref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-            {
-                @Override
-                public void onSuccess(Uri downloadUrl)
-                {
-
-                    musicURLString=downloadUrl.toString();
-
-
-
-                    DownloadData downloadData=new DownloadData();
-                    downloadData.execute(musicURLString);
-
-                }
-            });
-
-        }catch (Exception e) {
-
-        }
-
-    }
 }

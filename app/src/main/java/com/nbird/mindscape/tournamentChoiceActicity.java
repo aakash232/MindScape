@@ -444,10 +444,15 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                         myRef.child("Lobby").child(String.valueOf(i)).child("gameFinder").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.getValue(Integer.class)==0){
-                                    listRoom.add(dataSnapshot1.getValue(roomDataHolder.class));
-                                    categoryAdapter.notifyDataSetChanged();
+                                try{
+                                    if(snapshot.getValue(Integer.class)==0){
+                                        listRoom.add(dataSnapshot1.getValue(roomDataHolder.class));
+                                        categoryAdapter.notifyDataSetChanged();
+                                    }
+                                }catch (Exception e){
+
                                 }
+
                             }
 
                             @Override

@@ -113,14 +113,15 @@ public class prizePictureQuiz extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
-
+    songActivity songActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_picture_quiz);
 
         loadAds();
-
+         songActivity=new songActivity(this);
+        songActivity.startMusic();
 
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
@@ -704,6 +705,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
                                                 Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -732,7 +738,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
                                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
                                         scoreIntent.putExtra("lifeline",lifelineSum);
@@ -761,6 +771,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                try{
+                                                    songActivity.songStop();
+                                                }catch (Exception e){
+
+                                                }
                                                 Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -789,7 +804,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             return;
                                         }
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
 
                                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                         scoreIntent.putExtra("score", score);
@@ -1033,6 +1052,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     public void onAdClosed(){
                         super.onAdClosed();
                         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
                         Toast.makeText(prizePictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                         scoreIntent.putExtra("score", score);
@@ -1060,7 +1084,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     mInterstitialAd.show();
                     return;
                 }
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
                 Toast.makeText(prizePictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                 scoreIntent.putExtra("score", score);
@@ -1142,6 +1170,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                 });
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 prizePictureQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
