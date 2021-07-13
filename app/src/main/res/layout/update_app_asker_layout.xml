@@ -56,9 +56,9 @@
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:padding="10dp"
-                android:text="Please Update The App! A New Version Is Available In The Play Store!!"
+                android:text="Please Update The App! A New Version Is Available In Play Store!!"
                 android:textColor="#000000"
-                android:textSize="23sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 />
 
@@ -93,7 +93,7 @@
                 android:scaleY="0.95"
                 android:text="No,Not Now"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
                 app:layout_constraintStart_toStartOf="@+id/layoutDialog" />
