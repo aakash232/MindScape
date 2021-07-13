@@ -1223,9 +1223,14 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         Random rand = new Random();
 
         // Generate random integers in range 0 to 999
+        int setRandomNumber;
+        final int categoryRandomNumber = rand.nextInt(7)+1;
+        if(categoryRandomNumber<=5||categoryRandomNumber==7){
+            setRandomNumber = rand.nextInt(49)+1;
+        }else{
+            setRandomNumber = rand.nextInt(199)+1;
+        }
 
-        final int categoryRandomNumber = rand.nextInt(4)+1;  //NEED TO CHANGE HERE
-        int setRandomNumber = rand.nextInt(50)+1;   //NEED TO CHANGE HERE
 
 
 
@@ -1341,6 +1346,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     public void onClick(View view) {
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(mainMenuActivity.this,welcomeActivity.class));
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
 
                     }
@@ -1355,39 +1361,59 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_profile:
                 Intent intent=new Intent(mainMenuActivity.this,profile.class);
                 startActivity(intent);
+               overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_about:
                 Intent intent12=new Intent(mainMenuActivity.this,AboutUsActivity.class);
                 startActivity(intent12);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_rate:
                 Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(linkdata));
                 startActivity(browserIntent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_tos:
                 Intent browserIntenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
                 startActivity(browserIntenttos);
+               overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_ref:
                 Intent browserIntenttos1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FRefund%20Policy-converted.pdf?alt=media&token=2679a62d-0b1a-4b57-8eb0-903295225076"));
                 startActivity(browserIntenttos1);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_ps:
                 Intent browserIntenttos2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
                 startActivity(browserIntenttos2);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_help:
                 Intent helpguide = new Intent(mainMenuActivity.this,HelpGuide1.class);
                 startActivity(helpguide);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_contact:
-                String[] TO = {"niftynile@gmail.com"};
 
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.setType("*/*");
-                email.putExtra(Intent.EXTRA_EMAIL, TO);
-                if(email.resolveActivity(getPackageManager()) != null)
-                    startActivity(email);
+                Intent intent2=new Intent(Intent.ACTION_SEND);
+                String[] recipients={"niftynile@gmail.com"};
+                intent2.putExtra(Intent.EXTRA_EMAIL, recipients);
+               // intent2.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
+               // intent2.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
+               // intent2.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");
+                intent2.setType("text/html");
+                intent2.setPackage("com.google.android.gm");
+                startActivity(Intent.createChooser(intent2, "Send mail"));
+               overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+
+
+                //String[] TO = {"niftynile@gmail.com"};
+
+               // Intent email = new Intent(Intent.ACTION_SEND);
+               // email.setType("*/*");
+               // email.putExtra(Intent.EXTRA_EMAIL, TO);
+               // if(email.resolveActivity(getPackageManager()) != null)
+               //     startActivity(email);
                 break;
             default :
                 return true;

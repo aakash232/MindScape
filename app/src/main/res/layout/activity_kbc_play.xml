@@ -38,18 +38,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/play_option_border"
             android:onClick="score"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SHARE"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
-            android:textSize="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/play_option_border"/>
-        <Button
+         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EXIT"

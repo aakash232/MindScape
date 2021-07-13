@@ -258,11 +258,13 @@ public class picture_quiz_menu extends AppCompatActivity {
         Random rand = new Random();
 
         // Generate random integers in range 0 to 999
-
-        final int categoryRandomNumber = rand.nextInt(3) + 1;  //NEED TO CHANGE HERE
-        int setRandomNumber = rand.nextInt(4) + 1;   //NEED TO CHANGE HERE
-
-
+        int setRandomNumber;
+        final int categoryRandomNumber = rand.nextInt(7)+1;
+        if(categoryRandomNumber<=5||categoryRandomNumber==7){
+            setRandomNumber = rand.nextInt(49)+1;
+        }else{
+            setRandomNumber = rand.nextInt(199)+1;
+        }
         myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
 
 

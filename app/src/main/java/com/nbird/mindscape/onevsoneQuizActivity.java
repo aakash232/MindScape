@@ -787,7 +787,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                                 enableOption(true);
                                 position++;
                                 LLTrueManupulator();
-                                battleGroundFor1vs1Function(num123);
+
 
 
 
@@ -970,6 +970,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 });
 
             myanimManuCorrect();
+            battleGroundFor1vs1Function(1);
 
             num123=1;
             arrlist.add(1);
@@ -990,6 +991,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     }
                 });
             myanimManuWrong();
+            battleGroundFor1vs1Function(0);
+
 
             num123=0;
             arrlist.add(2);
@@ -1353,10 +1356,10 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child(String.valueOf(questionNumber)).setValue(status).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                questionNumber++;
+
             }
         });
-
+       questionNumber++;
    }
 
    public void opponentDataRetrieving(final int i){
