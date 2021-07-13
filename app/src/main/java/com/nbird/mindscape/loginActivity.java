@@ -201,6 +201,7 @@ public class loginActivity extends AppCompatActivity {
                                                         Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
                                                         Intent intent = new Intent(loginActivity.this, mainMenuActivity.class);
                                                         intent.putExtra("firstTime", 0);
+                                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                         startActivity(intent);
                                                         loadingDialog.dismiss();
                                                         finish();
@@ -223,6 +224,7 @@ public class loginActivity extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "Logged In Successfully!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(loginActivity.this, mainMenuActivity.class);
                             intent.putExtra("firstTime", 1);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             startActivity(intent);
                             loadingDialog.dismiss();
                             finish();
@@ -246,8 +248,12 @@ public class loginActivity extends AppCompatActivity {
                     }
                 }else{
 
-                    Toast.makeText(getBaseContext(), "Error!"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "User Email Is Not Registered! Please Register Your Emailniftynile@gmail.com", Toast.LENGTH_LONG).show();
                     loadingDialog.dismiss();
+                    Intent intent=new Intent(loginActivity.this,registerActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
 
                 }
             }

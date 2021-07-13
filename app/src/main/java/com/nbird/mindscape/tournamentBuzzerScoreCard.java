@@ -646,6 +646,13 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 }
                             });
 
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameFinder").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                }
+                            });
+
 
                             if(countDownTimer!=null){
                                 countDownTimer.cancel();

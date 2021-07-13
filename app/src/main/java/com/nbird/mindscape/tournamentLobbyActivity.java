@@ -886,7 +886,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     }
                                 });
                             }catch (Exception e){
-                                Toast.makeText(tournamentLobbyActivity.this, "Cannot Remove", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                         @Override
@@ -1554,15 +1554,15 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             public void onTick(long l) {
 
                 if(playerNum==2){
-                    removeActualNotAdminBoss("player2Uid");
+                    removeActualNotAdminBoss("player2Uid","player2Status");
 
                 }
                 if(playerNum==3){
-                    removeActualNotAdminBoss("player3Uid");
+                    removeActualNotAdminBoss("player3Uid","player3Status");
 
                 }
                 if(playerNum==4){
-                    removeActualNotAdminBoss("player4Uid");
+                    removeActualNotAdminBoss("player4Uid","player4Status");
 
                 }
 
@@ -1576,7 +1576,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void removeActualNotAdminBoss(final String player2Uid){
+    public void removeActualNotAdminBoss(final String player2Uid, final String playerStatus){
         myRef.child("Lobby").child(String.valueOf(roomCode1)).child(player2Uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -1592,6 +1592,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
                 }catch (Exception e){
                   //  Toast.makeText(tournamentLobbyActivity.this, "Gate 1", Toast.LENGTH_LONG).show();
+                    myRef.child("Lobby").child(String.valueOf(roomCode1)).child(playerStatus).onDisconnect().cancel();
                     Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
                     intent.putExtra("removal",5);
                     intent.putExtra("hostName",hostName);
@@ -1645,6 +1646,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                    if(playerNum==2){
                         if(!playerStatus89.equals(mAuth.getCurrentUser().getUid())){
                           //  Toast.makeText(tournamentLobbyActivity.this, "Gate 2", Toast.LENGTH_LONG).show();
+
                             Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
                             intent.putExtra("removal",5);
                             intent.putExtra("hostName",hostName);
@@ -1677,14 +1679,29 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
                                 deletingPlayerFromLayout(main2Image,image2,name2,accuracy2,totalTimeTaken2,score2);
-                                findplayerSatus("player3Status",listener33);
-                           //        connectedRef.removeEventListener(listener33);
-                        playerNum--;
                         try{
-                            connectedRef.removeEventListener(listener34);
+                            //connectedRef.removeEventListener(listener34);
+                            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").onDisconnect().cancel();
                         }catch (Exception e1){
 
                         }
+                                findplayerSatus("player3Status",listener33);
+                           //        connectedRef.removeEventListener(listener33);
+                        playerNum--;
+
+
+                        try{
+                            main4Image.setImageDrawable(null);
+                            image4.setImageDrawable(null);
+                            name4.setText("");
+                            accuracy4.setText("");
+                            totalTimeTaken4.setText("");
+                            score4.setText("");
+                        }catch (Exception e1){
+
+                        }
+
+
                    //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
                      //      myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener1);
                        //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener3);
@@ -1703,16 +1720,17 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                 if(name4.getText().toString().isEmpty()){
                                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Status").removeValue();
                                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeValue();
+                                    try{
+                                        // connectedRef.removeEventListener(listener33);
+                                        myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Status").onDisconnect().cancel();
+                                    }catch (Exception e){
 
+                                    }
                                     deletingPlayerFromLayout(main2Image,image2,name2,accuracy2,totalTimeTaken2,score2);
                                     //connectedRef.removeEventListener(listener33);
                                     findplayerSatus("player2Status",listener32);
                                     playerNum--;
-                                    try{
-                                        connectedRef.removeEventListener(listener33);
-                                    }catch (Exception e){
 
-                                    }
 
 
                                //     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
@@ -1733,14 +1751,22 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeValue();
                                                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").removeValue();
+                                                    try{
+                                                        // connectedRef.removeEventListener(listener33);
+                                                        myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Status").onDisconnect().cancel();
+                                                    }catch (Exception e){
 
+                                                    }
                                                     deletingPlayerFromLayout(main2Image,image2,name2,accuracy2,totalTimeTaken2,score2);
                                              //       connectedRef.removeEventListener(listener33);
                                                     findplayerSatus("player2Status",listener32);
 
                                                     playerNum--;
 
-                                        //            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
+                                                //    myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").onDisconnect().cancel();
+
+
+                                                    //            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener2);
                                         //            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener1);
                                          //           myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener3);
 
@@ -1827,6 +1853,12 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             intent.putExtra("removal",5);
                             intent.putExtra("hostName",hostName);
                             playerNum=0;
+                            try{
+                                // connectedRef.removeEventListener(listener33);
+                                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener4);
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener4);
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener4);
@@ -1851,14 +1883,41 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeValue();
+                                Toast.makeText(tournamentLobbyActivity.this, "gATE1", Toast.LENGTH_LONG).show();
                                 deletingPlayerFromLayout(main3Image,image3,name3,accuracy3,totalTimeTaken3,score3);
+                                try{
+                                    // connectedRef.removeEventListener(listener33);
+                                    myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").onDisconnect().cancel();
+                                }catch (Exception e){
+
+                                }
+                                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").removeValue();
                                 findplayerSatus("player3Status",listener33);
                                 playerNum--;
-                                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Status").removeValue();
+                                try{
+                                    main4Image.setImageDrawable(null);
+                                    image4.setImageDrawable(null);
+                                    name4.setText("");
+                                    accuracy4.setText("");
+                                    totalTimeTaken4.setText("");
+                                    score4.setText("");
+                                }catch (Exception e1){
+
+                                }
                             }
                         });
                     }else if(playerNum==2||playerNum==1){
                         deletingPlayerFromLayout(main3Image,image3,name3,accuracy3,totalTimeTaken3,score3);
+                        try{
+                            main4Image.setImageDrawable(null);
+                            image4.setImageDrawable(null);
+                            name4.setText("");
+                            accuracy4.setText("");
+                            totalTimeTaken4.setText("");
+                            score4.setText("");
+                        }catch (Exception e1){
+
+                        }
                     }
 
                 }
@@ -2081,7 +2140,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     }
                                 });
                             }catch (Exception e){
-                                Toast.makeText(tournamentLobbyActivity.this, "Cannot Remove", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                         @Override
@@ -3613,15 +3672,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
     public void dataForHorizontalSlide() {
 
-        // create instance of Random class
         Random rand = new Random();
 
         // Generate random integers in range 0 to 999
-
-        int categoryRandomNumber = rand.nextInt(3) + 1;  //NEED TO CHANGE HERE
-        int setRandomNumber = rand.nextInt(4) + 1;   //NEED TO CHANGE HERE
-
-
+        int setRandomNumber;
+        final int categoryRandomNumber = rand.nextInt(7)+1;
+        if(categoryRandomNumber<=5||categoryRandomNumber==7){
+            setRandomNumber = rand.nextInt(49)+1;
+        }else{
+            setRandomNumber = rand.nextInt(199)+1;
+        }
         myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
 
 

@@ -35,6 +35,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -86,10 +89,21 @@ public class KbcSetup extends AppCompatActivity {
     ImageView expertImage;
     TextView titleText;
     String userName;
+    private InterstitialAd mInterstitialAd;
+
+    private void loadAds(){
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kbc_setup);
+
+        loadAds();
 
         kbcQueMus=MediaPlayer.create(KbcSetup.this,R.raw.kbc_que_start);
         kbcCountMus=MediaPlayer.create(KbcSetup.this,R.raw.kb_tick);
@@ -644,9 +658,22 @@ public class KbcSetup extends AppCompatActivity {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(KbcSetup.this,KbcPlay.class);
-                startActivity(intent);
-                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                kbcQueMus.reset();kbcQueMus.release();
+                kbcCountMus.reset();kbcCountMus.release();
+                if(countDownTimer!=null){
+                    countDownTimer.cancel();}
+                KbcSetup.super.onBackPressed();
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
 
             }
@@ -889,6 +916,7 @@ public class KbcSetup extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         musicManu();
+
                         Intent scoreIntent = new Intent(KbcSetup.this, KbcScoreActivity.class);
                         scoreIntent.putExtra("score", score);
                         startActivity(scoreIntent);
@@ -1045,6 +1073,29 @@ public class KbcSetup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 musicManu();
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
+                        i.putExtra("string",wrongString);
+                        i.putExtra("score",score);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();
+                        }
+                        startActivity(i);
+                        alertDialog.cancel();
+                        finish();
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return;
+                }
+
                 Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
                 i.putExtra("string",wrongString);
                 i.putExtra("score",score);
@@ -1150,6 +1201,27 @@ public class KbcSetup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 musicManu();
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
+                        i.putExtra("string",wrongString);
+                        i.putExtra("score",score);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();
+                        }
+                        startActivity(i);
+                        alertDialog.cancel();
+                        finish();
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return;
+                }
                 Intent i = new Intent(KbcSetup.this,KbcScoreActivity.class);
                 i.putExtra("string",wrongString);
                 i.putExtra("score",score);

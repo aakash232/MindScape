@@ -978,4 +978,8 @@ public class scoreActivity extends AppCompatActivity {
         });
     }
 
+    public void onBackPressed() {
+
+    }
+
 }

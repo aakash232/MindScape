@@ -391,7 +391,7 @@ public class profile extends AppCompatActivity {
     }
 
     public void imageUploader(String urlAva,String Str){
-        myRef.child("leaderBoard").child(Str).child(mAuth.getCurrentUser().getUid()).setValue(urlAva).addOnCompleteListener(new OnCompleteListener<Void>() {
+        myRef.child("leaderBoard").child(Str).child(mAuth.getCurrentUser().getUid()).child("imageUrl").setValue(urlAva).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

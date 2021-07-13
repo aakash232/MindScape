@@ -1295,25 +1295,6 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 oppoScore.setText(" Total Score : "+opponentScorebro);
 
 
-                                final ArrayList<BarEntry> visitors=new ArrayList<>();
-                                visitors.add(new BarEntry(1,score));
-                                visitors.add(new BarEntry(2, oppoScoreCounter));
-
-
-                                BarDataSet barDataSet=new BarDataSet(visitors,"Correct Answer");
-                                barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-                                barDataSet.setValueTextSize(3f);
-
-                                BarData barData=new BarData(barDataSet);
-
-                                barChart.setFitBars(true);
-                                barChart.setData(barData);
-                                barChart.getDescription().setText("Green Is Yours And Yellow Is For "+opponentUsername);
-                                barChart.getDescription().setTextSize(3f);
-                                barChart.animateY(2000);
-
-
 
                                 ArrayList<PieEntry> visitors1=new ArrayList<>();
 
@@ -1324,6 +1305,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 PieDataSet pieDataSet=new PieDataSet(visitors1,"");
                                 pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
                                 pieDataSet.setValueTextColor(Color.BLACK);
+                                pieDataSet.setValueLineColor(R.color.white);
                                 pieDataSet.setValueTextSize(5f);
 
                                 PieData pieData=new PieData(pieDataSet);
@@ -1425,6 +1407,25 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                 oppoAccu.setText("Accuracy : "+accOppo+"%");
                                 int myWrong=10-oppoScoreMate;
                                 oppoRatio.setText("Correct/Wrong : "+oppoScoreMate+"/"+myWrong);
+
+                                final ArrayList<BarEntry> visitors=new ArrayList<>();
+                                visitors.add(new BarEntry(1,score));
+                                visitors.add(new BarEntry(2, oppoScoreMate));
+
+
+                                BarDataSet barDataSet=new BarDataSet(visitors,"Correct Answer");
+                                barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+                                barDataSet.setValueTextSize(10f);
+
+                                BarData barData=new BarData(barDataSet);
+
+                                barChart.setFitBars(true);
+                                barChart.setData(barData);
+                                barChart.getDescription().setText("Green Is Yours And Yellow Is For "+opponentUsername);
+                                barChart.getDescription().setTextSize(3f);
+                                barChart.animateY(2000);
+
 
                             }
 
@@ -1954,6 +1955,27 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             }
         });
     }
-
+    public void onBackPressed() {
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+        myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
+        myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
+        myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
+        myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
+        myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+        deleteData();
+        Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
+    }
 
 }
