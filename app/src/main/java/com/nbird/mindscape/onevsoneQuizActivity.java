@@ -743,6 +743,14 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
+
     public void fireBaseData(int setNumber){
         myRef.child("NormalQuizBIGJSON").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

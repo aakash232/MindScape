@@ -418,13 +418,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_gravity="end"
             android:background="@drawable/circular_shape_view"
             android:fontFamily="@font/mouse_memoirs"
             android:gravity="center"
             android:text="Hello! I am Dr. Brain"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="20dp" />
 

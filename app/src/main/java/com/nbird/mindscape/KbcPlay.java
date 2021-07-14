@@ -58,6 +58,12 @@ public class KbcPlay extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
     public void playB(View view){
         final MediaPlayer musicNav;
         musicNav = MediaPlayer.create(KbcPlay.this, R.raw.finalbuttonmusic);

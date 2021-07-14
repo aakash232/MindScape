@@ -764,6 +764,11 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 
 
     public void animationListner(){

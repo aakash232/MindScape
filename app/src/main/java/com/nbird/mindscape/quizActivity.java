@@ -125,6 +125,7 @@ public class quizActivity extends AppCompatActivity {
 
         loadAds();
 
+
         songActivity=new songActivity(this);
         songActivity.startMusic();
 
@@ -655,8 +656,6 @@ public class quizActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 
@@ -1355,5 +1354,13 @@ public class quizActivity extends AppCompatActivity {
     public void adManu(){
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
 
 }

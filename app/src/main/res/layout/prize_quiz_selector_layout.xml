@@ -79,10 +79,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:text="Aakash Text To be Written hERE"
+                    android:text="Event Time!"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:layout_margin="5dp"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -92,8 +93,9 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:text="Aakash Text To be Written hERE Aakash Text To be Written hERE Aakash Text To be Written hERE"
+                    android:text="Play Event quizzes and GET A CHANCE TO WIN CASH PRIZES! \nAce the quiz to be on top and get rewarded. Yay!"
                     android:textColor="@color/black"
+                    android:textAlignment="center"
                     android:textSize="15dp" />
 
 

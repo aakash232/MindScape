@@ -917,6 +917,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
     public void answerStatus(String playerAnswerStatusName,int i) {
         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswerStatusName).child(String.valueOf(questionCounter)).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
