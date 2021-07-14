@@ -89,6 +89,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     private int position=0, score=0, count;
     private int setNo;
     private InterstitialAd mInterstitialAd;
+    songActivity songActivity;
 
     private void loadAds(){
 
@@ -97,7 +98,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
-    songActivity songActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1277,6 +1278,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
     }
 
 

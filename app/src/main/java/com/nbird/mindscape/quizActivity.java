@@ -659,8 +659,6 @@ public class quizActivity extends AppCompatActivity {
 
 
 
-
-
     public void fireBaseData(int setNumber){
         myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

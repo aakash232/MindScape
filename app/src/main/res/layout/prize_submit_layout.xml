@@ -104,7 +104,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/mouse_memoirs"
-                android:text="You Really Want To Quit?You Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To Quit"
+                android:text="OPTIONAL: Entering UPI ID will make it easier for us to stay connected for post-quiz prizes, If eligible. The sole purpose is to make the reward procedure easy."
                 android:gravity="left"
                 android:textColor="#000000"
                 android:textSize="15sp"

@@ -784,6 +784,13 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
     public void animationListner(){
         playOrPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override

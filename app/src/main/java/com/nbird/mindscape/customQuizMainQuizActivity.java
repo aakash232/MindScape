@@ -575,6 +575,12 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
     public void buttonMusic(){
         final MediaPlayer musicNav;
         musicNav = MediaPlayer.create(customQuizMainQuizActivity.this, R.raw.finalbuttonmusic);

@@ -235,4 +235,11 @@ public class HelpGuide3 extends AppCompatActivity {
             }); */
         fadeIn.start();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
 }

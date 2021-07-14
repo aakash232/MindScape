@@ -631,7 +631,11 @@ public class prizePictureQuiz extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 
     public void picWaiter(){
         if(questionImage.getDrawable() != null){
