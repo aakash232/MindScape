@@ -1417,6 +1417,8 @@ public class profile extends AppCompatActivity {
                 }
             });
 
+
+
         }
 
         public void pieChart(){
@@ -1526,6 +1528,10 @@ public class profile extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
     public void correctArrFun2(){
         mainbarGroupChartManuOnlineMode("Sunday",1);

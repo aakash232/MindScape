@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -60,10 +62,17 @@ public class tournamentChoiceActicity extends AppCompatActivity {
     int mam=0;
     private List<roomDataHolder> list123;
     androidx.appcompat.widget.Toolbar toolbar;
+    private void loadAds(){
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_choice_acticity);
+
+        loadAds();
 
         builder1 = new AlertDialog.Builder(tournamentChoiceActicity.this, R.style.AlertDialogTheme);
         view1 = LayoutInflater.from(tournamentChoiceActicity.this).inflate(R.layout.tournment_join_create_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer), false);

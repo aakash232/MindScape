@@ -1883,7 +1883,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeValue();
-                                Toast.makeText(tournamentLobbyActivity.this, "gATE1", Toast.LENGTH_LONG).show();
+                            //    Toast.makeText(tournamentLobbyActivity.this, "gATE1", Toast.LENGTH_LONG).show();
                                 deletingPlayerFromLayout(main3Image,image3,name3,accuracy3,totalTimeTaken3,score3);
                                 try{
                                     // connectedRef.removeEventListener(listener33);

@@ -56,8 +56,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -277,6 +279,13 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
      //String To Be Changed After Each Update
      String version="Version1";
 
+    private InterstitialAd mInterstitialAd;
+    private void loadAds(){
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+    LottieAnimationView profilebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,6 +293,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_main_menu);
 
 
+        loadAds();
 
 
         myRef.child("UpdateString").child("version").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -385,15 +395,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         prizeModeAnim.setVisibility(View.GONE);
 
         //ProfileButton
-        LottieAnimationView profilebutton = (LottieAnimationView) findViewById(R.id.profilebutton);
-        profilebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(mainMenuActivity.this,profile.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-            }
-        });
+         profilebutton = (LottieAnimationView) findViewById(R.id.profilebutton);
+        profileFun();
 
 
 
@@ -771,6 +774,33 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
 
+    public void profileFun(){
+        profilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Intent intent=new Intent(mainMenuActivity.this,profile.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return ;
+                }
+
+                Intent i = new Intent(mainMenuActivity.this,profile.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+            }
+        });
+    }
 
     public void UpdateAsker(){
         AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
@@ -1359,6 +1389,25 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 });
                 break;
             case R.id.nav_profile:
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Intent intent=new Intent(mainMenuActivity.this,profile.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return true;
+                }
+
+
+
                 Intent intent=new Intent(mainMenuActivity.this,profile.class);
                 startActivity(intent);
                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

@@ -28,6 +28,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -83,12 +85,17 @@ public class picture_quiz_menu extends AppCompatActivity {
     AlertDialog alertDialog123;
     Button joinButton,createButton;
     int isHost=0;
-
+    private void loadAds(){
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_quiz_menu);
 
+        loadAds();
         singlePlayerButton = (CardView) findViewById(R.id.singleplayer);
         onlineButton=(CardView) findViewById(R.id.online12345);
         localButton=(CardView) findViewById(R.id.local);

@@ -12,16 +12,25 @@ import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class SongChoiceActivity extends AppCompatActivity {
     CardView audioquiz,videoquiz;
     MediaPlayer mediaPlayer,mp;
     androidx.appcompat.widget.Toolbar toolbar;
+    private void loadAds(){
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_choice);
 
 
+        loadAds();
 
 
         mainMenuActivity menuActivity=new mainMenuActivity();

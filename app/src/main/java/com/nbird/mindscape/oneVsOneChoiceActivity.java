@@ -34,6 +34,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -103,11 +105,17 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     int isHost=0;
     int setNumber;
+    private void loadAds(){
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_vs_one_choice);
 
+        loadAds();
         try{
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCorrectAns").removeValue();
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineCurrentScore").removeValue();

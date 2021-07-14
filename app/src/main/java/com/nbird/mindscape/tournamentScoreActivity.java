@@ -448,9 +448,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                     }catch (Exception e){
                         int k=0;
                         if(playerNum==2){
-                            k=2;
+                            k=0;
                         }else if(playerNum==3){
-                            k=3;
+                            k=2;
                         }else if(playerNum==4){
                             k=4;
                         }
@@ -475,24 +475,14 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                           }
 
                                           if(m<4){
-                                              myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(m+1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                  @Override
-                                                  public void onComplete(@NonNull Task<Void> task) {
-                                                      Intent intent = new Intent(tournamentScoreActivity.this, tournamentLobbyActivity.class);
-                                                      myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
-                                                      intent.putExtra("hostUid", hostUid);
-                                                      intent.putExtra("hostImage",hostImageUrl);
-                                                      intent.putExtra("hostName",hostName);
-                                                      intent.putExtra("isHost",0);
-                                                      intent.putExtra("roomCode",roomCode);
-                                                      intent.putExtra("Playernum",m+1);
-                                                    //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
-                                                      startActivity(intent);
-                                                      overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                      finish();
+                                              if(m==1){
+                                                  fishManu(2);
+                                              }else if(m==2){
+                                                  fishManu(3);
+                                              }else if(m==3){
+                                                  fishManu(4);
+                                              }
 
-                                                  }
-                                              });
                                           }else{
                                               Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
                                               startActivity(intent);
@@ -864,6 +854,27 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void fishManu(int kali){
+        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(kali).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(tournamentScoreActivity.this, tournamentLobbyActivity.class);
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                intent.putExtra("hostUid", hostUid);
+                intent.putExtra("hostImage",hostImageUrl);
+                intent.putExtra("hostName",hostName);
+                intent.putExtra("isHost",0);
+                intent.putExtra("roomCode",roomCode);
+                intent.putExtra("Playernum",m+1);
+                //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+            }
+        });
     }
 
     public void cancelDialogFunction(){
