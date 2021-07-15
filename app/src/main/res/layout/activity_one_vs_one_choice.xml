@@ -95,7 +95,7 @@
                             android:padding="8dp"
                             android:text="Compete Against Time! Challenge your visuals and complete the quiz as soon as possible with utmost accuracy!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -122,7 +122,7 @@
                                     android:gravity="center"
                                     android:text="Online"
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -186,7 +186,7 @@
                             android:padding="8dp"
                             android:text="Create your own room and play with friends. Share your code across your group and ivite them to compete with you one-on-one. Time to show them who's the real king!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -213,7 +213,7 @@
                                     android:gravity="center"
                                     android:text="Local"
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>

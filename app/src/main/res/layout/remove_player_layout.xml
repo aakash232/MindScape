@@ -64,7 +64,7 @@
                 android:padding="10dp"
                 android:text="Select A Player To Be Removed From The Room"
                 android:textColor="#000000"
-                android:textSize="23sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,7 @@
                 android:scaleX="0.9"
                 android:scaleY="0.9"
                 android:text="Remove"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
 

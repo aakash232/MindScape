@@ -51,7 +51,7 @@
         android:gravity="left"
         android:text="Mind"
         android:textColor="#000000"
-        android:textSize="40sp"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView2" />
@@ -64,7 +64,7 @@
         android:gravity="center"
         android:text="Scape"
         android:textColor="#000000"
-        android:textSize="37sp"
+        android:textSize="37dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView2"

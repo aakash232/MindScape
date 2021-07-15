@@ -43,7 +43,7 @@
                     android:text="Custom Quiz Design"
                     android:textAlignment="center"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="Enter Quiz name"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -105,7 +105,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="Put Some Description"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +134,7 @@
                         android:inputType="number"
                         android:text="Enter the time duration of the quiz"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
 
@@ -164,7 +164,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="Select the lifelines for the quiz(Optional)"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <CheckBox
@@ -260,7 +260,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="START"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

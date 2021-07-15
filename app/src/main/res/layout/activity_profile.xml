@@ -72,7 +72,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/profilepic"
@@ -153,7 +153,7 @@
                                 android:text=" Level :"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
-                                android:textSize="20sp" />
+                                android:textSize="20dp" />
 
 
                         </LinearLayout>
@@ -208,7 +208,7 @@
                                 android:text=" Level :"
                                 android:textAlignment="center"
                                 android:textColor="@color/white"
-                                android:textSize="20sp" />
+                                android:textSize="20dp" />
 
 
                         </LinearLayout>

@@ -188,7 +188,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:backgroundTint="@color/white"
-            android:textSize="25sp"/>
+            android:textSize="25dp"/>
 
         <TextView
             android:id="@+id/countdown"
@@ -200,7 +200,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
             android:text="30"
-            android:textSize="30sp"
+            android:textSize="30dp"
             android:textColor="@color/black"
             android:layout_centerInParent="true"
             android:gravity="center"/>
@@ -267,7 +267,7 @@
             android:scaleX="0.9"
             android:scaleY="0.9"
             android:text="START"
-            android:textSize="30sp"
+            android:textSize="30dp"
             android:textColor="#000000"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

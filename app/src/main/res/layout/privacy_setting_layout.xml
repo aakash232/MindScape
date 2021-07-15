@@ -55,7 +55,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Choose Your Privacy"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textTitle"
                 app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />

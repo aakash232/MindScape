@@ -113,7 +113,7 @@
                             android:fontFamily="@font/mouse_memoirs"
                             android:text="Choose among 20 categories and begin your quest!"
                             android:textColor="#000000"
-                            android:textSize="13sp"
+                            android:textSize="13dp" 
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/backlitemodeanim" />
@@ -175,7 +175,7 @@
                                 android:gravity="left"
                                 android:text="Historical Monuments"
                                 android:textColor="#000000"
-                                android:textSize="23sp"
+                                android:textSize="23dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -190,7 +190,7 @@
                                 android:gravity="left"
                                 android:text="Check out the Quiz on historical monuments all over the world and test your trivia facts about the rich culture in various places and explore the essence of history. Get aboard for the fun-filled yet challenging tour you've ever experienced."
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -247,7 +247,7 @@
                                 android:gravity="left"
                                 android:text="Flora And Fauna"
                                 android:textColor="#000000"
-                                android:textSize="20sp"
+                                android:textSize="20dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -260,7 +260,7 @@
                                 android:gravity="left"
                                 android:text="Do you have the green thumbs and know about plants and animals? Ace the wild quiz and be the king of the jungle!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -332,7 +332,7 @@
                                 android:gravity="left"
                                 android:text="The mystery of space never stops to amze us. All aboard on the spacecraft!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -389,7 +389,7 @@
                                 android:gravity="left"
                                 android:text="Geography"
                                 android:textColor="#000000"
-                                android:textSize="20sp"
+                                android:textSize="20dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -403,7 +403,7 @@
                                 android:gravity="left"
                                 android:text="Earth is an amazing planet. Take a spin around the Globe and test how much do you know about your Home!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -473,7 +473,7 @@
                                 android:gravity="left"
                                 android:text="Take your mind on a jog across fields and tracks. Time to turn the Game Mode ON!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -545,7 +545,7 @@
                                 android:gravity="left"
                                 android:text="The big game is here! Check out your skills and ace it all the way down!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -603,7 +603,7 @@
                                 android:gravity="left"
                                 android:text="Conuntry,Capitals And Currencies"
                                 android:textColor="#000000"
-                                android:textSize="23sp"
+                                android:textSize="23dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -618,7 +618,7 @@
                                 android:gravity="left"
                                 android:text="Bonjour quizzers! Get your compass aligned as we take a voyage across the globe scalling every landmass! Test your mind with capitals, currency and more things right here. Guide your ship to victory!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -676,7 +676,7 @@
                                 android:gravity="left"
                                 android:text="Famous Personalities"
                                 android:textColor="#000000"
-                                android:textSize="23sp"
+                                android:textSize="23dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -691,7 +691,7 @@
                                 android:gravity="left"
                                 android:text="Life is a long journey and gave us many prominent people. Those who stood up and change the world's perspective forever in their own ways. Scan through different time eras and know abut these famous personalities."
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -762,7 +762,7 @@
                                 android:gravity="left"
                                 android:text="You won't need a PhD degree for these questions - though it would certainly help to ace it. Fire up your skills whith the magic that bloomed life."
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -835,7 +835,7 @@
                                 android:gravity="left"
                                 android:text="Did you know? The first quiz was made in 1782! Do you know those several crucial dates in human history and want to test your knowledge about facts and events that changed the entire world? Its your time then! prove it who's the greatest quizzer right here!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -906,7 +906,7 @@
                                 android:gravity="left"
                                 android:text="Two terms with overlapping concepts considered even older than the universe! Time to put your spiritual skills to test."
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -961,7 +961,7 @@
                                 android:gravity="left"
                                 android:text="History"
                                 android:textColor="#000000"
-                                android:textSize="20sp"
+                                android:textSize="20dp" 
                                 android:textStyle="bold" />
 
                             <TextView
@@ -975,7 +975,7 @@
                                 android:gravity="left"
                                 android:text="History is who we are and why we are the way we are! Get on your time machine for we are going way back to storm your brain with these quiz questions!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1044,7 +1044,7 @@
                                 android:gravity="left"
                                 android:text="From Bollywood to Hollywood, from the Kardashians to Friends! and from The Oscars to Grammy! this quiz will make sure you have kept an eye on the world of TV,film,music and the intenet."
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1116,7 +1116,7 @@
                                 android:gravity="left"
                                 android:text="Long, long time ago... Our earliest human ancestors invented the wheel, but who invented the ball bearing that reduces the friction in it? Let the wheels in your brain roll for the ultimate quiz has just walked in! "
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1198,7 +1198,7 @@
                                     android:gravity="left"
                                     android:text="Many things in the world that took place for the first time. Ranging from adventures, expeditions, discoveries and inventions!"
                                     android:textColor="#000000"
-                                    android:textSize="12sp" />
+                                    android:textSize="12dp"  />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -1270,7 +1270,7 @@
                                     android:gravity="left"
                                     android:text="The soul and heart of a country. In this diverse world, quiz your mind about these varse events and ace up to the top!"
                                     android:textColor="#000000"
-                                    android:textSize="12sp" />
+                                    android:textSize="12dp"  />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -1342,7 +1342,7 @@
                                     android:gravity="left"
                                     android:text="Order! Order! Test your knowlege about the ultimate essence that rules and guides a country ahead. "
                                     android:textColor="#000000"
-                                    android:textSize="12sp" />
+                                    android:textSize="12dp"  />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -1415,7 +1415,7 @@
                                 android:gravity="left"
                                 android:text="Take a break from the busy life and get involved in the beautiful world of literature. Full of imagination, creativity and inspiration. Open doors to this new world and ace the questions right ahead!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1485,7 +1485,7 @@
                                 android:gravity="left"
                                 android:text="From your nose to toes, do you know how your body works? Are you aware of the physical and mental well-being? Test your doctor skills right here!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1556,7 +1556,7 @@
                                 android:gravity="left"
                                 android:text="Life is full of miscellaneous surprises and so are we! Prepare your mind for the chamber of secrets is soon to be opened. Again!"
                                 android:textColor="#000000"
-                                android:textSize="12sp" />
+                                android:textSize="12dp"  />
 
                         </LinearLayout>
                     </LinearLayout>

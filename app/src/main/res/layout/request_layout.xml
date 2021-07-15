@@ -74,7 +74,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="#ffffff"
                 android:layout_weight="1"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:text="Accept"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
@@ -91,7 +91,7 @@
                 android:textColor="#000000"
                 android:text="Reject"
                 android:layout_weight="1"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
                 app:layout_constraintStart_toStartOf="@+id/layoutDialog" />

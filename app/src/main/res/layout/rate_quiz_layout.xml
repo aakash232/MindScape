@@ -58,7 +58,7 @@
                 android:padding="10dp"
                 android:text="Please Rate This Quiz"
                 android:textColor="#000000"
-                android:textSize="23sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 />
 
@@ -176,7 +176,7 @@
                 android:scaleY="0.95"
                 android:text="Home"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
                 app:layout_constraintStart_toStartOf="@+id/layoutDialog" />
@@ -191,7 +191,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Select Quiz"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
                 app:layout_constraintStart_toStartOf="@+id/layoutDialog" />

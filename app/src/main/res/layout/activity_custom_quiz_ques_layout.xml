@@ -47,7 +47,7 @@
                     android:scaleY="0.9"
                     android:text="Question 2/10"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Enter the question"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="18dp" 
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -109,7 +109,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Enter the options"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="18dp" 
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -134,7 +134,7 @@
                         android:gravity="center"
                         android:text="A."
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -171,7 +171,7 @@
                         android:gravity="center"
                         android:text="B."
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -208,7 +208,7 @@
                         android:gravity="center"
                         android:text="C."
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -245,7 +245,7 @@
                         android:gravity="center"
                         android:text="D."
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="18dp" 
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -276,7 +276,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Select the correct option"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="18dp" 
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout27" />
@@ -297,7 +297,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="A."
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -308,7 +308,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="B."
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -319,7 +319,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="C."
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -330,7 +330,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="D."
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     android:textStyle="bold" />
             </RadioGroup>
 

@@ -39,7 +39,7 @@
                     android:textColor="@color/black"
                     android:layout_margin="1dp"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15sp"
+                    android:textSize="15dp" 
                     android:textStyle="bold"
                     />
                 <TextView
@@ -50,7 +50,7 @@
                     android:textColor="@color/black"
                     android:layout_margin="1dp"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15sp"
+                    android:textSize="15dp" 
                     android:textStyle="bold"
                     />
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_margin="1dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15sp"
+                    android:textSize="15dp" 
                     android:textStyle="bold"
                     />
 
@@ -73,7 +73,7 @@
                     android:layout_margin="1dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15sp"
+                    android:textSize="15dp" 
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -423,7 +423,7 @@
                 android:layout_margin="5dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Room Code : 452309"
-                android:textSize="15sp"
+                android:textSize="15dp" 
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -449,7 +449,7 @@
             android:text="Share"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20dp"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
@@ -470,7 +470,7 @@
                 android:background="@drawable/whitewithblackstroke"
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="START"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textColor="#000000"
                 android:layout_marginStart="10dp"
                 android:clickable="true"
@@ -585,7 +585,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13sp"
+                                            android:textSize="13dp" 
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -602,7 +602,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -618,7 +618,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -635,7 +635,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15sp"
+                                            android:textSize="15dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -708,7 +708,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13sp"
+                                            android:textSize="13dp" 
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -725,7 +725,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -740,7 +740,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -757,7 +757,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15sp"
+                                            android:textSize="15dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -842,7 +842,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13sp"
+                                            android:textSize="13dp" 
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -859,7 +859,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -875,7 +875,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -892,7 +892,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15sp"
+                                            android:textSize="15dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -965,7 +965,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13sp"
+                                            android:textSize="13dp" 
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -982,7 +982,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -998,7 +998,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10sp"
+                                            android:textSize="10dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -1015,7 +1015,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15sp"
+                                            android:textSize="15dp" 
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />

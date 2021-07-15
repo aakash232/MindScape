@@ -10,7 +10,8 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="2dp"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    app:ignore="NamespaceTypo">
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
@@ -57,7 +58,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="17dp"
                         android:textColor="@color/white"
                         android:fontFamily="@font/mouse_memoirs"
                         android:layout_margin="10dp"
@@ -147,8 +148,7 @@
                         android:background="@drawable/only_black"
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="OKAY"
-
-                        android:textSize="30sp"
+                        android:textSize="30dp"
                         android:textColor="#ffffff"
                         />
 

@@ -29,7 +29,7 @@
             android:fontFamily="@font/mouse_memoirs"
             android:gravity="center_vertical"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/animationView" />
@@ -1196,7 +1196,7 @@
             android:fontFamily="@font/mouse_memoirs"
             android:gravity="center_vertical"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -1261,7 +1261,7 @@
             android:background="@drawable/blackwithwhitestroke"
             android:fontFamily="@font/mouse_memoirs"
             android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
             app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
             app:layout_constraintStart_toStartOf="@+id/layoutDialog" />

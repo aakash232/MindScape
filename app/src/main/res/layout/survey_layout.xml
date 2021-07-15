@@ -69,7 +69,7 @@
                         android:padding="2dp"
                         android:text="This Survey helps us to Improve MindScape! It's your time to step ahead and make your thoughts heard!"
                         android:textColor="#000000"
-                        android:textSize="16sp"
+                        android:textSize="16dp" 
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -103,7 +103,7 @@
                             android:gravity="left"
                             android:text="On a scale of 1 to 5, rate your experience with MindScape "
                             android:textColor="#000000"
-                            android:textSize="18sp"
+                            android:textSize="18dp" 
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -239,7 +239,7 @@
                             android:gravity="left"
                             android:text="On a scale of 1 to 5, rate the interface of MindScape"
                             android:textColor="#000000"
-                            android:textSize="18sp"
+                            android:textSize="18dp" 
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -358,7 +358,7 @@
                             android:gravity="left"
                             android:text="On a scale of 1 to 5, rate the Quality Of Questions Asked in MindScape "
                             android:textColor="#000000"
-                            android:textSize="18sp"
+                            android:textSize="18dp" 
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -464,7 +464,7 @@
                     android:padding="5dp"
                     android:text="Does MindScape Helps You To Increase Your Knowledge?"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                   android:textSize="15dp" 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -491,7 +491,7 @@
                             android:fontFamily="@font/mouse_memoirs"
                             android:text="Yes"
                             android:textColor="#000000"
-                            android:textSize="16sp" />
+                            android:textSize="16dp"  />
 
                         <RadioButton
                             android:id="@+id/Professional"
@@ -500,7 +500,7 @@
                             android:fontFamily="@font/mouse_memoirs"
                             android:text="No"
                             android:textColor="#000000"
-                            android:textSize="16sp" />
+                            android:textSize="16dp"  />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -518,7 +518,7 @@
                     android:padding="5dp"
                     android:text="Are there any features that you think you need but are missing in MindScape right now? Describe.(Optional)"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                   android:textSize="15dp" 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -557,7 +557,7 @@
                     android:padding="5dp"
                     android:text="What do you think are the points MindScape should work upon for your better experience?(Optional)"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                   android:textSize="15dp" 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -595,7 +595,7 @@
                     android:padding="5dp"
                     android:text="Please Explain An Issue, If You Have Faced Any.(Optional)"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                   android:textSize="15dp" 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -633,7 +633,7 @@
                     android:scaleX="0.9"
                     android:scaleY="0.9"
                     android:text="Submit"
-                    android:textSize="18sp"
+                    android:textSize="18dp" 
                     android:textStyle="bold" />
 
 

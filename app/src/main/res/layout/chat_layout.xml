@@ -60,11 +60,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:textColor="@color/white"
                         android:fontFamily="@font/mouse_memoirs"
                         android:layout_margin="10dp"
-                        android:text="Discuss About The Settings From The Host."/>
+                        android:textAlignment="center"
+                        android:text="Discuss About The Game."/>
 
                 </LinearLayout>
 
