@@ -894,17 +894,17 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
     }
 
     public void fireBaseData(int setNumber){
-        myRef.child("SongQuizJson").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("SongQuizJson").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(musicQuestionHolder.class));
+
+                    list.add(snapshot.getValue(musicQuestionHolder.class));
                     Glide.with(getBaseContext())
                             .load(list.get(num).getImageURL())
                             .preload(20, 10);
 
                     num++;
-                }
+
                 if(num>=11) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
@@ -915,7 +915,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view);
                                     }catch (Exception e){
-                                        Toast.makeText(AudioQuizSinglePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                             //           Toast.makeText(AudioQuizSinglePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

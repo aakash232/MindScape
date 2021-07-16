@@ -757,36 +757,36 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void mainMenuBro(){
-       switch (playerNum){
-           case 1:;
-               scoreGetter("player2Score");
-               scoreGetter("player3Score");
-               scoreGetter("player4Score");
-               dataGetter("Player2",correctvswrong2,accuracy2);
-               dataGetter("Player3",correctvswrong3,accuracy3);
-               dataGetter("Player4",correctvswrong4,accuracy4);break;
-           case 2:
-               scoreGetter("player1Score");
-               scoreGetter("player3Score");
-               scoreGetter("player4Score");
-               dataGetter("Player1",correctvswrong1,accuracy1);
-               dataGetter("Player3",correctvswrong3,accuracy3);
-               dataGetter("Player4",correctvswrong4,accuracy4);break;
-           case 3:
-               scoreGetter("player2Score");
-               scoreGetter("player1Score");
-               scoreGetter("player4Score");
-               dataGetter("Player2",correctvswrong2,accuracy2);
-               dataGetter("Player1",correctvswrong1,accuracy1);
-               dataGetter("Player4",correctvswrong4,accuracy4);break;
-           case 4:
-               scoreGetter("player2Score");
-               scoreGetter("player3Score");
-               scoreGetter("player1Score");
-               dataGetter("Player2",correctvswrong2,accuracy2);
-               dataGetter("Player3",correctvswrong3,accuracy3);
-               dataGetter("Player1",correctvswrong1,accuracy1);break;
-       }
+        switch (playerNum){
+            case 1:;
+                scoreGetter("player2Score");
+                scoreGetter("player3Score");
+                scoreGetter("player4Score");
+                dataGetter("Player2",correctvswrong2,accuracy2);
+                dataGetter("Player3",correctvswrong3,accuracy3);
+                dataGetter("Player4",correctvswrong4,accuracy4);break;
+            case 2:
+                scoreGetter("player1Score");
+                scoreGetter("player3Score");
+                scoreGetter("player4Score");
+                dataGetter("Player1",correctvswrong1,accuracy1);
+                dataGetter("Player3",correctvswrong3,accuracy3);
+                dataGetter("Player4",correctvswrong4,accuracy4);break;
+            case 3:
+                scoreGetter("player2Score");
+                scoreGetter("player1Score");
+                scoreGetter("player4Score");
+                dataGetter("Player2",correctvswrong2,accuracy2);
+                dataGetter("Player1",correctvswrong1,accuracy1);
+                dataGetter("Player4",correctvswrong4,accuracy4);break;
+            case 4:
+                scoreGetter("player2Score");
+                scoreGetter("player3Score");
+                scoreGetter("player1Score");
+                dataGetter("Player2",correctvswrong2,accuracy2);
+                dataGetter("Player3",correctvswrong3,accuracy3);
+                dataGetter("Player1",correctvswrong1,accuracy1);break;
+        }
     }
 
     public void scoreGetter(final String playerData){
@@ -1254,7 +1254,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         } else {
-                                              deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                            deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
                                             if (countDownTimer != null) {
                                                 countDownTimer.cancel();
                                             }

@@ -342,8 +342,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         if(questionNum==0){
             for(int i=0;i<12;i++){
 
-                    totalQuestion=10;
-                    // create instance of Random class
+                totalQuestion=10;
+                // create instance of Random class
 
                 if(arrlist12345.size()==12){
                     fireBaseData(arrlist12345.get(i));
@@ -351,21 +351,21 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
                     final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
-                             @Override
-                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                 try {
-                                     arrlist12345.add(snapshot.getValue(Integer.class));
-                                     fireBaseData(arrlist12345.get(finalI));
-                                 } catch (Exception e) {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                arrlist12345.add(snapshot.getValue(Integer.class));
+                                fireBaseData(arrlist12345.get(finalI));
+                            } catch (Exception e) {
 
-                                 }
-                             }
+                            }
+                        }
 
-                             @Override
-                             public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                             }
-                         });
+                        }
+                    });
 
                 }
 
@@ -450,11 +450,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         }else{
             for(int i=0;i<22;i++){
                 totalQuestion=20;
-                    if(arrlist12345.size()==22){
+                if(arrlist12345.size()==22){
 
-                        // create instance of Random class
-                        fireBaseData(arrlist12345.get(i));
-                    } else{
+                    // create instance of Random class
+                    fireBaseData(arrlist12345.get(i));
+                } else{
 
                     final int finalI = i;
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -669,13 +669,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("NormalQuizBIGJSON").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("NormalQuizBIGJSON").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(questionHolder.class));
+                    list.add(snapshot.getValue(questionHolder.class));
                     num++;
-                }
+
                 quizManupulator();
 
             }
@@ -728,7 +727,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view, finalI);
                                     }catch (Exception e){
-                                        Toast.makeText(tournamentBuzzerNormalQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                             //           Toast.makeText(tournamentBuzzerNormalQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
@@ -750,7 +749,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view, finalI);
+                                    try{
+                                        checkAnswer((Button) view, finalI);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -771,7 +775,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view, finalI);
+                                    try{
+                                        checkAnswer((Button) view, finalI);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -934,15 +943,15 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     try {
                         ((TextView) view).setText(data);
 
-                            switch (questionNum){
-                                case 0:
-                                    scoreBoard.setText(" Question "+(position+1)+"/10 ");break;
-                                case 1:
-                                    scoreBoard.setText(" Question "+(position+1)+"/15 ");break;
-                                case 2:
-                                    scoreBoard.setText(" Question "+(position+1)+"/20 ");break;
+                        switch (questionNum){
+                            case 0:
+                                scoreBoard.setText(" Question "+(position+1)+"/10 ");break;
+                            case 1:
+                                scoreBoard.setText(" Question "+(position+1)+"/15 ");break;
+                            case 2:
+                                scoreBoard.setText(" Question "+(position+1)+"/20 ");break;
 
-                            }
+                        }
 
                     } catch (ClassCastException ex) {
                         ((Button) view).setText(data);
@@ -1229,7 +1238,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         }else {
             //incorrect
 
-             final MediaPlayer musicNav;
+            final MediaPlayer musicNav;
             musicNav = MediaPlayer.create(tournamentBuzzerNormalQuiz.this, R.raw.wrongansfinal);
             musicNav.start();
             musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -1256,7 +1265,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             }
 
 
-             myRef.child("Lobby").child(String.valueOf(roomCode)).child("BuzzerScoreKnower").child(String.valueOf(position+1)).addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("BuzzerScoreKnower").child(String.valueOf(position+1)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -2632,7 +2641,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                 if(countDownTimer!=null){
+                if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 try{
                     songActivity.songStop();

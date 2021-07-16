@@ -37,6 +37,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -60,6 +61,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
+     ValueEventListener listenerFast1;
     int minrev,secriv;
     String opponentUID;
     String opponentimageUrl;
@@ -105,20 +107,27 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     ImageView oppoBatch;
     int min12345,sec12345;
     String mine;
-    Button leaderBoardButton;
     int minman,secman;
     List<leaderBoardHolder> list;
     RecyclerView recyclerView;
     private ShimmerFrameLayout mShimmerViewContainer;
     recyclerViewLeaderBoardAdapter categoryAdapter;
     int desider,amin,asec;
-
+    DatabaseReference myRef1;
     barGroupHolder man;
     ValueEventListener listener1;
+    int parcel;
+    private InterstitialAd mInterstitialAd;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +181,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         oppoBatch=(ImageView) findViewById(R.id.batch5);
         partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
         party2 = (LottieAnimationView)findViewById(R.id.party2);
-        leaderBoardButton=(Button) findViewById(R.id.leaderBoardButton);
+
       //  mShimmerViewContainer=(ShimmerFrameLayout) view1.findViewById(R.id.shimmer90);
 
         arrlist = new ArrayList<>();
@@ -197,6 +206,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         desider=getIntent().getIntExtra("desider",0);
         amin=getIntent().getIntExtra("actualmin",0);
         asec=getIntent().getIntExtra("actualsec",0);
+        parcel=getIntent().getIntExtra("parsel",0);
 
 
 
@@ -317,15 +327,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             }
         });
 
-       leaderBoardButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               dialogFunctionLeaderBoard();
-               MediaPlayer musicNav;
-               musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-               musicNav.start();
-           }
-       });
+
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -461,8 +463,14 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 .bitmapTransform(new RoundedCorners(14)))
                 .into(onlineImage);
 
-        minrev=2-minutes;
-        secriv=59-second;
+        if(parcel==1){
+            minrev=amin;
+            secriv=asec;
+        }else{
+            minrev=2-minutes;
+            secriv=59-second;
+        }
+
 
         totalSum= ((60*minrev)+secriv)*80;
         totalSum=totalSum+2000;
@@ -486,7 +494,17 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         myScore.setText("Total Score : "+totalSum+" ");
         myAcuu.setText("Accuracy : "+accUser+"%");
 
-        myTime.setText(mine);
+        if(parcel==1){
+            myTime.setText("Time Taken : "+minrev+"min "+secriv+"sec");
+        }else{
+
+            myTime.setText(mine);
+        }
+
+        if(parcel==1){
+            mine="Time Taken : "+minrev+"min "+secriv+"sec";
+        }
+
         myLifelines.setText("Life-Lines Used : "+lifelineSum+"/4");
         oppoName.setText(opponentUsername);
 
@@ -770,23 +788,36 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     }
 
     public void requestFinderFunction(){
-        myRef.child("User").child(opponentUID).child("1vs1Online").child("request").addValueEventListener(new ValueEventListener() {
+        listenerFast1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     REQUESTReceived=snapshot.getValue(Integer.class);
                     requestDialogBoxFun();
                 }catch(Exception e){
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef1=database.getReference().child("User").child(opponentUID).child("1vs1Online").child("request");
+        myRef1.addValueEventListener(listenerFast1);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+            myRef1.removeEventListener(listenerFast1);
+        }catch (Exception e){
+
+        }
+
+        Runtime.getRuntime().gc();
+    }
+
 
     public void requestDialogBoxFun(){
         if(REQUESTReceived==1){
@@ -1362,7 +1393,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             }
         });
 
-        String timeStr="Total Time Taken : "+minrev+"min "+secriv+"sec";
+
+
         myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineTimeTaken").setValue(mine).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -1540,22 +1572,19 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                                                 myRef.child("leaderBoard").child("1vs1").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                                        myRef.child("leaderBoard").child("1vs1").orderByChild("score").limitToLast(100).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                            @Override
-                                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                                                                    list.add(dataSnapshot1.getValue(leaderBoardHolder.class));
-                                                                                }
+                                                                        mInterstitialAd.setAdListener(new AdListener(){
+                                                                            public void onAdClosed(){
+                                                                                super.onAdClosed();
+                                                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
                                                                             }
 
-
-                                                                            @Override
-                                                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                                                            }
-
-                                                                            // ...
                                                                         });
+
+                                                                        if(mInterstitialAd.isLoaded()){
+                                                                            mInterstitialAd.show();
+                                                                            return;
+                                                                        }
+
 
                                                                     }
                                                                     public void onCancelled(@NonNull DatabaseError error) {

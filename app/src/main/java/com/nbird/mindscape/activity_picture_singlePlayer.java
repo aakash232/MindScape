@@ -676,17 +676,17 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
     //Firebase Fetch
     public void fireBaseData(int setNumber){
-        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(pictureQuizHolder.class));
+
+                    list.add(snapshot.getValue(pictureQuizHolder.class));
                     Glide.with(getBaseContext())
                             .load(list.get(num).getQuestionPicture())
                             .preload(20, 10);
 
                     num++;
-                }
+
                 if(num==10) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
@@ -697,7 +697,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view);
                                     }catch (Exception e){
-                                        Toast.makeText(activity_picture_singlePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                              //          Toast.makeText(activity_picture_singlePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -1090,6 +1090,39 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     songActivity.songStop();
                 }catch (Exception e){
 
+                }
+
+
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+
+                        Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
+                        Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
+                        scoreIntent.putExtra("score", score);
+                        scoreIntent.putExtra("lifeline",lifelineSum);
+                        scoreIntent.putExtra("minutes",minutes);
+                        scoreIntent.putExtra("seconds",second);
+                        scoreIntent.putExtra("minutestext",minutestext);
+                        scoreIntent.putExtra("secondtext",secondtext);
+                        scoreIntent.putExtra("milliholder",milliHolder);
+                        scoreIntent.putExtra("category",category);
+                        scoreIntent.putExtra("imageurl",imageurl);
+                        scoreIntent.putExtra("Collider", 100);
+                        startActivity(scoreIntent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
+                        finish();
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return;
                 }
 
                 Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();

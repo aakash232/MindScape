@@ -248,7 +248,7 @@ public class loginActivity extends AppCompatActivity {
                     }
                 }else{
 
-                    Toast.makeText(getBaseContext(), "User Email Is Not Registered! Please Register Your Emailniftynile@gmail.com", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "User Email Is Not Registered! Please Register Your Email First", Toast.LENGTH_LONG).show();
                     loadingDialog.dismiss();
                     Intent intent=new Intent(loginActivity.this,registerActivity.class);
                     startActivity(intent);

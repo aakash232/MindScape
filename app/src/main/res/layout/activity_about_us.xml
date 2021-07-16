@@ -59,7 +59,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/mouse_memoirs"
-            android:text="Paper Wind is the All-In-One package for the students through out the country. We at Nifty Nile work together to design, create and produce ideas we all are proud of and this would not have been possible without your lovely support!"
+            android:text="We at Nifty Nile work together to design, create and produce ideas we all are proud of and this would not have been possible without your lovely support!"
             android:textColor="#474747"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/mypic" />
+                    android:background="@drawable/kartikpic5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -194,11 +194,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="105dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/aakashpic" />
+                    android:background="@drawable/aakashpic5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,7 +280,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/snehapic" />
+                    android:background="@drawable/snehapic5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -366,7 +366,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/zimmypic1" />
+                    android:background="@drawable/zimmypic5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -451,7 +451,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/gitikapic1" />
+                    android:background="@drawable/gitikapic5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

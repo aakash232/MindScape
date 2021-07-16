@@ -706,7 +706,7 @@ public class scoreActivity extends AppCompatActivity {
     }
 
     public void dataSetter(){
-        myRef.child("leaderBoard").child("singlePlayer").orderByChild("score").limitToLast(100).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("leaderBoard").child("singlePlayer").orderByChild("score").limitToLast(50).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {

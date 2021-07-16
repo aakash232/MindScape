@@ -1409,18 +1409,17 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(pictureQuizHolder.class));
+                    list.add(snapshot.getValue(pictureQuizHolder.class));
 
                     Glide.with(getBaseContext())
                             .load(list.get(num).getQuestionPicture())
                             .preload(20, 10);
 
                     num++;
-                }
+
 
                 quizManupulator();
 
@@ -1448,7 +1447,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view);
                                     }catch (Exception e){
-                                        Toast.makeText(tournamentPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                  //      Toast.makeText(tournamentPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -1531,7 +1530,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -1613,7 +1617,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -2087,16 +2096,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
 
-             final MediaPlayer musicNav;
-                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.correctmusic);
-                            musicNav.start();
-                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mediaPlayer) {
-                                    musicNav.reset();
-                                    musicNav.release();
-                                }
-                            });
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.correctmusic);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -2129,16 +2138,16 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
         }else {
             //incorrect
-                    final MediaPlayer musicNav;
-                            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.wrongansfinal);
-                            musicNav.start();
-                            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mediaPlayer) {
-                                    musicNav.reset();
-                                    musicNav.release();
-                                }
-                            });
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentPictureQuiz.this, R.raw.wrongansfinal);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);

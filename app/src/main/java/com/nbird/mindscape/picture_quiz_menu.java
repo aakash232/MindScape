@@ -85,6 +85,8 @@ public class picture_quiz_menu extends AppCompatActivity {
     AlertDialog alertDialog123;
     Button joinButton,createButton;
     int isHost=0;
+   // DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID");
+    ValueEventListener listenerFast1;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -272,15 +274,15 @@ public class picture_quiz_menu extends AppCompatActivity {
         }else{
             setRandomNumber = rand.nextInt(199)+1;
         }
-        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).child(String.valueOf(setRandomNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+
+                    list.add(snapshot.getValue(mainMenuFactsHolder.class));
                     num++;
-                }
+
 
                 if (num == 3) {
                     mShimmerViewContainer.stopShimmerAnimation();
@@ -1699,7 +1701,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                 });
 
 
-                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
+                listenerFast1=new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -1861,10 +1863,24 @@ public class picture_quiz_menu extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                };
+                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(listenerFast1);
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+            myRef.removeEventListener(listenerFast1);
+        }catch (Exception e){
+
+        }
+
+        Runtime.getRuntime().gc();
+    }
+
 
 
     public void levelManupulation99(){

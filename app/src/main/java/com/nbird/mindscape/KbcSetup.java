@@ -695,13 +695,13 @@ public class KbcSetup extends AppCompatActivity {
     }
 
     public void fireBaseData(int setNumber, int i){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("SETS").child(String.valueOf(category)).child("questions").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(questionHolder.class));
+
+                    list.add(snapshot.getValue(questionHolder.class));
                     num++;
-                }
+
                 if(num==13) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
@@ -709,7 +709,12 @@ public class KbcSetup extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }

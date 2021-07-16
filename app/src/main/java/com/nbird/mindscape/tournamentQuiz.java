@@ -1336,13 +1336,13 @@ public class tournamentQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber){
-        myRef.child("NormalQuizBIGJSON").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("NormalQuizBIGJSON").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(questionHolder.class));
+
+                    list.add(snapshot.getValue(questionHolder.class));
                     num++;
-                }
+
                 quizManupulator();
 
             }
@@ -1369,7 +1369,7 @@ public class tournamentQuiz extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view);
                                     }catch (Exception e){
-                                        Toast.makeText(tournamentQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                               //         Toast.makeText(tournamentQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -1452,7 +1452,12 @@ public class tournamentQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -1534,7 +1539,12 @@ public class tournamentQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view);
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -2006,16 +2016,16 @@ public class tournamentQuiz extends AppCompatActivity {
 
         if(selectedOption.getText().toString().equals(list.get(position).getCorrectAnswer())){
             //correct
- final MediaPlayer musicNav;
-                    musicNav = MediaPlayer.create(tournamentQuiz.this, R.raw.correctmusic);
-                    musicNav.start();
-                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mediaPlayer) {
-                            musicNav.reset();
-                            musicNav.release();
-                        }
-                    });
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentQuiz.this, R.raw.correctmusic);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -2048,26 +2058,26 @@ public class tournamentQuiz extends AppCompatActivity {
 
         }else {
             //incorrect
- final MediaPlayer musicNav;
-                    musicNav = MediaPlayer.create(tournamentQuiz.this, R.raw.wrongansfinal);
-                    musicNav.start();
-                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mediaPlayer) {
-                            musicNav.reset();
-                            musicNav.release();
-                        }
-                    });
+            final MediaPlayer musicNav;
+            musicNav = MediaPlayer.create(tournamentQuiz.this, R.raw.wrongansfinal);
+            musicNav.start();
+            musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    musicNav.reset();
+                    musicNav.release();
+                }
+            });
 
-                        selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
-                        selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
-                        Button correctOption = (Button) linearLayout.findViewWithTag(list.get(position).getCorrectAnswer());
-                        correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
-                        correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        correctOption.setShadowLayer(3,1,1,R.color.lightred);
+            selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
+            selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
+            selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
+            Button correctOption = (Button) linearLayout.findViewWithTag(list.get(position).getCorrectAnswer());
+            correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));     //green color
+            correctOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
+            correctOption.setShadowLayer(3,1,1,R.color.lightred);
 
-          
+
             switch (playerNum){
                 case 1:
                     myWrongAnswerAnimManupulator1(anim1,anim2,anim3,anim4,anim5,anim6,anim7,anim8,anim9,anim10,animz1,animz2,animz3,animz4,animz5,animz6,animz7,animz8,animz9,animz10);break;
@@ -2164,18 +2174,18 @@ public class tournamentQuiz extends AppCompatActivity {
                             .into(opponentPic3);
                 }catch (Exception e){
 
-               }
+                }
 
-               try {
+                try {
 
-                       opponentName4.setText(name4String);
-                       Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
-                               .bitmapTransform(new RoundedCorners(14)))
-                               .into(opponentPic4);
+                    opponentName4.setText(name4String);
+                    Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(opponentPic4);
 
-               }catch (Exception e){
+                }catch (Exception e){
 
-               }
+                }
 
 
                 break;
@@ -2190,20 +2200,20 @@ public class tournamentQuiz extends AppCompatActivity {
                         .bitmapTransform(new RoundedCorners(14)))
                         .into(opponentPic2);
 
-                    opponentName3.setText(myName);
-                    Glide.with(getBaseContext()).load(myImageUrl).apply(RequestOptions
+                opponentName3.setText(myName);
+                Glide.with(getBaseContext()).load(myImageUrl).apply(RequestOptions
+                        .bitmapTransform(new RoundedCorners(14)))
+                        .into(opponentPic3);
+
+                try {
+
+                    opponentName4.setText(name4String);
+                    Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
                             .bitmapTransform(new RoundedCorners(14)))
-                            .into(opponentPic3);
+                            .into(opponentPic4);
+                }catch (Exception e){
 
-                    try {
-
-                            opponentName4.setText(name4String);
-                            Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
-                                    .bitmapTransform(new RoundedCorners(14)))
-                                    .into(opponentPic4);
-                    }catch (Exception e){
-
-                    }
+                }
 
                 break;
             case 4:
@@ -2224,8 +2234,8 @@ public class tournamentQuiz extends AppCompatActivity {
 
                 opponentName4.setText(myName);
                 Glide.with(getBaseContext()).load(myImageUrl).apply(RequestOptions
-                            .bitmapTransform(new RoundedCorners(14)))
-                            .into(opponentPic4);
+                        .bitmapTransform(new RoundedCorners(14)))
+                        .into(opponentPic4);
                 break;
 
         }
@@ -2493,9 +2503,9 @@ public class tournamentQuiz extends AppCompatActivity {
 
     public void cancelLeaveFunction(){
         if(playerNum==1){
-         //   myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
-        //    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
-        //    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
+            //   myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
+            //    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
+            //    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -2517,19 +2527,19 @@ public class tournamentQuiz extends AppCompatActivity {
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-        //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
 
         }else if(playerNum==3){
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-        //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
 
         }else if (playerNum==4){
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
-       //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
+            //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
 
         }
 

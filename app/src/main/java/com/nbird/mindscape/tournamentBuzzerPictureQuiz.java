@@ -354,8 +354,8 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         if (questionNum == 0) {
             for (int i = 0; i < 12; i++) {
 
-                    totalQuestion = 10;
-                    // create instance of Random class
+                totalQuestion = 10;
+                // create instance of Random class
                 if(arrlist12345.size()==12){
                     fireBaseData(arrlist12345.get(i));
                 }else{
@@ -411,8 +411,8 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         } else if (questionNum == 1) {
             for (int i = 0; i < 17; i++) {
 
-                    totalQuestion = 15;
-                    // create instance of Random class
+                totalQuestion = 15;
+                // create instance of Random class
                 if(arrlist12345.size()==17){
 
                     // create instance of Random class
@@ -462,8 +462,8 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         } else {
             for (int i = 0; i < 22; i++) {
 
-                    totalQuestion = 20;
-                    // create instance of Random class
+                totalQuestion = 20;
+                // create instance of Random class
                 if(arrlist12345.size()==22){
 
                     // create instance of Random class
@@ -627,7 +627,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         alertDialog.show();
 
 
-        countDownTimeralerDialog=new CountDownTimer(1000*20,1000){
+        countDownTimeralerDialog=new CountDownTimer(1000*10,1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 textView.setText("Quiz Starts In "+ millisUntilFinished/1000 + " Seconds. Picture Is Getting Loaded!!!Please Wait.");
@@ -768,16 +768,16 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
 
     public void fireBaseData(int setNumber) {
-        myRef.child("PictureQuizMain").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("PictureQuizMain").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    list.add(snapshot1.getValue(pictureQuizHolder.class));
+
+                    list.add(snapshot.getValue(pictureQuizHolder.class));
                     Glide.with(getBaseContext())
                             .load(list.get(num).getQuestionPicture())
                             .preload(20, 10);
                     num++;
-                }
+
                 quizManupulator();
 
             }
@@ -834,7 +834,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view, finalI);
                                     }catch (Exception e){
-                                        Toast.makeText(tournamentBuzzerPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                //        Toast.makeText(tournamentBuzzerPictureQuiz.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -844,7 +844,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                         finish();
                         Toast.makeText(tournamentBuzzerPictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
                     }
-             //       loadingDialog.dismiss();
+                    //       loadingDialog.dismiss();
                 }
                 break;
             case 1:
@@ -856,7 +856,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view, finalI);
+                                    try{
+                                        checkAnswer((Button) view, finalI);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -878,7 +883,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onClick(View view) {
-                                    checkAnswer((Button) view, finalI);
+                                    try{
+                                        checkAnswer((Button) view, finalI);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }
@@ -1373,7 +1383,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         } else {
             //incorrect
 
-             final MediaPlayer musicNav;
+            final MediaPlayer musicNav;
             musicNav = MediaPlayer.create(tournamentBuzzerPictureQuiz.this, R.raw.wrongansfinal);
             musicNav.start();
             musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

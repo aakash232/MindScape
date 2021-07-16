@@ -58,6 +58,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID");
+    ValueEventListener listenerFast1;
     private List<mainMenuFactsHolder> list;
     private List<onevsoneOnlinePlayerList> list123;
     public ViewPager slideViewPager;
@@ -293,15 +295,15 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         }else{
             setRandomNumber = rand.nextInt(199)+1;
         }
-        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).child(String.valueOf(setRandomNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+
+                    list.add(snapshot.getValue(mainMenuFactsHolder.class));
                     num++;
-                }
+
 
                 if (num == 3) {
                     mShimmerViewContainer.stopShimmerAnimation();
@@ -444,7 +446,12 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
+
 
 
                 cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -574,7 +581,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                     myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
+
+                            listenerFast1=new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -641,7 +649,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                 public void onCancelled(@NonNull DatabaseError error) {
 
                                 }
-                            });
+                            };
+                            myRef1.addValueEventListener(listenerFast1);
                         }
                     });
                 }
@@ -1940,6 +1949,17 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+            myRef1.removeEventListener(listenerFast1);
+        }catch (Exception e){
+
+        }
+
+        Runtime.getRuntime().gc();
+    }
 
 
 }

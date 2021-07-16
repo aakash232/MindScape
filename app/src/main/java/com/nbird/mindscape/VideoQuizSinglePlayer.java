@@ -831,15 +831,18 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
 
 
 
+
+
+
     public void fireBaseData(int setNumber){
-        myRef.child("VideoQuizJson").orderByChild("sets").equalTo(setNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("VideoQuizJson").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    list.add(snapshot1.getValue(VideoQuestionHolder.class));
+
+                    list.add(snapshot.getValue(VideoQuestionHolder.class));
 
                     num++;
-                }
+
                 if(num>=11) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
@@ -850,7 +853,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                                     try{
                                         checkAnswer((Button) view);
                                     }catch (Exception e){
-                                        Toast.makeText(VideoQuizSinglePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                            //            Toast.makeText(VideoQuizSinglePlayer.this, "Please Wait", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

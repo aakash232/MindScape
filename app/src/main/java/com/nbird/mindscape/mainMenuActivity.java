@@ -80,6 +80,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -111,9 +112,38 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     mainMenuFactsAdapter categoryAdapter;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
-   int num=0;
+
+    DatabaseReference myRef = database.getReference();
+    DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("userName");
+    DatabaseReference myRef2 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("propic");
+    DatabaseReference myRef3 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("personal").child("propic");
+    ValueEventListener listener2,listener3,listener1;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+            myRef1.removeEventListener(listener1);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef2.removeEventListener(listener2);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef3.removeEventListener(listener3);
+        }catch (Exception e){
+
+        }
+
+    }
+
+
+    int num=0;
     String randomuid,mailid123,imageurl,imageurl123;
 
     FirebaseStorage storage;
@@ -400,19 +430,14 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        l=new ArrayList<>(6);
+
 
 
         final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("musicCollection",0);
         final SharedPreferences.Editor myEdit = sharedPreferences.edit();
         
 
-            l.add(R.raw.music1);
-            l.add(R.raw.music2);
-            l.add(R.raw.music3);
-            l.add(R.raw.music4);
-            l.add(R.raw.music5);
-            l.add(R.raw.music6);
+
 
 
             myRef.child("appMainLink").child("link").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -444,23 +469,24 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         nav_image123 = (ImageView) hView.findViewById(R.id.proimage);
 
 
+     listener1=new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot snapshot) {
+             String nameString=snapshot.getValue(String.class);
+             nav_mail.setText(nameString);
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError error) {
+
+         }
+     };myRef1.addValueEventListener(listener1);
 
 
 
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("userName").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 String nameString=snapshot.getValue(String.class);
-                 nav_mail.setText(nameString);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(new ValueEventListener() {
+        listener2=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -468,15 +494,12 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                   Glide.with(getBaseContext()).load(nav_img_url).apply(RequestOptions
                         .bitmapTransform(new RoundedCorners(18)))
                         .into(nav_image123);
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef2.addValueEventListener(listener2);
 
 
         nav_image123.setOnClickListener(new View.OnClickListener() {
@@ -593,7 +616,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        myRef.child("User").child(fAuth.getCurrentUser().getUid()).child("personal").child("propic").addValueEventListener(new ValueEventListener() {
+        listener3=new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // convert the data back to the model
@@ -605,7 +628,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef3.addValueEventListener(listener3);
 
 
 
@@ -873,8 +896,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         switch5=(Switch) view1.findViewById(R.id.switch5);
         switch6=(Switch) view1.findViewById(R.id.switch6);
 
-        cardOnSetClickListner(musicCard1,musicCard2,musicCard3,musicCard4,musicCard5,musicCard6,linear1,linear2,linear3,linear4,linear5,linear6);
-
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChangedValue = 0;
@@ -1033,120 +1054,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-    public void cardOnSetClickListner(final CardView musicCard1, final CardView musicCard2, final CardView musicCard3, final CardView musicCard4, final CardView musicCard5, final CardView musicCard6, final LinearLayout linear1, final LinearLayout linear2, final LinearLayout linear3, final LinearLayout linear4, final LinearLayout linear5, final LinearLayout linear6){
-        final SharedPreferences kali = getBaseContext().getSharedPreferences("kali",0);
-        final SharedPreferences.Editor editkali = kali.edit();
 
-        musicCard1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m1", 1);
-                if(a==1){
-                    editkali.putInt("m1", 0);
-                    editkali.commit();
-                    linear1.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music1);
-                }else{
-                    editkali.putInt("m1", 1);
-                    editkali.commit();
-                    linear1.setAlpha(1f);
-
-                }
-
-            }
-        });
-        musicCard2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m2", 1);
-                if(a==1){
-                    editkali.putInt("m2", 0);
-                    editkali.commit();
-                    linear2.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music2);
-                }else{
-                    editkali.putInt("m2", 1);
-                    editkali.commit();
-                    linear2.setAlpha(1f);
-
-                }
-            }
-        });
-        musicCard3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m3", 1);
-                if(a==1){
-                    editkali.putInt("m3", 0);
-                    editkali.commit();
-                    linear3.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music3);
-                }else{
-                    editkali.putInt("m3", 1);
-                    editkali.commit();
-                    linear3.setAlpha(1f);
-
-                }
-            }
-        });
-        musicCard4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m4", 1);
-                if(a==1){
-                    editkali.putInt("m4", 0);
-                    editkali.commit();
-                    linear4.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music4);
-                }else{
-                    editkali.putInt("m4", 1);
-                    editkali.commit();
-                    linear4.setAlpha(1f);
-
-                }
-            }
-        });
-        musicCard5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m5", 1);
-                if(a==1){
-                    editkali.putInt("m5", 0);
-                    editkali.commit();
-                    linear5.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music5);
-                }else{
-                    editkali.putInt("m5", 1);
-                    editkali.commit();
-                    linear5.setAlpha(1f);
-
-                }
-            }
-        });
-        musicCard6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardManu47(linear1,linear2,linear3,linear4,linear5,linear6);
-                int a = kali.getInt("m6", 1);
-                if(a==1){
-                    editkali.putInt("m6", 0);
-                    editkali.commit();
-                    linear6.setAlpha(0.5f);
-                    musicChangerFunction(R.raw.music6);
-                }else{
-                    editkali.putInt("m6", 1);
-                    editkali.commit();
-                    linear6.setAlpha(1f);
-
-                }
-            }
-        });
-    }
 
     public void cardManu47(LinearLayout musicCard1, LinearLayout musicCard2, LinearLayout musicCard3, LinearLayout musicCard4, LinearLayout musicCard5, LinearLayout musicCard6){
         musicCard1.setAlpha(1);
@@ -1264,15 +1172,15 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).child(String.valueOf(setRandomNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange( DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+
+                    list.add(snapshot.getValue(mainMenuFactsHolder.class));
                     num++;
-                }
+
 
                 if(num==3){
                     mShimmerViewContainer.stopShimmerAnimation();

@@ -673,21 +673,7 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/leaderBoardButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/whitewithblackstroke"
-                    android:fontFamily="@font/roboto_bold"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:text="1vs1 LeaderBoard"
-                    android:textColor="#000000"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout33" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

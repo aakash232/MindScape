@@ -111,6 +111,63 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     CardView buzzerNormalCard,buzzerPictureCard;
     List<pictureQuizHolder> list100;
     int setNumber;
+    ValueEventListener lisnerfox1,lisnerfox2,lisnerfox3,lisnerfox4,lisnerfox5,lisnerfox6,lisnerfox7,lisnerfox8;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try{
+            myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").removeEventListener(lisnerfox1);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(1)).child(hostUid).child("questionNumber").removeEventListener(lisnerfox2);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(1)).child(hostUid).child("mode").removeEventListener(lisnerfox3);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(1)).child(hostUid).child("time").removeEventListener(lisnerfox4);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(0)).child(hostUid).child("privacy").removeEventListener(lisnerfox5);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(0)).child(hostUid).child("time").removeEventListener(lisnerfox8);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(0)).child(hostUid).child("mode").removeEventListener(lisnerfox7);
+
+        }catch ( Exception e){
+
+        }
+        try{
+            myRef.child("room").child(String.valueOf(0)).child(hostUid).child("questionNumber").removeEventListener(lisnerfox6);
+
+        }catch ( Exception e){
+
+        }
+        Runtime.getRuntime().gc();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -2364,7 +2421,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
     public void lobbyDataGettingNotHost(){
 
-        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").addValueEventListener(new ValueEventListener() {
+        lisnerfox1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -2373,7 +2430,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
                     privacyTextView.setText(" Privacy : Public ");
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("questionNumber").addValueEventListener(new ValueEventListener() {
+                    lisnerfox2=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -2399,10 +2456,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("questionNumber").addValueEventListener(lisnerfox2);
 
-
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("mode").addValueEventListener(new ValueEventListener() {
+                    lisnerfox3=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try{
@@ -2430,9 +2487,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("mode").addValueEventListener(lisnerfox3);
 
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("time").addValueEventListener(new ValueEventListener() {
+                    lisnerfox4=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try{
@@ -2470,8 +2528,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
-
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("time").addValueEventListener(lisnerfox4);
 
                 } catch (Exception e) {
 
@@ -2487,10 +2545,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").addValueEventListener(lisnerfox1);
 
 
-        myRef.child("room").child(String.valueOf(0)).child(hostUid).child("privacy").addValueEventListener(new ValueEventListener() {
+        lisnerfox5=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -2499,7 +2558,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
 
-                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("questionNumber").addValueEventListener(new ValueEventListener() {
+                    lisnerfox6=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -2524,10 +2583,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
+                    };
+                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("questionNumber").addValueEventListener(lisnerfox6);
 
-
-                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("mode").addValueEventListener(new ValueEventListener() {
+                    lisnerfox7=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try{
@@ -2557,9 +2616,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
+                    };
+                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("mode").addValueEventListener(lisnerfox7);
 
-                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("time").addValueEventListener(new ValueEventListener() {
+                    lisnerfox8=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try{
@@ -2597,8 +2657,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    });
-
+                    };
+                    myRef.child("room").child(String.valueOf(0)).child(hostUid).child("time").addValueEventListener(lisnerfox8);
 
                 } catch (Exception e) {
 
@@ -2614,8 +2674,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
+        };
+        myRef.child("room").child(String.valueOf(0)).child(hostUid).child("privacy").addValueEventListener(lisnerfox5);
     }
 
 
@@ -3682,15 +3742,15 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         }else{
             setRandomNumber = rand.nextInt(199)+1;
         }
-        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).child(String.valueOf(setRandomNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    list.add(dataSnapshot1.getValue(mainMenuFactsHolder.class));
+
+                    list.add(snapshot.getValue(mainMenuFactsHolder.class));
                     num++;
-                }
+
 
                 if (num == 3) {
                     AdapterManupulation();

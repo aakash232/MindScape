@@ -184,7 +184,7 @@
                             android:fontFamily="@font/mouse_memoirs"
                             android:gravity="left"
                             android:padding="8dp"
-                            android:text="Create your own room and play with friends. Share your code across your group and ivite them to compete with you one-on-one. Time to show them who's the real king!"
+                            android:text="Create your own room and play with friends. Share your code across your group and invite them to compete with you one-on-one. Time to show them who's the real king!"
                             android:textColor="#000000"
                             android:textSize="15sp" />
 

@@ -328,7 +328,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
                     int wA;
                     switch (questionNum){
                         case 0:
-                             wA=man.getWrong()+(10-correctNum);break;
+                            wA=man.getWrong()+(10-correctNum);break;
                         case 1:
                             wA=man.getWrong()+(15-correctNum);break;
                         default:
@@ -462,47 +462,47 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             @Override
                             public void onFinish() {
 
-                              myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
-                                  @Override
-                                  public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                      try{
-                                          m=snapshot.getValue(Integer.class);
-                                          if(countDownTimer!=null){
-                                              countDownTimer.cancel();
-                                          }
-                                          if(countDownTimer1234!=null){
-                                              countDownTimer1234.cancel();
-                                          }
+                                myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        try{
+                                            m=snapshot.getValue(Integer.class);
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
+                                            }
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
 
-                                          if(m<4){
-                                              if(m==1){
-                                                  fishManu(2);
-                                              }else if(m==2){
-                                                  fishManu(3);
-                                              }else if(m==3){
-                                                  fishManu(4);
-                                              }
+                                            if(m<4){
+                                                if(m==1){
+                                                    fishManu(2);
+                                                }else if(m==2){
+                                                    fishManu(3);
+                                                }else if(m==3){
+                                                    fishManu(4);
+                                                }
 
-                                          }else{
-                                              Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
-                                              startActivity(intent);
-                                              Toast.makeText(tournamentScoreActivity.this, "Room Is Full!", Toast.LENGTH_LONG).show();
-                                               overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                              finish();
-                                          }
+                                            }else{
+                                                Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
+                                                startActivity(intent);
+                                                Toast.makeText(tournamentScoreActivity.this, "Room Is Full!", Toast.LENGTH_LONG).show();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
 
-                                      }catch (Exception e){
+                                        }catch (Exception e){
 
 
-                                      }
+                                        }
 
-                                  }
+                                    }
 
-                                  @Override
-                                  public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                  }
-                              });
+                                    }
+                                });
 
 
 
@@ -767,11 +767,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
                 }
 
-               if(playerNum==1){
-                   del(mAuth.getCurrentUser().getUid());
-               }else{
-                   del(hostUid);
-               }
+                if(playerNum==1){
+                    del(mAuth.getCurrentUser().getUid());
+                }else{
+                    del(hostUid);
+                }
             }
         });
 
@@ -796,53 +796,53 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-                     myRef.child("room").child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                         @Override
-                         public void onComplete(@NonNull Task<Void> task) {
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
-                             myRef.child("room").child(mAuth.getCurrentUser().getUid()).removeValue();
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                    myRef.child("room").child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
+                            myRef.child("room").child(mAuth.getCurrentUser().getUid()).removeValue();
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
 
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("roomCode").setValue(roomCode).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("roomCode").setValue(roomCode).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                 }
-                             });
+                                }
+                            });
 
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameStarter").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameStarter").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                 }
-                             });
+                                }
+                            });
 
-                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameFinder").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameFinder").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                 }
-                             });
+                                }
+                            });
 
-                             if(countDownTimer!=null){
-                                 countDownTimer.cancel();
-                             }
-                             if(countDownTimer1234!=null){
-                                 countDownTimer1234.cancel();
-                             }
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer1234!=null){
+                                countDownTimer1234.cancel();
+                            }
 
-                             Intent intent=new Intent(tournamentScoreActivity.this,tournamentLobbyActivity.class);
-                             intent.putExtra("Playernum",1);
-                             intent.putExtra("roomCode",roomCode);
-                             startActivity(intent);
-                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                             finish();
+                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentLobbyActivity.class);
+                            intent.putExtra("Playernum",1);
+                            intent.putExtra("roomCode",roomCode);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            finish();
 
-                         }
-                     });
+                        }
+                    });
                 }
             });
         }else{
@@ -941,7 +941,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-      cancelDialogFunction();
+        cancelDialogFunction();
     }
 
     public void mainManu2(String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView totalLifeLines, final TextView totalTimeTaken, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
@@ -1318,23 +1318,23 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                        myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
+                                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
 
-                                                if(countDownTimer!=null){
-                                                    countDownTimer.cancel();
-                                                }
-                                                if(countDownTimer1234!=null){
-                                                    countDownTimer1234.cancel();
-                                                }
-                                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                                                startActivity(intent);
-                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                finish();
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
                                             }
-                                        });
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                            finish();
+                                        }
+                                    });
 
                                 }
                             });
@@ -1441,13 +1441,13 @@ public class tournamentScoreActivity extends AppCompatActivity {
                     Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
                     startActivity(intent);
                     switch (playerNum){
-                          case 2:
-                              myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
-                          case 3:
-                              myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
-                          case 4:
-                              myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
-                      }
+                        case 2:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                        case 3:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                        case 4:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                    }
                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -2530,7 +2530,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
         countDownTimer1234=new CountDownTimer(1000*60*60,1000) {
             @Override
             public void onTick(long l) {
-               oppoFinder();
+                oppoFinder();
 
             }
 
@@ -3033,31 +3033,31 @@ public class tournamentScoreActivity extends AppCompatActivity {
     }
 
     public void scoreGetter(final String playerData){
-         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).child("scoreInt").addValueEventListener(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 try{
-                     if(playerData.equals("player1Data")){
-                         sco1=snapshot.getValue(Integer.class);
-                     }else if(playerData.equals("player2Data")){
-                         sco2=snapshot.getValue(Integer.class);
-                     }else if(playerData.equals("player3Data")){
-                         sco3=snapshot.getValue(Integer.class);
-                     }else if(playerData.equals("player4Data")){
-                         sco4=snapshot.getValue(Integer.class);
-                     }
-                 }catch (Exception e){
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).child("scoreInt").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    if(playerData.equals("player1Data")){
+                        sco1=snapshot.getValue(Integer.class);
+                    }else if(playerData.equals("player2Data")){
+                        sco2=snapshot.getValue(Integer.class);
+                    }else if(playerData.equals("player3Data")){
+                        sco3=snapshot.getValue(Integer.class);
+                    }else if(playerData.equals("player4Data")){
+                        sco4=snapshot.getValue(Integer.class);
+                    }
+                }catch (Exception e){
 
-                 }
+                }
 
 
-             }
+            }
 
-             @Override
-             public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-             }
-         });
+            }
+        });
     }
 
     public void uiDataSetter( tournamentUserDataHolder s, TextView accuracy, TextView totalLifeLines, TextView totalTimeTaken, TextView correctvswrong, TextView score, ImageView img, ImageView propic, TextView headText, TextView name, String imageUrl, String nameString, ShimmerFrameLayout playerShimmer, ShimmerFrameLayout playerShimmerPic){
@@ -3083,10 +3083,10 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
     public void animManupulator(String playerAAnswer, String playerBAnswer, String playerCAnswer, String playerDAnswer){
 
-                    animDataReceiving(playerAAnswer,anim1,anim2,anim3,anim4,anim5,anim6,anim7,anim8,anim9,anim10,animz1,animz2,animz3,animz4,animz5,animz6,animz7,animz8,animz9,animz10);
-                    animDataReceiving(playerBAnswer, anim11, anim12, anim13, anim14, anim15, anim16, anim17, anim18, anim19, anim20, animz11, animz12, animz13, animz14, animz15, animz16, animz17, animz18, animz19, animz20);
-                    animDataReceiving(playerCAnswer, anim21, anim22, anim23, anim24, anim25, anim26, anim27, anim28, anim29, anim30, animz21, animz22, animz23, animz24, animz25, animz26, animz27, animz28, animz29, animz30);
-                    animDataReceiving(playerDAnswer, anim31, anim32, anim33, anim34, anim35, anim36, anim37, anim38, anim39, anim40, animz31, animz32, animz33, animz34, animz35, animz36, animz37, animz38, animz39, animz40);
+        animDataReceiving(playerAAnswer,anim1,anim2,anim3,anim4,anim5,anim6,anim7,anim8,anim9,anim10,animz1,animz2,animz3,animz4,animz5,animz6,animz7,animz8,animz9,animz10);
+        animDataReceiving(playerBAnswer, anim11, anim12, anim13, anim14, anim15, anim16, anim17, anim18, anim19, anim20, animz11, animz12, animz13, animz14, animz15, animz16, animz17, animz18, animz19, animz20);
+        animDataReceiving(playerCAnswer, anim21, anim22, anim23, anim24, anim25, anim26, anim27, anim28, anim29, anim30, animz21, animz22, animz23, animz24, animz25, animz26, animz27, animz28, animz29, animz30);
+        animDataReceiving(playerDAnswer, anim31, anim32, anim33, anim34, anim35, anim36, anim37, anim38, anim39, anim40, animz31, animz32, animz33, animz34, animz35, animz36, animz37, animz38, animz39, animz40);
 
     }
 
