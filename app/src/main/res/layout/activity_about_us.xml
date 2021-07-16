@@ -44,7 +44,7 @@
             android:fontFamily="@font/mouse_memoirs"
             android:text="Welcome To The Team Page"
             android:textColor="@color/black"
-            android:textSize="28sp"
+            android:textSize="28dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
             android:fontFamily="@font/mouse_memoirs"
             android:text="We at Nifty Nile work together to design, create and produce ideas we all are proud of and this would not have been possible without your lovely support!"
             android:textColor="#474747"
-            android:textSize="18sp"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />

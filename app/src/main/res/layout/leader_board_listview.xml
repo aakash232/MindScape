@@ -47,7 +47,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text=" Lv. 100"
                 android:textColor="#000000"
-                android:textSize="10sp"
+              android:textSize="10dp" 
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -109,7 +109,7 @@
                         android:gravity="left"
                         android:text="Anu Malik"
                         android:textColor="#000000"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -122,7 +122,7 @@
                         android:gravity="right"
                         android:text="Correct/Wrong : 23/21 "
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="15dp" 
                         android:textStyle="bold" />
 
 
@@ -144,7 +144,7 @@
                         android:gravity="left"
                         android:text="Score : 18023"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="15dp" 
                         android:textStyle="bold" />
 
 
@@ -159,7 +159,7 @@
                         android:gravity="right"
                         android:text="Total Time : 18023 "
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="15dp" 
                         android:textStyle="bold" />
 
 

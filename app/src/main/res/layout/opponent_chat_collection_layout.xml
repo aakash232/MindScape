@@ -61,7 +61,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="Sachu"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/oppoText"
@@ -70,7 +70,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text="Sachu "
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12dp" />
                 </LinearLayout>
 
 

@@ -105,10 +105,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/mouse_memoirs"
-                android:text="You Really Want To Quit?You Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To QuitYou Really Want To Quit"
+                android:text="Share the word! Challenge people across the world. Showcase your creativity and test the knowledge of MindScapers!"
                 android:gravity="left"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 />
         </LinearLayout>
 
@@ -137,7 +137,7 @@
                 android:background="@drawable/insidecardviewlessradius"
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:scaleY="0.95"
                 android:scaleX="0.95"
                 android:layout_weight="1"
@@ -155,7 +155,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="@color/white"
                 android:text="PLAY"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
 
@@ -172,7 +172,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="@color/black"
                 android:text="SHARE"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/layoutDialog"
                 app:layout_constraintStart_toStartOf="@+id/layoutDialog" />

@@ -41,7 +41,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="MindScape"
         android:textColor="#000000"
-        android:textSize="45sp"
+        android:textSize="45dp"
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +60,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text=" @NiftyNile "
         android:textColor="#000000"
-        android:textSize="15sp"
+        android:textSize="15dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +150,7 @@
             android:text="Get Started"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="10sp"/>
+            android:textSize="10dp"/>
 
         <FrameLayout
             android:id="@+id/google"

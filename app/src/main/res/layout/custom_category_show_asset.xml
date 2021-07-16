@@ -8,7 +8,8 @@
     android:foreground="?selectableItemBackground"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     cardview:cardCornerRadius="5dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    app:ignore="NamespaceTypo">
 
 
 
@@ -54,7 +55,7 @@
                     android:layout_marginBottom="5dp"
                     android:text="Anu Malik"
                     android:textColor="#000000"
-                    android:textSize="12sp"
+                    android:textSize="12dp" 
                     />
 
             </LinearLayout>
@@ -192,7 +193,7 @@
                                 android:scaleY="0.8"
                                 android:text="50:50"
                                 android:textColor="#000000"
-                                android:textSize="10sp"
+                                android:textSize="10dp" 
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -211,7 +212,7 @@
                     android:gravity="left"
                     android:text="Number Of Times Played : 19"
                     android:textColor="#000000"
-                    android:textSize="10sp"
+                    android:textSize="10dp" 
                     />
 
 
@@ -229,7 +230,7 @@
                         android:gravity="left"
                         android:text="Time : 2 Mins"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         />
 
 

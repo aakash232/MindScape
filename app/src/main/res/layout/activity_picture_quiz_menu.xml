@@ -94,7 +94,7 @@
                             android:padding="8dp"
                             android:text="Compete Against Time! Challenge your visuals and complete the quiz as soon as possible with utmost accuracy!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -119,7 +119,7 @@
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:text="Single Player"
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -183,7 +183,7 @@
                             android:padding="8dp"
                             android:text="Compete with the world and ace your quizzing skills. It's not just time to beat now, it's the ultimate Arena!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -210,7 +210,7 @@
                                     android:gravity="center"
                                     android:text="Online"
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -272,7 +272,7 @@
                             android:padding="8dp"
                             android:text="Play with your friends in custom rooms. Make the environment friendly yet fiercely competitive!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -299,7 +299,7 @@
                                     android:gravity="center"
                                     android:text="Local"
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>

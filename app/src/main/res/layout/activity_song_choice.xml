@@ -93,7 +93,7 @@
                             android:padding="8dp"
                             android:text="Shhh.. It's time to hear! Wander into the unknowns and ace this quiz to be the King of the Kings!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -118,7 +118,7 @@
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:text=" Audio Quiz "
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -182,7 +182,7 @@
                             android:padding="8dp"
                             android:text="Time to test your visual skills in this fun filled quiz. Storm your brain and win with utmost accuracy to be the Ace!"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
 
                         <androidx.cardview.widget.CardView
@@ -209,7 +209,7 @@
                                     android:gravity="center"
                                     android:text=" Video Quiz "
                                     android:textColor="@color/white"
-                                    android:textSize="25sp"
+                                    android:textSize="25dp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>

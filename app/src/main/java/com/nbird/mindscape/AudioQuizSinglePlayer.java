@@ -9,6 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
@@ -1319,6 +1321,29 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     }
                     timerText.setText(" Timer "+minutestext+":"+secondtext+" ");
                     second++;
+                }
+
+                //Last 15 seconds end animation
+                if(minutes==9 && second>45){
+
+                    CardView Timer = (CardView) findViewById(R.id.cardView3);
+                    timerText.setTextColor(getResources().getColor(R.color.av_red));
+
+                    //Continuous zoomIn - zoomOut
+                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(Timer, "scaleX", 0.9f, 1f);
+                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(Timer, "scaleY", 0.9f, 1f);
+
+                    scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    scaleY.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleY.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    AnimatorSet scaleAnim = new AnimatorSet();
+                    scaleAnim.setDuration(500);
+                    scaleAnim.play(scaleX).with(scaleY);
+
+                    scaleAnim.start();
                 }
             }
             public void onFinish() {

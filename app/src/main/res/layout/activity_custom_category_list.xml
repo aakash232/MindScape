@@ -67,7 +67,7 @@
                         android:padding="8dp"
                         android:text="Compete Against Time! Challenge your visuals and complete the quiz as soon as possible with utmost accuracy!"
                         android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
 

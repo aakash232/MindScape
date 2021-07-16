@@ -83,7 +83,7 @@
                     android:gravity="left"
                     android:text="Create custom quiz created by players across the world!\nHave fun with private and Professional modes! Do your friends really know you? Do they have the right quiz-mind? TIme to find out..."
                     android:textColor="#000000"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
 
 
@@ -114,7 +114,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:layout_margin="10dp"
-                            android:textSize="25sp"/>
+                            android:textSize="25dp"/>
 
                     </LinearLayout>
 
@@ -182,7 +182,7 @@
                         android:padding="8dp"
                         android:text="Play Quizzes created by players across the world! Select private quiz if you have a code. The Ultimate friendship test! \nElse, choose a mode from the great list below! \nHappy Quizzing!"
                         android:textColor="#000000"
-                        android:textSize="12sp" />
+                        android:textSize="12dp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/joinPrivateButton"
@@ -211,7 +211,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:layout_margin="10dp"
-                                android:textSize="18sp"/>
+                                android:textSize="18dp"/>
 
                         </LinearLayout>
 

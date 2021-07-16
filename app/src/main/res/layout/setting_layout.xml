@@ -55,7 +55,7 @@
                 android:padding="10dp"
                 android:text="Select The Number Of Questions"
                 android:textColor="#000000"
-                android:textSize="23sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
                             android:gravity="center"
                             android:text="10"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -133,7 +133,7 @@
                             android:gravity="center"
                             android:text="15"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -167,7 +167,7 @@
                             android:gravity="center"
                             android:text="20"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -191,7 +191,7 @@
                 android:padding="10dp"
                 android:text="Select The Time"
                 android:textColor="#000000"
-                android:textSize="23sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,7 @@
                             android:gravity="center"
                             android:text="3 Mins"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -268,7 +268,7 @@
                             android:gravity="center"
                             android:text="4.5 Mins"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -302,7 +302,7 @@
                             android:gravity="center"
                             android:text="6 Mins"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -326,7 +326,7 @@
                 android:padding="10dp"
                 android:text="Select Mode"
                 android:textColor="#000000"
-                android:textSize="23sp"
+             android:textSize="23dp" 
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -369,7 +369,7 @@
                             android:gravity="center"
                             android:text="Normal"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -404,7 +404,7 @@
                             android:gravity="center"
                             android:text="Picture"
                             android:textColor="#000000"
-                            android:textSize="25sp"
+                            android:textSize="25dp" 
                             android:textStyle="bold" />
 
 
@@ -452,7 +452,7 @@
                             android:gravity="center"
                             android:text="Buzzer Normal"
                             android:textColor="#000000"
-                            android:textSize="20sp"
+                         android:textSize="20dp" 
                             android:textStyle="bold" />
 
 
@@ -487,7 +487,7 @@
                             android:gravity="center"
                             android:text="Buzzer Picture"
                             android:textColor="#000000"
-                            android:textSize="20sp"
+                         android:textSize="20dp" 
                             android:textStyle="bold" />
 
 
@@ -512,7 +512,7 @@
 
                 android:scaleY="0.9"
                 android:text="Done"
-                android:textSize="18sp"
+             android:textSize="18dp" 
                 android:textStyle="bold" />
 
 

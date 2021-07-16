@@ -40,7 +40,7 @@
                 android:fontFamily="@font/mouse_memoirs"
                 android:text="Select The Category Of Your Quiz"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="20dp" 
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textTitle"
                 app:layout_constraintTop_toBottomOf="@+id/backlitemodeanim" />
@@ -392,7 +392,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/card10"
+                        android:id="@+id/card100"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
