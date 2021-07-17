@@ -65,7 +65,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
     private List<questionHolder> listsecondary;
     private List<pictureQuizHolder> list;
     private List<mainMenuFactsHolder> list4;
-    CountDownTimer countDownTimer,countDownTimer47,countDownTimer50,countDownTimerMine;
+    CountDownTimer countDownTimer,countDownTimer47,countDownTimer50,countDownTimerMine,countDownTimeralerDialog;
     int position=0;
     private int score=0;
     private int currentPage;
@@ -259,7 +259,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
 
 
-        countDownTimerFun47();
+
         opponentDataRetrieving(0,listenerFast0);
         opponentDataRetrieving(1,listenerFast1);
         opponentDataRetrieving(2,listenerFast2);
@@ -784,6 +784,61 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
             }
         });
 
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(multiPlayerPictureQuiz.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(multiPlayerPictureQuiz.this).inflate(R.layout.buzzerpicturedialog,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(false);
+        final TextView textView=view1.findViewById(R.id.textTitle);
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+
+
+        countDownTimeralerDialog=new CountDownTimer(1000*10,1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+                textView.setText("Quiz Starts In "+ millisUntilFinished/1000 + " Seconds. Picture Is Getting Loaded!!!Please Wait.");
+            }
+
+            @Override
+            public void onFinish() {
+                alertDialog.dismiss();
+                countDownTimerFun47();
+                new CountDownTimer(1000*5000,1000){
+                    @Override
+                    public void onTick(long l) {
+                        picWaiter();
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+                }.start();
+            }
+        }.start();
+
+
+
+
+
+    }
+
+    public void picWaiter(){
+        if(questionImage.getDrawable() != null){
+            try {
+                loadingDialog.dismiss();
+            }catch (Exception e){
+
+            }
+
+        }
     }
 
     @Override
@@ -870,9 +925,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                     list.add(snapshot.getValue(pictureQuizHolder.class));
 
-                    Glide.with(getBaseContext())
-                            .load(list.get(num).getQuestionPicture())
-                            .preload(20, 10);
+                    try{
+                        Glide.with(getBaseContext())
+                                .load(list.get(num).getQuestionPicture())
+                                .preload(20, 10);
+                    }catch (Exception e){
+
+                    }
+
 
                     num++;
 

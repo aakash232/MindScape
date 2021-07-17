@@ -56,7 +56,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     TextView name2,totalTimeTaken2,accuracy2,score2;
     TextView name3,totalTimeTaken3,accuracy3,score3;
     TextView name4,totalTimeTaken4,accuracy4,score4;
-
+     int privacyNuddles=1;
     leaderBoardHolder list1,list2,list3,list4;
     roomDataHolder listHostChanged;
     private List<mainMenuFactsHolder> list;
@@ -229,6 +229,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         roomCode1=getIntent().getIntExtra("roomCode",0);
         playerNum=getIntent().getIntExtra("Playernum",1);
 
+        numQuestion=getIntent().getIntExtra("numQuestion",0);
+        numTime=getIntent().getIntExtra("numTime",0);
+        numMode=getIntent().getIntExtra("numMode",0);
+
         list1= new leaderBoardHolder();
 
         roomCodeTextView.setText(" Room Code : "+roomCode1);
@@ -290,6 +294,29 @@ public class tournamentLobbyActivity extends AppCompatActivity {
      //   list3= new leaderBoardHolder();
      //   list4= new leaderBoardHolder();
         if(playerNum==1){
+            if (numMode == 0) {
+                modeTextView.setText(" Mode : Normal ");
+            } else if(numMode==1){
+                modeTextView.setText(" Mode : Picture ");
+            }else if(numMode==2){
+                modeTextView.setText(" Mode : Buzzer Normal ");
+            }else{
+                modeTextView.setText(" Mode : Buzzer Picture ");
+            }
+            if(numQuestion==0){
+                questionNumberTextView.setText(" Question : " + 10);
+            }else if(numQuestion==1){
+                questionNumberTextView.setText(" Question : " + 15);
+            }else{
+                questionNumberTextView.setText(" Question : " + 20);
+            }
+            if(numTime==0){
+                timeTextView.setText(" Time : 3 Mins ");
+            }else if(numTime==1){
+                timeTextView.setText(" Time : 4.5 Mins ");
+            }else{
+                timeTextView.setText(" Time : 6 Mins ");
+            }
             hostDetailsRetrievingCreate();
             findplayer1Status();
             dataRetrievingByHost("player2Uid",image2,name2,totalTimeTaken2,accuracy2,score2,main2Image,2);
@@ -1069,6 +1096,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             intent.putExtra("roomCode",roomCode1);
                             intent.putExtra("questionNum",numQuestion);
                             intent.putExtra("timerNum",numTime);
+                            intent.putExtra("privacy",privacyFinder);
+                            intent.putExtra("numMode",numMode);
                             intent.putExtra("numberOfPlayers",numberOfPlayers);
                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                             startActivity(intent);
@@ -1147,6 +1176,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     intent.putExtra("roomCode",roomCode1);
                     intent.putExtra("questionNum",numQuestion);
                     intent.putExtra("timerNum",numTime);
+                    intent.putExtra("privacy",privacyNuddles);
                     intent.putExtra("numberOfPlayers",numberOfPlayers);
                     intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                     startActivity(intent);
@@ -2430,6 +2460,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
                     privacyTextView.setText(" Privacy : Public ");
+                    privacyNuddles=1;
                     lisnerfox2=new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -2606,6 +2637,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     modeTextView.setText(" Mode : Buzzer Picture ");
                                 }
                                 privacyTextView.setText(" Privacy : Private ");
+                                privacyNuddles=0;
                             }catch (Exception e){
 
                             }
@@ -3294,7 +3326,30 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     }
 
     public void roomListViewPushingByHost(){
-        roomDataHolder s1 = new roomDataHolder(mAuth.getCurrentUser().getUid(),1,image1Url,name1String,roomCode1,10,3,0,1);
+        int qnum = 0,tnum=0,mnum;
+        switch (numQuestion){
+            case 0:
+                qnum=10;break;
+            case 1:
+                qnum=15;break;
+            case 2:
+                qnum=20;break;
+
+        }
+
+         switch (numTime){
+            case 0:
+                tnum=3;break;
+            case 1:
+                tnum=45;break;
+            case 2:
+                tnum=6;break;
+
+        }
+
+
+
+        roomDataHolder s1 = new roomDataHolder(mAuth.getCurrentUser().getUid(),1,image1Url,name1String,roomCode1,qnum,tnum,numMode,1);
 
         myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -3729,6 +3784,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void dataForHorizontalSlide() {
 

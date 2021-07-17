@@ -106,6 +106,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                refreshButton.setEnabled(false);
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentChoiceActicity.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -226,67 +227,63 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                                     Toast.makeText(tournamentChoiceActicity.this, "Room Is Full!", Toast.LENGTH_SHORT).show();
                                 }
                             }catch (Exception e){
-                                if(mam==0){
-                                    password.setError("Room Password Is Wrong");
-                                }else{
-                                    alertDialog.dismiss();
-                                }
-                            }
+                                myRef.child("room").child(String.valueOf(0)).orderByChild("roomCode").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        try{
+                                            for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                                                list123.add(dataSnapshot1.getValue(roomDataHolder.class));
+                                            }
+                                            //  s=snapshot.getValue(roomDataHolder.class);
 
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                            int num=list123.get(0).getNumberOfPlayers();
+                                            if(num<4){
+                                                num++;
+                                                final String sos=list123.get(0).getHostName();
+                                                mam=list123.get(0).getNumberOfPlayers();
+                                                final int finalNum = num;
+                                                myRef.child("room").child(String.valueOf(0)).child(list123.get(0).getHostUid()).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Intent intent=new Intent(tournamentChoiceActicity.this,tournamentLobbyActivity.class);
+                                                        intent.putExtra("hostUid",list123.get(0).getHostUid());
+                                                        intent.putExtra("hostImage",list123.get(0).getHostImageUrl());
+                                                        intent.putExtra("hostName",sos);
+                                                        intent.putExtra("isHost",0);
+                                                        intent.putExtra("roomCode",list123.get(0).getRoomCode());
+                                                        intent.putExtra("Playernum", finalNum);
+                                                        startActivity(intent);
+                                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                        finish();
+                                                    }
+                                                });
 
-                        }
-                    });
+                                            }else {
+                                                Toast.makeText(tournamentChoiceActicity.this, "Room Is Full!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }catch (Exception e){
 
-                    myRef.child("room").child(String.valueOf(0)).orderByChild("roomCode").equalTo(codeInteger).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            try{
-                                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                                    list123.add(dataSnapshot1.getValue(roomDataHolder.class));
-                                }
-                              //  s=snapshot.getValue(roomDataHolder.class);
+                                            password.setError("Room Password Is Wrong");
 
-                                int num=list123.get(0).getNumberOfPlayers();
-                                if(num<4){
-                                    num++;
-                                    final String sos=list123.get(0).getHostName();
-                                    mam=list123.get(0).getNumberOfPlayers();
-                                    final int finalNum = num;
-                                    myRef.child("room").child(String.valueOf(0)).child(sos).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Intent intent=new Intent(tournamentChoiceActicity.this,tournamentLobbyActivity.class);
-                                            intent.putExtra("hostUid",list123.get(0).getHostUid());
-                                            intent.putExtra("hostImage",list123.get(0).getHostImageUrl());
-                                            intent.putExtra("hostName",sos);
-                                            intent.putExtra("isHost",0);
-                                            intent.putExtra("roomCode",list123.get(0).getRoomCode());
-                                            intent.putExtra("Playernum", finalNum);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
                                         }
-                                    });
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }else {
-                                    Toast.makeText(tournamentChoiceActicity.this, "Room Is Full!", Toast.LENGTH_SHORT).show();
-                                }
-                            }catch (Exception e){
-                                if(mam==0){
-                                    password.setError("Room Password Is Wrong");
-                                }else{
-                                    alertDialog.dismiss();
-                                }
+                                    }
+                                });
+
+
                             }
+
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
+
+
 
 
 
@@ -458,6 +455,7 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                                         listRoom.add(dataSnapshot1.getValue(roomDataHolder.class));
                                         categoryAdapter.notifyDataSetChanged();
                                     }
+
                                 }catch (Exception e){
 
                                 }
@@ -473,10 +471,10 @@ public class tournamentChoiceActicity extends AppCompatActivity {
 
                     }
                 }finally {
-                  /*  if(listRoom.size()==0){
-                        Toast.makeText(tournamentChoiceActicity.this, "No Rooms Available!Please Create A Room.", Toast.LENGTH_LONG).show();
-                    }*/
-
+               //     if(listRoom.size()==0){
+               //         Toast.makeText(tournamentChoiceActicity.this, "No Rooms Available!Please Create A Room.", Toast.LENGTH_LONG).show();
+               //     }
+                    refreshButton.setEnabled(true);
                     shimmer.stopShimmerAnimation();
                     shimmer.setVisibility(View.GONE);
                 }

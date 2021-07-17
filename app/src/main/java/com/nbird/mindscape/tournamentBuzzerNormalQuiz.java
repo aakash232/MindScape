@@ -101,7 +101,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
     int wrongAns=0;
     ValueEventListener listner;
     int oppoStatus;
-    int isAttempt=0;
+    int isAttempt=0,numMode;
     private InterstitialAd mInterstitialAd;
 
     private void loadAds(){
@@ -255,7 +255,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         questionNum=getIntent().getIntExtra("questionNum",0);
         timerNum=getIntent().getIntExtra("timerNum",0);
         numberOfPlayers=getIntent().getIntExtra("numberOfPlayers",1);
-
+        numMode=getIntent().getIntExtra("numMode",0);
         if(playerNum==2||playerNum==3||playerNum==4){
             opponentRemovedKnower();
         }
@@ -855,6 +855,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 scoreIntent.putExtra("timerNum",timerNum);
                 scoreIntent.putExtra("correctMy",correctAns);
                 scoreIntent.putExtra("wrongMy",wrongAns);
+                scoreIntent.putExtra("numMode",numMode);
                 for(int i=0;i<=20;i++){
                     if(countDownTimer!=null){
                         countDownTimer.cancel();}
@@ -897,6 +898,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         scoreIntent.putExtra("timerNum",timerNum);
         scoreIntent.putExtra("correctMy",correctAns);
         scoreIntent.putExtra("wrongMy",wrongAns);
+        scoreIntent.putExtra("numMode",numMode);
         for(int i=0;i<=20;i++){
             if(countDownTimer!=null){
                 countDownTimer.cancel();}
@@ -2589,21 +2591,67 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
 
         } else if(playerNum==2){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+                    finish();
+                }
+            });
+
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
 
         }else if(playerNum==3){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+                    finish();
+                }
+            });
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
 
         }else if (playerNum==4){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+                    finish();
+                }
+            });
             //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
 
         }
@@ -2625,7 +2673,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {

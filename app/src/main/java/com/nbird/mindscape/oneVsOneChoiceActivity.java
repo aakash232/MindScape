@@ -709,8 +709,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             if(countDownTimer123!=null){
                                 countDownTimer123.cancel();
                             }
-                                Toast.makeText(oneVsOneChoiceActivity.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                                Toast.makeText(oneVsOneChoiceActivity.this, "Your Opponent Joined Another Room!!Try Again", Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(oneVsOneChoiceActivity.this,oneVsOneChoiceActivity.class);
                             startActivity(intent);
                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();

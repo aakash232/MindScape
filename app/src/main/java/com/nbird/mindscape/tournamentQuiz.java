@@ -84,7 +84,7 @@ public class tournamentQuiz extends AppCompatActivity {
     int yo3;
     int yo4;
     String userName;
-    int selectNum;
+    int selectNum,numMode;
     int lifelineSum=0;
     private int position=0;
     CountDownTimer countDownTimer;
@@ -114,7 +114,7 @@ public class tournamentQuiz extends AppCompatActivity {
     int oppoStatus=5;
     int setNumber;
     private InterstitialAd mInterstitialAd;
-
+    int privacyFinder;
     private void loadAds(){
 
         mInterstitialAd = new InterstitialAd(this);
@@ -259,7 +259,8 @@ public class tournamentQuiz extends AppCompatActivity {
         questionNum=getIntent().getIntExtra("questionNum",0);
         timerNum=getIntent().getIntExtra("timerNum",0);
         numberOfPlayers=getIntent().getIntExtra("numberOfPlayers",1);
-
+        privacyFinder=getIntent().getIntExtra("privacy",0);
+        numMode=getIntent().getIntExtra("numMode",0);
 
         if(playerNum==2||playerNum==3||playerNum==4){
             opponentRemovedKnower();
@@ -309,9 +310,24 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand1 = new Random();
-                    setNumber=rand1.nextInt(6326)+1; //NEED TO CHANGE HERE
-                    fireBaseData(setNumber);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                fireBaseData(snapshot.getValue(Integer.class));
+
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                 }
 
             }
@@ -321,9 +337,23 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand1 = new Random();
-                    setNumber=rand1.nextInt(6326)+1;//NEED TO CHANGE HERE
-                    fireBaseData(setNumber);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                fireBaseData(snapshot.getValue(Integer.class));
+
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
             }
@@ -333,10 +363,23 @@ public class tournamentQuiz extends AppCompatActivity {
                     // create instance of Random class
                     fireBaseData(arrlist12345.get(i));
                 }catch (Exception e){
-                    Random rand1 = new Random();
-                    setNumber=rand1.nextInt(6326)+1;  //NEED TO CHANGE HERE
-                    //NEED TO CHANGE HERE
-                    fireBaseData(setNumber);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("questionPack").child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                fireBaseData(snapshot.getValue(Integer.class));
+
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
             }
@@ -1663,6 +1706,8 @@ public class tournamentQuiz extends AppCompatActivity {
                 scoreIntent.putExtra("roomCode",roomCode);
                 scoreIntent.putExtra("questionNum",questionNum);
                 scoreIntent.putExtra("timerNum",timerNum);
+                scoreIntent.putExtra("privacy",privacyFinder);
+                scoreIntent.putExtra("numMode",numMode);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 startActivity(scoreIntent);
@@ -1710,6 +1755,8 @@ public class tournamentQuiz extends AppCompatActivity {
         scoreIntent.putExtra("roomCode",roomCode);
         scoreIntent.putExtra("questionNum",questionNum);
         scoreIntent.putExtra("timerNum",timerNum);
+        scoreIntent.putExtra("privacy",privacyFinder);
+        scoreIntent.putExtra("numMode",numMode);
         if(countDownTimer!=null){
             countDownTimer.cancel();}
         startActivity(scoreIntent);
@@ -2315,6 +2362,8 @@ public class tournamentQuiz extends AppCompatActivity {
                         scoreIntent.putExtra("roomCode",roomCode);
                         scoreIntent.putExtra("questionNum",questionNum);
                         scoreIntent.putExtra("timerNum",timerNum);
+                        scoreIntent.putExtra("privacy",privacyFinder);
+                        scoreIntent.putExtra("numMode",numMode);
                         startActivity(scoreIntent);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         if(countDownTimer!=null){
@@ -2363,6 +2412,8 @@ public class tournamentQuiz extends AppCompatActivity {
                 scoreIntent.putExtra("roomCode",roomCode);
                 scoreIntent.putExtra("questionNum",questionNum);
                 scoreIntent.putExtra("timerNum",timerNum);
+                scoreIntent.putExtra("privacy",privacyFinder);
+                scoreIntent.putExtra("numMode",numMode);
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 if(countDownTimer!=null){
@@ -2456,7 +2507,12 @@ public class tournamentQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -2524,21 +2580,67 @@ public class tournamentQuiz extends AppCompatActivity {
 
 
         } else if(playerNum==2){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+                    finish();
+                }
+            });
+
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
 
         }else if(playerNum==3){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+                    finish();
+                }
+            });
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
 
         }else if (playerNum==4){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+                    finish();
+                }
+            });
             //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
 
         }
@@ -2560,7 +2662,12 @@ public class tournamentQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {
@@ -2582,7 +2689,8 @@ public class tournamentQuiz extends AppCompatActivity {
                     }
                 });
                 if(countDownTimer!=null){
-                    countDownTimer.cancel();}
+                    countDownTimer.cancel();
+                }
                 alertDialog.dismiss();
                 tournamentQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

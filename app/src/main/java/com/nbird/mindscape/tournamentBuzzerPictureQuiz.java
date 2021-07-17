@@ -106,7 +106,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
     ImageView questionImage;
     String linkHolder;
-    int isAttempt=0;
+    int isAttempt=0,numMode;
     private InterstitialAd mInterstitialAd;
 
     private void loadAds(){
@@ -261,6 +261,8 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         questionNum = getIntent().getIntExtra("questionNum", 0);
         timerNum = getIntent().getIntExtra("timerNum", 0);
         numberOfPlayers = getIntent().getIntExtra("numberOfPlayers", 1);
+        numMode=getIntent().getIntExtra("numMode",0);
+
 
         if (playerNum == 2 || playerNum == 3 || playerNum == 4) {
             opponentRemovedKnower();
@@ -348,7 +350,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         category = getIntent().getIntExtra("category", 1);
         list = new ArrayList<>();
 
-        loadingDialog.show();
+       // loadingDialog.show();
 
 
         if (questionNum == 0) {
@@ -637,17 +639,6 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             public void onFinish() {
                 alertDialog.dismiss();
                 quizTime(timePerQuestion);
-                new CountDownTimer(1000*5000,1000){
-                    @Override
-                    public void onTick(long l) {
-                        picWaiter();
-                    }
-
-                    @Override
-                    public void onFinish() {
-
-                    }
-                }.start();
             }
         }.start();
 
@@ -773,9 +764,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     list.add(snapshot.getValue(pictureQuizHolder.class));
-                    Glide.with(getBaseContext())
-                            .load(list.get(num).getQuestionPicture())
-                            .preload(20, 10);
+                    try{
+                        Glide.with(getBaseContext())
+                                .load(list.get(num).getQuestionPicture())
+                                .preload(20, 10);
+                    }catch (Exception e){
+
+                    }
+
                     num++;
 
                 quizManupulator();
@@ -969,6 +965,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                 scoreIntent.putExtra("timerNum", timerNum);
                 scoreIntent.putExtra("correctMy", correctAns);
                 scoreIntent.putExtra("wrongMy", wrongAns);
+                scoreIntent.putExtra("numMode",numMode);
                 for (int i = 0; i <= 20; i++) {
                     if (countDownTimer != null) {
                         countDownTimer.cancel();
@@ -1015,6 +1012,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         scoreIntent.putExtra("timerNum", timerNum);
         scoreIntent.putExtra("correctMy", correctAns);
         scoreIntent.putExtra("wrongMy", wrongAns);
+        scoreIntent.putExtra("numMode",numMode);
         for (int i = 0; i <= 20; i++) {
             if (countDownTimer != null) {
                 countDownTimer.cancel();
@@ -2804,8 +2802,8 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
     }
 
-    public void cancelLeaveFunction() {
-        if (playerNum == 1) {
+    public void cancelLeaveFunction(){
+        if(playerNum==1){
             //   myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
             //    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
             //    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
@@ -2814,11 +2812,10 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
 
-                    Intent intent47 = new Intent(tournamentBuzzerPictureQuiz.this, mainMenuActivity.class);
+                    Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
 
-                    if (countDownTimer != null) {
-                        countDownTimer.cancel();
-                    }
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
 
                     startActivity(intent47);
 
@@ -2827,28 +2824,73 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             });
 
 
-        } else if (playerNum == 2) {
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+        } else if(playerNum==2){
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
+                    finish();
+                }
+            });
+
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
 
-        } else if (playerNum == 3) {
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+        }else if(playerNum==3){
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
+                    finish();
+                }
+            });
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
 
-        } else if (playerNum == 4) {
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+        }else if (playerNum==4){
+
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Uid").removeValue();
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+
+                    Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
+
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+
+                    startActivity(intent47);
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
+                    finish();
+                }
+            });
             //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
 
         }
 
     }
-
     public void leaveDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(tournamentBuzzerPictureQuiz.this, R.style.AlertDialogTheme);
         View view = LayoutInflater.from(tournamentBuzzerPictureQuiz.this).inflate(R.layout.removal_lobby_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -2864,7 +2906,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         if (alertDialog.getWindow() != null) {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {

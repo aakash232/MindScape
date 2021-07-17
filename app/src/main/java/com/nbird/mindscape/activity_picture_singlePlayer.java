@@ -681,9 +681,14 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     list.add(snapshot.getValue(pictureQuizHolder.class));
-                    Glide.with(getBaseContext())
-                            .load(list.get(num).getQuestionPicture())
-                            .preload(20, 10);
+                    try{
+                        Glide.with(getBaseContext())
+                                .load(list.get(num).getQuestionPicture())
+                                .preload(20, 10);
+                    }catch (Exception e){
+
+                    }
+
 
                     num++;
 

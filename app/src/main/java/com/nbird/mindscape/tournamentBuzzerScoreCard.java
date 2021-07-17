@@ -76,9 +76,36 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     int numberOfPlayers;
     int roomEntry=0;
     CountDownTimer countDownTimer,countDownTimer1234;
-    int j=0;
+    int j=0,privacyFinder,numMode;
     correctWrongAnsweredBuzzerHolder m;
     LottieAnimationView partypoper,party2;
+    ValueEventListener lisnernumber1,lisnernumber2,lisnernumber3;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
+    public void fishManu(int mk){
+        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(mk).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(tournamentBuzzerScoreCard.this, tournamentLobbyActivity.class);
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                intent.putExtra("hostUid", hostUid);
+                intent.putExtra("hostImage",hostImageUrl);
+                intent.putExtra("hostName",hostName);
+                intent.putExtra("isHost",0);
+                intent.putExtra("roomCode",roomCode);
+                intent.putExtra("Playernum",m1+1);
+                //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
+                startActivity(intent);    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,6 +257,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         quitButton=(Button) findViewById(R.id.quitButton);
         lobbyButton=(Button) findViewById(R.id.lobbyButton);
 
+        privacyFinder=getIntent().getIntExtra("privacy",0);
         correctNum=getIntent().getIntExtra("score",0);
         myName=getIntent().getStringExtra("myName");
         myImageUrl=getIntent().getStringExtra("myImageUrl");
@@ -249,6 +277,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         counter=getIntent().getIntExtra("counter",0);
         mycorrect=getIntent().getIntExtra("correctMy",0);
         mywrong=getIntent().getIntExtra("wrongMy",0);
+        numMode=getIntent().getIntExtra("numMode",0);
 
         partypoper.setVisibility(View.VISIBLE);
         partypoper.setAnimation(R.raw.partypoppersanim);
@@ -299,6 +328,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                 }
             });
 
+
+
             listner45=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -334,23 +365,14 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             }
 
                                             if(m1<4){
-                                                myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(m1+1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Intent intent = new Intent(tournamentBuzzerScoreCard.this, tournamentLobbyActivity.class);
-                                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
-                                                        intent.putExtra("hostUid", hostUid);
-                                                        intent.putExtra("hostImage",hostImageUrl);
-                                                        intent.putExtra("hostName",hostName);
-                                                        intent.putExtra("isHost",0);
-                                                        intent.putExtra("roomCode",roomCode);
-                                                        intent.putExtra("Playernum",m1+1);
-                                                        //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
-                                                        startActivity(intent);    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                        finish();
+                                                if(m1==1){
+                                                    fishManu(2);
+                                                }else if(m1==2){
+                                                    fishManu(3);
+                                                }else if(m1==3){
+                                                    fishManu(4);
+                                                }
 
-                                                    }
-                                                });
                                             }else{
                                                 Toast.makeText(tournamentBuzzerScoreCard.this, "Room Is Full!", Toast.LENGTH_LONG).show();
                                                 tournamentBuzzerScoreCard.super.onBackPressed();
@@ -622,7 +644,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-                    myRef.child("room").child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
@@ -664,6 +686,13 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             Intent intent=new Intent(tournamentBuzzerScoreCard.this,tournamentLobbyActivity.class);
                             intent.putExtra("Playernum",1);
                             intent.putExtra("roomCode",roomCode);
+                            intent.putExtra("privacy",privacyFinder);
+
+                            intent.putExtra("numQuestion",questionNum);
+                            intent.putExtra("numTime",timerNum);
+                            intent.putExtra("numMode",numMode);
+
+
                             startActivity(intent);
                             finish();
 
@@ -1300,14 +1329,29 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
 
-    public void mainManu2(String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
+    public void mainManu2(final String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(new ValueEventListener() {
+        lisnernumber1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     int t=snapshot.getValue(Integer.class);
                     if(t==0){
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber1);
+                        }catch (Exception e){
+
+                        }
+
+                        numberOfPlayers--;
+                        switch (playerNum){
+                            case 1:
+                                sco2=0;break;
+                            case 2:
+                            case 3:
+                            case 4:
+                                sco1=0;break;
+                        }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
                                 .into(img);
@@ -1326,7 +1370,38 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         playerShimmerPic.setVisibility(View.GONE);
                     }
                 }catch (Exception e){
+                    try{
+                        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber1);
+                    }catch (Exception e1){
 
+                    }
+                    numberOfPlayers--;
+                    switch (playerNum){
+                        case 1:
+                            sco2=0;break;
+                        case 2:
+                        case 3:
+                        case 4:
+                            sco1=0;break;
+                    }
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(img);
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(propic);
+                    headText.setText(nameString);
+                    name.setText(nameString+" (Left)");
+                    accuracy.setText("Accuracy : 0%");
+                    correctvswrong.setText("Correct/Wrong : 0/0");
+                  //  totalLifeLines.setText("Total Life-Lines : 0/0");
+                    score.setText("Total Score : 0");
+                  //  totalTimeTaken.setText("Total Time Taken : 0");
+                    sco2=0;
+                    playerShimmer.stopShimmerAnimation();
+                    playerShimmer.setVisibility(View.GONE);
+                    playerShimmerPic.stopShimmerAnimation();
+                    playerShimmerPic.setVisibility(View.GONE);
                 }
             }
 
@@ -1334,16 +1409,31 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(lisnernumber1);
     }
 
-    public void mainManu3(String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void mainManu3(final String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
+        new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     int t=snapshot.getValue(Integer.class);
                     if(t==0){
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber2);
+                        }catch (Exception e){
+
+                        }
+                        numberOfPlayers--;
+                        switch (playerNum){
+                            case 1:
+                            case 2:
+                                sco3=0;break;
+                            case 3:
+                            case 4:
+                                sco1=0;break;
+                        }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
                                 .into(img);
@@ -1362,7 +1452,38 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         playerShimmerPic.setVisibility(View.GONE);
                     }
                 }catch (Exception e){
+                    try{
+                        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber2);
+                    }catch (Exception e1){
 
+                    }
+                    numberOfPlayers--;
+                    switch (playerNum){
+                        case 1:
+                        case 2:
+                            sco3=0;break;
+                        case 3:
+                        case 4:
+                            sco1=0;break;
+                    }
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(img);
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(propic);
+                    headText.setText(nameString);
+                    name.setText(nameString+" (Left)");
+                    accuracy.setText("Accuracy : 0%");
+                    correctvswrong.setText("Correct/Wrong : 0/0");
+                   // totalLifeLines.setText("Total Life-Lines : 0/0");
+                    score.setText("Total Score : 0");
+                   // totalTimeTaken.setText("Total Time Taken : 0");
+                    sco3=0;
+                    playerShimmer.stopShimmerAnimation();
+                    playerShimmer.setVisibility(View.GONE);
+                    playerShimmerPic.stopShimmerAnimation();
+                    playerShimmerPic.setVisibility(View.GONE);
                 }
             }
 
@@ -1370,15 +1491,30 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(lisnernumber2);
     }
-    public void mainManu4(String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void mainManu4(final String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
+       new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     int t=snapshot.getValue(Integer.class);
                     if(t==0){
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber3);
+                        }catch (Exception e){
+
+                        }
+                        numberOfPlayers--;
+                        switch (playerNum){
+                            case 1:
+                            case 2:
+                            case 3:
+                                sco4=0;break;
+                            case 4:
+                                sco3=0;break;
+                        }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
                                 .into(img);
@@ -1398,7 +1534,38 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
                     }
                 }catch (Exception e){
+                    try{
+                        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeEventListener(lisnernumber3);
+                    }catch (Exception e1){
 
+                    }
+                    numberOfPlayers--;
+                    switch (playerNum){
+                        case 1:
+                        case 2:
+                        case 3:
+                            sco4=0;break;
+                        case 4:
+                            sco3=0;break;
+                    }
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(img);
+                    Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(14)))
+                            .into(propic);
+                    headText.setText(nameString);
+                    name.setText(nameString+" (Left)");
+                    accuracy.setText("Accuracy : 0%");
+                    correctvswrong.setText("Correct/Wrong : 0/0");
+                   // totalLifeLines.setText("Total Life-Lines : 0/0");
+                    score.setText("Total Score : 0");
+                 //   totalTimeTaken.setText("Total Time Taken : 0");
+                    sco4=0;
+                    playerShimmer.stopShimmerAnimation();
+                    playerShimmer.setVisibility(View.GONE);
+                    playerShimmerPic.stopShimmerAnimation();
+                    playerShimmerPic.setVisibility(View.GONE);
                 }
             }
 
@@ -1406,7 +1573,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(lisnernumber3);
     }
     public void playerOnlineStatusManupulator(String playerStatus){
         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addValueEventListener(new ValueEventListener() {
@@ -2509,6 +2677,77 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void alertDialog123(String text, int pos){
+
+
+        switch (playerNum){
+            case 1:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 2:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 3:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 4:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+        }
+
+
+
         AlertDialog.Builder builder=new AlertDialog.Builder(tournamentBuzzerScoreCard.this,R.style.AlertDialogTheme);
 
         final View view1= LayoutInflater.from(tournamentBuzzerScoreCard.this).inflate(R.layout.position_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -2544,6 +2783,77 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void alertDialog4(String s){
+
+
+        switch (playerNum){
+            case 1:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 2:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 3:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 4:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+        }
+
+
+
         AlertDialog.Builder builder=new AlertDialog.Builder(tournamentBuzzerScoreCard.this,R.style.AlertDialogTheme);
 
         final View view1= LayoutInflater.from(tournamentBuzzerScoreCard.this).inflate(R.layout.lose_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
