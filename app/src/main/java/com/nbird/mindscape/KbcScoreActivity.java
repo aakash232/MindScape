@@ -108,33 +108,33 @@ public class KbcScoreActivity extends AppCompatActivity {
 
 
         switch (score) {
-            case 0: priceText.setText("nothing");
+            case 0: priceText.setText("Nothing");
                  break;
-            case 1: priceText.setText("5000");
+            case 1: priceText.setText(" Rs 5,000 ");
                 break;
-            case 2:priceText.setText("10000");
+            case 2:priceText.setText(" Rs 10,000 ");
                 break;
-            case 3: priceText.setText("20000");
+            case 3: priceText.setText(" Rs 20,000 ");
                 break;
-            case 4:priceText.setText("40000");
+            case 4:priceText.setText(" Rs 40,000 ");
                 break;
-            case 5: priceText.setText("80000");
+            case 5: priceText.setText(" Rs 80,000 ");
                 break;
-            case 6:priceText.setText("160000");
+            case 6:priceText.setText(" Rs 1,60,000");
                 break;
-            case 7: priceText.setText("320000");
+            case 7: priceText.setText(" Rs 3,20,000 ");
                 break;
-            case 8:priceText.setText("640000");
+            case 8:priceText.setText(" Rs 6,40,000 ");
                 break;
-            case 9: priceText.setText("1250000");
+            case 9: priceText.setText(" Rs 12,50,000 ");
                 break;
-            case 10:priceText.setText("25 lakh");
+            case 10:priceText.setText(" Rs 25 Lakhs ");
                 break;
-            case 11: priceText.setText("50 lakh");
+            case 11: priceText.setText(" Rs 50 Lakhs ");
                 break;
-            case 12:priceText.setText("1 crore");
+            case 12:priceText.setText(" Rs 1 Crores ");
                 break;
-            case 13: priceText.setText("5 crore");
+            case 13: priceText.setText(" Rs 5 Crores ");
                 break;
         }
     }

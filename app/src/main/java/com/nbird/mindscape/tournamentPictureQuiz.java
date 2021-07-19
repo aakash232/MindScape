@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -987,6 +988,13 @@ public class tournamentPictureQuiz extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+        if(countDownTimeralerDialog!=null){
+            countDownTimeralerDialog.cancel();
+        }
+
         Runtime.getRuntime().gc();
     }
 
@@ -1483,7 +1491,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     try{
                         Glide.with(getBaseContext())
-                                .load(list.get(num).getQuestionPicture())
+                                .load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).preload(20,10)).preload(20,10)).preload(20,10))
                                 .preload(20, 10);
                     }catch (Exception e){
 
@@ -1876,7 +1884,15 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     String option="";
                     if(count==0){
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        try{
+                            Glide.with(getBaseContext())
+                                    .load(linkHolder)
+                                    .error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder))))
+                                    .into(questionImage);
+                        }catch (Exception e){
+
+                        }
+
                         Animation imgAnim1 = AnimationUtils.loadAnimation(tournamentPictureQuiz.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 
@@ -2783,8 +2799,34 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         }catch (Exception e){
 
         }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+        }catch (Exception e){
+
+        }
+        if(playerNum==2){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
 
 
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
+
+        }else if(playerNum==3){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
+
+        }else if (playerNum==4){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+            //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
+
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();}
 
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2804,8 +2846,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if(countDownTimer!=null){
-                    countDownTimer.cancel();}
+
 
                 alertDialog.dismiss();
                 tournamentPictureQuiz.super.onBackPressed();

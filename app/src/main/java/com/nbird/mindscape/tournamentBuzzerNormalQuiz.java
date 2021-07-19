@@ -111,6 +111,17 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     songActivity songActivity;
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
+        Runtime.getRuntime().gc();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -2679,7 +2690,34 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
         }
 
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+        }catch (Exception e){
 
+        }
+        if(playerNum==2){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
+
+        }else if(playerNum==3){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
+
+        }else if (playerNum==4){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+            //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
+
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();}
 
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2694,8 +2732,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if(countDownTimer!=null){
-                    countDownTimer.cancel();}
+
                 try{
                     songActivity.songStop();
                 }catch (Exception e){

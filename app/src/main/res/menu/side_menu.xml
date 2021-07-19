@@ -47,6 +47,11 @@
                     android:icon="@drawable/nav_aboutus"
                     />
                 <item
+                    android:id="@+id/share_us"
+                    android:title="Share"
+                    android:icon="@drawable/sharenav"
+                    />
+                <item
                     android:id="@+id/nav_rate"
                     android:title="Rate Us"
                     android:icon="@drawable/nav_rateus"

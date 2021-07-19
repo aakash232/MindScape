@@ -107,6 +107,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     int isHost=0;
     int setNumber;
+    int isHostFinal=0;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -252,6 +253,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             }
                         });
                         alertDialog.dismiss();
+                        isHostFinal=1;
                         roomCodeGenerator();
                     }
                 });
@@ -514,7 +516,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 }
                 try {
                     opponentUID = list123.get(0).getUID();
-
+                    isHostFinal=0;
                     leader = 1;
                     myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
                     myRef.child("oneVsoneOnlinePlayers").child(opponentUID).removeValue();
@@ -593,7 +595,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
 
                                         opponentDataGetterFunction();
                                         isHost=1;
-
+                                        isHostFinal=1;
                                         myRef.child("User").child(opponentUID).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -692,6 +694,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             intent.putExtra("mypropic", proPicUrl);
                             intent.putExtra("myName", userName);
                             intent.putExtra("leader", leader);
+                                intent.putExtra("isHostFinal", isHostFinal);
                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                                 if(countDownTimer!=null){
                                     countDownTimer.cancel();
@@ -722,6 +725,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                 intent.putExtra("mypropic", proPicUrl);
                                 intent.putExtra("myName", userName);
                                 intent.putExtra("leader", leader);
+                                intent.putExtra("isHostFinal", isHostFinal);
                                 intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                                 if(countDownTimer!=null){
                                     countDownTimer.cancel();
@@ -741,6 +745,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             intent.putExtra("mypropic", proPicUrl);
                             intent.putExtra("myName", userName);
                             intent.putExtra("leader", leader);
+                            intent.putExtra("isHostFinal", isHostFinal);
                             intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist);
                             if(countDownTimer!=null){
                                 countDownTimer.cancel();
@@ -1386,6 +1391,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 try {
                     opponentUID = list123.get(0).getUID();
                     leader = 1;
+                    isHostFinal=0;
                     alertDialog123.dismiss();
                     myRef.child("oneVsoneLocalPlayers").child(opponentUID).removeValue();
 

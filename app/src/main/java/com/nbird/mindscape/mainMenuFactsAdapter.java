@@ -77,7 +77,7 @@ public class mainMenuFactsAdapter extends RecyclerView.Adapter<mainMenuFactsAdap
             this.title.setText(title);
             this.dis.setText(dis);
 
-            Glide.with(itemView.getContext()).load(str).into(image);
+            Glide.with(itemView.getContext()).load(str).error(Glide.with(itemView.getContext()).load(str).error(Glide.with(itemView.getContext()).load(str))).into(image);
 
        /*     Glide.with(itemView.getContext())
                     .load(str)

@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -927,7 +928,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                     try{
                         Glide.with(getBaseContext())
-                                .load(list.get(num).getQuestionPicture())
+                                .load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).preload(20,10)).preload(20,10)).preload(20,10))
                                 .preload(20, 10);
                     }catch (Exception e){
 
@@ -1046,7 +1047,14 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     String option="";
                     if(count==0){
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        try{
+                            Glide.with(getBaseContext())
+                                    .load(linkHolder)
+                                    .error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder))))
+                                    .into(questionImage);
+                        }catch (Exception e){
+
+                        }
                         Animation imgAnim1 = AnimationUtils.loadAnimation(multiPlayerPictureQuiz.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 

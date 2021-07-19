@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:id="@+id/cardview_id"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:scaleX="0.9"
+    android:scaleY="0.9"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="5dp"
@@ -14,7 +16,7 @@
     app:ignore="NamespaceTypo">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         cardview:cardCornerRadius="5dp"
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
@@ -23,6 +25,7 @@
         cardview:layout_constraintStart_toStartOf="parent"
         cardview:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -30,9 +33,33 @@
             android:background="@drawable/whitewithblackstroke"
             android:orientation="vertical">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    shimmer:adSize="SMART_BANNER"
+                    shimmer:adUnitId="@string/bannerID"
+                    shimmer:layout_constraintBottom_toBottomOf="parent"
+                    shimmer:layout_constraintEnd_toEndOf="parent"
+                    shimmer:layout_constraintStart_toStartOf="parent"
+                    shimmer:layout_constraintTop_toTopOf="parent">
+
+                </com.google.android.gms.ads.AdView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="horizontal">
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/backlitemodeanim"

@@ -140,7 +140,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     TextView myNameTextView;
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     int myPosition=0;
-    int setNumber;
+    int setNumber,isHostFinal;
     long stopperLong;
     songActivity songActivity;
     ValueEventListener listenerFast0,listenerFast1,listenerFast2,listenerFast3,listenerFast4,listenerFast5,listenerFast6,listenerFast7,listenerFast8,listenerFast9,listenerFast10,listenerFast11,listenerFast12;
@@ -219,7 +219,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
 
 
-
+        isHostFinal=getIntent().getIntExtra("isHostFinal",0);
         category=getIntent().getIntExtra("category",1);
         setNo=getIntent().getIntExtra("setNo",10);
         opponentUID=getIntent().getStringExtra("opponentUID");
@@ -1299,6 +1299,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 scoreIntent.putExtra("actualmin",a1);
                 scoreIntent.putExtra("actualsec",a2);
                 scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                scoreIntent.putExtra("isHostFinal", isHostFinal);
                 scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
                 scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
                 startActivity(scoreIntent);
@@ -1702,6 +1703,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             scoreIntent.putExtra("actualsec",a2);
                             scoreIntent.putExtra("minman",minman);
                             scoreIntent.putExtra("secman",secman);
+                            scoreIntent.putExtra("isHostFinal", isHostFinal);
                             scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
                             scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
                             scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
@@ -1862,6 +1864,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                        scoreIntent.putExtra("minman",kalimin);
                        scoreIntent.putExtra("secman",kalisec);
                        scoreIntent.putExtra("parsel",1);
+                       scoreIntent.putExtra("isHostFinal", isHostFinal);
                        scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
                        scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
                        scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);

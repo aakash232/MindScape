@@ -71,23 +71,108 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     int m1;
     int roomCode,playerNum,questionNum,timerNum;
     String myName,myImageUrl,hostUid,hostName,hostImageUrl,name2String,name3String,name4String,image2Url,image3Url,image4Url;
-    ValueEventListener listner45;
+    ValueEventListener listner45,lisner89;
     int mycorrect,mywrong;
     int numberOfPlayers;
     int roomEntry=0;
-    CountDownTimer countDownTimer,countDownTimer1234;
+    CountDownTimer countDownTimer,countDownTimer1234,Countdownlast;
     int j=0,privacyFinder,numMode;
     correctWrongAnsweredBuzzerHolder m;
     LottieAnimationView partypoper,party2;
-    ValueEventListener lisnernumber1,lisnernumber2,lisnernumber3;
+    ValueEventListener lisnernumber1,lisnernumber2,lisnernumber3,lisnerdog1;
     @Override
     public void onDestroy() {
         super.onDestroy();
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisner89);
+        }catch (Exception e){
+
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+        if(countDownTimer1234!=null){
+            countDownTimer1234.cancel();
+        }
+        if(Countdownlast!=null){
+            Countdownlast.cancel();
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnerdog1);
+        }catch (Exception e){
+
+        }
+        switch (playerNum){
+            case 1:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 2:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 3:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+            case 4:
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber3);
+                }catch (Exception e){
+
+                }break;
+        }
         Runtime.getRuntime().gc();
     }
 
-    public void fishManu(int mk){
-        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(mk).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void fishManu(final int kali){
+        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(kali).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Intent intent = new Intent(tournamentBuzzerScoreCard.this, tournamentLobbyActivity.class);
@@ -97,9 +182,104 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                 intent.putExtra("hostName",hostName);
                 intent.putExtra("isHost",0);
                 intent.putExtra("roomCode",roomCode);
-                intent.putExtra("Playernum",m1+1);
+                intent.putExtra("Playernum",kali);
+                intent.putExtra("privacy",privacyFinder);
+                switch (playerNum){
+                    case 1:
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber1);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                        }catch (Exception e){
+
+                        }break;
+                    case 2:
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber2);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                        }catch (Exception e){
+
+                        }break;
+                    case 3:
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(lisnernumber3);
+                        }catch (Exception e){
+
+                        }break;
+                    case 4:
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisnernumber1);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeEventListener(lisnernumber2);
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(lisnernumber3);
+                        }catch (Exception e){
+
+                        }break;
+                }
+
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+
+                }catch(Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                }catch(Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+                }catch(Exception e){
+
+                }
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+                }catch(Exception e){
+
+                }
+
+
                 //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
-                startActivity(intent);    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
 
             }
@@ -257,6 +437,13 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         quitButton=(Button) findViewById(R.id.quitButton);
         lobbyButton=(Button) findViewById(R.id.lobbyButton);
 
+        quitButton.setEnabled(false);
+        quitButton.setAlpha((float) 0.6);
+        lobbyButton.setAlpha((float) 0.6);
+        lobbyButton.setEnabled(false);
+
+
+
         privacyFinder=getIntent().getIntExtra("privacy",0);
         correctNum=getIntent().getIntExtra("score",0);
         myName=getIntent().getStringExtra("myName");
@@ -292,7 +479,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
         if(playerNum==2||playerNum==3||playerNum==4){
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
+         /*   myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -326,7 +513,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            });*/
 
 
 
@@ -338,13 +525,13 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     }catch (Exception e){
                         int k=0;
                         if(playerNum==2){
-                            k=2;
+                            k=0;
                         }else if(playerNum==3){
-                            k=3;
+                            k=2;
                         }else if(playerNum==4){
                             k=4;
                         }
-                        new CountDownTimer(1000*k,1000){
+                        Countdownlast=new CountDownTimer(1000*k,1000){
                             @Override
                             public void onTick(long l) {
 
@@ -374,8 +561,9 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 }
 
                                             }else{
+                                                Intent intent = new Intent(tournamentBuzzerScoreCard.this, mainMenuActivity.class);
+                                                startActivity(intent);
                                                 Toast.makeText(tournamentBuzzerScoreCard.this, "Room Is Full!", Toast.LENGTH_LONG).show();
-                                                tournamentBuzzerScoreCard.super.onBackPressed();
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
@@ -508,18 +696,18 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             case 3:
                                 if(numberOfPlayers==4){
                                     mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                    mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                    mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
                                     mainManu4("player4Status",image4Url,name4String,headText4,name4,accuracy4,correctvswrong4,score4,img4,propic4,player4ShimmerPic,player4Shimmer);
                                 }else if(numberOfPlayers==3){
                                     mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                    mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                    mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
 
                                 }break;
                             case 4:
                                 if(numberOfPlayers==4){
                                     mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                    mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
-                                    mainManu3("player3Status",image3Url,name3String,headText3,name3,accuracy3,correctvswrong3,score3,img3,propic3,player3ShimmerPic,player3Shimmer);
+                                    mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                    mainManu4("player3Status",image3Url,name3String,headText3,name3,accuracy3,correctvswrong3,score3,img3,propic3,player3ShimmerPic,player3Shimmer);
                                 }break;
                         }
 
@@ -559,18 +747,18 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                         case 3:
                                             if(numberOfPlayers==4){
                                                 mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                                mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                                mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
                                                 mainManu4("player4Status",image4Url,name4String,headText4,name4,accuracy4,correctvswrong4,score4,img4,propic4,player4ShimmerPic,player4Shimmer);
                                             }else if(numberOfPlayers==3){
                                                 mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                                mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                                mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
 
                                             }break;
                                         case 4:
                                             if(numberOfPlayers==4){
                                                 mainManu2("player1Status",hostImageUrl,hostName,headText1,name1,accuracy1,correctvswrong1,score1,img1,propic1,player1ShimmerPic,player1Shimmer);
-                                                mainManu2("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
-                                                mainManu3("player3Status",image3Url,name3String,headText3,name3,accuracy3,correctvswrong3,score3,img3,propic3,player3ShimmerPic,player3Shimmer);
+                                                mainManu3("player2Status",image2Url,name2String,headText2,name2,accuracy2,correctvswrong2,score2,img2,propic2,player2ShimmerPic,player2Shimmer);
+                                                mainManu4("player3Status",image3Url,name3String,headText3,name3,accuracy3,correctvswrong3,score3,img3,propic3,player3ShimmerPic,player3Shimmer);
                                             }break;
                                     }
 
@@ -620,7 +808,12 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                try{
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+
+                }catch (Exception e){
+
+                }
                 if(playerNum==1){
                     del(mAuth.getCurrentUser().getUid());
                 }else{
@@ -648,11 +841,28 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             myRef.child("Lobby").child(String.valueOf(roomCode)).removeValue();
-                            myRef.child("room").child(mAuth.getCurrentUser().getUid()).removeValue();
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                         //   myRef.child("room").child(mAuth.getCurrentUser().getUid()).removeValue();
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                            }catch (Exception e){
+
+                            }
+
 
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("roomCode").setValue(roomCode).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -701,7 +911,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                 }
             });
         }else{
-            lobbyButton.setText("Waiting For Host To Join The Room First");
+            lobbyButton.setText("Please Wait! Waiting For Host To Join The Room First");
             lobbyButton.setEnabled(false);
             lobbyButton.setTextSize(10);
         }
@@ -753,6 +963,16 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentBuzzerScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 alertDialog.dismiss();
             }
         });
@@ -764,54 +984,252 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
     public void dataGetter(String playerName, final TextView correctvswrong, final TextView accuracy){
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("correctWrongAnswered").child(playerName).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try{
-                    m=snapshot.getValue(correctWrongAnsweredBuzzerHolder.class);
-                    correctvswrong.setText("Correct/Wronng : "+m.getCorrect()+"/"+m.getWrong());
-                    accuracy.setText("Accuracy : "+((m.getCorrect()*100)/(m.getCorrect()+m.getWrong()))+"%");
-                }catch (Exception e){
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("correctWrongAnswered").child(playerName).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try{
+                        m=snapshot.getValue(correctWrongAnsweredBuzzerHolder.class);
+                        correctvswrong.setText("Correct/Wronng : "+m.getCorrect()+"/"+m.getWrong());
+                        accuracy.setText("Accuracy : "+((m.getCorrect()*100)/(m.getCorrect()+m.getWrong()))+"%");
+                    }catch (Exception e){
+
+                    }
+
 
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
+                }
+            });
+        }catch (Exception e){
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        }
 
-            }
-        });
     }
 
     public void mainMenuBro(){
         switch (playerNum){
-            case 1:;
-                scoreGetter("player2Score");
-                scoreGetter("player3Score");
-                scoreGetter("player4Score");
+            case 1:
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player2Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player3Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player4Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 dataGetter("Player2",correctvswrong2,accuracy2);
                 dataGetter("Player3",correctvswrong3,accuracy3);
                 dataGetter("Player4",correctvswrong4,accuracy4);break;
             case 2:
-                scoreGetter("player1Score");
-                scoreGetter("player3Score");
-                scoreGetter("player4Score");
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player1Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player3Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player4Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 dataGetter("Player1",correctvswrong1,accuracy1);
                 dataGetter("Player3",correctvswrong3,accuracy3);
                 dataGetter("Player4",correctvswrong4,accuracy4);break;
             case 3:
-                scoreGetter("player2Score");
-                scoreGetter("player1Score");
-                scoreGetter("player4Score");
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player2Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player1Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player4Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 dataGetter("Player2",correctvswrong2,accuracy2);
                 dataGetter("Player1",correctvswrong1,accuracy1);
                 dataGetter("Player4",correctvswrong4,accuracy4);break;
             case 4:
-                scoreGetter("player2Score");
-                scoreGetter("player3Score");
-                scoreGetter("player1Score");
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player2Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player3Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            if(snapshot.getValue(Integer.class)==1){
+                                scoreGetter("player1Score");
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 dataGetter("Player2",correctvswrong2,accuracy2);
                 dataGetter("Player3",correctvswrong3,accuracy3);
                 dataGetter("Player1",correctvswrong1,accuracy1);break;
@@ -819,95 +1237,128 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void scoreGetter(final String playerData){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child(playerData).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try{
-                    if(playerData.equals("player1Score")){
-                        sco1=snapshot.getValue(Integer.class);
-                        score1.setText("Score : "+sco1);
-                        Glide.with(getBaseContext()).load(hostImageUrl).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(img1);
-                        Glide.with(getBaseContext()).load(hostImageUrl).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(propic1);
-                        headText1.setText(hostName);
-                        name1.setText(hostName);
-                        player1Shimmer.stopShimmerAnimation();
-                        player1Shimmer.setVisibility(View.GONE);
-                        player1ShimmerPic.stopShimmerAnimation();
-                        player1ShimmerPic.setVisibility(View.GONE);
-                    }else if(playerData.equals("player2Score")){
-                        sco2=snapshot.getValue(Integer.class);
-                        score2.setText("Score : "+sco2);
-                        Glide.with(getBaseContext()).load(image2Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(img2);
-                        Glide.with(getBaseContext()).load(image2Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(propic2);
-                        headText2.setText(name2String);
-                        name2.setText(name2String);
-                        player2Shimmer.stopShimmerAnimation();
-                        player2Shimmer.setVisibility(View.GONE);
-                        player2ShimmerPic.stopShimmerAnimation();
-                        player2ShimmerPic.setVisibility(View.GONE);
-                    }else if(playerData.equals("player3Score")){
-                        sco3=snapshot.getValue(Integer.class);
-                        score3.setText("Score : "+sco3);
-                        Glide.with(getBaseContext()).load(image3Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(img3);
-                        Glide.with(getBaseContext()).load(image3Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(propic3);
-                        headText3.setText(name3String);
-                        name3.setText(name3String);
-                        player3Shimmer.stopShimmerAnimation();
-                        player3Shimmer.setVisibility(View.GONE);
-                        player3ShimmerPic.stopShimmerAnimation();
-                        player3ShimmerPic.setVisibility(View.GONE);
-                    }else if(playerData.equals("player4Score")){
-                        sco4=snapshot.getValue(Integer.class);
-                        score4.setText("Score : "+sco4);
-                        Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(img4);
-                        Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
-                                .bitmapTransform(new RoundedCorners(14)))
-                                .into(propic4);
-                        headText4.setText(name4String);
-                        name4.setText(name4String);
-                        player4Shimmer.stopShimmerAnimation();
-                        player4Shimmer.setVisibility(View.GONE);
-                        player4ShimmerPic.stopShimmerAnimation();
-                        player4ShimmerPic.setVisibility(View.GONE);
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child(playerData).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try{
+                        if(playerData.equals("player1Score")){
+
+                                sco1=snapshot.getValue(Integer.class);
+                                score1.setText("Score : "+sco1);
+
+
+                            Glide.with(getBaseContext()).load(hostImageUrl).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(img1);
+                            Glide.with(getBaseContext()).load(hostImageUrl).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(propic1);
+                            headText1.setText(hostName);
+                            name1.setText(hostName);
+                            player1Shimmer.stopShimmerAnimation();
+                            player1Shimmer.setVisibility(View.GONE);
+                            player1ShimmerPic.stopShimmerAnimation();
+                            player1ShimmerPic.setVisibility(View.GONE);
+                        }else if(playerData.equals("player2Score")){
+                            sco2=snapshot.getValue(Integer.class);
+                            score2.setText("Score : "+sco2);
+                            Glide.with(getBaseContext()).load(image2Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(img2);
+                            Glide.with(getBaseContext()).load(image2Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(propic2);
+                            headText2.setText(name2String);
+                            name2.setText(name2String);
+                            player2Shimmer.stopShimmerAnimation();
+                            player2Shimmer.setVisibility(View.GONE);
+                            player2ShimmerPic.stopShimmerAnimation();
+                            player2ShimmerPic.setVisibility(View.GONE);
+                        }else if(playerData.equals("player3Score")){
+                            sco3=snapshot.getValue(Integer.class);
+                            score3.setText("Score : "+sco3);
+                            Glide.with(getBaseContext()).load(image3Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(img3);
+                            Glide.with(getBaseContext()).load(image3Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(propic3);
+                            headText3.setText(name3String);
+                            name3.setText(name3String);
+                            player3Shimmer.stopShimmerAnimation();
+                            player3Shimmer.setVisibility(View.GONE);
+                            player3ShimmerPic.stopShimmerAnimation();
+                            player3ShimmerPic.setVisibility(View.GONE);
+                        }else if(playerData.equals("player4Score")){
+                            sco4=snapshot.getValue(Integer.class);
+                            score4.setText("Score : "+sco4);
+                            Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(img4);
+                            Glide.with(getBaseContext()).load(image4Url).apply(RequestOptions
+                                    .bitmapTransform(new RoundedCorners(14)))
+                                    .into(propic4);
+                            headText4.setText(name4String);
+                            name4.setText(name4String);
+                            player4Shimmer.stopShimmerAnimation();
+                            player4Shimmer.setVisibility(View.GONE);
+                            player4ShimmerPic.stopShimmerAnimation();
+                            player4ShimmerPic.setVisibility(View.GONE);
+                        }
+                    }catch (Exception e){
+
                     }
-                }catch (Exception e){
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            }
+            });
+        }catch (Exception e){
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        }
 
-            }
-        });
     }
 
 
     @Override
     public void onBackPressed() {
-        cancelDialogFunction();
+        try{
+            cancelDialogFunction();
+        }catch (Exception e){
+
+        }
+
     }
 
 
     public void deleter(String playerAnswer, String playerData, String playerStatus, String playerUid){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).removeValue();
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).removeValue();
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeValue();
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerUid).removeValue();
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).removeValue();
+
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).removeValue();
+
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).removeValue();
+
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerUid).removeValue();
+        }catch (Exception e){
+
+        }
+
     }
 
     public void holeDeleteIfRoomIsEmpty(String uid){
@@ -924,15 +1375,39 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
                 }break;
             case 2:
-                if(sco1!=-100&&sco2!=-100){
+
+                if(sco2!=-50&&sco2!=-100&&sco1!=-100){
                     roomEntry=2;
-
-                }break;
+                 //   Toast.makeText(this, "1", Toast.LENGTH_LONG).show();
+                }else if(sco2!=-50&&sco2!=-100&&sco3==0&&sco1!=-100){
+                    roomEntry=2;
+               //     Toast.makeText(this, "2", Toast.LENGTH_LONG).show();
+                } else if(sco3!=-50&&sco3!=-100&&sco2==-50&&sco1!=-100){
+                    roomEntry=2;
+               //     Toast.makeText(this, "3", Toast.LENGTH_LONG).show();
+                }else if(sco2!=-100&&sco2!=-50&&sco3==-50&&sco4==-50&&sco1!=-100){
+                    roomEntry=2;
+               //     Toast.makeText(this, "4", Toast.LENGTH_LONG).show();
+                }else if(sco3!=-100&&sco3!=-50&&sco2==-50&&sco4==-50&&sco1!=-100){
+                    roomEntry=2;
+                //    Toast.makeText(this, "5", Toast.LENGTH_LONG).show();
+                }else if(sco4!=-100&&sco4!=-50&&sco3==-50&&sco2==-50&&sco1!=-100){
+                    roomEntry=2;
+               //     Toast.makeText(this, "6", Toast.LENGTH_LONG).show();
+                }
+                break;
             case 3:
-                if(sco1!=-100&&sco2!=-100&&sco3!=-100){
-                    roomEntry=3;
 
-                }break;
+                if(sco2!=-50&&sco2!=-100&&sco3!=-50&&sco3!=-100&&sco4==-50&&sco1!=-100){
+                    roomEntry=3;
+                }else if(sco2!=-50&&sco2!=-100&&sco4!=-50&&sco4!=-100&&sco3==-50&&sco1!=-100){
+                    roomEntry=3;
+                }else if(sco3!=-50&&sco3!=-100&&sco4!=-50&&sco4!=-100&&sco2==-50&&sco1!=-100){
+                    roomEntry=3;
+                }else if(sco2!=-50&&sco2!=-100&&sco3!=-50&&sco3!=-100&&sco4==-100&&sco1!=-100){
+                    roomEntry=3;
+                }
+                break;
             case 4:
                 if(sco1!=-100&&sco2!=-100&&sco3!=-100&&sco4!=-100){
                     roomEntry=4;
@@ -976,14 +1451,25 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 countDownTimer1234.cancel();
                             }
                             if(playerNum==2){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                }catch (Exception e){
+
+                                }
+
 
                             }else if(playerNum==3){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                }catch (Exception e){
 
+                                }
                             }else if(playerNum==4){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                }catch (Exception e){
 
+                                }
                             }
                             tournamentBuzzerScoreCard.super.onBackPressed();
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -999,8 +1485,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                     myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Intent intent=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
-
                                             if(countDownTimer!=null){
                                                 countDownTimer.cancel();
                                             }
@@ -1008,7 +1492,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                                            tournamentBuzzerScoreCard.super.onBackPressed();
+                                            Intent intent23=new Intent(tournamentBuzzerScoreCard.this,mainMenuActivity.class);
+                                            startActivity(intent23);
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
                                         }
@@ -1115,11 +1600,26 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
                     switch (playerNum){
                         case 2:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                         case 3:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                         case 4:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                     }
                     tournamentBuzzerScoreCard.super.onBackPressed();
                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -1166,13 +1666,28 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                 countDownTimer1234.cancel();
                             }
                             if(playerNum==2){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                                }catch (Exception e){
+
+                                }
 
                             }else if(playerNum==3){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+                                }catch (Exception e){
+
+                                }
 
                             }else if(playerNum==4){
-                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                try{
+                                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+                                }catch (Exception e){
+
+                                }
 
                             }
                             tournamentBuzzerScoreCard.super.onBackPressed();
@@ -1211,16 +1726,47 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             if (j == 1) {
                                 switch (playerNum) {
                                     case 2:
-                                        deleter("player2Answer", "player2Data", "player2Status", "player2Uid");
-                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                        try{
+                                            deleter("player2Answer", "player2Data", "player2Status", "player2Uid");
+
+                                        }catch (Exception e){
+
+                                        }
+                                        try{
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                                        }catch (Exception e){
+
+                                        }
+
                                         break;
                                     case 3:
-                                        deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
-                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                        try{
+                                            deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
+                                        }catch (Exception e){
+
+                                        }
+                                        try{
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                        }catch (Exception e){
+
+                                        }
+
+
                                         break;
                                     case 4:
-                                        deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
-                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                        try{
+                                            deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                        }catch (Exception e){
+
+                                        }
+                                        try{
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                        }catch (Exception e){
+
+                                        }
+
+
                                         break;
                                 }
 
@@ -1265,7 +1811,13 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             if (countDownTimer1234 != null) {
                                                 countDownTimer1234.cancel();
                                             }
-                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                            try{
+                                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                                            }catch (Exception e){
+
+                                            }
+
                                             tournamentBuzzerScoreCard.super.onBackPressed();
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
@@ -1278,7 +1830,12 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             if (countDownTimer1234 != null) {
                                                 countDownTimer1234.cancel();
                                             }
-                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                            try{
+                                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                            }catch (Exception e){
+
+                                            }
+
                                             tournamentBuzzerScoreCard.super.onBackPressed();
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
@@ -1290,7 +1847,12 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             if (countDownTimer1234 != null) {
                                                 countDownTimer1234.cancel();
                                             }
-                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                            try{
+                                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                            }catch (Exception e){
+
+                                            }
+
                                             tournamentBuzzerScoreCard.super.onBackPressed();
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                             finish();
@@ -1311,11 +1873,26 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     startActivity(intent);
                     switch (playerNum){
                         case 2:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                         case 3:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                         case 4:
-                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                            try{
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                            }catch (Exception e1){
+
+                            }
+                           break;
                     }
                     finish();
                 }
@@ -1346,11 +1923,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         numberOfPlayers--;
                         switch (playerNum){
                             case 1:
-                                sco2=0;break;
+                                sco2=-50;break;
                             case 2:
                             case 3:
                             case 4:
-                                sco1=0;break;
+                                sco1=-50;break;
                         }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
@@ -1363,7 +1940,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         accuracy.setText("Accuracy : 0%");
                         correctvswrong.setText("Correct/Wrong : 0/0");
                         score.setText("Total Score : 0");
-                        sco2=0;
+
                         playerShimmer.stopShimmerAnimation();
                         playerShimmer.setVisibility(View.GONE);
                         playerShimmerPic.stopShimmerAnimation();
@@ -1378,11 +1955,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     numberOfPlayers--;
                     switch (playerNum){
                         case 1:
-                            sco2=0;break;
+                            sco2=-50;break;
                         case 2:
                         case 3:
                         case 4:
-                            sco1=0;break;
+                            sco1=-50;break;
                     }
                     Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                             .bitmapTransform(new RoundedCorners(14)))
@@ -1397,7 +1974,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                   //  totalLifeLines.setText("Total Life-Lines : 0/0");
                     score.setText("Total Score : 0");
                   //  totalTimeTaken.setText("Total Time Taken : 0");
-                    sco2=0;
+
                     playerShimmer.stopShimmerAnimation();
                     playerShimmer.setVisibility(View.GONE);
                     playerShimmerPic.stopShimmerAnimation();
@@ -1414,7 +1991,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void mainManu3(final String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
-        new ValueEventListener() {
+        lisnernumber2=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -1429,10 +2006,10 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         switch (playerNum){
                             case 1:
                             case 2:
-                                sco3=0;break;
+                                sco3=-50;break;
                             case 3:
                             case 4:
-                                sco1=0;break;
+                                sco2=-50;break;
                         }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
@@ -1445,7 +2022,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         accuracy.setText("Accuracy : 0%");
                         correctvswrong.setText("Correct/Wrong : 0/0");
                         score.setText("Total Score : 0");
-                        sco3=0;
+
                         playerShimmer.stopShimmerAnimation();
                         playerShimmer.setVisibility(View.GONE);
                         playerShimmerPic.stopShimmerAnimation();
@@ -1461,10 +2038,10 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     switch (playerNum){
                         case 1:
                         case 2:
-                            sco3=0;break;
+                            sco3=-50;break;
                         case 3:
                         case 4:
-                            sco1=0;break;
+                            sco2=-50;break;
                     }
                     Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                             .bitmapTransform(new RoundedCorners(14)))
@@ -1479,7 +2056,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                    // totalLifeLines.setText("Total Life-Lines : 0/0");
                     score.setText("Total Score : 0");
                    // totalTimeTaken.setText("Total Time Taken : 0");
-                    sco3=0;
+
                     playerShimmer.stopShimmerAnimation();
                     playerShimmer.setVisibility(View.GONE);
                     playerShimmerPic.stopShimmerAnimation();
@@ -1495,7 +2072,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(lisnernumber2);
     }
     public void mainManu4(final String playerStatus, final String imageUrl, final String nameString, final TextView headText, final TextView name, final TextView accuracy, final TextView correctvswrong, final TextView score, final ImageView img, final ImageView propic, final ShimmerFrameLayout playerShimmerPic, final ShimmerFrameLayout playerShimmer){
-       new ValueEventListener() {
+        lisnernumber3= new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -1511,9 +2088,9 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                             case 1:
                             case 2:
                             case 3:
-                                sco4=0;break;
+                                sco4=-50;break;
                             case 4:
-                                sco3=0;break;
+                                sco3=-50;break;
                         }
                         Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                                 .bitmapTransform(new RoundedCorners(14)))
@@ -1526,7 +2103,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         accuracy.setText("Accuracy : 0%");
                         correctvswrong.setText("Correct/Wrong : 0/0");
                         score.setText("Total Score : 0");
-                        sco4=0;
+
                         playerShimmer.stopShimmerAnimation();
                         playerShimmer.setVisibility(View.GONE);
                         playerShimmerPic.stopShimmerAnimation();
@@ -1544,9 +2121,9 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                         case 1:
                         case 2:
                         case 3:
-                            sco4=0;break;
+                            sco4=-50;break;
                         case 4:
-                            sco3=0;break;
+                            sco3=-50;break;
                     }
                     Glide.with(getBaseContext()).load(imageUrl).apply(RequestOptions
                             .bitmapTransform(new RoundedCorners(14)))
@@ -1561,7 +2138,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                    // totalLifeLines.setText("Total Life-Lines : 0/0");
                     score.setText("Total Score : 0");
                  //   totalTimeTaken.setText("Total Time Taken : 0");
-                    sco4=0;
+
                     playerShimmer.stopShimmerAnimation();
                     playerShimmer.setVisibility(View.GONE);
                     playerShimmerPic.stopShimmerAnimation();
@@ -1577,21 +2154,26 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addListenerForSingleValueEvent(lisnernumber3);
     }
     public void playerOnlineStatusManupulator(String playerStatus){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addValueEventListener(new ValueEventListener() {
+        lisnerdog1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     int swaper = snapshot.getValue(Integer.class);
                     if (swaper == 0) {
                         lobbyButton.setEnabled(false);
-                        lobbyButton.setAlpha(0.6f);
+                        lobbyButton.setAlpha(0.9f);
                         lobbyButton.setText("Host Has Left The Room");
                         lobbyButton.setTextSize(10);
                         numberOfPlayersReducerNotHostBecauseOfHost(1);
                         numberOfPlayersReducerNotHostBecauseOfHost(0);
                     }
                 }catch (Exception e) {
-
+                    lobbyButton.setEnabled(false);
+                    lobbyButton.setAlpha(0.9f);
+                    lobbyButton.setText("Host Has Left The Room");
+                    lobbyButton.setTextSize(10);
+                    numberOfPlayersReducerNotHostBecauseOfHost(1);
+                    numberOfPlayersReducerNotHostBecauseOfHost(0);
 
                 }
             }
@@ -1600,7 +2182,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerStatus).addValueEventListener(lisnerdog1);
     }
 
     public void numberOfPlayersReducerNotHostBecauseOfHost(final int i){
@@ -1701,7 +2284,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         switch (numberOfPlayers){
             case 1:
                 if(roomEntry==1){
-                    alertDialog123(myName+"\nYour Alone",R.drawable.alone);
+                    alertDialog123(myName+"\nYour Are Alone",R.drawable.alone);
                     headShimmer.stopShimmerAnimation();
                     headShimmer.setVisibility(View.GONE);
                     pos1.setText("1st");
@@ -1717,28 +2300,113 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     int p1,p2;
                     if(playerNum==1){
                         p1= sco1;
-                        p2= sco2;
-                        if(p1>p2){
-                            alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
-                            pos1.setText("1st");
-                            pos2.setText("2nd");
-                        }else{
-                            alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
-                            pos1.setText("2nd");
-                            pos2.setText("1st");
+                        if(sco2==-50&&sco3!=-50&&sco3!=-100){
+                            p2= sco3;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos3.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos3.setText("1st");
+                            }
+                        }else if(sco3==-50&&sco2!=-50&&sco2!=-100){
+                            p2= sco2;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos2.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos2.setText("1st");
+                            }
+                        }else if(sco3==-50&&sco2!=-50&&sco2!=-100&&sco4==-50){
+                            p2= sco2;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos2.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos2.setText("1st");
+                            }
+                        }else if(sco2==-50&&sco3!=-50&&sco3!=-100&&sco4==-50){
+                            p2= sco3;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos3.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos3.setText("1st");
+                            }
+                        }else if(sco2==-50&&sco4!=-50&&sco4!=-100&&sco3==-50){
+                            p2= sco4;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos4.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos4.setText("1st");
+                            }
+                        }else if(sco3==-100&&sco2!=-50&&sco2!=-100&&sco4==-100){
+                            p2= sco2;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("1st");
+                                pos2.setText("2nd");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("2nd");
+                                pos2.setText("1st");
+                            }
                         }
                     }else{
-                        p1= sco2;
-                        p2= sco1;
-                        if(p1>p2){
-                            alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
-                            pos1.setText("2nd");
-                            pos2.setText("1st");
-                        }else{
-                            alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
-                            pos1.setText("1st");
-                            pos2.setText("2nd");
+                        if(playerNum==2){
+                            p1= sco2;
+                            p2= sco1;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("2nd");
+                                pos2.setText("1st");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("1st");
+                                pos2.setText("2nd");
+                            }
+                        }else if(playerNum==3){
+                            p1= sco3;
+                            p2= sco1;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("2nd");
+                                pos3.setText("1st");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("1st");
+                                pos3.setText("2nd");
+                            }
                         }
+                        else if(playerNum==4){
+                            p1= sco4;
+                            p2= sco1;
+                            if(p1>p2){
+                                alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                pos1.setText("2nd");
+                                pos4.setText("1st");
+                            }else{
+                                alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                pos1.setText("1st");
+                                pos4.setText("2nd");
+                            }
+                        }
+
                     }
 
 
@@ -1756,144 +2424,438 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                     int o1=0,o2=0,o3=0;
                     int p1=0,p2=0,p3=0;
                     if(playerNum==1){
-                        p1= sco1;
-                        p2= sco2;
-                        p3=sco3;
-                        if(p1>=p2||p1>=p3){
-                            if(p1>=p3){
-                                o1++;
-                            }
-                            if(p1>=p2){
-                                o1++;
-                            }
+                        if(sco1!=-50&&sco2!=-50&&sco3!=-50){
+                            p1= sco1;
+                            p2= sco2;
+                            p3=sco3;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
 
-                            switch (o1){
-                                case 1:
-                                    alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
-                                    pos1.setText("2nd");
-                                    if(p2>=p3){
-                                        pos2.setText("1st");
-                                        pos3.setText("3rd");
-                                    }else{
-                                        pos3.setText("1st");
-                                        pos2.setText("3rd");
-                                    }
-                                    break;
-                                case 2:
-                                    alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
-                                    pos1.setText("1st");
-                                    if(p2>=p3){
-                                        pos2.setText("2nd");
-                                        pos3.setText("3rd");
-                                    }else{
-                                        pos3.setText("2nd");
-                                        pos2.setText("3rd");
-                                    }
-                                    break;
-                            }
-
-                        }else if(p1<p2&&p1<p3){
-                            alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
-                            pos1.setText("3rd");
-                            if(p2>=p3){
-                                pos2.setText("1st");
-                                pos3.setText("2nd");
-                            }else{
-                                pos3.setText("1st");
-                                pos2.setText("2nd");
-                            }
-                        }
-                    }else if(playerNum==2){
-                        p1= sco2;
-                        p2= sco3;
-                        p3=sco1;
-                        if(p1>=p2||p1>=p3){
-                            if(p1>=p3){
-                                o1++;
-                            }
-                            if(p1>=p2){
-                                o1++;
-                            }
-
-                            switch (o1){
-                                case 1:
-                                    alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
-                                    pos2.setText("2nd");
-                                    if(p2>=p3){
-                                        pos3.setText("1st");
-                                        pos1.setText("3rd");
-                                    }else{
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos1.setText("2nd");
+                                        if(p2>=p3){
+                                            pos2.setText("1st");
+                                            pos3.setText("3rd");
+                                        }else{
+                                            pos3.setText("1st");
+                                            pos2.setText("3rd");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
                                         pos1.setText("1st");
-                                        pos3.setText("3rd");
-                                    }break;
-                                case 2:
-                                    alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        if(p2>=p3){
+                                            pos2.setText("2nd");
+                                            pos3.setText("3rd");
+                                        }else{
+                                            pos3.setText("2nd");
+                                            pos2.setText("3rd");
+                                        }
+                                        break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos1.setText("3rd");
+                                if(p2>=p3){
                                     pos2.setText("1st");
-                                    if(p2>=p3){
-                                        pos3.setText("2nd");
-                                        pos1.setText("3rd");
-                                    }else{
-                                        pos3.setText("3rd");
-                                        pos1.setText("2nd");
-                                    }break;
+                                    pos3.setText("2nd");
+                                }else{
+                                    pos3.setText("1st");
+                                    pos2.setText("2nd");
+                                }
                             }
+                        }else if(sco2==-50){
+                            p1= sco1;
+                            p2= sco3;
+                            p3=sco4;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
 
-                        }else if(p1<p2&&p1<p3){
-                            alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
-                            pos2.setText("3rd");
-                            if(p2>=p3){
-                                pos3.setText("1st");
-                                pos1.setText("2nd");
-                            }else{
-                                pos3.setText("2nd");
-                                pos1.setText("1st");
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos1.setText("2nd");
+                                        if(p2>=p3){
+                                            pos3.setText("1st");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos4.setText("1st");
+                                            pos3.setText("3rd");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos1.setText("1st");
+                                        if(p2>=p3){
+                                            pos3.setText("2nd");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos4.setText("2nd");
+                                            pos3.setText("3rd");
+                                        }
+                                        break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos1.setText("3rd");
+                                if(p2>=p3){
+                                    pos3.setText("1st");
+                                    pos4.setText("2nd");
+                                }else{
+                                    pos4.setText("1st");
+                                    pos3.setText("2nd");
+                                }
+                            }
+                        }else if(sco3==-50){
+                            p1= sco1;
+                            p2= sco2;
+                            p3=sco4;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos1.setText("2nd");
+                                        if(p2>=p3){
+                                            pos2.setText("1st");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos4.setText("1st");
+                                            pos2.setText("3rd");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos1.setText("1st");
+                                        if(p2>=p3){
+                                            pos2.setText("2nd");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos4.setText("2nd");
+                                            pos2.setText("3rd");
+                                        }
+                                        break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos1.setText("3rd");
+                                if(p2>=p3){
+                                    pos2.setText("1st");
+                                    pos4.setText("2nd");
+                                }else{
+                                    pos4.setText("1st");
+                                    pos2.setText("2nd");
+                                }
                             }
                         }
-                    }else if(playerNum==3){
-                        p1= sco3;
-                        p2= sco1;
-                        p3=sco2;
-                        if(p1>=p2||p1>=p3){
-                            if(p1>=p3){
-                                o1++;
-                            }
-                            if(p1>=p2){
-                                o1++;
-                            }
 
-                            switch (o1){
-                                case 1:
-                                    alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
-                                    pos3.setText("2nd");
-                                    if(p2>=p3){
-                                        pos1.setText("1st");
-                                        pos2.setText("3rd");
-                                    }else{
-                                        pos1.setText("3rd");
-                                        pos2.setText("1st");
-                                    }
-                                    break;
-                                case 2:
-                                    alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
-                                    pos3.setText("1st");
-                                    if(p2>=p3){
-                                        pos1.setText("2nd");
-                                        pos2.setText("3rd");
-                                    }else{
-                                        pos1.setText("3rd");
+                    }else if(playerNum==2){
+                        if(sco3!=-50){
+                            p1= sco2;
+                            p2= sco3;
+                            p3=sco1;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
                                         pos2.setText("2nd");
-                                    }break;
-                            }
+                                        if(p2>=p3){
+                                            pos3.setText("1st");
+                                            pos1.setText("3rd");
+                                        }else{
+                                            pos1.setText("1st");
+                                            pos3.setText("3rd");
+                                        }break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos2.setText("1st");
+                                        if(p2>=p3){
+                                            pos3.setText("2nd");
+                                            pos1.setText("3rd");
+                                        }else{
+                                            pos3.setText("3rd");
+                                            pos1.setText("2nd");
+                                        }break;
+                                }
 
-                        }else if(p1<p2&&p1<p3){
-                            alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
-                            pos3.setText("3rd");
-                            if(p2>=p3){
-                                pos1.setText("1st");
-                                pos2.setText("2nd");
-                            }else{
-                                pos1.setText("2nd");
-                                pos2.setText("1st");
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos2.setText("3rd");
+                                if(p2>=p3){
+                                    pos3.setText("1st");
+                                    pos1.setText("2nd");
+                                }else{
+                                    pos3.setText("2nd");
+                                    pos1.setText("1st");
+                                }
+                            }
+                        }else if(sco3==-50){
+                            p1= sco2;
+                            p2= sco4;
+                            p3=sco1;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos2.setText("2nd");
+                                        if(p2>=p3){
+                                            pos4.setText("1st");
+                                            pos1.setText("3rd");
+                                        }else{
+                                            pos1.setText("1st");
+                                            pos4.setText("3rd");
+                                        }break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos2.setText("1st");
+                                        if(p2>=p3){
+                                            pos4.setText("2nd");
+                                            pos1.setText("3rd");
+                                        }else{
+                                            pos4.setText("3rd");
+                                            pos1.setText("2nd");
+                                        }break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos2.setText("3rd");
+                                if(p2>=p3){
+                                    pos4.setText("1st");
+                                    pos1.setText("2nd");
+                                }else{
+                                    pos4.setText("2nd");
+                                    pos1.setText("1st");
+                                }
+                            }
+                        }
+
+                    }else if(playerNum==3){
+                        if(sco2!=-50){
+                            p1= sco3;
+                            p2= sco1;
+                            p3=sco2;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos3.setText("2nd");
+                                        if(p2>=p3){
+                                            pos1.setText("1st");
+                                            pos2.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos2.setText("1st");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos3.setText("1st");
+                                        if(p2>=p3){
+                                            pos1.setText("2nd");
+                                            pos2.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos2.setText("2nd");
+                                        }break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos3.setText("3rd");
+                                if(p2>=p3){
+                                    pos1.setText("1st");
+                                    pos2.setText("2nd");
+                                }else{
+                                    pos1.setText("2nd");
+                                    pos2.setText("1st");
+                                }
+                            }
+                        }else if(sco2==-50){
+                            p1= sco3;
+                            p2= sco1;
+                            p3=sco4;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos3.setText("2nd");
+                                        if(p2>=p3){
+                                            pos1.setText("1st");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos4.setText("1st");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos3.setText("1st");
+                                        if(p2>=p3){
+                                            pos1.setText("2nd");
+                                            pos4.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos4.setText("2nd");
+                                        }break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos3.setText("3rd");
+                                if(p2>=p3){
+                                    pos1.setText("1st");
+                                    pos4.setText("2nd");
+                                }else{
+                                    pos1.setText("2nd");
+                                    pos4.setText("1st");
+                                }
+                            }
+                        }
+
+                    }else if(playerNum==4){
+                        if(sco2!=-50){
+                            p1= sco4;
+                            p2= sco1;
+                            p3=sco2;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos4.setText("2nd");
+                                        if(p2>=p3){
+                                            pos1.setText("1st");
+                                            pos2.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos2.setText("1st");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos4.setText("1st");
+                                        if(p2>=p3){
+                                            pos1.setText("2nd");
+                                            pos2.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos2.setText("2nd");
+                                        }break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos4.setText("3rd");
+                                if(p2>=p3){
+                                    pos1.setText("1st");
+                                    pos2.setText("2nd");
+                                }else{
+                                    pos1.setText("2nd");
+                                    pos2.setText("1st");
+                                }
+                            }
+                        }else if(sco2==-50){
+                            p1= sco4;
+                            p2= sco1;
+                            p3=sco3;
+                            if(p1>=p2||p1>=p3){
+                                if(p1>=p3){
+                                    o1++;
+                                }
+                                if(p1>=p2){
+                                    o1++;
+                                }
+
+                                switch (o1){
+                                    case 1:
+                                        alertDialog123(myName+"\n You Are Second",R.drawable.secondpos);
+                                        pos4.setText("2nd");
+                                        if(p2>=p3){
+                                            pos1.setText("1st");
+                                            pos3.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos3.setText("1st");
+                                        }
+                                        break;
+                                    case 2:
+                                        alertDialog123(myName+"\n You Are First",R.drawable.firstpos);
+                                        pos4.setText("1st");
+                                        if(p2>=p3){
+                                            pos1.setText("2nd");
+                                            pos3.setText("3rd");
+                                        }else{
+                                            pos1.setText("3rd");
+                                            pos3.setText("2nd");
+                                        }break;
+                                }
+
+                            }else if(p1<p2&&p1<p3){
+                                alertDialog123(myName+"\n You Are Third",R.drawable.thirdpos);
+                                pos4.setText("3rd");
+                                if(p2>=p3){
+                                    pos1.setText("1st");
+                                    pos3.setText("2nd");
+                                }else{
+                                    pos1.setText("2nd");
+                                    pos3.setText("1st");
+                                }
                             }
                         }
                     }
@@ -2418,8 +3380,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             pos3.setText("2nd");
                                             pos2.setText("4th");
                                         }else{
-                                            pos2.setText("4th");
-                                            pos3.setText("2nd");
+                                            pos2.setText("2nd");
+                                            pos3.setText("4th");
                                         }
                                     }
 
@@ -2453,8 +3415,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             pos3.setText("3rd");
                                             pos2.setText("4th");
                                         }else{
-                                            pos2.setText("4th");
-                                            pos3.setText("3rd");
+                                            pos2.setText("3rd");
+                                            pos3.setText("4th");
                                         }
                                     }
 
@@ -2488,8 +3450,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                             pos3.setText("3rd");
                                             pos2.setText("4th");
                                         }else{
-                                            pos2.setText("4th");
-                                            pos3.setText("3rd");
+                                            pos2.setText("3rd");
+                                            pos3.setText("4th");
                                         }
                                     }
 
@@ -2524,8 +3486,8 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
                                     pos3.setText("2nd");
                                     pos2.setText("3rd");
                                 }else{
-                                    pos2.setText("3rd");
-                                    pos3.setText("2nd");
+                                    pos2.setText("2nd");
+                                    pos3.setText("3rd");
                                 }
                             }
 
@@ -2562,7 +3524,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void waiter(){
-        countDownTimer1234=new CountDownTimer(1000*60*60,1000) {
+        countDownTimer1234=new CountDownTimer(1000*60*60,2000) {
             @Override
             public void onTick(long l) {
                 oppoFinder();
@@ -2677,7 +3639,18 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void alertDialog123(String text, int pos){
+        try {
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisner89);
+        }catch (Exception e){
 
+        }
+
+        quitButton.setEnabled(true);
+        quitButton.setAlpha(1);
+        if(playerNum==1){
+            lobbyButton.setEnabled(true);
+            lobbyButton.setAlpha(1);
+        }
 
         switch (playerNum){
             case 1:
@@ -2783,7 +3756,18 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     }
 
     public void alertDialog4(String s){
+        try {
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisner89);
+        }catch (Exception e){
 
+        }
+
+        quitButton.setEnabled(true);
+        quitButton.setAlpha(1);
+        if(playerNum==1){
+            lobbyButton.setEnabled(true);
+            lobbyButton.setAlpha(1);
+        }
 
         switch (playerNum){
             case 1:
@@ -3555,6 +4539,82 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
 
             }
         });
+    }
+    public void leaveDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(tournamentBuzzerScoreCard.this,R.style.AlertDialogTheme);
+        View view =LayoutInflater.from(tournamentBuzzerScoreCard.this).inflate(R.layout.removal_lobby_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view);
+        builder.setCancelable(false);
+
+
+        TextView disText=(TextView) view.findViewById(R.id.textTitle);
+        Button buttonYes=(Button) view.findViewById(R.id.buttonYes);
+        disText.setText("Your Host "+hostName+" Has Either Disconnected Or Left The Game!");
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
+
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentBuzzerScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                try {
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                }catch (Exception e){
+
+                }
+
+                if(playerNum==1){
+                    del(mAuth.getCurrentUser().getUid());
+                }else{
+                    del(hostUid);
+                }
+            }
+        });
+
+
+
+    }
+
+    public void opponentRemovedKnower(){
+        lisner89=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int oppoStatus=snapshot.getValue(Integer.class);
+                    if(oppoStatus==0){
+                        leaveDialog();
+                    }
+                }catch (Exception e){
+                    leaveDialog();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addValueEventListener(lisner89);
     }
 
 }

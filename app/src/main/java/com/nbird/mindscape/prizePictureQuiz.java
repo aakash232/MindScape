@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -658,9 +659,13 @@ public class prizePictureQuiz extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     list.add(snapshot1.getValue(pictureQuizHolder.class));
-                    Glide.with(getBaseContext())
-                            .load(list.get(num).getQuestionPicture())
-                            .preload(20, 10);
+                    try{
+                        Glide.with(getBaseContext())
+                                .load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).preload(20,10)).preload(20,10)).preload(20,10))
+                                .preload(20, 10);
+                    }catch (Exception e){
+
+                    }
                     num++;
                 }
                 if(num==10) {
@@ -869,7 +874,14 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(count==0){
 
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        try{
+                            Glide.with(getBaseContext())
+                                    .load(linkHolder)
+                                    .error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder))))
+                                    .into(questionImage);
+                        }catch (Exception e){
+
+                        }
                         Animation imgAnim1 = AnimationUtils.loadAnimation(prizePictureQuiz.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 

@@ -1330,6 +1330,19 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 startActivity(browserIntent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
+            case R.id.share_us:
+                Toast.makeText(this, "Share Me!", Toast.LENGTH_SHORT).show();
+                Intent shareIntent=new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plane");
+                String shareBody="MindScape: The ultimate Quiz Station!\n\n" +
+                        "Experience the fun of quizzing with your friends and family in the most innovative way. \n\n" +
+                        "Download Now! \n" + linkdata;
+                String sharesub="Paper Wind";
+
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                startActivity(Intent.createChooser(shareIntent,"Share Using"));
+                break;
             case R.id.nav_tos:
                 Intent browserIntenttos = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FTERMS%20OF%20SERVICE-converted.pdf?alt=media&token=d07a0294-a15f-4c30-802b-d1ddc0a3eb31"));
                 startActivity(browserIntenttos);

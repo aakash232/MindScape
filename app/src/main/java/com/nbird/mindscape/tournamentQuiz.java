@@ -889,6 +889,12 @@ public class tournamentQuiz extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
+
+
         Runtime.getRuntime().gc();
     }
 
@@ -2668,6 +2674,34 @@ public class tournamentQuiz extends AppCompatActivity {
 
         }
 
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+        }catch (Exception e){
+
+        }
+         if(playerNum==2){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
+
+        }else if(playerNum==3){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
+
+        }else if (playerNum==4){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+            //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
+
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {
@@ -2688,9 +2722,8 @@ public class tournamentQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if(countDownTimer!=null){
-                    countDownTimer.cancel();
-                }
+
+
                 alertDialog.dismiss();
                 tournamentQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

@@ -116,7 +116,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     DatabaseReference myRef1;
     barGroupHolder man;
     ValueEventListener listener1;
-    int parcel;
+    int parcel,isHostFinal,isRequesSendValid=1;
     private InterstitialAd mInterstitialAd;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
@@ -129,6 +129,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,7 +209,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         amin=getIntent().getIntExtra("actualmin",0);
         asec=getIntent().getIntExtra("actualsec",0);
         parcel=getIntent().getIntExtra("parsel",0);
-
+        isHostFinal=getIntent().getIntExtra("isHostFinal",0);
 
 
 
@@ -327,7 +329,79 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             }
         });
 
+        listener1= new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    acceptInt=snapshot.getValue(Integer.class);
+                    if(acceptInt==1){
+                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
+                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
+                        if(desider==0){
+                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
+                            intent.putExtra("opponentUID",opponentUID);
+                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                            intent.putExtra("opponentUserName",opponentUsername);
+                            intent.putExtra("mypropic",myProPicUrl);
+                            intent.putExtra("myName",myName123);
+                            deleteData();
+                            try{
+                                myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                            }catch (Exception e){
 
+                            }
+                            try{
+                                myRef1.removeEventListener(listenerFast1);
+                            }catch (Exception e){
+
+                            }
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            finish();
+
+                        }else{
+                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
+                            intent.putExtra("opponentUID",opponentUID);
+                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                            intent.putExtra("opponentUserName",opponentUsername);
+                            intent.putExtra("mypropic",myProPicUrl);
+                            intent.putExtra("myName",myName123);
+                            deleteData();
+                            try{
+                                myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef1.removeEventListener(listenerFast1);
+                            }catch (Exception e){
+
+                            }
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            finish();
+                        }
+
+                    }else if(acceptInt==0){
+                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
+                        isRequesSendValid=1;
+                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Declined By "+opponentUsername, Toast.LENGTH_SHORT).show();
+
+                    }
+                }catch (Exception e){
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").addValueEventListener(listener1);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,6 +416,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
+                try{
+                    myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef1.removeEventListener(listenerFast1);
+                }catch (Exception e){
+
+                }
                 myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
@@ -358,6 +442,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         rematch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isRequesSendValid=0;
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -369,6 +454,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                     }
                 });
                 randomNumberGeneratorFunction();
+
                 myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
@@ -379,57 +465,10 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(onevsoneOnlineScoreCard.this, "Request Send To "+opponentUsername, Toast.LENGTH_LONG).show();
 
-                        listener1= new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                try{
-                                    acceptInt=snapshot.getValue(Integer.class);
-                                    if(acceptInt==1){
-                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
-                                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();
-                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
-                                        if(desider==0){
-                                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
-                                            intent.putExtra("opponentUID",opponentUID);
-                                            intent.putExtra("opponentImageUrl",opponentimageUrl);
-                                            intent.putExtra("opponentUserName",opponentUsername);
-                                            intent.putExtra("mypropic",myProPicUrl);
-                                            intent.putExtra("myName",myName123);
-                                            deleteData();
-                                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
 
-                                        }else{
-                                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
-                                            intent.putExtra("opponentUID",opponentUID);
-                                            intent.putExtra("opponentImageUrl",opponentimageUrl);
-                                            intent.putExtra("opponentUserName",opponentUsername);
-                                            intent.putExtra("mypropic",myProPicUrl);
-                                            intent.putExtra("myName",myName123);
-                                            deleteData();
-                                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
-                                        }
 
-                                    }else {
-                                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Declined By "+opponentUsername, Toast.LENGTH_SHORT).show();
-                                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").removeValue();;
-                                    }
-                                }catch (Exception e){
 
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        };
-                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").addValueEventListener(listener1);
 
                     }
                 });
@@ -466,13 +505,15 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         if(parcel==1){
             minrev=amin;
             secriv=asec;
+            totalSum= ((60*(2-amin))+(59-asec))*80;
         }else{
             minrev=2-minutes;
             secriv=59-second;
+            totalSum= ((60*minutes)+second)*80;
         }
 
 
-        totalSum= ((60*minrev)+secriv)*80;
+
         totalSum=totalSum+2000;
         for(int i=1;i<=lifelineSum;i++){
             totalSum=totalSum-500;
@@ -793,9 +834,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     REQUESTReceived=snapshot.getValue(Integer.class);
-                    requestDialogBoxFun();
+                    if(isRequesSendValid==1){
+                        requestDialogBoxFun();
+                    }else{
+                        isRequesSendValid=1;
+                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Clashed!!Please Try Again For A Rematch", Toast.LENGTH_LONG).show();
+                    }
+
                 }catch(Exception e){
                 }
+                myRef.child("User").child(opponentUID).child("1vs1Online").child("request").removeValue();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -810,6 +858,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         try{
+            myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+        }catch (Exception e){
+
+        }
+        try{
             myRef1.removeEventListener(listenerFast1);
         }catch (Exception e){
 
@@ -820,106 +873,136 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
 
     public void requestDialogBoxFun(){
+
         if(REQUESTReceived==1){
 
-            randomNumberGeneratorTaker();
 
-            AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneOnlineScoreCard.this,R.style.AlertDialogTheme);
 
-            final View view1= LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.request_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
-            builder.setView(view1);
-            builder.setCancelable(false);
+                randomNumberGeneratorTaker();
 
-            titleDialog=(TextView) view1.findViewById(R.id.textTitle);
-            buttonYes=(Button) view1.findViewById(R.id.buttonYes);
-            buttonNo=(Button) view1.findViewById(R.id.buttonNo);
-            requestAnim=(LottieAnimationView) view1.findViewById(R.id.backlitemodeanim);
+                AlertDialog.Builder builder = new AlertDialog.Builder(onevsoneOnlineScoreCard.this, R.style.AlertDialogTheme);
 
-            final AlertDialog alertDialog=builder.create();
-            if(alertDialog.getWindow()!=null){
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-            }
-            alertDialog.show();
+                final View view1 = LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.request_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                builder.setView(view1);
+                builder.setCancelable(false);
 
-            titleDialog.setText(opponentUsername+" Has Send You A Request For A Rematch!");
+                titleDialog = (TextView) view1.findViewById(R.id.textTitle);
+                buttonYes = (Button) view1.findViewById(R.id.buttonYes);
+                buttonNo = (Button) view1.findViewById(R.id.buttonNo);
+                requestAnim = (LottieAnimationView) view1.findViewById(R.id.backlitemodeanim);
 
-            buttonYes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MediaPlayer musicNav;
-                    musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-                    musicNav.start();
-                    alertDialog.dismiss();
+                final AlertDialog alertDialog = builder.create();
+                if (alertDialog.getWindow() != null) {
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+                alertDialog.show();
 
-                    myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
-                    myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
-                    myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
-                    myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
-                    myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+                titleDialog.setText(opponentUsername + " Has Send You A Request For A Rematch!");
 
-                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
-                            if(desider==0){
-                                Intent intent=new Intent(onevsoneOnlineScoreCard.this,onevsoneQuizActivity.class);
-                                intent.putExtra("opponentUID",opponentUID);
-                                intent.putExtra("opponentImageUrl",opponentimageUrl);
-                                intent.putExtra("opponentUserName",opponentUsername);
-                                intent.putExtra("mypropic",myProPicUrl);
-                                intent.putExtra("myName",myName123);
-                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-                                deleteData();
-                                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                finish();
-                            }else{
-                                Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
-                                intent.putExtra("opponentUID",opponentUID);
-                                intent.putExtra("opponentImageUrl",opponentimageUrl);
-                                intent.putExtra("opponentUserName",opponentUsername);
-                                intent.putExtra("mypropic",myProPicUrl);
-                                intent.putExtra("myName",myName123);
-                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
-                                deleteData();
-                                startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                finish();
+
+                buttonYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        alertDialog.dismiss();
+
+                        myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
+                        myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
+                        myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
+                        myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
+                        myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
+                                if (desider == 0) {
+                                    Intent intent = new Intent(onevsoneOnlineScoreCard.this, onevsoneQuizActivity.class);
+                                    intent.putExtra("opponentUID", opponentUID);
+                                    intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                    intent.putExtra("opponentUserName", opponentUsername);
+                                    intent.putExtra("mypropic", myProPicUrl);
+                                    intent.putExtra("myName", myName123);
+                                    try{
+                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                                    }catch (Exception e){
+
+                                    }
+                                    try{
+                                        myRef1.removeEventListener(listenerFast1);
+                                    }catch (Exception e){
+
+                                    }
+                                    myRef.child("User").child(opponentUID).child("1vs1Online").removeValue();
+
+                                    intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                    deleteData();
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
+                                } else {
+                                    Intent intent = new Intent(onevsoneOnlineScoreCard.this, multiPlayerPictureQuiz.class);
+                                    intent.putExtra("opponentUID", opponentUID);
+                                    intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                    intent.putExtra("opponentUserName", opponentUsername);
+                                    intent.putExtra("mypropic", myProPicUrl);
+                                    intent.putExtra("myName", myName123);
+                                    try{
+                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                                    }catch (Exception e){
+
+                                    }
+                                    try{
+                                        myRef1.removeEventListener(listenerFast1);
+                                    }catch (Exception e){
+
+                                    }
+                                    myRef.child("User").child(opponentUID).child("1vs1Online").removeValue();
+
+                                    intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                    deleteData();
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
+                                }
+
                             }
-
-                        }
-                    });
+                        });
 
 
+                    }
+                });
 
-                }
-            });
+                buttonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-            buttonNo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final MediaPlayer musicNav;
-                    musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-                    musicNav.start();
-                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mediaPlayer) {
-                            musicNav.reset();
-                            musicNav.release();
-                        }
-                    });
-                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
-                            myRef.child("User").child(opponentUID).child("1vs1Online").removeValue();
-                            alertDialog.dismiss();
-                        }
-                    });
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
+                        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
+                            //    myRef.child("User").child(opponentUID).child("1vs1Online").removeValue();
+                                alertDialog.dismiss();
+                            }
+                        });
 
 
-                }
-            });
+                    }
+                });
+            }
 
-        }
     }
 
 
@@ -1835,7 +1918,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2001,6 +2088,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
         myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
         deleteData();
+        try{
+            myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef1.removeEventListener(listenerFast1);
+        }catch (Exception e){
+
+        }
         Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);

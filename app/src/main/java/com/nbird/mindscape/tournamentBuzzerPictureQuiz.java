@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -116,6 +117,18 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     songActivity songActivity;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+        if(countDownTimeralerDialog!=null){
+            countDownTimeralerDialog.cancel();
+        }
+
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -766,7 +779,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     list.add(snapshot.getValue(pictureQuizHolder.class));
                     try{
                         Glide.with(getBaseContext())
-                                .load(list.get(num).getQuestionPicture())
+                                .load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).preload(20,10)).preload(20,10)).preload(20,10))
                                 .preload(20, 10);
                     }catch (Exception e){
 
@@ -811,7 +824,12 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                 break;
         }
         count = 0;
-        playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+        try{
+            playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+        }catch (Exception e){
+
+        }
+
     }
 
 
@@ -1035,7 +1053,14 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     if (count == 0) {
 
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        try{
+                            Glide.with(getBaseContext())
+                                    .load(linkHolder)
+                                    .error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder))))
+                                    .into(questionImage);
+                        }catch (Exception e){
+
+                        }
                         Animation imgAnim1 = AnimationUtils.loadAnimation(tournamentBuzzerPictureQuiz.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
 
@@ -2765,9 +2790,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
-                if(countDownTimeralerDialog!=null){
-                    countDownTimeralerDialog.cancel();
-                }
+
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentBuzzerPictureQuiz.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -2815,7 +2838,11 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
 
                     if(countDownTimer!=null){
-                        countDownTimer.cancel();}
+                        countDownTimer.cancel();
+                    }
+                    if(countDownTimeralerDialog!=null){
+                        countDownTimeralerDialog.cancel();
+                    }
 
                     startActivity(intent47);
 
@@ -2836,7 +2863,11 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
 
                     if(countDownTimer!=null){
-                        countDownTimer.cancel();}
+                        countDownTimer.cancel();
+                    }
+                    if(countDownTimeralerDialog!=null){
+                        countDownTimeralerDialog.cancel();
+                    }
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
@@ -2858,7 +2889,11 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
 
                     if(countDownTimer!=null){
-                        countDownTimer.cancel();}
+                        countDownTimer.cancel();
+                    }
+                    if(countDownTimeralerDialog!=null){
+                        countDownTimeralerDialog.cancel();
+                    }
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
@@ -2879,7 +2914,11 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                     Intent intent47=new Intent(tournamentBuzzerPictureQuiz.this,mainMenuActivity.class);
 
                     if(countDownTimer!=null){
-                        countDownTimer.cancel();}
+                        countDownTimer.cancel();
+                    }
+                    if(countDownTimeralerDialog!=null){
+                        countDownTimeralerDialog.cancel();
+                    }
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
@@ -2912,8 +2951,38 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
 
         }
 
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+        }catch (Exception e){
+
+        }
+        if(playerNum==2){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
 
 
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status");
+
+        }else if(playerNum==3){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+            //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
+
+        }else if (playerNum==4){
+
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+            //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
+
+        }
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+        if(countDownTimeralerDialog!=null){
+            countDownTimeralerDialog.cancel();
+        }
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2927,12 +2996,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-                if(countDownTimeralerDialog!=null){
-                    countDownTimeralerDialog.cancel();
-                }
+
                 try{
                     songActivity.songStop();
                 }catch (Exception e){

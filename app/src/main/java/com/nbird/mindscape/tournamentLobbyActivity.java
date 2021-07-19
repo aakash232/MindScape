@@ -32,6 +32,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,7 +72,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     int roomCode1,playerNum;
     String hostUid,hostImageUrl,hostName;
     String player1Uid,player2Uid,player3Uid,player4Uid;
-
+    int kim=0;
     CardView chatButton,factsButton,settingButton,privacyButton,cancelButton;
    // AlertDialog.Builder builderFact;
    // View viewFact;
@@ -116,6 +119,16 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+        if(counterRemovalDownTimer!=null){
+            counterRemovalDownTimer.cancel();
+        }
+        if(countDownHost!=null){
+            countDownHost.cancel();
+        }
 
         try{
             myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").removeEventListener(lisnerfox1);
@@ -172,6 +185,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_lobby);
+
+
 
         list = new ArrayList<>();
         listChat = new ArrayList<>();
@@ -592,7 +607,12 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -1036,13 +1056,95 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     privacyButton.setEnabled(false);
                     cancelButton.setEnabled(false);
                     removePlayerButton.setEnabled(false);
-                    new CountDownTimer(1000 * 10, 1000) {
+                    final int k=0;
+                    new CountDownTimer(1000 * 9, 900) {
 
 
                         public void onTick(long millisUntilFinished) {
-                            int sec = (int) (millisUntilFinished / 1000);
+                            int sec = (int) (millisUntilFinished / 900);
                             startButton.setText("Quiz Starts In " + sec + " Seconds");
                             startButton.setTextSize(15f);
+                            if(kim==0){
+                                kim=1;
+                                int numberOfPlayers=4;
+                                if(name4.getText().toString().isEmpty()){
+                                    numberOfPlayers--;
+                                }
+                                if(name3.getText().toString().isEmpty()){
+                                    numberOfPlayers--;
+                                }
+                                if(name2.getText().toString().isEmpty()){
+                                    numberOfPlayers--;
+                                }
+                                if(numberOfPlayers==1){
+                                       myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player1Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                }else if(numberOfPlayers==2){
+                                       myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player1Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                          myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player2Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                }else if(numberOfPlayers==3){
+                                       myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player1Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                          myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player2Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player3Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                }else if(numberOfPlayers==4){
+                                       myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player1Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                          myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player2Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player3Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("Buzzer").child("BuzzerScore").child("player4Score").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                              }
+                           });
+                                }
+
+
+                            }
+
                         }
 
                         @Override
@@ -1116,11 +1218,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             privacyButton.setEnabled(false);
             cancelButton.setEnabled(false);
             removePlayerButton.setEnabled(false);
-            new CountDownTimer(1000 * 9, 900) {
+            new CountDownTimer(1000 * 10, 1000) {
 
 
                 public void onTick(long millisUntilFinished) {
-                    int sec = (int) (millisUntilFinished / 900);
+                    int sec = (int) (millisUntilFinished / 1000);
                     startButton.setText("Quiz Starts In " + sec + " Seconds");
                     startButton.setTextSize(15f);
                 }
@@ -2227,6 +2329,22 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     }
                                 });
                             }catch (Exception e){
+                                if(playerNum==1){
+                                       myRef.child("Lobby").child(String.valueOf(roomCode1)).removeValue();
+                                myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player1Status").onDisconnect().cancel();
+                                if(counterRemovalDownTimer!=null){
+                                    counterRemovalDownTimer.cancel();}
+                                if(countDownTimer!=null){
+                                    countDownTimer.cancel();}
+                                if(countDownHost!=null){
+                                    countDownHost.cancel();}
+                                tournamentLobbyActivity.super.onBackPressed();
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                finish();
+                                }
+
 
                             }
                         }
@@ -3134,6 +3252,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 numM=0;break;
             case 1:
                 numM=1;break;
+            case 2:
+                numM=2;break;
+            case 3:
+                numM=3;break;
         }
 
 
@@ -3195,6 +3317,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     }
 
     public void factButtonFunction(){
+
         list.clear();
         AlertDialog.Builder builderFact=new AlertDialog.Builder(tournamentLobbyActivity.this,R.style.AlertDialogTheme);
         final View viewFact= LayoutInflater.from(tournamentLobbyActivity.this).inflate(R.layout.factfull_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
@@ -3208,11 +3331,23 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
 
+
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
         alertDialog.show();
+
+        LinearLayout adContainer = viewFact.findViewById(R.id.linearLayout);
+
+
+        AdView mAdView = viewFact.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+            mAdView.loadAd(adRequest);
+
+
+
         for(int i=1;i<=3;i++){
             dataForHorizontalSlide();
         }

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -140,7 +142,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         userNameFunction();
 
 
-        c=new CountDownTimer(1000*180,1000) {
+        c=new CountDownTimer(1000*15,1000) {
             @Override
             public void onTick(long l) {
                 if(questionImage.getDrawable() != null){
@@ -159,7 +161,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                countDownTimerFun();
+                loadingDialog.dismiss();
             }
         }.start();
 
@@ -681,13 +684,13 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     list.add(snapshot.getValue(pictureQuizHolder.class));
-                    try{
-                        Glide.with(getBaseContext())
-                                .load(list.get(num).getQuestionPicture())
-                                .preload(20, 10);
-                    }catch (Exception e){
+                try{
+                    Glide.with(getBaseContext())
+                            .load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).error((Drawable) Glide.with(getBaseContext()).load(list.get(num).getQuestionPicture()).preload(20,10)).preload(20,10)).preload(20,10))
+                            .preload(20, 10);
+                }catch (Exception e){
 
-                    }
+                }
 
 
                     num++;
@@ -866,7 +869,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                 }
 
                                 count = 0;
-                                playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                try{
+                                    playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                }catch (Exception e){
+
+                                }
+
 
                             }
                         });
@@ -899,11 +907,19 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     String option="";
                     if(count==0){
 
-
                         linkHolder=list.get(position).getQuestionPicture();
-                        Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
+                        try{
+                            Glide.with(getBaseContext())
+                                    .load(linkHolder)
+                                    .error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder).error(Glide.with(getBaseContext()).load(linkHolder))))
+                                    .into(questionImage);
+                        }catch (Exception e){
+
+                        }
+                      //  Glide.with(getBaseContext()).load(linkHolder).into(questionImage);
                         Animation imgAnim1 = AnimationUtils.loadAnimation(activity_picture_singlePlayer.this, R.anim.scaleincanim);
                         questionImage.setAnimation(imgAnim1);
+
 
 
                         option=list.get(position).getOption1();
