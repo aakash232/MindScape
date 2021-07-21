@@ -9,8 +9,11 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -41,6 +44,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -100,14 +104,53 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
+    public void songStopperAndResumer(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongRemember", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
+        final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
+        if(songDetect){
+            songActivity=new songActivity(this);
+            songActivity.startMusic();
+        }else{
+            Speaker.setBackgroundResource(R.drawable.usedicon);
+            speakerImage.setBackgroundResource(R.drawable.speakeroff);
+        }
+
+        cardViewSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean songDetect9 = songStopper.getBoolean("IsPlaying",true);
+                if(songDetect9){
+                    songActivity.songStop();
+                    Speaker.setBackgroundResource(R.drawable.usedicon);
+                    speakerImage.setBackgroundResource(R.drawable.speakeroff);
+                    editorsongStopper.putBoolean("IsPlaying", false);
+                    editorsongStopper.commit();
+                }else{
+                    songActivity=new songActivity(activity_picture_singlePlayer.this);
+                    songActivity.startMusic();
+                    Speaker.setBackgroundResource(R.drawable.whitewithblackstroke);
+                    speakerImage.setBackgroundResource(R.drawable.speakeron);
+                    editorsongStopper.putBoolean("IsPlaying", true);
+                    editorsongStopper.commit();
+                }
+
+
+
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_singleplayer);
         loadAds();
-         songActivity=new songActivity(this);
-        songActivity.startMusic();
+       songStopperAndResumer();
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -300,7 +343,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
+
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -328,6 +376,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(audiencenum==0) {
+
                     final MediaPlayer musicNav;
                     musicNav = MediaPlayer.create(activity_picture_singlePlayer.this, R.raw.lifelinemusic);
                     musicNav.start();
@@ -401,6 +450,9 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Vote Bars");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -420,7 +472,12 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
+
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -462,7 +519,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -538,7 +599,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -591,16 +656,26 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
+
                     expertAdviceImageManupulator();
+
+
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -634,7 +709,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -741,11 +820,6 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                                                try{
-                                                    songActivity.songStop();
-                                                }catch (Exception e){
-
-                                                }
 
                                                 Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
@@ -769,6 +843,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -808,11 +887,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                                                try{
-                                                    songActivity.songStop();
-                                                }catch (Exception e){
 
-                                                }
 
                                                 Intent scoreIntent = new Intent(activity_picture_singlePlayer.this, scoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
@@ -836,6 +911,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -1075,7 +1155,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     //Clock Algorithm (UpCounter)
     public void countDownTimerFun(){   //Clock Algo
         countDownTimer=new CountDownTimer(60000*10, 1000) {
-
+            CardView Timer = (CardView) findViewById(R.id.cardView3);
 
             public void onTick(long millisUntilFinished) {
 
@@ -1105,13 +1185,30 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                     timerText.setText(" Timer "+minutestext+":"+secondtext+" ");
                     second++;
                 }
+
+                if(minutes==9 && second>45){
+
+                    timerText.setTextColor(getResources().getColor(R.color.av_red));
+
+                    //Continuous zoomIn - zoomOut
+                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(Timer, "scaleX", 0.9f, 1f);
+                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(Timer, "scaleY", 0.9f, 1f);
+
+                    scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    scaleY.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleY.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    AnimatorSet scaleAnim = new AnimatorSet();
+                    scaleAnim.setDuration(500);
+                    scaleAnim.play(scaleX).with(scaleY);
+
+                    scaleAnim.start();
+                }
             }
             public void onFinish() {
-                try{
-                    songActivity.songStop();
-                }catch (Exception e){
 
-                }
 
 
                 mInterstitialAd.setAdListener(new AdListener(){
@@ -1142,8 +1239,20 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 });
 
                 if(mInterstitialAd.isLoaded()){
+                    try{
+                        songActivity.songStop();
+                    }catch (Exception e){
+
+                    }
                     mInterstitialAd.show();
                     return;
+                }
+
+
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
                 }
 
                 Toast.makeText(activity_picture_singlePlayer.this, "Time Over", Toast.LENGTH_SHORT).show();
@@ -1284,7 +1393,11 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

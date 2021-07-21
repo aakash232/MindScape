@@ -19,6 +19,7 @@ public class HelpGuide3 extends AppCompatActivity {
     Context context;
     boolean flag = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

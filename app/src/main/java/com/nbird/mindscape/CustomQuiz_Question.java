@@ -42,7 +42,11 @@ public class CustomQuiz_Question extends AppCompatActivity {
     int expertAdvise,fiftyfifty,swap,AudiencePoll;
      int currentPage;
     int pointer=0;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

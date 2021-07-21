@@ -27,7 +27,39 @@
         app:lottie_speed="0.1" />
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSpeaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:foreground="?selectableItemBackground"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+            android:id="@+id/Speaker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:elevation="10dp">
+
+
+            <ImageView
+                android:id="@+id/speakerImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/speakeron" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.cardview.widget.CardView
@@ -62,7 +94,7 @@
                 android:scaleY="0.9"
                 android:fontFamily="@font/mouse_memoirs"
                 android:gravity="right"
-                android:text="Question 1/10"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="30dp" 
                 android:textStyle="bold"
@@ -438,7 +470,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
                 android:alpha="0.65"
                 android:background="@drawable/blackwithwhitestroke"

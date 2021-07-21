@@ -68,6 +68,11 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_choice_acticity);
@@ -117,6 +122,8 @@ public class tournamentChoiceActicity extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
+                shimmer.startShimmerAnimation();
+                shimmer.setVisibility(View.VISIBLE);
                 roomListView();
             }
         });
@@ -171,7 +178,11 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
         s=new roomDataHolder();
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override

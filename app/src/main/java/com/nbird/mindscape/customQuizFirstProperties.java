@@ -57,6 +57,11 @@ public class customQuizFirstProperties extends AppCompatActivity {
     int r;
     androidx.appcompat.widget.Toolbar toolbar;
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_quiz_first_properties);
@@ -160,7 +165,11 @@ public class customQuizFirstProperties extends AppCompatActivity {
                             if(alertDialog.getWindow()!=null){
                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                             }
-                            alertDialog.show();
+                            try{
+                                alertDialog.show();
+                            }catch (Exception e){
+
+                            }
 
 
 

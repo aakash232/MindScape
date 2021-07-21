@@ -113,7 +113,7 @@ public class prizeRecyclerAdapter extends RecyclerView.Adapter<prizeRecyclerAdap
                                 itemView.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Toast.makeText(context, "You Have Played This Pakage!!!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "You Have Played This Package!!!", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }

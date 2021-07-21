@@ -49,6 +49,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -184,6 +185,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
     int ptron=1;
 
     int mainfinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -415,7 +417,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -530,12 +536,20 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     barChart.getDescription().setText("Audience Poll");
                     barChart.animateY(2000);
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
+
 
                     final AlertDialog alertDialog = builder.create();
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -577,7 +591,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -653,7 +671,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -706,16 +728,26 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OK");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
+
+
+
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -749,7 +781,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -968,7 +1004,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                                 if (countDownTimer != null) {
                                                     countDownTimer.cancel();
                                                 }
-                                                clearMediaPlayer();
+
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
@@ -976,6 +1012,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            clearMediaPlayer();
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -1029,7 +1066,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                                 if (countDownTimer != null) {
                                                     countDownTimer.cancel();
                                                 }
-                                                clearMediaPlayer();
+
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
                                             }
@@ -1037,6 +1074,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            clearMediaPlayer();
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -1279,8 +1317,14 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
 
+                int i;
+                try{
+                     i=music.getCurrentPosition();
+                }catch (Exception e){
 
-                int i=music.getCurrentPosition();
+                }
+
+
 
                 ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
                 ActivityManager.getMyMemoryState(myProcess);
@@ -1288,13 +1332,18 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                 if (isInBackground) {
                     music.pause();
                 } else {
-                    if (!music.isPlaying()) {
+                    try{
+
+                    }catch (Exception e){
+                         if (!music.isPlaying()) {
                         if(statusFinder==1){
                             music.start();
                             music.setVolume(0.8f,0.8f);
                         }
 
                     }
+                    }
+
                 }
 
 
@@ -1488,7 +1537,11 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

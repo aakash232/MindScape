@@ -35,6 +35,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,6 +107,11 @@ public class customPublicQuiz extends AppCompatActivity {
     int rater;
     int rate,ratess,numberOfTimesPlayed;
     songActivity songActivity;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -403,6 +410,9 @@ public class customPublicQuiz extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -422,7 +432,11 @@ public class customPublicQuiz extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -472,9 +486,12 @@ public class customPublicQuiz extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -482,8 +499,11 @@ public class customPublicQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
 
+                    }
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -726,7 +746,11 @@ public class customPublicQuiz extends AppCompatActivity {
                                             if(alertDialog.getWindow()!=null){
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
                                             buttonHome.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -1014,7 +1038,11 @@ public class customPublicQuiz extends AppCompatActivity {
                                             if(alertDialog.getWindow()!=null){
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
                                            buttonHome.setOnClickListener(new View.OnClickListener() {
                                                @Override
@@ -1384,7 +1412,11 @@ public class customPublicQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

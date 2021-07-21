@@ -936,7 +936,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -3735,7 +3739,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -3851,7 +3859,11 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override

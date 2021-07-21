@@ -87,33 +87,42 @@
 
     <LinearLayout
         android:id="@+id/que_vec"
-        android:layout_width="600dp"
+        android:layout_width="0dp"
         android:layout_height="78dp"
         android:background="@drawable/que_vec"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/optLayout"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice">
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/kbc_que"
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="3dp"
             android:gravity="center"
+            android:layout_marginBottom="3dp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
             android:text=""
             android:textSize="20dp"
-            android:translationX="45dp" />
+            />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/optLayout"
-        android:layout_width="600dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@drawable/opt"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice">
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutPrice"
+        app:layout_constraintStart_toStartOf="@+id/que_vec">
 
 
         <Button

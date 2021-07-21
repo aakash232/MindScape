@@ -30,7 +30,11 @@ public class customCategoryListActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
 
     int position;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

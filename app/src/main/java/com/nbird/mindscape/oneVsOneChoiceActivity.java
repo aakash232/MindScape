@@ -216,7 +216,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
 
                 joinButton.setOnClickListener(new View.OnClickListener() {
@@ -1371,7 +1375,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 roomCodeString=roomCodeEditText.getText().toString();
-                codeInteger= Integer.parseInt(roomCodeString);
+                try{
+                    codeInteger= Integer.parseInt(roomCodeString);
+                }catch (Exception e){
+                    codeInteger= -100;
+                }
                 joinTunedFunction();
 
             }
@@ -1444,7 +1452,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                             if (alertDialog.getWindow() != null) {
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
 
                                             cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -1563,6 +1575,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                                             }
                                                         });
                                                     }catch (Exception e){
+                                                        levelManupulation();
                                                         highestScore.setText(" Higest Score : null");
                                                         totalTime.setText(" Total Time : null ");
                                                         oppoAccu.setText(" Accuracy : null");
@@ -1693,7 +1706,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
 
                 cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -1842,6 +1859,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                             }
                                         });
                                     }catch (Exception e){
+                                        levelManupulation99();
                                         highestScore.setText(" Highest Score : null");
                                         totalTime.setText(" Total Time : null ");
                                         oppoAccu.setText(" Accuracy : null");

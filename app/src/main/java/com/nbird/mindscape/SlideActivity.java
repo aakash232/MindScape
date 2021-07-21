@@ -22,7 +22,11 @@ public class SlideActivity extends AppCompatActivity {
     private TextView[] mDots;
     private Button nextbutton,backbutton;
     private int currentPage;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

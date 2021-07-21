@@ -84,6 +84,11 @@ public class customFlipperMain extends AppCompatActivity {
     Button cancel1,cancel2,cancel3,cancel4,cancel5;
     String key="";
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_flipper_main);
@@ -485,7 +490,11 @@ public class customFlipperMain extends AppCompatActivity {
                             if(alertDialog.getWindow()!=null){
                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                             }
-                            alertDialog.show();
+                            try{
+                                alertDialog.show();
+                            }catch (Exception e){
+
+                            }
 
                             yesButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -663,7 +672,11 @@ public class customFlipperMain extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override

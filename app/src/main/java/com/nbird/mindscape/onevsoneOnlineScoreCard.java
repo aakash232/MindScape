@@ -117,17 +117,10 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     barGroupHolder man;
     ValueEventListener listener1;
     int parcel,isHostFinal,isRequesSendValid=1;
-    private InterstitialAd mInterstitialAd;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
     }
 
 
@@ -463,7 +456,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("request").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Send To "+opponentUsername, Toast.LENGTH_LONG).show();
+                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Send To "+opponentUsername, Toast.LENGTH_SHORT).show();
 
 
 
@@ -568,12 +561,25 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
         try {
             for (int i = 0; i < 10; i++) {
-                int numMy = arrlist.get(i);
-                int numOppo = arroppo.get(i);
+                int numOppo=2;
+                int numMy=2;
+                try{
+                     numMy = arrlist.get(i);
+                }catch (Exception e){
+
+                }
+                try{
+                     numOppo = arroppo.get(i);
+                }catch (Exception e){
+
+                }
+
+
 
                 switch (i + 1) {
                     case 1:
-                        if (numMy == 1) {
+                        try{
+                             if (numMy == 1) {
                             anim1.setAnimation(R.raw.tickanim);
                             anim1.playAnimation();
                             anim1.loop(false);
@@ -582,7 +588,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim1.playAnimation();
                             anim1.loop(false);
                         }
-                        if (numOppo == 1) {
+                        }catch (Exception e){
+
+                        }
+                       try{
+                             if (numOppo == 1) {
                             anim1oppo.setAnimation(R.raw.tickanim);
                             anim1oppo.playAnimation();
                             anim1oppo.loop(false);
@@ -591,9 +601,14 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim1oppo.playAnimation();
                             anim1oppo.loop(false);
                         }
+                       }catch (Exception e){
+
+                       }
+
                         break;
                     case 2:
-                        if (numMy == 1) {
+                        try{
+                           if (numMy == 1) {
                             anim2.setAnimation(R.raw.tickanim);
                             anim2.playAnimation();
                             anim2.loop(false);
@@ -602,7 +617,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim2.playAnimation();
                             anim2.loop(false);
                         }
-                        if (numOppo == 1) {
+                        }catch (Exception e){
+
+                        }
+                        try{
+                          if (numOppo == 1) {
                             anim2oppo.setAnimation(R.raw.tickanim);
                             anim2oppo.playAnimation();
                             anim2oppo.loop(false);
@@ -611,10 +630,16 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim2oppo.playAnimation();
                             anim2oppo.loop(false);
                         }
+                        }catch (Exception e){
+
+                        }
+
+
 
                         break;
                     case 3:
-                        if (numMy == 1) {
+                        try{
+                           if (numMy == 1) {
                             anim3.setAnimation(R.raw.tickanim);
                             anim3.playAnimation();
                             anim3.loop(false);
@@ -623,7 +648,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim3.playAnimation();
                             anim3.loop(false);
                         }
-                        if (numOppo == 1) {
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            if (numOppo == 1) {
                             anim3oppo.setAnimation(R.raw.tickanim);
                             anim3oppo.playAnimation();
                             anim3oppo.loop(false);
@@ -632,9 +661,15 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim3oppo.playAnimation();
                             anim3oppo.loop(false);
                         }
+                        }catch (Exception e){
+
+                        }
+
+
                         break;
                     case 4:
-                        if (numMy == 1) {
+                        try{
+                         if (numMy == 1) {
                             anim4.setAnimation(R.raw.tickanim);
                             anim4.playAnimation();
                             anim4.loop(false);
@@ -643,7 +678,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim4.playAnimation();
                             anim4.loop(false);
                         }
-                        if (numOppo == 1) {
+                        }catch (Exception e){
+
+                        }
+                        try{
+                           if (numOppo == 1) {
                             anim4oppo.setAnimation(R.raw.tickanim);
                             anim4oppo.playAnimation();
                             anim4oppo.loop(false);
@@ -652,9 +691,15 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim4oppo.playAnimation();
                             anim4oppo.loop(false);
                         }
+                        }catch (Exception e){
+
+                        }
+
+
                         break;
                     case 5:
-                        if (numMy == 1) {
+                        try{
+                     if (numMy == 1) {
                             anim5.setAnimation(R.raw.tickanim);
                             anim5.playAnimation();
                             anim5.loop(false);
@@ -663,7 +708,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim5.playAnimation();
                             anim5.loop(false);
                         }
-                        if (numOppo == 1) {
+                        }catch (Exception e){
+
+                        }
+                        try{
+                         if (numOppo == 1) {
                             anim5oppo.setAnimation(R.raw.tickanim);
                             anim5oppo.playAnimation();
                             anim5oppo.loop(false);
@@ -672,18 +721,28 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim5oppo.playAnimation();
                             anim5oppo.loop(false);
                         }
+                        }catch (Exception e){
+
+                        }
+
+
                         break;
                     case 6:
-                        if (numMy == 1) {
-                            anim6.setAnimation(R.raw.tickanim);
-                            anim6.playAnimation();
-                            anim6.loop(false);
-                        } else  {
-                            anim6.setAnimation(R.raw.wronganim);
-                            anim6.playAnimation();
-                            anim6.loop(false);
+                        try{
+                            if (numMy == 1) {
+                                anim6.setAnimation(R.raw.tickanim);
+                                anim6.playAnimation();
+                                anim6.loop(false);
+                            } else  {
+                                anim6.setAnimation(R.raw.wronganim);
+                                anim6.playAnimation();
+                                anim6.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
-                        if (numOppo == 1) {
+                        try{
+                          if (numOppo == 1) {
                             anim6oppo.setAnimation(R.raw.tickanim);
                             anim6oppo.playAnimation();
                             anim6oppo.loop(false);
@@ -692,90 +751,135 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             anim6oppo.playAnimation();
                             anim6oppo.loop(false);
                         }
+                        }catch (Exception e){
+
+                        }
+
+
                         break;
                     case 7:
-                        if (numMy == 1) {
+                        try{
+                            if (numMy == 1) {
 
-                            anim7.setAnimation(R.raw.tickanim);
-                            anim7.playAnimation();
-                            anim7.loop(false);
-                        } else  {
-                            anim7.setAnimation(R.raw.wronganim);
-                            anim7.playAnimation();
-                            anim7.loop(false);
+                                anim7.setAnimation(R.raw.tickanim);
+                                anim7.playAnimation();
+                                anim7.loop(false);
+                            } else  {
+                                anim7.setAnimation(R.raw.wronganim);
+                                anim7.playAnimation();
+                                anim7.loop(false);
+                            }
+                        }catch (Exception e){
+
+                        }
+                        try{
+                            if (numOppo == 1) {
+                                anim7oppo.setAnimation(R.raw.tickanim);
+                                anim7oppo.playAnimation();
+                                anim7oppo.loop(false);
+                            } else  {
+                                anim7oppo.setAnimation(R.raw.wronganim);
+                                anim7oppo.playAnimation();
+                                anim7oppo.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
 
-                        if (numOppo == 1) {
-                            anim7oppo.setAnimation(R.raw.tickanim);
-                            anim7oppo.playAnimation();
-                            anim7oppo.loop(false);
-                        } else  {
-                            anim7oppo.setAnimation(R.raw.wronganim);
-                            anim7oppo.playAnimation();
-                            anim7oppo.loop(false);
-                        }
+
+
                         break;
                     case 8:
-                        if (numMy == 1) {
+                        try{
+                            if (numMy == 1) {
 
-                            anim8.setAnimation(R.raw.tickanim);
-                            anim8.playAnimation();
-                            anim8.loop(false);
-                        } else  {
-                            anim8.setAnimation(R.raw.wronganim);
-                            anim8.playAnimation();
-                            anim8.loop(false);
+                                anim8.setAnimation(R.raw.tickanim);
+                                anim8.playAnimation();
+                                anim8.loop(false);
+                            } else  {
+                                anim8.setAnimation(R.raw.wronganim);
+                                anim8.playAnimation();
+                                anim8.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
-                        if (numOppo == 1) {
-                            anim8oppo.setAnimation(R.raw.tickanim);
-                            anim8oppo.playAnimation();
-                            anim8oppo.loop(false);
-                        } else  {
-                            anim8oppo.setAnimation(R.raw.wronganim);
-                            anim8oppo.playAnimation();
-                            anim8oppo.loop(false);
+                        try{
+
+                            if (numOppo == 1) {
+                                anim8oppo.setAnimation(R.raw.tickanim);
+                                anim8oppo.playAnimation();
+                                anim8oppo.loop(false);
+                            } else  {
+                                anim8oppo.setAnimation(R.raw.wronganim);
+                                anim8oppo.playAnimation();
+                                anim8oppo.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
+
                         break;
                     case 9:
-                        if (numMy == 1) {
+                        try{
+                            if (numMy == 1) {
 
-                            anim9.setAnimation(R.raw.tickanim);
-                            anim9.playAnimation();
-                            anim9.loop(false);
-                        } else  {
-                            anim9.setAnimation(R.raw.wronganim);
-                            anim9.playAnimation();
-                            anim9.loop(false);
+                                anim9.setAnimation(R.raw.tickanim);
+                                anim9.playAnimation();
+                                anim9.loop(false);
+                            } else  {
+                                anim9.setAnimation(R.raw.wronganim);
+                                anim9.playAnimation();
+                                anim9.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
-                        if (numOppo == 1) {
-                            anim9oppo.setAnimation(R.raw.tickanim);
-                            anim9oppo.playAnimation();
-                            anim9oppo.loop(false);
-                        } else  {
-                            anim9oppo.setAnimation(R.raw.wronganim);
-                            anim9oppo.playAnimation();
-                            anim9oppo.loop(false);
+                        try{
+                            if (numOppo == 1) {
+                                anim9oppo.setAnimation(R.raw.tickanim);
+                                anim9oppo.playAnimation();
+                                anim9oppo.loop(false);
+                            } else  {
+                                anim9oppo.setAnimation(R.raw.wronganim);
+                                anim9oppo.playAnimation();
+                                anim9oppo.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
+
+
                         break;
                     case 10:
-                        if (numMy == 1) {
-                            anim10.setAnimation(R.raw.tickanim);
-                            anim10.playAnimation();
-                            anim10.loop(false);
-                        } else  {
-                            anim10.setAnimation(R.raw.wronganim);
-                            anim10.playAnimation();
-                            anim10.loop(false);
+                        try{
+                            if (numMy == 1) {
+                                anim10.setAnimation(R.raw.tickanim);
+                                anim10.playAnimation();
+                                anim10.loop(false);
+                            } else  {
+                                anim10.setAnimation(R.raw.wronganim);
+                                anim10.playAnimation();
+                                anim10.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
-                        if (numOppo == 1) {
-                            anim10oppo.setAnimation(R.raw.tickanim);
-                            anim10oppo.playAnimation();
-                            anim10oppo.loop(false);
-                        } else  {
-                            anim10oppo.setAnimation(R.raw.wronganim);
-                            anim10oppo.playAnimation();
-                            anim10oppo.loop(false);
+                        try{
+                            if (numOppo == 1) {
+                                anim10oppo.setAnimation(R.raw.tickanim);
+                                anim10oppo.playAnimation();
+                                anim10oppo.loop(false);
+                            } else  {
+                                anim10oppo.setAnimation(R.raw.wronganim);
+                                anim10oppo.playAnimation();
+                                anim10oppo.loop(false);
+                            }
+                        }catch (Exception e){
+
                         }
+
+
                         break;
                 }
             }
@@ -816,7 +920,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -838,7 +946,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                         requestDialogBoxFun();
                     }else{
                         isRequesSendValid=1;
-                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Clashed!!Please Try Again For A Rematch", Toast.LENGTH_LONG).show();
+                        Toast.makeText(onevsoneOnlineScoreCard.this, "Request Clashed!!Please Try Again For A Rematch", Toast.LENGTH_SHORT).show();
                     }
 
                 }catch(Exception e){
@@ -895,7 +1003,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
+            try{
                 alertDialog.show();
+            }catch (Exception e){
+
+            }
 
                 titleDialog.setText(opponentUsername + " Has Send You A Request For A Rematch!");
 
@@ -1655,18 +1767,6 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                                                 myRef.child("leaderBoard").child("1vs1").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                                        mInterstitialAd.setAdListener(new AdListener(){
-                                                                            public void onAdClosed(){
-                                                                                super.onAdClosed();
-                                                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                                                                            }
-
-                                                                        });
-
-                                                                        if(mInterstitialAd.isLoaded()){
-                                                                            mInterstitialAd.show();
-                                                                            return;
-                                                                        }
 
 
                                                                     }
@@ -1962,7 +2062,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
         categoryAdapter.notifyDataSetChanged();
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

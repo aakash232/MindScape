@@ -29,6 +29,11 @@ public class registerActivity extends AppCompatActivity {
     Dialog loadingDialog;
     FirebaseAuth fAuth= FirebaseAuth.getInstance();
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);

@@ -169,7 +169,11 @@ public class profile extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     ImageView pencilImage,nav_image,nav_image123;
     String nameString,imageurl123;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -350,7 +354,11 @@ public class profile extends AppCompatActivity {
             if(alertDialog.getWindow()!=null){
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
-            alertDialog.show();
+            try{
+                alertDialog.show();
+            }catch (Exception e){
+
+            }
 
             view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1094,7 +1102,11 @@ public class profile extends AppCompatActivity {
             if(alertDialog.getWindow()!=null){
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
-            alertDialog.show();
+            try{
+                alertDialog.show();
+            }catch (Exception e){
+
+            }
 
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1436,6 +1448,7 @@ public class profile extends AppCompatActivity {
             PieData pieData=new PieData(pieDataSet);
 
             pieChart.setData(pieData);
+            pieChart.invalidate();         //Imporatant line showing pie chart
             pieChart.setEntryLabelTextSize(5);
             pieChart.setEntryLabelColor(R.color.black);
             pieChart.getDescription().setEnabled(false);

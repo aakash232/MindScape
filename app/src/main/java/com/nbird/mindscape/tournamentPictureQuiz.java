@@ -8,8 +8,11 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -40,6 +43,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -124,16 +128,56 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+
     songActivity songActivity;
+    public void songStopperAndResumer(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongRemember", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
+
+        final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
+        if(songDetect){
+            songActivity=new songActivity(this);
+            songActivity.startMusic();
+        }else{
+            Speaker.setBackgroundResource(R.drawable.usedicon);
+            speakerImage.setBackgroundResource(R.drawable.speakeroff);
+        }
+
+        cardViewSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean songDetect9 = songStopper.getBoolean("IsPlaying",true);
+                if(songDetect9){
+                    songActivity.songStop();
+                    Speaker.setBackgroundResource(R.drawable.usedicon);
+                    speakerImage.setBackgroundResource(R.drawable.speakeroff);
+                    editorsongStopper.putBoolean("IsPlaying", false);
+                    editorsongStopper.commit();
+                }else{
+                    songActivity=new songActivity(tournamentPictureQuiz.this);
+                    songActivity.startMusic();
+                    Speaker.setBackgroundResource(R.drawable.whitewithblackstroke);
+                    speakerImage.setBackgroundResource(R.drawable.speakeron);
+                    editorsongStopper.putBoolean("IsPlaying", true);
+                    editorsongStopper.commit();
+                }
+
+
+
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_picture_quiz);
 
         loadAds();
-         songActivity=new songActivity(this);
-        songActivity.startMusic();
-
+        songStopperAndResumer();
         anim1=(LottieAnimationView) findViewById(R.id.anim1);
         anim2=(LottieAnimationView) findViewById(R.id.anim2);
         anim3=(LottieAnimationView) findViewById(R.id.anim3);
@@ -563,7 +607,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -667,6 +715,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -686,7 +737,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -728,7 +783,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -804,7 +863,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -859,9 +922,12 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(myName+" I Think It's : \n'"+answerByExpert+"'");
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(myName+" I Think It's : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -869,7 +935,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -913,7 +983,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -948,8 +1022,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
 
+        }
 
         countDownTimeralerDialog=new CountDownTimer(1000*10,1000){
             @Override
@@ -1786,11 +1863,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
             public void onAdClosed(){
                 super.onAdClosed();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                try{
-                    songActivity.songStop();
-                }catch (Exception e){
 
-                }
                 Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
                 scoreIntent.putExtra("score", score);
                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -1831,11 +1904,20 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         });
 
         if(mInterstitialAd.isLoaded()){
+            try{
+                songActivity.songStop();
+            }catch (Exception e){
+
+            }
             mInterstitialAd.show();
             return;
         }
 
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
 
+        }
 
         Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
         scoreIntent.putExtra("score", score);
@@ -2424,7 +2506,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
     public void countDownTimerFun(int i){   //Clock Algo
         countDownTimer=new CountDownTimer(i, 1000) {
-
+            CardView Timer = (CardView) findViewById(R.id.cardView3);
 
             public void onTick(long millisUntilFinished) {
                 milliHolder47= (int) millisUntilFinished;
@@ -2452,6 +2534,26 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     timerText.setText(" Timer "+minutestext+":"+secondtext+" ");
                     second--;
                 }
+                if(minutes==0 && second<=15){
+
+                    timerText.setTextColor(getResources().getColor(R.color.av_red));
+
+                    //Continuous zoomIn - zoomOut
+                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(Timer, "scaleX", 0.9f, 1f);
+                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(Timer, "scaleY", 0.9f, 1f);
+
+                    scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    scaleY.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleY.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    AnimatorSet scaleAnim = new AnimatorSet();
+                    scaleAnim.setDuration(500);
+                    scaleAnim.play(scaleX).with(scaleY);
+
+                    scaleAnim.start();
+                }
             }
             public void onFinish() {
 
@@ -2459,11 +2561,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     public void onAdClosed(){
                         super.onAdClosed();
                         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                        try{
-                            songActivity.songStop();
-                        }catch (Exception e){
 
-                        }
                         Toast.makeText(tournamentPictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                         Intent scoreIntent = new Intent(tournamentPictureQuiz.this, tournamentScoreActivity.class);
                         scoreIntent.putExtra("score", score);
@@ -2506,6 +2604,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 });
 
                 if(mInterstitialAd.isLoaded()){
+                    try{
+                        songActivity.songStop();
+                    }catch (Exception e){
+
+                    }
                     mInterstitialAd.show();
                     return;
                 }

@@ -20,7 +20,11 @@ public class singleModeListView extends AppCompatActivity {
     CardView festivalArtAndCulture,polityAndConstitution,literature,healthAndDiseases,miscellaneous;
 
     androidx.appcompat.widget.Toolbar toolbar;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

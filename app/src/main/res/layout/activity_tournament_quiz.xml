@@ -26,7 +26,39 @@
         app:lottie_rawRes="@raw/backquiz"
         app:lottie_speed="0.1" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSpeaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:foreground="?selectableItemBackground"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+            android:id="@+id/Speaker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:elevation="10dp">
+
+
+            <ImageView
+                android:id="@+id/speakerImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/speakeron" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 
@@ -121,7 +153,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardViewSpeaker">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,9 +168,9 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:elevation="-2dp"
-                android:scaleY="0.9"
-                android:scaleX="0.9"
                 android:foreground="?selectableItemBackground"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2"
@@ -153,8 +185,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -163,318 +195,317 @@
                             android:orientation="horizontal">
 
 
-
-                        <ImageView
-                            android:id="@+id/opponentPic"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="5dp"
-                            />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/insidecardviewlessradius"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/opponentName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#000000"
-                                android:textSize="10dp" 
-                                android:layout_marginTop="3dp"
-                                android:layout_marginLeft="6dp"
-                                android:fontFamily="@font/mouse_memoirs"
-                                android:text="Sachu"
-                                android:textStyle="bold"/>
+                            <ImageView
+                                android:id="@+id/opponentPic"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="5dp" />
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="1dp"
-                                android:orientation="horizontal">
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/insidecardviewlessradius"
+                                android:orientation="vertical">
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim1"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                <TextView
+                                    android:id="@+id/opponentName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="3dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:text="Sachu"
+                                    android:textColor="#000000"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim2"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="1dp"
+                                    android:orientation="horizontal">
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim3"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim4"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim1"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim5"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim2"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim6"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim7"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim3"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim8"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim4"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim9"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim5"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/anim10"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim6"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim7"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim8"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim9"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/anim10"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:orientation="horizontal">
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz1"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz2"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz3"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz4"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz5"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz6"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz7"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz8"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz9"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:id="@+id/animz10"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:elevation="-5dp"
+                                        android:scaleType="centerCrop"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="parent"
+                                        app:lottie_speed="1" />
+
+
+                                </LinearLayout>
 
 
                             </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp"
-                                android:orientation="horizontal">
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz1"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz2"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz3"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz4"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz5"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz6"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz7"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz8"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz9"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/animz10"
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:elevation="-5dp"
-                                    android:scaleType="centerCrop"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="parent"
-                                    app:lottie_speed="1" />
-
-
-                            </LinearLayout>
-
-
 
                         </LinearLayout>
 
-                    </LinearLayout>
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="horizontal">
-
 
 
                             <ImageView
                                 android:id="@+id/opponentPic2"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_margin="5dp"
-                                />
+                                android:layout_margin="5dp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
                                 android:background="@drawable/insidecardviewlessradius"
                                 android:orientation="vertical">
@@ -483,13 +514,13 @@
                                     android:id="@+id/opponentName2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="#000000"
-                                    android:textSize="10dp" 
-                                    android:layout_marginTop="3dp"
                                     android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:text="Sachu"
-                                    android:textStyle="bold"/>
+                                    android:textColor="#000000"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -533,6 +564,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim14"
                                         android:layout_width="13dp"
@@ -568,6 +600,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim17"
                                         android:layout_width="13dp"
@@ -662,6 +695,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz14"
                                         android:layout_width="13dp"
@@ -697,6 +731,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz17"
                                         android:layout_width="13dp"
@@ -749,7 +784,6 @@
                                 </LinearLayout>
 
 
-
                             </LinearLayout>
 
                         </LinearLayout>
@@ -760,8 +794,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -770,19 +804,17 @@
                             android:orientation="horizontal">
 
 
-
                             <ImageView
                                 android:id="@+id/opponentPic3"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_margin="5dp"
-                                />
+                                android:layout_margin="5dp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_marginBottom="8dp"
                                 android:background="@drawable/insidecardviewlessradius"
@@ -792,13 +824,13 @@
                                     android:id="@+id/opponentName3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="#000000"
-                                    android:textSize="10dp" 
-                                    android:layout_marginTop="3dp"
                                     android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:text="Sachu"
-                                    android:textStyle="bold"/>
+                                    android:textColor="#000000"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -842,6 +874,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim24"
                                         android:layout_width="13dp"
@@ -877,6 +910,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim27"
                                         android:layout_width="13dp"
@@ -971,6 +1005,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz24"
                                         android:layout_width="13dp"
@@ -1006,6 +1041,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz27"
                                         android:layout_width="13dp"
@@ -1058,7 +1094,6 @@
                                 </LinearLayout>
 
 
-
                             </LinearLayout>
 
                         </LinearLayout>
@@ -1070,19 +1105,17 @@
                             android:orientation="horizontal">
 
 
-
                             <ImageView
                                 android:id="@+id/opponentPic4"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_margin="5dp"
-                                />
+                                android:layout_margin="5dp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_marginBottom="8dp"
                                 android:background="@drawable/insidecardviewlessradius"
@@ -1092,13 +1125,13 @@
                                     android:id="@+id/opponentName4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="#000000"
-                                    android:textSize="10dp" 
-                                    android:layout_marginTop="3dp"
                                     android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="3dp"
                                     android:fontFamily="@font/mouse_memoirs"
                                     android:text="Sachu"
-                                    android:textStyle="bold"/>
+                                    android:textColor="#000000"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -1142,6 +1175,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim34"
                                         android:layout_width="13dp"
@@ -1177,6 +1211,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/anim37"
                                         android:layout_width="13dp"
@@ -1232,8 +1267,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="1dp"
                                     android:layout_margin="2dp"
+                                    android:layout_marginTop="1dp"
                                     android:orientation="horizontal">
 
                                     <com.airbnb.lottie.LottieAnimationView
@@ -1271,6 +1306,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz34"
                                         android:layout_width="13dp"
@@ -1306,6 +1342,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="parent"
                                         app:lottie_speed="1" />
+
                                     <com.airbnb.lottie.LottieAnimationView
                                         android:id="@+id/animz37"
                                         android:layout_width="13dp"
@@ -1366,7 +1403,6 @@
                     </LinearLayout>
 
 
-
                 </LinearLayout>
 
 
@@ -1377,14 +1413,14 @@
                 android:id="@+id/cardView123"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:elevation="-2dp"
+                android:foreground="?selectableItemBackground"
                 android:scaleX="0.85"
                 android:scaleY="0.85"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:foreground="?selectableItemBackground"
                 app:cardBackgroundColor="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1408,7 +1444,7 @@
                         android:padding="15dp"
                         android:text=""
                         android:textColor="#ffffff"
-                        android:textSize="24dp" 
+                        android:textSize="24dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -1555,7 +1591,7 @@
                             android:scaleY="0.8"
                             android:text="50:50"
                             android:textColor="#000000"
-                            android:textSize="30dp" 
+                            android:textSize="30dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -1596,7 +1632,7 @@
 
                         android:text=""
                         android:textColor="#ffffff"
-                        android:textSize="20dp"  />
+                        android:textSize="20dp" />
 
                     <Button
                         android:id="@+id/button2"
@@ -1607,7 +1643,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text=""
                         android:textColor="#ffffff"
-                        android:textSize="20dp"  />
+                        android:textSize="20dp" />
 
                     <Button
                         android:id="@+id/button3"
@@ -1618,7 +1654,7 @@
                         android:fontFamily="@font/mouse_memoirs"
                         android:text=""
                         android:textColor="#ffffff"
-                        android:textSize="20dp"  />
+                        android:textSize="20dp" />
 
                     <Button
                         android:id="@+id/button4"
@@ -1630,7 +1666,7 @@
                         android:text=""
                         android:textColor="#ffffff"
 
-                        android:textSize="20dp"  />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
 
@@ -1650,7 +1686,7 @@
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:text="Next"
-                android:textSize="30dp" 
+                android:textSize="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />

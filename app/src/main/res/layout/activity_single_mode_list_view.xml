@@ -111,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mouse_memoirs"
-                            android:text="Choose among 20 categories and begin your quest!"
+                            android:text="Choose among 20 categories and begin your quest!\nComplete The Quiz Under 10 Mins With Utmost Accuracy!"
                             android:textColor="#000000"
                             android:textSize="13dp" 
                             android:textStyle="bold"

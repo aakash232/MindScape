@@ -22,10 +22,15 @@ public class songActivity {
 
 
     public void songStop(){
-        mediaPlayer.pause();
-        mediaPlayer.reset();
-        mediaPlayer.release();
-        mediaPlayer=null;
+        try{
+            mediaPlayer.pause();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer=null;
+        }catch (Exception e){
+
+        }
+
     }
 
     private void musicArray(){

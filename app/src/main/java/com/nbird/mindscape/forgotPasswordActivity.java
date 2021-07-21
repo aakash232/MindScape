@@ -21,6 +21,11 @@ public class forgotPasswordActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password2);

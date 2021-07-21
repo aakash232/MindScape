@@ -40,6 +40,11 @@ public class customQuizMainMenu extends AppCompatActivity {
     customQuizPropertiesSetter S;
     androidx.appcompat.widget.Toolbar toolbar;
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_quiz_main_menu);
@@ -85,7 +90,11 @@ public class customQuizMainMenu extends AppCompatActivity {
                 if(alertDialog.getWindow()!=null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -120,7 +129,12 @@ public class customQuizMainMenu extends AppCompatActivity {
                         });
 
                         String t=codeTextView.getText().toString();
-                        int p=Integer.parseInt(t);
+                        int p;
+                        try{
+                             p=Integer.parseInt(t);
+                        }catch (Exception e){
+                            p= -100;
+                        }
 
                         S=new customQuizPropertiesSetter();
                         myRef.child("CustomQuiz").child("0").child("QuizProperties").orderByChild("quizCode").equalTo(p).addListenerForSingleValueEvent(new ValueEventListener() {

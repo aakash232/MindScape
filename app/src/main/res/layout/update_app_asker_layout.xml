@@ -58,8 +58,8 @@
                 android:padding="10dp"
                 android:text="Please Update The App! \nA New Version Is Available on Play Store."
                 android:textColor="#000000"
-                android:textAlignment="center"
-                android:textSize="23dp"
+                android:textAlignment="textStart"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 />
 

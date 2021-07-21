@@ -55,30 +55,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                musicNav = MediaPlayer.create(mContext, R.raw.navclick);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
+
                 a=position+1;
                 switch (a){
                     case 1:
+                        music();
                         Intent intent = new Intent(mContext, singleModeListView.class);
                         intent.putExtra("position", a);
                         mContext.startActivity(intent);break;
                     case 2:
+                        music();
                         Intent intent123 = new Intent(mContext, oneVsOneChoiceActivity.class);
                         intent123.putExtra("position", a);
                         mContext.startActivity(intent123);break;
                     case 3:
+                        music();
                         Intent intent2 = new Intent(mContext, tournamentChoiceActicity.class);
                         intent2.putExtra("position", a);
                         mContext.startActivity(intent2);break;
                     case 4:
+                        music();
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
                         mContext.startActivity(intent4);break;
@@ -91,12 +87,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         }catch (Exception e){
 
                         }
-
+                        music();
                         Intent intent5 = new Intent(mContext, SongChoiceActivity.class);
                         intent5.putExtra("position", a);
 
                         mContext.startActivity(intent5);break;
                     case 6:
+                        music();
                         Intent intent6 = new Intent(mContext, customQuizMainMenu.class);
                         intent6.putExtra("position", a);
                         mContext.startActivity(intent6);break;
@@ -111,7 +108,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         }
 
 
-
+                        music();
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);
                         mContext.startActivity(intent1);break;
@@ -146,6 +143,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
 
+    }
+
+    public void music(){
+        musicNav = MediaPlayer.create(mContext, R.raw.navclick);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                try{
+                    musicNav.reset();
+                }catch (Exception e){
+
+                }
+                try{
+                    musicNav.release();
+                }catch (Exception e) {
+
+                }
+            }
+        });
     }
 
 }

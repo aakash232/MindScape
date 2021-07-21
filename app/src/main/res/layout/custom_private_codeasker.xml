@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/upianim"
+            app:lottie_rawRes="@raw/codeanim"
             app:lottie_speed="1" />
 
         <LinearLayout

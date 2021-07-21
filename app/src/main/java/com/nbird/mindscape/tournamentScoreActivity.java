@@ -554,9 +554,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                         if(playerNum==2){
                             k=0;
                         }else if(playerNum==3){
-                            k=2;
+                            k=3;
                         }else if(playerNum==4){
-                            k=4;
+                            k=6;
                         }
                         Countdownlast=new CountDownTimer(1000*k,1000){
                             @Override
@@ -901,6 +901,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
+                    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
                     myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -1076,7 +1077,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -3362,7 +3367,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -3476,7 +3485,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override

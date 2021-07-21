@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -74,6 +75,11 @@ public class prizeScoreActivity extends AppCompatActivity {
     TextView disDialog;
     int sets,type;
     List<prizeRecyclerHolder> lstExam123;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,7 +173,8 @@ public class prizeScoreActivity extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                prizeScoreActivity.super.onBackPressed();
+                Intent intent=new Intent(prizeScoreActivity.this,mainMenuActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }
@@ -205,7 +212,11 @@ public class prizeScoreActivity extends AppCompatActivity {
                 if(alertDialog.getWindow()!=null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
                 final prizeRecyclerAdapter myAdapter=new prizeRecyclerAdapter(prizeScoreActivity.this,lstExam123, alertDialog);
                     recyclerView.setLayoutManager(new GridLayoutManager(prizeScoreActivity.this,2));

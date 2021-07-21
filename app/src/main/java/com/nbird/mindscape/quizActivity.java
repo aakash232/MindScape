@@ -13,6 +13,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -106,7 +107,7 @@ public class quizActivity extends AppCompatActivity {
     int mainfinder=0;
     int myPosition=0;
     LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
-    ImageView myPic;
+    ImageView myPic,speakerImage;
     TextView myName;
 
     GridView gridView;
@@ -120,16 +121,57 @@ public class quizActivity extends AppCompatActivity {
     }
     songActivity songActivity;
 
+
+    public void songStopperAndResumer(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongRemember", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
+
+        final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
+        if(songDetect){
+            songActivity=new songActivity(this);
+            songActivity.startMusic();
+        }else{
+            Speaker.setBackgroundResource(R.drawable.usedicon);
+            speakerImage.setBackgroundResource(R.drawable.speakeroff);
+        }
+
+        cardViewSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean songDetect9 = songStopper.getBoolean("IsPlaying",true);
+                if(songDetect9){
+                    songActivity.songStop();
+                    Speaker.setBackgroundResource(R.drawable.usedicon);
+                    speakerImage.setBackgroundResource(R.drawable.speakeroff);
+                    editorsongStopper.putBoolean("IsPlaying", false);
+                    editorsongStopper.commit();
+                }else{
+                    songActivity=new songActivity(quizActivity.this);
+                    songActivity.startMusic();
+                    Speaker.setBackgroundResource(R.drawable.whitewithblackstroke);
+                    speakerImage.setBackgroundResource(R.drawable.speakeron);
+                    editorsongStopper.putBoolean("IsPlaying", true);
+                    editorsongStopper.commit();
+                }
+
+
+
+
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
         loadAds();
+        songStopperAndResumer();
 
-
-        songActivity=new songActivity(this);
-        songActivity.startMusic();
 
         questionTextView=findViewById(R.id.question);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -192,25 +234,32 @@ public class quizActivity extends AppCompatActivity {
             switch (category){
                 case 1:
                 case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                      setNumber = rand.nextInt(299)+1;break;
+                      setNumber = rand.nextInt(299)+1;
+                    fireBaseData(setNumber);break;
                 case 2: case 14:
-                    setNumber = rand.nextInt(499)+1;break;
+                    setNumber = rand.nextInt(499)+1;
+                    fireBaseData(setNumber);break;
                 case 7:
-                    setNumber = rand.nextInt(401)+1;break;
+                    setNumber = rand.nextInt(401)+1;
+                    fireBaseData(setNumber);break;
                 case 8: case 18:
-                    setNumber = rand.nextInt(339)+1;break;
+                    setNumber = rand.nextInt(339)+1;
+                    fireBaseData(setNumber);break;
                 case 13: case 15: case 16:
-                    setNumber = rand.nextInt(249)+1;break;
+                    setNumber = rand.nextInt(249)+1;
+                    fireBaseData(setNumber);break;
                 case 19:
-                    setNumber = rand.nextInt(399)+1;break;
+                    setNumber = rand.nextInt(399)+1;
+                    fireBaseData(setNumber);break;
                 default:
-                    setNumber = rand.nextInt(199)+1;break;
+                    setNumber = rand.nextInt(6326)+1;
+                    fireBaseData2(setNumber);break;
             }
             //NEED TO CHANGE HERE
               //NEED TO CHANGE HERE
 
 
-            fireBaseData(setNumber);
+
         }
 
 
@@ -338,7 +387,11 @@ public class quizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -433,6 +486,9 @@ public class quizActivity extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -452,7 +508,11 @@ public class quizActivity extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -484,7 +544,11 @@ public class quizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -551,7 +615,11 @@ public class quizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -597,9 +665,12 @@ public class quizActivity extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -607,7 +678,11 @@ public class quizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -641,7 +716,11 @@ public class quizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -659,7 +738,203 @@ public class quizActivity extends AppCompatActivity {
 
     }
 
+    public void fireBaseData2(int setNumber){
+        myRef.child("NormalQuizBIGJSON").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                list.add(snapshot.getValue(questionHolder.class));
+                num++;
+
+                if(num==10) {
+                    if (list.size() > 0) {
+                        for (int i = 0; i < 4; i++) {
+                            linearLayout.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View view) {
+                                    try{
+                                        checkAnswer((Button) view);
+                                    }catch (Exception e){
+                                        //        Toast.makeText(quizActivity.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                        }
+                        playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+
+                        nextButton.setOnClickListener(new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                            @Override
+                            public void onClick(View view) {
+                                final MediaPlayer musicNav;
+                                musicNav = MediaPlayer.create(quizActivity.this, R.raw.buttonmusic);
+                                musicNav.start();
+                                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mediaPlayer) {
+                                        musicNav.reset();
+                                        musicNav.release();
+                                    }
+                                });
+
+                                nextButton.setEnabled(false);
+                                nextButton.setAlpha(0.7f);
+                                enableOption(true);
+                                position++;
+                                LLTrueManupulator();
+
+
+
+                                if(swapnum==0){
+                                    if (position == 10) {
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                startActivity(scoreIntent);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
+
+                                        }
+
+                                        Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                        scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("imageurl",imageurl);
+                                        startActivity(scoreIntent);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                        finish();
+                                        return;
+                                    }
+
+                                }else {
+                                    if (position == 11) {
+
+
+
+                                        mInterstitialAd.setAdListener(new AdListener(){
+                                            public void onAdClosed(){
+                                                super.onAdClosed();
+                                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                                Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                                scoreIntent.putExtra("score", score);
+                                                scoreIntent.putExtra("lifeline",lifelineSum);
+                                                scoreIntent.putExtra("minutes",minutes);
+                                                scoreIntent.putExtra("seconds",second);
+                                                scoreIntent.putExtra("minutestext",minutestext);
+                                                scoreIntent.putExtra("secondtext",secondtext);
+                                                scoreIntent.putExtra("milliholder",milliHolder);
+                                                scoreIntent.putExtra("category",category);
+                                                scoreIntent.putExtra("imageurl",imageurl);
+                                                startActivity(scoreIntent);
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();}
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                                finish();
+                                            }
+
+                                        });
+
+                                        if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
+                                            mInterstitialAd.show();
+                                            return;
+                                        }
+
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
+
+                                        }
+
+
+                                        Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+                                        scoreIntent.putExtra("score", score);
+                                        scoreIntent.putExtra("lifeline",lifelineSum);
+                                        scoreIntent.putExtra("minutes",minutes);
+                                        scoreIntent.putExtra("seconds",second);
+                                        scoreIntent.putExtra("minutestext",minutestext);
+                                        scoreIntent.putExtra("secondtext",secondtext);
+                                        scoreIntent.putExtra("category",category);
+                                        scoreIntent.putExtra("milliholder",milliHolder);
+                                        scoreIntent.putExtra("imageurl",imageurl);
+                                        startActivity(scoreIntent);
+                                        if(countDownTimer!=null){
+                                            countDownTimer.cancel();}
+                                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                        finish();
+                                        return;
+                                    }
+                                }
+
+                                count = 0;
+
+                                playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+
+                            }
+                        });
+                    } else {
+                        finish();
+                        Toast.makeText(quizActivity.this, "No Questions", Toast.LENGTH_SHORT).show();
+
+                    }
+                    loadingDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(quizActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                loadingDialog.dismiss();
+                finish();
+            }
+        });
+    }
 
     public void fireBaseData(int setNumber){
         myRef.child("SETS").child(String.valueOf(category)).child("questions").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -728,11 +1003,7 @@ public class quizActivity extends AppCompatActivity {
                                                 scoreIntent.putExtra("category",category);
                                                 scoreIntent.putExtra("imageurl",imageurl);
                                                 startActivity(scoreIntent);
-                                                try{
-                                                    songActivity.songStop();
-                                                }catch (Exception e){
 
-                                                }
                                                 if(countDownTimer!=null){
                                                     countDownTimer.cancel();}
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
@@ -742,6 +1013,11 @@ public class quizActivity extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -775,11 +1051,7 @@ public class quizActivity extends AppCompatActivity {
                                     if (position == 11) {
 
 
-                                        try{
-                                            songActivity.songStop();
-                                        }catch (Exception e){
 
-                                        }
                                         mInterstitialAd.setAdListener(new AdListener(){
                                             public void onAdClosed(){
                                                 super.onAdClosed();
@@ -804,6 +1076,11 @@ public class quizActivity extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -1164,8 +1441,44 @@ public class quizActivity extends AppCompatActivity {
 
             }
             public void onFinish() {
-
                 Toast.makeText(quizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+
+                        Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
+
+                        scoreIntent.putExtra("score", score);
+                        scoreIntent.putExtra("lifeline",lifelineSum);
+                        scoreIntent.putExtra("minutes",minutes);
+                        scoreIntent.putExtra("seconds",second);
+                        scoreIntent.putExtra("minutestext",minutestext);
+                        scoreIntent.putExtra("secondtext",secondtext);
+                        scoreIntent.putExtra("milliholder",milliHolder);
+                        scoreIntent.putExtra("category",category);
+                        scoreIntent.putExtra("imageurl",imageurl);
+                        startActivity(scoreIntent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
+                        finish();
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    try{
+                        songActivity.songStop();
+                    }catch (Exception e){
+
+                    }
+                    mInterstitialAd.show();
+                    return;
+                }
+
+
                 Intent scoreIntent = new Intent(quizActivity.this, scoreActivity.class);
                 try{
                     songActivity.songStop();
@@ -1328,7 +1641,11 @@ public class quizActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

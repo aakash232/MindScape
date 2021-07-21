@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="Event Time!"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:layout_margin="5dp"
                     android:textSize="25dp"
@@ -95,7 +95,7 @@
                     android:fontFamily="@font/mouse_memoirs"
                     android:text="Play Event quizzes and GET A CHANCE TO WIN CASH PRIZES! \nAce the quiz to be on top and get rewarded. Yay!"
                     android:textColor="@color/black"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textSize="15dp" />
 
 

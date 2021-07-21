@@ -234,7 +234,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/mouse_memoirs"
-                        android:text="A sophomore interested enough in computers to learn coding! Here comes our first project as a team. We learnt a lot of things ranging from the technicalities to our sociability. Feel free to mail me anytime😇.Looking forward to many happy projects ahead. Thank you xx.Email:aakashtyagi232@gmail.com"
+                        android:text="A sophomore interested enough in computers to learn coding! Here comes our second project as a team. We learnt a lot of things ranging from the technicalities to our sociability. Feel free to mail me anytime😇.Looking forward to many happy projects ahead. Thank you xx.Email:aakashtyagi232@gmail.com"
                         android:textColor="#E4E4E4"
                         android:textSize="13dp"
                         android:textStyle="normal" />
@@ -316,7 +316,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/mouse_memoirs"
-                        android:text="An undergrad Data Analyst. Presenting you all our very first project. Working with team and building this app was a wonderful experience in a whole new field. Hope you all like it! You can mail me your thoughts or any suggestions. Email-snehagul2309@gmail.com"
+                        android:text="Presenting you all our second project. Working with team and building this app was a wonderful experience in a whole new field. Hope you all like it! You can mail me your thoughts or any suggestions. Email-snehagul2309@gmail.com"
                         android:textColor="#E4E4E4"
                         android:textSize="13dp"
                         android:textStyle="normal" />

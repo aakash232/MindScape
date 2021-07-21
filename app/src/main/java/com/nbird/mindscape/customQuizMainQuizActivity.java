@@ -37,6 +37,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -102,6 +104,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
     int cat;
     String key;
     songActivity songActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -327,7 +330,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -421,6 +428,9 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -440,7 +450,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -472,7 +486,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -517,9 +535,12 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -527,7 +548,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -561,7 +586,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -658,7 +687,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                             if(alertDialog.getWindow()!=null){
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
                                             view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -773,7 +806,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                             if(alertDialog.getWindow()!=null){
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
                                             view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -1097,7 +1134,11 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -1149,50 +1190,61 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
 
     }
 
-    public void expertAdviceImageManupulator(){     //Aakash changes in this functions are to be done
+    public void expertAdviceImageManupulator() {
         Random rand = new Random();
-        int num = rand.nextInt(11)+1;
+        int num = rand.nextInt(11) + 1;
 
-        switch (num){
-            case 1:
+        switch (num) {
+            case 1:               //If possible, avatars can match the facial descriptions
                 expertImage.setBackgroundResource(R.drawable.expert1female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText(" Dorjana Sirola: Highest woman scorer in World Quizzing Championship, Croatian linguist and anglicist! is Expert for the day");
+                break;            //white complexion,short hair
             case 2:
                 expertImage.setBackgroundResource(R.drawable.expert2male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Dr.Neil deGrasse Tyson: Astrophysicist, Planetory scientist, Author and Science communicator! is Expert for the day");
+                break;            //Dark complexion
             case 3:
                 expertImage.setBackgroundResource(R.drawable.expert3male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Kevin Ashman: Six times World Quizzing Championship winner and Five times British Quizing Champion! is Expert for the day");
+                break;            //white complexion
             case 4:
                 expertImage.setBackgroundResource(R.drawable.expert4male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Derek O'Brian: Quiz Master, Indian politician and television personality! is Expert for the day");
+                break;            //white complexion, spects
             case 5:
                 expertImage.setBackgroundResource(R.drawable.expert5male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Pat Gibson: Multiple World champion in quizzing, Software developer and professional Irish quizzer! is Expert for the day");
+                break;             // white complexion, spectacles
             case 6:
                 expertImage.setBackgroundResource(R.drawable.expert6female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Elsie Kaufmann: Quiz mistress, Ghanaian academic and Biomedical engineer! is Expert for the day.");
+                break;          //Dark complexion
             case 7:
                 expertImage.setBackgroundResource(R.drawable.expert7male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Olav Bjortomt: Four time World champion and English international quiz star player! is Expert for the day");
+                break;          //White complexion
             case 8:
                 expertImage.setBackgroundResource(R.drawable.expert8female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Anne Hegerty: English quizzer and famous UK television personality! is Expert for the day");
+                break;              //White complexion,short hair,fat face
             case 9:
                 expertImage.setBackgroundResource(R.drawable.expert9female);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Seema Chari: Quiz mistress, author, anchor and knowledge media professional! is Expert for the day");
+                break;          //curly hair
             case 10:
                 expertImage.setBackgroundResource(R.drawable.expert10male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Siddhartha Basu: Father of Indian television quizzing, producer-director and quiz show host! is Expert for the day");
+                break;          //almost no hair,fair complexion
             case 11:
                 expertImage.setBackgroundResource(R.drawable.expert11male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Tom Trogh: Belgian quiz player and European quizzing champion! is Expert for the day");
+                break;            //White complexion
             case 12:
                 expertImage.setBackgroundResource(R.drawable.expert12male);
-                titleText.setText("Dr. Harry (PhD) is Expert for the day");break;
+                titleText.setText("Ravi Avva: 2020 World Quizzing champion, Singaporean hailing from India and an Engineer! is Expert for the day");
+                break;          //Fair complexion,spectacles
 
         }
-
 
     }
 

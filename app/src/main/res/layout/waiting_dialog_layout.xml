@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:id="@+id/cardview_id"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:scaleX="0.9"
+    android:scaleY="0.9"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="5dp"
@@ -13,15 +15,29 @@
     android:layout_marginBottom="5dp"
     app:ignore="NamespaceTypo">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        shimmer:adSize="SMART_BANNER"
+        shimmer:adUnitId="@string/bannerID"
+        shimmer:layout_constraintEnd_toEndOf="@+id/cardView7"
+        shimmer:layout_constraintStart_toStartOf="@+id/cardView7"
+        shimmer:layout_constraintTop_toTopOf="parent">
+
+    </com.google.android.gms.ads.AdView>
+
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        cardview:cardCornerRadius="5dp"
+        android:id="@+id/cardView7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
+        cardview:cardCornerRadius="5dp"
         cardview:layout_constraintBottom_toBottomOf="parent"
         cardview:layout_constraintEnd_toEndOf="parent"
         cardview:layout_constraintStart_toStartOf="parent"
-        cardview:layout_constraintTop_toTopOf="parent">
+        shimmer:layout_constraintTop_toBottomOf="@+id/adView">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -30,19 +46,30 @@
             android:background="@drawable/whitewithblackstroke"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/cancelButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cancelicon123"
+                android:layout_gravity="right"
+               android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/backlitemodeanim"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:elevation="-5dp"
-                    android:scaleType="centerCrop"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
+                    android:elevation="-5dp"
+                    android:scaleType="centerCrop"
                     cardview:lottie_autoPlay="true"
                     cardview:lottie_loop="true"
                     cardview:lottie_rawRes="@raw/waitinganim"
@@ -51,21 +78,20 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="@drawable/blackwithwhitestroke"
-                    android:layout_height="wrap_content">
+                    android:background="@drawable/blackwithwhitestroke">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="17dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mouse_memoirs"
                         android:layout_margin="10dp"
-                        android:text=" Waiting For Opponent to Complete the Quiz "/>
+                        android:fontFamily="@font/mouse_memoirs"
+                        android:text=" Waiting For Opponent to Complete the Quiz "
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -73,7 +99,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
 
                 <LinearLayout
@@ -138,25 +163,27 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
+
                                 <TextView
                                     android:id="@+id/ratio"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
                                     android:text="Correct/Wrong : 4/6"
                                     android:textColor="#000000"
-                                    android:layout_margin="5dp"
-                                    android:textSize="12dp"
-                                    android:fontFamily="@font/mouse_memoirs"/>
+                                    android:textSize="15dp" />
+
                                 <TextView
                                     android:id="@+id/timeTaken"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="right"
                                     android:text="Time Taken : 1min 3 sec"
                                     android:textColor="#000000"
-                                    android:layout_margin="5dp"
-                                    android:gravity="right"
-                                    android:textSize="12dp"
-                                    android:fontFamily="@font/mouse_memoirs"/>
+                                    android:textSize="15dp" />
 
                             </LinearLayout>
 
@@ -164,28 +191,29 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
+
                                 <TextView
                                     android:id="@+id/accuracy"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                   android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
                                     android:text="Accuracy : 60%"
                                     android:textColor="#000000"
-                                    android:layout_margin="5dp"
-                                    android:textSize="12dp"
-                                    android:fontFamily="@font/mouse_memoirs"/>
+                                    android:textSize="15dp" />
+
                                 <TextView
                                     android:id="@+id/lifeLines"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/mouse_memoirs"
+                                    android:gravity="right"
                                     android:text="Total Life-Lines : 2/4"
                                     android:textColor="#000000"
-                                    android:layout_margin="5dp"
-                                    android:gravity="right"
-                                    android:textSize="12dp"
-                                    android:fontFamily="@font/mouse_memoirs"/>
+                                    android:textSize="15dp" />
 
                             </LinearLayout>
-
 
 
                         </LinearLayout>
@@ -198,21 +226,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/whitewithblackstroke"
-                android:layout_height="wrap_content">
+                android:background="@drawable/whitewithblackstroke">
 
                 <LinearLayout
                     android:id="@+id/dotLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
                     android:layout_gravity="right"
+                    android:layout_marginEnd="30dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="@id/slideViewPager"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -222,22 +247,21 @@
                 </LinearLayout>
 
 
-
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmer_view_container"
-                    shimmer:duration="800"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
                     android:layout_margin="10dp"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dotLayout"
                     cardview:layout_constraintBottom_toBottomOf="parent"
                     cardview:layout_constraintEnd_toEndOf="parent"
                     cardview:layout_constraintStart_toStartOf="parent"
-                    cardview:layout_constraintTop_toTopOf="parent">
+                    cardview:layout_constraintTop_toTopOf="parent"
+                    shimmer:duration="800">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -265,8 +289,6 @@
 
 
                 </androidx.viewpager.widget.ViewPager>
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,11 @@ public class HelpGuide1 extends AppCompatActivity {
     Context context;
     boolean flag=false;
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

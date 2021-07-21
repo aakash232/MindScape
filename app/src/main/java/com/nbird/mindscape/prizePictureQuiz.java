@@ -8,6 +8,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -306,7 +308,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -400,6 +406,9 @@ public class prizePictureQuiz extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -419,7 +428,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -451,7 +464,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -488,6 +505,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                     nextButton.setAlpha(0.7f);
                     enableOption(true);
                     position++;
+
                     LLTrueManupulator();
 
 
@@ -517,7 +535,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -562,9 +584,12 @@ public class prizePictureQuiz extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -572,7 +597,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -606,7 +635,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -714,11 +747,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             public void onAdClosed(){
                                                 super.onAdClosed();
                                                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                                                try{
-                                                    songActivity.songStop();
-                                                }catch (Exception e){
 
-                                                }
                                                 Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                                                 scoreIntent.putExtra("score", score);
                                                 scoreIntent.putExtra("lifeline",lifelineSum);
@@ -743,6 +772,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                                         });
 
                                         if(mInterstitialAd.isLoaded()){
+                                            try{
+                                                songActivity.songStop();
+                                            }catch (Exception e){
+
+                                            }
                                             mInterstitialAd.show();
                                             return;
                                         }
@@ -1035,7 +1069,7 @@ public class prizePictureQuiz extends AppCompatActivity {
     public void countDownTimerFun(){   //Clock Algo
         countDownTimer=new CountDownTimer(60000*10, 1000) {
 
-
+            CardView Timer = (CardView) findViewById(R.id.cardView3);
             public void onTick(long millisUntilFinished) {
                 milliHolder=millisUntilFinished;
                 if(second==60){
@@ -1061,6 +1095,26 @@ public class prizePictureQuiz extends AppCompatActivity {
                     timerText.setText(" Timer "+minutestext+":"+secondtext+" ");
                     second++;
                 }
+                if(minutes==9 && second>45){
+
+                    timerText.setTextColor(getResources().getColor(R.color.av_red));
+
+                    //Continuous zoomIn - zoomOut
+                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(Timer, "scaleX", 0.9f, 1f);
+                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(Timer, "scaleY", 0.9f, 1f);
+
+                    scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    scaleY.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleY.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    AnimatorSet scaleAnim = new AnimatorSet();
+                    scaleAnim.setDuration(500);
+                    scaleAnim.play(scaleX).with(scaleY);
+
+                    scaleAnim.start();
+                }
             }
             public void onFinish() {
 
@@ -1068,11 +1122,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                     public void onAdClosed(){
                         super.onAdClosed();
                         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                        try{
-                            songActivity.songStop();
-                        }catch (Exception e){
 
-                        }
                         Toast.makeText(prizePictureQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                         Intent scoreIntent = new Intent(prizePictureQuiz.this, prizeScoreActivity.class);
                         scoreIntent.putExtra("score", score);
@@ -1097,6 +1147,11 @@ public class prizePictureQuiz extends AppCompatActivity {
                 });
 
                 if(mInterstitialAd.isLoaded()){
+                    try{
+                        songActivity.songStop();
+                    }catch (Exception e){
+
+                    }
                     mInterstitialAd.show();
                     return;
                 }
@@ -1168,7 +1223,11 @@ public class prizePictureQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -121,15 +123,54 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
         Runtime.getRuntime().gc();
     }
+    public void songStopperAndResumer(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongRemember", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
+        final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
+        if(songDetect){
+            songActivity=new songActivity(this);
+            songActivity.startMusic();
+        }else{
+            Speaker.setBackgroundResource(R.drawable.usedicon);
+            speakerImage.setBackgroundResource(R.drawable.speakeroff);
+        }
+
+        cardViewSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean songDetect9 = songStopper.getBoolean("IsPlaying",true);
+                if(songDetect9){
+                    songActivity.songStop();
+                    Speaker.setBackgroundResource(R.drawable.usedicon);
+                    speakerImage.setBackgroundResource(R.drawable.speakeroff);
+                    editorsongStopper.putBoolean("IsPlaying", false);
+                    editorsongStopper.commit();
+                }else{
+                    songActivity=new songActivity(tournamentBuzzerNormalQuiz.this);
+                    songActivity.startMusic();
+                    Speaker.setBackgroundResource(R.drawable.whitewithblackstroke);
+                    speakerImage.setBackgroundResource(R.drawable.speakeron);
+                    editorsongStopper.putBoolean("IsPlaying", true);
+                    editorsongStopper.commit();
+                }
+
+
+
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_buzzer_normal_quiz);
 
         loadAds();
-         songActivity=new songActivity(this);
-        songActivity.startMusic();
+        songStopperAndResumer();
 
         partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
         party2=(LottieAnimationView) findViewById(R.id.party2);
@@ -841,11 +882,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             public void onAdClosed(){
                 super.onAdClosed();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                try{
-                    songActivity.songStop();
-                }catch (Exception e){
 
-                }
                 Intent scoreIntent = new Intent(tournamentBuzzerNormalQuiz.this, tournamentBuzzerScoreCard.class);
                 scoreIntent.putExtra("score", myScore);
                 scoreIntent.putExtra("numberOfPlayers",numberOfPlayers);
@@ -880,6 +917,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         });
 
         if(mInterstitialAd.isLoaded()){
+            try{
+                songActivity.songStop();
+            }catch (Exception e){
+
+            }
             mInterstitialAd.show();
             return;
         }
@@ -2534,7 +2576,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

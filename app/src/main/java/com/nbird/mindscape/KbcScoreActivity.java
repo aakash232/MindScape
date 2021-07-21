@@ -27,7 +27,11 @@ public class KbcScoreActivity extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     public void home(View view){
         final MediaPlayer musicNav;
         musicNav = MediaPlayer.create(KbcScoreActivity.this, R.raw.finalbuttonmusic);

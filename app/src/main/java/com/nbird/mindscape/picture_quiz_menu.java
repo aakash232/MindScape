@@ -193,7 +193,11 @@ public class picture_quiz_menu extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
 
                 joinButton.setOnClickListener(new View.OnClickListener() {
@@ -414,7 +418,11 @@ public class picture_quiz_menu extends AppCompatActivity {
         if (alertDialog.getWindow() != null) {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -1322,7 +1330,11 @@ public class picture_quiz_menu extends AppCompatActivity {
                     }
                 });
                 roomCodeString=roomCodeEditText.getText().toString();
-                codeInteger= Integer.parseInt(roomCodeString);
+                try{
+                    codeInteger= Integer.parseInt(roomCodeString);
+                }catch (Exception e){
+                    codeInteger= -100;
+                }
                 joinTunedFunction();
 
             }
@@ -1394,7 +1406,11 @@ public class picture_quiz_menu extends AppCompatActivity {
                                             if (alertDialog.getWindow() != null) {
                                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                                             }
-                                            alertDialog.show();
+                                            try{
+                                                alertDialog.show();
+                                            }catch (Exception e){
+
+                                            }
 
 
                                             cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -1515,6 +1531,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                             }
                                                         });
                                                     }catch (Exception e){
+                                                        levelManupulation();
                                                         highestScore.setText(" Higest Score : null");
                                                         totalTime.setText(" Total Time : null ");
                                                         oppoAccu.setText(" Accuracy : null");
@@ -1598,7 +1615,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                         roomCodeGenerator();
                     }else{
                         loadingDialog.dismiss();
-                        createFunction();
+                        createFunction(roomCode);
                     }
                 }catch (Exception e){
 
@@ -1614,11 +1631,12 @@ public class picture_quiz_menu extends AppCompatActivity {
     }
 
 
-    public void createFunction(){
+    public void createFunction(final int roomCode3){
 
 
 
-        onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), roomCode);
+        onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), this.roomCode);
+        shareText.setText(" Room Code : "+ this.roomCode);
         myRef.child("oneVsoneLocalPicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -1650,7 +1668,11 @@ public class picture_quiz_menu extends AppCompatActivity {
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
 
                 cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -1681,7 +1703,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                     }
                 });
 
-                shareText.setText(" Room Code : "+roomCode);
+
 
 
 
@@ -1691,7 +1713,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                         Intent shareIntent=new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plane");
-                        String shareBody="MindScape\n"+userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+roomCode+".";
+                        String shareBody="MindScape\n"+userName+" Has Created A Room To Play With You.\n"+"Here's Your Room Code : "+ roomCode +".";
                         String sharesub="MindScape";
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
                         shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
@@ -1756,7 +1778,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                                                         sumationOfScore = snapshot.getValue(Integer.class);
-                                                                        levelManupulation99();
+                                                                        levelManupulation99(sumationOfScore);
 
                                                                     }
 
@@ -1791,6 +1813,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                             }
                                         });
                                     }catch (Exception e){
+                                        levelManupulation99(0);
                                         highestScore.setText(" Higest Score : null");
                                         totalTime.setText(" Total Time : null ");
                                         oppoAccu.setText(" Accuracy : null");
@@ -1883,35 +1906,35 @@ public class picture_quiz_menu extends AppCompatActivity {
 
 
 
-    public void levelManupulation99(){
+    public void levelManupulation99(int sumationOfScorell){
 
-        if(sumationOfScore<100000){
-            if(sumationOfScore<50000){
+        if(sumationOfScorell <100000){
+            if(sumationOfScorell <50000){
                 levelText99.setText(" Lv. 1 ");
             }else{
                 levelText99.setText(" Lv. 2 ");
             }
         }else{
             int holder;
-            holder=sumationOfScore/50000;
+            holder= sumationOfScorell /50000;
             levelText99.setText(" Lv. "+holder+" ");
         }
 
-        if(sumationOfScore<50000){
+        if(sumationOfScorell <50000){
             batch99.setBackgroundResource(R.drawable.blackiron);
-        }else if(sumationOfScore<200000){
+        }else if(sumationOfScorell <200000){
             batch99.setBackgroundResource(R.drawable.bronze);
-        }else if(sumationOfScore<800000){
+        }else if(sumationOfScorell <800000){
             batch99.setBackgroundResource(R.drawable.silver);
-        }else if(sumationOfScore<1800000){
+        }else if(sumationOfScorell <1800000){
             batch99.setBackgroundResource(R.drawable.gold);
-        }else if(sumationOfScore<3000000){
+        }else if(sumationOfScorell <3000000){
             batch99.setBackgroundResource(R.drawable.platinum);
-        }else if(sumationOfScore<4000000){
+        }else if(sumationOfScorell <4000000){
             batch99.setBackgroundResource(R.drawable.diamond);
-        }else if(sumationOfScore<8000000){
+        }else if(sumationOfScorell <8000000){
             batch99.setBackgroundResource(R.drawable.amethyst);
-        }else if(sumationOfScore<12000000){
+        }else if(sumationOfScorell <12000000){
             batch99.setBackgroundResource(R.drawable.master);
         }else{
             batch99.setBackgroundResource(R.drawable.king);

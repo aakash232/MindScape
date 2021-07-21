@@ -296,6 +296,7 @@
                     cardview:cardBackgroundColor="@color/transparent"
                     cardview:cardElevation="5dp"
                     shimmer:layout_constraintEnd_toEndOf="@+id/shimmer40"
+                    shimmer:layout_constraintStart_toStartOf="@+id/shimmer40"
                     shimmer:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout

@@ -94,6 +94,11 @@ public class scoreActivity extends AppCompatActivity {
     barGroupHolder man;
     int mainfinder;
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
@@ -377,6 +382,7 @@ public class scoreActivity extends AppCompatActivity {
 
                                                                     }
                                                                 });
+
 
 
                                                             }
@@ -735,6 +741,7 @@ public class scoreActivity extends AppCompatActivity {
 
             // ...
         });
+
 
     }
     @Override

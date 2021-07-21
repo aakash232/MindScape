@@ -10,6 +10,40 @@
     tools:context=".quizActivity">
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSpeaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:foreground="?selectableItemBackground"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/Speaker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/whitewithblackstroke"
+            android:elevation="10dp">
+
+
+            <ImageView
+                android:id="@+id/speakerImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/speakeron" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/backlitemodeanim"
@@ -347,13 +381,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="160dp"
         android:layout_weight="1"
         android:clickable="true"
         android:elevation="-2dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:foreground="?selectableItemBackground"
-        android:scaleX="0.85"
-        android:scaleY="0.85"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView46"
@@ -370,7 +405,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="55dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:gravity="center"
                 android:padding="15dp"
@@ -423,9 +457,10 @@
                 android:background="@drawable/whitewithblackstroke">
 
                 <ImageView
-                    android:layout_width="79dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/kaal"
+
                     android:scaleX="0.85"
                     android:scaleY="0.7" />
 

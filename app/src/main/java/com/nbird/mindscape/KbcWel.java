@@ -11,7 +11,11 @@ import android.os.Handler;
 public class KbcWel extends AppCompatActivity {
     MediaPlayer kbcmusic;
     private static int SPLASH_TIME_OUT = 5500;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class KbcWel extends AppCompatActivity {
         kbcmusic = MediaPlayer.create(KbcWel.this,R.raw.kbc_mus);
         if(kbcmusic != null){
             kbcmusic.start();
+            kbcmusic.setVolume(0.1f,0.1f);
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -62,10 +67,10 @@ public class KbcWel extends AppCompatActivity {
 
     }
     public void onBackPressed() {
-        Intent intent=new Intent(KbcWel.this,mainMenuActivity.class);
+       /* Intent intent=new Intent(KbcWel.this,mainMenuActivity.class);
         intent.putExtra("mainfinder",1);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-        finish();
+        finish();*/
 
     }
 }

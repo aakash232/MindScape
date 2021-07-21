@@ -10,8 +10,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -40,6 +43,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -143,14 +148,55 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     int setNumber,isHostFinal;
     long stopperLong;
     songActivity songActivity;
+    int finisherNum=0;
     ValueEventListener listenerFast0,listenerFast1,listenerFast2,listenerFast3,listenerFast4,listenerFast5,listenerFast6,listenerFast7,listenerFast8,listenerFast9,listenerFast10,listenerFast11,listenerFast12;
+    public void songStopperAndResumer(){
+        final SharedPreferences songStopper = this.getSharedPreferences("SongRemember", 0);
+        final SharedPreferences.Editor editorsongStopper = songStopper.edit();
+
+        final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
+        if(songDetect){
+            songActivity=new songActivity(this);
+            songActivity.startMusic();
+        }else{
+            Speaker.setBackgroundResource(R.drawable.usedicon);
+            speakerImage.setBackgroundResource(R.drawable.speakeroff);
+        }
+
+        cardViewSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean songDetect9 = songStopper.getBoolean("IsPlaying",true);
+                if(songDetect9){
+                    songActivity.songStop();
+                    Speaker.setBackgroundResource(R.drawable.usedicon);
+                    speakerImage.setBackgroundResource(R.drawable.speakeroff);
+                    editorsongStopper.putBoolean("IsPlaying", false);
+                    editorsongStopper.commit();
+                }else{
+                    songActivity=new songActivity(onevsoneQuizActivity.this);
+                    songActivity.startMusic();
+                    Speaker.setBackgroundResource(R.drawable.whitewithblackstroke);
+                    speakerImage.setBackgroundResource(R.drawable.speakeron);
+                    editorsongStopper.putBoolean("IsPlaying", true);
+                    editorsongStopper.commit();
+                }
+
+
+
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onevsone_quiz);
 
-         songActivity=new songActivity(this);
-        songActivity.startMusic();
+       songStopperAndResumer();
 
         builder=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -417,7 +463,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -532,6 +582,9 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -551,7 +604,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -583,7 +640,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -648,7 +709,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -692,9 +757,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     builder.setView(view1);
                     builder.setCancelable(false);
                     titleText=((TextView) view1.findViewById(R.id.textTitle));
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
+                    AdView mAdView = view1.findViewById(R.id.adView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 
@@ -702,7 +770,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -736,7 +808,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -824,16 +900,6 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         }catch (Exception e){
 
         }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1211,7 +1277,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
     public void countDownTimerFun47(){   //Clock Algo
         countDownTimer47=new CountDownTimer(60000*3, 1000) {
-
+            CardView Timer = (CardView) findViewById(R.id.cardView3);
 
             public void onTick(long millisUntilFinished) {
 
@@ -1241,70 +1307,34 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     second--;
                 }
 
+                if(minutes==0 && second<=15){
+
+                    timerText.setTextColor(getResources().getColor(R.color.av_red));
+
+                    //Continuous zoomIn - zoomOut
+                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(Timer, "scaleX", 0.9f, 1f);
+                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(Timer, "scaleY", 0.9f, 1f);
+
+                    scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    scaleY.setRepeatCount(ObjectAnimator.INFINITE);
+                    scaleY.setRepeatMode(ObjectAnimator.REVERSE);
+
+                    AnimatorSet scaleAnim = new AnimatorSet();
+                    scaleAnim.setDuration(500);
+                    scaleAnim.play(scaleX).with(scaleY);
+
+                    scaleAnim.start();
+                }
+
             }
             public void onFinish() {
                 Toast.makeText(onevsoneQuizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
-                Intent scoreIntent = new Intent(onevsoneQuizActivity.this, onevsoneOnlineScoreCard.class);
-
-               // myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).removeValue();
-              //  myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeValue();
-             //   myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
-                opponentUID=getIntent().getStringExtra("opponentUID");
-                opponentimageUrl=getIntent().getStringExtra("opponentImageUrl");
-                opponentUsername=getIntent().getStringExtra("opponentUserName");
-                myProPicUrl=getIntent().getStringExtra("mypropic");
-                myName=getIntent().getStringExtra("myName");
-                myRef.child("User").child(opponentUID).child("myStatus").removeEventListener(listner);
-             //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
-                if(countDownTimerMine!=null){
-                    countDownTimerMine.cancel();}
-                if(countDownTimer47!=null){
-                    countDownTimer47.cancel();}
-                if(countDownTimer50!=null){
-                    countDownTimer50.cancel();}
-                if(countDownTimer!=null){
-                    countDownTimer.cancel();
+                if(finisherNum==0){
+                    waitingFunction();
                 }
 
-                try {
-                    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).child("isComplete").removeEventListener(listner1);
-                }catch (Exception e){
-
-                }
-                try{
-                    songActivity.songStop();
-                }catch (Exception e){
-
-                }
-
-              //  Toast.makeText(onevsoneQuizActivity.this, "Gate4", Toast.LENGTH_LONG).show();
-
-                scoreIntent.putExtra("opponentUID",opponentUID);
-                scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
-                scoreIntent.putExtra("opponentUserName",opponentUsername);
-                scoreIntent.putExtra("mypropic",myProPicUrl);
-                scoreIntent.putExtra("myName",myName);
-                scoreIntent.putExtra("score", score);
-                scoreIntent.putExtra("lifeline",lifelineSum);
-                scoreIntent.putExtra("minutes",minutes);
-                scoreIntent.putExtra("seconds",second);
-                scoreIntent.putExtra("mine",mine);
-                scoreIntent.putExtra("minman",0);
-                scoreIntent.putExtra("secman",0);
-                scoreIntent.putExtra("minutestext",minutestext);
-                scoreIntent.putExtra("secondtext",secondtext);
-                scoreIntent.putExtra("milliholder",milliHolder);
-                scoreIntent.putExtra("category",category);
-                scoreIntent.putExtra("imageurl",imageurl);
-                scoreIntent.putExtra("actualmin",a1);
-                scoreIntent.putExtra("actualsec",a2);
-                scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
-                scoreIntent.putExtra("isHostFinal", isHostFinal);
-                scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
-                scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
-                startActivity(scoreIntent);
-                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
 
             }
 
@@ -1766,6 +1796,20 @@ public class onevsoneQuizActivity extends AppCompatActivity {
            dataForHorizontalSlide();
        }
 
+       finisherNum=1;
+
+           AdView mAdView = view1.findViewById(R.id.adView);
+           AdRequest adRequest = new AdRequest.Builder().build();
+           mAdView.loadAd(adRequest);
+
+           ImageView cancelButton=(ImageView) view1.findViewById(R.id.cancelButton);
+
+           cancelButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   cancelDialogFunction(1);
+               }
+           });
 
        Glide.with(getBaseContext())
                .load(myProPicUrl)
@@ -1794,7 +1838,12 @@ public class onevsoneQuizActivity extends AppCompatActivity {
        if(alertDialog.getWindow()!=null){
            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
        }
-       alertDialog.show();
+       try{
+           alertDialog.show();
+       }catch (Exception e){
+
+       }
+
 
 
        listner1=new ValueEventListener() {
@@ -1901,14 +1950,17 @@ public class onevsoneQuizActivity extends AppCompatActivity {
     public void dataForHorizontalSlide(){
 
         // create instance of Random class
+        // create instance of Random class
         Random rand = new Random();
 
         // Generate random integers in range 0 to 999
-
-        final int categoryRandomNumber = rand.nextInt(3)+1;  //NEED TO CHANGE HERE
-        int setRandomNumber = rand.nextInt(4)+1;   //NEED TO CHANGE HERE
-
-
+        int setRandomNumber;
+        final int categoryRandomNumber = rand.nextInt(7)+1;
+        if(categoryRandomNumber<=5||categoryRandomNumber==7){
+            setRandomNumber = rand.nextInt(49)+1;
+        }else{
+            setRandomNumber = rand.nextInt(199)+1;
+        }
 
         myRef.child("Facts").child(String.valueOf(categoryRandomNumber)).orderByChild("set").equalTo(setRandomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -1990,13 +2042,13 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
     public void onBackPressed() {
 
-        cancelDialogFunction();
+        cancelDialogFunction(2);
 
 
     }
 
 
-    public void cancelDialogFunction(){
+    public void cancelDialogFunction(int i){
         AlertDialog.Builder builderRemove=new AlertDialog.Builder(onevsoneQuizActivity.this,R.style.AlertDialogTheme);
         View viewRemove1= LayoutInflater.from(onevsoneQuizActivity.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
         builderRemove.setView(viewRemove1);
@@ -2009,7 +2061,17 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
+
+        if(i==1){
+            TextView textTitle=(TextView) viewRemove1.findViewById(R.id.textTitle);
+            textTitle.setText("If You Quit Now You Will Not Be Able To See Your Score More Over Opponent Will Also Get Disconnect\nYou Really Want To Quit?");
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -2098,7 +2160,11 @@ public class onevsoneQuizActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         buttonYes.setOnClickListener(new View.OnClickListener() {

@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -37,6 +38,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +67,7 @@ public class KbcSetup extends AppCompatActivity {
     Button button1,button2,button3,button4;
     int category;
     public MediaPlayer kbcQueMus,kbcCountMus;
-
+    Boolean isInBackground;
     String wrongString;
 
     Dialog loadingDialog,expert1dialog;
@@ -90,12 +92,23 @@ public class KbcSetup extends AppCompatActivity {
     TextView titleText;
     String userName;
     private InterstitialAd mInterstitialAd;
+    CountDownTimer countDownTimer100;
 
     private void loadAds(){
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(countDownTimer100!=null){
+            countDownTimer100.cancel();
+        }
+        Runtime.getRuntime().gc();
     }
 
     @Override
@@ -165,27 +178,14 @@ public class KbcSetup extends AppCompatActivity {
 
         }.start();
 
+
+
         for(int i=1;i<=14;i++){
-            // create instance of Random class
-            Random rand = new Random();
             int setNumber;
-            switch (category){
-                case 1:
-                case 3: case 4: case 5: case 6: case 9: case 10: case 11: case 12: case 17:
-                    setNumber = rand.nextInt(299)+1;break;
-                case 2: case 14:
-                    setNumber = rand.nextInt(499)+1;break;
-                case 7:
-                    setNumber = rand.nextInt(401)+1;break;
-                case 8: case 18:
-                    setNumber = rand.nextInt(339)+1;break;
-                case 13: case 15: case 16:
-                    setNumber = rand.nextInt(249)+1;break;
-                case 19:
-                    setNumber = rand.nextInt(399)+1;break;
-                default:
-                    setNumber = rand.nextInt(199)+1;break;
-            }
+            Random rand1 = new Random();
+            setNumber=rand1.nextInt(6326)+1; //NEED TO CHANGE HERE
+
+            // create instance of Random class
 
             fireBaseData(setNumber, i);
 
@@ -326,7 +326,11 @@ public class KbcSetup extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -439,7 +443,11 @@ public class KbcSetup extends AppCompatActivity {
                     if (alertDialog.getWindow() != null) {
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -481,7 +489,11 @@ public class KbcSetup extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -554,7 +566,11 @@ public class KbcSetup extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -598,16 +614,21 @@ public class KbcSetup extends AppCompatActivity {
                     final View view1= LayoutInflater.from(KbcSetup.this).inflate(R.layout.expertadvicelayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : \n"+answerByExpert);
+                    ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=(ImageView) view1.findViewById(R.id.imageIcon);
                     titleText=(TextView) view1.findViewById(R.id.textTitle);
+
 
                     final AlertDialog alertDialog=builder.create();
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     expertAdviceImageManupulator();
 
@@ -643,7 +664,11 @@ public class KbcSetup extends AppCompatActivity {
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
 
                     view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -679,6 +704,49 @@ public class KbcSetup extends AppCompatActivity {
             }
         });
 
+        countDownTimer100=new CountDownTimer(1000 * 60 * 24 * 30, 1000) {
+            @Override
+            public void onTick(long l) {
+
+                try{
+                    ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
+                    ActivityManager.getMyMemoryState(myProcess);
+                    isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+                    if (isInBackground) {
+                        final MediaPlayer musicNav;
+                        musicNav = MediaPlayer.create(KbcSetup.this, R.raw.finalbuttonmusic);
+                        musicNav.start();
+                        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                musicNav.reset();
+                                musicNav.release();
+                            }
+                        });
+                        kbcQueMus.reset();kbcQueMus.release();
+                        kbcCountMus.reset();kbcCountMus.release();
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();}
+                        KbcSetup.super.onBackPressed();
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                        finish();
+                    } else {
+
+                    }
+
+                }catch (Exception e){
+
+                }
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
     }
 
     public void musicManu(){
@@ -695,7 +763,7 @@ public class KbcSetup extends AppCompatActivity {
     }
 
     public void fireBaseData(int setNumber, int i){
-        myRef.child("SETS").child(String.valueOf(category)).child("questions").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("NormalQuizBIGJSON").child(String.valueOf(setNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -907,7 +975,11 @@ public class KbcSetup extends AppCompatActivity {
                 if(alertDialog.getWindow()!=null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
                 partypoper1.setVisibility(View.VISIBLE);
                 partypoper1.setAnimation(R.raw.partypoppersanim);
                 partypoper1.playAnimation();
@@ -967,7 +1039,11 @@ public class KbcSetup extends AppCompatActivity {
                 if(alertDialog.getWindow()!=null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
 
                 view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1008,7 +1084,11 @@ public class KbcSetup extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
         partypoper1.setVisibility(View.VISIBLE);
         partypoper1.setAnimation(R.raw.partypoppersanim);
         partypoper1.playAnimation();
@@ -1072,7 +1152,11 @@ public class KbcSetup extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1200,7 +1284,11 @@ public class KbcSetup extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1275,7 +1363,11 @@ public class KbcSetup extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
 
         yesButton.setOnClickListener(new View.OnClickListener() {

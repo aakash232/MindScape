@@ -109,6 +109,12 @@ public class SongChoiceActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
+
     public void onBackPressed() {
         Intent intent=new Intent(SongChoiceActivity.this,mainMenuActivity.class);
         intent.putExtra("mainfinder",1);

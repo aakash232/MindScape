@@ -139,7 +139,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         }catch (Exception e){
 
         }
-
+        Runtime.getRuntime().gc();
     }
 
 
@@ -329,9 +329,30 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         myRef.child("UpdateString").child("version").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!version.equals(snapshot.getValue(String.class))){
-                    UpdateAsker();
+                try{
+                     if(!version.equals(snapshot.getValue(String.class))){
+                    myRef.child("UpdateString").child("updateText").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try{
+                                String str=snapshot.getValue(String.class);
+                                UpdateAsker(str);
+                            }catch (Exception e){
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
+                }catch (Exception e){
+
+                }
+
             }
 
             @Override
@@ -600,7 +621,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             if(alertDialog.getWindow()!=null){
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
-            alertDialog.show();
+            try{
+                alertDialog.show();
+            }catch (Exception e){
+
+            }
 
             buttonYes.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -825,7 +850,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
-    public void UpdateAsker(){
+    public void UpdateAsker(String str){
         AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
 
         final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.update_app_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -833,12 +858,20 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         builder.setCancelable(false);
         Button noButton=(Button) view1.findViewById(R.id.buttonYes);
         Button yesButton=(Button) view1.findViewById(R.id.buttonNo);
+        TextView textDis=(TextView) view1.findViewById(R.id.textTitle);
 
         final AlertDialog alertDialog=builder.create();
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
+
+        textDis.setText(str);
 
        noButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -931,7 +964,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         int k1=sharedPreferences.getInt("m1",1);
         int k2=sharedPreferences.getInt("m2",1);
@@ -1119,7 +1156,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         lstExam123.clear();
 
@@ -1278,7 +1319,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 if(alertDialog.getWindow()!=null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                try{
+                    alertDialog.show();
+                }catch (Exception e){
+
+                }
                 view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1544,7 +1589,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                     if(alertDialog.getWindow()!=null){
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
-                    alertDialog.show();
+            try{
+                alertDialog.show();
+            }catch (Exception e){
+
+            }
 
 
                     usernameEditText.setOnKeyListener(new View.OnKeyListener()
@@ -2508,7 +2557,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         starA1.setOnClickListener(new View.OnClickListener() {
             @Override

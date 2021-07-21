@@ -115,7 +115,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     List<pictureQuizHolder> list100;
     int setNumber;
     ValueEventListener lisnerfox1,lisnerfox2,lisnerfox3,lisnerfox4,lisnerfox5,lisnerfox6,lisnerfox7,lisnerfox8;
-
+    CountDownTimer cCompany,bCompany;
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -128,6 +128,13 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         }
         if(countDownHost!=null){
             countDownHost.cancel();
+        }
+
+        if(cCompany!=null){
+            cCompany.cancel();
+        }
+        if(bCompany!=null){
+            bCompany.cancel();
         }
 
         try{
@@ -1057,11 +1064,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     cancelButton.setEnabled(false);
                     removePlayerButton.setEnabled(false);
                     final int k=0;
-                    new CountDownTimer(1000 * 9, 900) {
+                    cCompany=new CountDownTimer(10000 * 1, 1000) {
 
 
                         public void onTick(long millisUntilFinished) {
-                            int sec = (int) (millisUntilFinished / 900);
+                            int sec = (int) (millisUntilFinished / 1000);
                             startButton.setText("Quiz Starts In " + sec + " Seconds");
                             startButton.setTextSize(15f);
                             if(kim==0){
@@ -1218,7 +1225,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             privacyButton.setEnabled(false);
             cancelButton.setEnabled(false);
             removePlayerButton.setEnabled(false);
-            new CountDownTimer(1000 * 10, 1000) {
+            bCompany=new CountDownTimer(1000 * 10, 1000) {
 
 
                 public void onTick(long millisUntilFinished) {
@@ -1570,7 +1577,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         removeImageAndTextSetter(img1,img2,img3,text1,text2,text3,cardView1,cardView2,cardView3);
 
@@ -1786,6 +1797,12 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     intent.putExtra("removal",5);
                     intent.putExtra("hostName",hostName);
                     playerNum=0;
+                    if(cCompany!=null){
+                        cCompany.cancel();
+                    }
+                    if(bCompany!=null){
+                        bCompany.cancel();
+                    }
                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener4);
                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener4);
                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener4);
@@ -1840,6 +1857,12 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                             intent.putExtra("removal",5);
                             intent.putExtra("hostName",hostName);
                             playerNum=0;
+                            if(cCompany!=null){
+                                cCompany.cancel();
+                            }
+                            if(bCompany!=null){
+                                bCompany.cancel();
+                            }
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener4);
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener4);
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener4);
@@ -2047,6 +2070,12 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                 myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Status").onDisconnect().cancel();
                             }catch (Exception e1){
 
+                            }
+                            if(cCompany!=null){
+                                cCompany.cancel();
+                            }
+                            if(bCompany!=null){
+                                bCompany.cancel();
                             }
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener4);
                             myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener4);
@@ -2423,7 +2452,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2569,134 +2602,6 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
     public void lobbyDataGettingNotHost(){
 
-        lisnerfox1=new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-
-                    int p = snapshot.getValue(Integer.class);
-
-
-                    privacyTextView.setText(" Privacy : Public ");
-                    privacyNuddles=1;
-                    lisnerfox2=new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            try{
-                                int c=snapshot.getValue(Integer.class);
-                                questionNumberTextView.setText(" Question : " + snapshot.getValue(Integer.class));
-
-                                switch (c){
-                                    case 10:
-                                        numQuestion=0;break;
-                                    case 15:
-                                        numQuestion=1;break;
-                                    case 20:
-                                        numQuestion=2;break;
-                                }
-                            }catch (Exception e){
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    };
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("questionNumber").addValueEventListener(lisnerfox2);
-
-                    lisnerfox3=new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            try{
-                                 int jack = snapshot.getValue(Integer.class);
-                            if (jack == 0) {
-                                numMode=0;
-                                modeTextView.setText(" Mode : Normal ");
-                            } else if(jack==1){
-                                numMode=1;
-                                modeTextView.setText(" Mode : Picture ");
-                            }else if(jack==2){
-                                numMode=2;
-                                modeTextView.setText(" Mode : Buzzer Normal ");
-                            }else{
-                                numMode=3;
-                                modeTextView.setText(" Mode : Buzzer Picture ");
-                            }
-                            }catch (Exception e){
-                            //    saver();
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    };
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("mode").addValueEventListener(lisnerfox3);
-
-                    lisnerfox4=new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            try{
-                                int goat = snapshot.getValue(Integer.class);
-                            if (goat == 45) {
-                                int f=snapshot.getValue(Integer.class);
-                                switch (f){
-                                    case 3:
-                                        numTime=0;break;
-                                    case 45:
-                                        numTime=1;break;
-                                    case 6:
-                                        numTime=2;break;
-                                }
-                                timeTextView.setText(" Time : 4.5 Mins ");
-                            } else {
-                                int f=snapshot.getValue(Integer.class);
-                                switch (f){
-                                    case 3:
-                                        numTime=0;break;
-                                    case 45:
-                                        numTime=1;break;
-                                    case 6:
-                                        numTime=2;break;
-                                }
-                                timeTextView.setText(" Time : " + goat + " Mins ");
-                            }
-                            }catch (Exception e){
-                            //    saver();
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    };
-                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("time").addValueEventListener(lisnerfox4);
-
-                } catch (Exception e) {
-
-               //      saver();
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").addValueEventListener(lisnerfox1);
-
 
         lisnerfox5=new ValueEventListener() {
             @Override
@@ -2826,6 +2731,139 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             }
         };
         myRef.child("room").child(String.valueOf(0)).child(hostUid).child("privacy").addValueEventListener(lisnerfox5);
+
+
+
+
+        lisnerfox1=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+
+                    int p = snapshot.getValue(Integer.class);
+
+
+                    privacyTextView.setText(" Privacy : Public ");
+                    privacyNuddles=1;
+                    lisnerfox2=new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            try{
+                                int c=snapshot.getValue(Integer.class);
+                                questionNumberTextView.setText(" Question : " + snapshot.getValue(Integer.class));
+
+                                switch (c){
+                                    case 10:
+                                        numQuestion=0;break;
+                                    case 15:
+                                        numQuestion=1;break;
+                                    case 20:
+                                        numQuestion=2;break;
+                                }
+                            }catch (Exception e){
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("questionNumber").addValueEventListener(lisnerfox2);
+
+                    lisnerfox3=new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try{
+                                int jack = snapshot.getValue(Integer.class);
+                                if (jack == 0) {
+                                    numMode=0;
+                                    modeTextView.setText(" Mode : Normal ");
+                                } else if(jack==1){
+                                    numMode=1;
+                                    modeTextView.setText(" Mode : Picture ");
+                                }else if(jack==2){
+                                    numMode=2;
+                                    modeTextView.setText(" Mode : Buzzer Normal ");
+                                }else{
+                                    numMode=3;
+                                    modeTextView.setText(" Mode : Buzzer Picture ");
+                                }
+                            }catch (Exception e){
+                                //    saver();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("mode").addValueEventListener(lisnerfox3);
+
+                    lisnerfox4=new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try{
+                                int goat = snapshot.getValue(Integer.class);
+                                if (goat == 45) {
+                                    int f=snapshot.getValue(Integer.class);
+                                    switch (f){
+                                        case 3:
+                                            numTime=0;break;
+                                        case 45:
+                                            numTime=1;break;
+                                        case 6:
+                                            numTime=2;break;
+                                    }
+                                    timeTextView.setText(" Time : 4.5 Mins ");
+                                } else {
+                                    int f=snapshot.getValue(Integer.class);
+                                    switch (f){
+                                        case 3:
+                                            numTime=0;break;
+                                        case 45:
+                                            numTime=1;break;
+                                        case 6:
+                                            numTime=2;break;
+                                    }
+                                    timeTextView.setText(" Time : " + goat + " Mins ");
+                                }
+                            }catch (Exception e){
+                                //    saver();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    };
+                    myRef.child("room").child(String.valueOf(1)).child(hostUid).child("time").addValueEventListener(lisnerfox4);
+
+                } catch (Exception e) {
+
+                    //      saver();
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("privacy").addValueEventListener(lisnerfox1);
+
+
     }
 
 
@@ -2870,7 +2908,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -3158,7 +3200,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         RadioButton radioButton1 = (RadioButton) radioGroup.findViewById(R.id.radio_public);
         RadioButton radioButton2 = (RadioButton) radioGroup.findViewById(R.id.radio_private);
@@ -3336,7 +3382,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
-        alertDialog.show();
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
 
         LinearLayout adContainer = viewFact.findViewById(R.id.linearLayout);
 
