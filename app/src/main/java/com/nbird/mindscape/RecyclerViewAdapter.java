@@ -1,5 +1,6 @@
 package com.nbird.mindscape;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -32,6 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
+
     @Override
     public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view;
@@ -41,6 +43,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new MyViewHolder(view);
 
     }
+
+
 
     @Override
     public void onBindViewHolder( final MyViewHolder holder, final int position) {
@@ -62,22 +66,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         music();
                         Intent intent = new Intent(mContext, singleModeListView.class);
                         intent.putExtra("position", a);
-                        mContext.startActivity(intent);break;
+                        mContext.startActivity(intent);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                     case 2:
                         music();
                         Intent intent123 = new Intent(mContext, oneVsOneChoiceActivity.class);
                         intent123.putExtra("position", a);
-                        mContext.startActivity(intent123);break;
+                        mContext.startActivity(intent123);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                     case 3:
                         music();
                         Intent intent2 = new Intent(mContext, tournamentChoiceActicity.class);
                         intent2.putExtra("position", a);
-                        mContext.startActivity(intent2);break;
+                        mContext.startActivity(intent2);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                     case 4:
                         music();
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
-                        mContext.startActivity(intent4);break;
+                        mContext.startActivity(intent4);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                     case 5:
                         try {
                             countDownTimer.cancel();
@@ -91,12 +107,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         Intent intent5 = new Intent(mContext, SongChoiceActivity.class);
                         intent5.putExtra("position", a);
 
-                        mContext.startActivity(intent5);break;
+                        mContext.startActivity(intent5);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                     case 6:
                         music();
                         Intent intent6 = new Intent(mContext, customQuizMainMenu.class);
                         intent6.putExtra("position", a);
-                        mContext.startActivity(intent6);break;
+                        mContext.startActivity(intent6);
+                        Runtime.getRuntime().gc();
+                        break;
                     case 7:
                         try {
                             countDownTimer.cancel();
@@ -111,7 +132,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         music();
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);
-                        mContext.startActivity(intent1);break;
+                        mContext.startActivity(intent1);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
                 }
 
             }

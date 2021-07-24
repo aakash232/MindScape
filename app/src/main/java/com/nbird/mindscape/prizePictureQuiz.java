@@ -668,6 +668,12 @@ public class prizePictureQuiz extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(c!=null){
+            c.cancel();
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
 
@@ -766,6 +772,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                                                     countDownTimer.cancel();}
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
 
                                             }
 
@@ -804,6 +811,8 @@ public class prizePictureQuiz extends AppCompatActivity {
                                             countDownTimer.cancel();}
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
+
                                         return;
                                     }
 
@@ -837,6 +846,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                                                     countDownTimer.cancel();}
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
 
                                             }
 
@@ -870,6 +880,8 @@ public class prizePictureQuiz extends AppCompatActivity {
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
+
                                         return;
                                     }
                                 }
@@ -882,6 +894,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(prizePictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
 
                     }
 
@@ -893,6 +906,8 @@ public class prizePictureQuiz extends AppCompatActivity {
                 Toast.makeText(prizePictureQuiz.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
                 finish();
+               
+
             }
         });
     }
@@ -1141,6 +1156,7 @@ public class prizePictureQuiz extends AppCompatActivity {
                         if(countDownTimer!=null){
                             countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
 
                     }
 
@@ -1176,8 +1192,10 @@ public class prizePictureQuiz extends AppCompatActivity {
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 if(countDownTimer!=null){
-                    countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
 
         }.start();
@@ -1250,9 +1268,12 @@ public class prizePictureQuiz extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
-                prizePictureQuiz.super.onBackPressed();
+                Intent i=new Intent(prizePictureQuiz.this,mainMenuActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
 
             }
         });

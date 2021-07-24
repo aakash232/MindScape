@@ -118,7 +118,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
     int counter=0;
     int numberOfPlayers,privacyFinder;
     ImageView questionImage;
-    ValueEventListener listner;
+    ValueEventListener listner,lisnerjoy1,lisnerjoy2,lisnerjoy3,lisnerjoy4,lisnerjoy5,lisnerjoy6,lisnerjoy7,lisnerjoy8,lisnerjoy9,lisnerjoy10,lisnerjoy11,lisnerjoy12;
     int oppoStatus=5;
     private InterstitialAd mInterstitialAd;
     CountDownTimer countDownTimeralerDialog;
@@ -704,7 +704,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     final View view1 = LayoutInflater.from(tournamentPictureQuiz.this).inflate(R.layout.audience_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
                     builder.setView(view1);
                     builder.setCancelable(false);
-                    ((TextView) view1.findViewById(R.id.textTitle)).setText("Earn 10 Paper Notes By Entering Your Friends Referral Code!");
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("MindScapers from across the world have casted their votes above. Choose your option!");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     BarChart barChart = ((BarChart) view1.findViewById(R.id.barChart));
 
@@ -1044,7 +1044,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 }else if(timerNum==2){
                     countDownTimerFun(1000 * 60 * 6);
                 }
-                new CountDownTimer(1000*5000,1000){
+                new CountDownTimer(1000*5,1000){
                     @Override
                     public void onTick(long l) {
                         picWaiter();
@@ -1052,7 +1052,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
+                        try{
+                            loadingDialog.dismiss();
+                        }catch (Exception e){
 
+                        }
                     }
                 }.start();
             }
@@ -1070,6 +1074,82 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         }
         if(countDownTimeralerDialog!=null){
             countDownTimeralerDialog.cancel();
+        }
+
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy1);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy2);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy3);
+            }catch (Exception e){
+
+            }
+        }
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy4);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy5);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy6);
+            }catch (Exception e){
+
+            }
+        }
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy7);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy8);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy9);
+            }catch (Exception e){
+
+            }
+        }
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy10);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy11);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Answer").child(String.valueOf(i)).removeEventListener(lisnerjoy12);
+            }catch (Exception e){
+
+            }
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+
+        }catch (Exception e){
+
         }
 
         Runtime.getRuntime().gc();
@@ -1257,7 +1337,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer1(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy1=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1278,9 +1358,10 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerjoy1);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy2= new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1301,9 +1382,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerjoy2);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy3=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1324,7 +1405,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerjoy3);
 
 
         }
@@ -1333,7 +1414,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer2(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy4=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1354,9 +1435,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerjoy4);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy5=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1377,9 +1458,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerjoy5);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy6=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1400,7 +1481,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerjoy6);
 
 
         }
@@ -1409,7 +1490,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer3(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy7=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1430,9 +1511,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerjoy7);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy8=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1453,9 +1534,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerjoy8);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy9=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1476,7 +1557,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerjoy9);
 
 
         }
@@ -1485,7 +1566,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer4(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy10= new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1506,9 +1587,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerjoy10);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy11=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1529,9 +1610,9 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerjoy11);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerjoy12=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1552,7 +1633,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerjoy12);
 
 
         }
@@ -1675,7 +1756,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentPictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
 
                 }break;
@@ -1762,7 +1843,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentPictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
 
                 }break;
@@ -1849,7 +1930,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentPictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
 
                 }break;
@@ -1898,7 +1979,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
-
+               
             }
 
         });
@@ -1953,7 +2034,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
         startActivity(scoreIntent);
         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
-
+       
     }
 
 
@@ -2598,7 +2679,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                             countDownTimer.cancel();}
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
-
+                       
                     }
 
                 });
@@ -2653,7 +2734,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
 
         }.start();
@@ -2808,7 +2889,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     startActivity(intent47);
 
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
 
@@ -2829,7 +2910,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
 
@@ -2851,7 +2932,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
@@ -2872,7 +2953,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
             //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
@@ -2952,9 +3033,10 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
 
                 alertDialog.dismiss();
-                tournamentPictureQuiz.super.onBackPressed();
+                Intent i=new Intent(tournamentPictureQuiz.this,mainMenuActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 

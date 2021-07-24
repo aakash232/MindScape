@@ -197,7 +197,7 @@ public class customQuizMainMenu extends AppCompatActivity {
                 });
                 Intent intent=new Intent(customQuizMainMenu.this,customQuizFirstProperties.class);
                 startActivity(intent);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 
@@ -235,7 +235,7 @@ public class customQuizMainMenu extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
-            finish();
+            finish();Runtime.getRuntime().gc();
         }
 
 

@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent slideIntent = new Intent(MainActivity.this, SlideActivity.class);
                 startActivity(slideIntent);
-                finish();
-
                 overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+                finish();
+               
             }
 
         }, SPLASH_TIME_OUT);

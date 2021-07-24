@@ -653,6 +653,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:weightSum="4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -779,7 +780,7 @@
                             android:scaleY="0.8"
                             android:text="50:50"
                             android:textColor="#000000"
-                            android:textSize="30dp" 
+                            android:textSize="27dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

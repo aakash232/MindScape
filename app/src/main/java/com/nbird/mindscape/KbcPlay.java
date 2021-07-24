@@ -32,7 +32,13 @@ public class KbcPlay extends AppCompatActivity {
     DatabaseReference myRef=database.getReference();
     int score;
     int scoreConvertedToMoney;
+    public void onBackPressed() {
+       Intent i=new Intent(KbcPlay.this,mainMenuActivity.class);
+       startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+       finish();
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +186,7 @@ public class KbcPlay extends AppCompatActivity {
         Intent intent = new Intent(this,mainMenuActivity.class);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
     }
 
 }

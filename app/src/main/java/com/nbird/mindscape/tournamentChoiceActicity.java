@@ -158,6 +158,9 @@ public class tournamentChoiceActicity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
+            Intent i=new Intent(tournamentChoiceActicity.this,mainMenuActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
         }
 

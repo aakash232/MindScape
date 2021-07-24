@@ -117,9 +117,9 @@ public class SongChoiceActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         Intent intent=new Intent(SongChoiceActivity.this,mainMenuActivity.class);
-        intent.putExtra("mainfinder",1);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
 
     }
 
@@ -127,7 +127,12 @@ public class SongChoiceActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
+            Intent i=new Intent(SongChoiceActivity.this,mainMenuActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
+           
+
         }
 
 

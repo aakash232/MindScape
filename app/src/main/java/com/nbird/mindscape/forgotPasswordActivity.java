@@ -50,6 +50,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), "A verification Link Is Send To Your Email Account.Please Check!", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getBaseContext(),loginActivity.class));
                                 finish();
+                               
                             }
                             else{
                                 String message=task.getException().getMessage();
@@ -82,6 +83,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
                                             Toast.makeText(getBaseContext(), "A verification Link Is Send To Your Email Account.Please Check!", Toast.LENGTH_LONG).show();
                                             startActivity(new Intent(getBaseContext(),loginActivity.class));
                                             finish();
+                                           
                                         }
                                         else{
                                             String message=task.getException().getMessage();

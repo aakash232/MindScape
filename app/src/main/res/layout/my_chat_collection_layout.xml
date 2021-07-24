@@ -19,7 +19,6 @@
         android:foreground="?selectableItemBackground"
         cardview:cardCornerRadius="20dp"
         cardview:layout_constraintEnd_toEndOf="parent"
-        cardview:layout_constraintStart_toEndOf="@+id/cardView5"
         cardview:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout

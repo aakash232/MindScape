@@ -694,7 +694,7 @@ public class customFlipperMain extends AppCompatActivity {
                 intent.putExtra("category",cat);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
 
 
 
@@ -710,7 +710,7 @@ public class customFlipperMain extends AppCompatActivity {
                 alertDialog.dismiss();
                 customFlipperMain.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 

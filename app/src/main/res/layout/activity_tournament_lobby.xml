@@ -8,20 +8,21 @@
     tools:context=".Lobby">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
+        android:foreground="?selectableItemBackground"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        android:foreground="?selectableItemBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/only_white">
+            android:background="@drawable/only_white"
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -35,57 +36,77 @@
                     android:id="@+id/privacyTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Privacy : Public "
-                    android:textColor="@color/black"
                     android:layout_margin="1dp"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15dp" 
-                    android:textStyle="bold"
-                    />
+                    android:text=" Privacy : Public "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/questionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Questions : 10 "
-                    android:textColor="@color/black"
                     android:layout_margin="1dp"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15dp" 
-                    android:textStyle="bold"
-                    />
+                    android:text=" Questions : 10 "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/timeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Time : 3 Mins "
                     android:layout_margin="1dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15dp" 
-                    android:textStyle="bold"
-                    />
+                    android:text=" Time : 3 Mins "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/modeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Mode : Normal "
                     android:layout_margin="1dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/mouse_memoirs"
-                    android:textSize="15dp" 
-                    android:textStyle="bold"
-                    />
+                    android:text=" Mode : Normal "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
         </LinearLayout>
 
 
-
     </androidx.cardview.widget.CardView>
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/troubleshoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:clickable="true"
+        android:foreground="?selectableItemBackground"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="5dp"
+        app:layout_constraintStart_toStartOf="@+id/cardView8"
+        app:layout_constraintTop_toBottomOf="@+id/cardView8">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/troubleshhotpic" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <com.airbnb.lottie.LottieAnimationView
@@ -96,13 +117,14 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/backlitemode"
         app:lottie_speed="0.8" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cons"
@@ -113,7 +135,7 @@
         android:scaleY="0.85"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/backlitemodeanim"

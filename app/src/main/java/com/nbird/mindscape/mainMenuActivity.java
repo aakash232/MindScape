@@ -119,7 +119,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("userName");
     DatabaseReference myRef2 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("propic");
     DatabaseReference myRef3 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("personal").child("propic");
-    ValueEventListener listener2,listener3,listener1;
+    ValueEventListener listener2,listener3,listener1,lisnerMAD1;
 
     @Override
     protected void onDestroy() {
@@ -138,6 +138,18 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             myRef3.removeEventListener(listener3);
         }catch (Exception e){
 
+        }
+        try{
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").removeEventListener(lisnerMAD1);
+        }catch (Exception e){
+
+        }
+
+        if(countIsInternet!=null){
+            countIsInternet.cancel();
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
         }
         Runtime.getRuntime().gc();
     }
@@ -219,84 +231,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
     int highjack=0;
 
-    private class DownloadData extends AsyncTask<String,Void,String> {
-        private static final String TAG = "DownloadData";
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            return;
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            final Random rand = new Random();
-
-            int i = 1;
-
-            try{
-                i = rand.nextInt(5)+1;
-            }catch (Exception e){
-
-            }
-
-
-
-
-            try {
-               // music.setDataSource(strings[0]);
-                music = MediaPlayer.create(mainMenuActivity.this, l.get(i));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-
-                    music.start();
-
-                    lol=1;
-                    music.setVolume(0.7f,0.7f);
-                    finalManu=0;
-
-                    final SharedPreferences songHolder1 = getSharedPreferences("songKnowe", 0);
-                    final SharedPreferences.Editor editorsongHolder1 = songHolder1.edit();
-
-                    timerStarterInt=songHolder1.getInt("timerStarterInt",0);
-
-
-
-
-                    timerStarterInt++;
-                    editorsongHolder1.putInt("timerStarterInt",timerStarterInt);
-                    editorsongHolder1.commit();
-
-                    if(timerStarterInt==1){
-
-                        try {
-                            countDownTimer.start();
-                        }catch (Exception e){
-
-                        }
-
-                    }
-                }
-            });
-            try {
-                music.prepare();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            return null;
-        }
-    }
 
     int lol=0;
     int finalManu=0;
@@ -708,69 +643,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
 
-    public void timerStarter(){
 
-        countDownTimer=new CountDownTimer(1000 * 60 * 24 * 30, 1000) {
-            ArrayList<Integer> r=l;
-            @Override
-            public void onTick(long l) {
-
-                try{
-                      ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
-                ActivityManager.getMyMemoryState(myProcess);
-                isInBackground = myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
-                if (isInBackground) {
-                    music.pause();
-                } else {
-                    try{
-                        if (!music.isPlaying()) {
-                        music.start();
-                        music.setVolume(0.4f,0.4f);
-                    }
-                    }catch (Exception e){
-
-                    }
-
-                }
-                music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-
-                        if(finalManu==0){
-                            if (music.isPlaying()) {
-                                music.stop();
-                                try {
-                                    music.reset();
-                                }catch (Exception e){
-
-                                }
-                                music.release();
-
-                            } else {
-                                music.reset();
-                                music.release();
-                            }
-
-
-                           // songURLDownload();
-                        }
-
-                    }
-                });
-                }catch (Exception e){
-
-                }
-
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
-
-    }
 
     public void InternetDialog(){
         AlertDialog.Builder builderRemove=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
@@ -883,6 +756,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                intent.addCategory(Intent.CATEGORY_HOME);
                startActivity(intent);
                finish();
+              
            }
        });
 
@@ -900,207 +774,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
        });
     }
 
-    public void speakersAlertDialog(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(mainMenuActivity.this,R.style.AlertDialogTheme);
 
-        final View view1= LayoutInflater.from(mainMenuActivity.this).inflate(R.layout.music_manu,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
-        builder.setView(view1);
-        builder.setCancelable(false);
-        SeekBar seekBar=(SeekBar) view1.findViewById(R.id.determinateBar);
-
-        CardView musicCard1=(CardView) view1.findViewById(R.id.card31);
-        CardView musicCard2=(CardView) view1.findViewById(R.id.card7);
-        CardView musicCard3=(CardView) view1.findViewById(R.id.card8);
-        CardView musicCard4=(CardView) view1.findViewById(R.id.card32);
-        CardView musicCard5=(CardView) view1.findViewById(R.id.card50);
-        CardView musicCard6=(CardView) view1.findViewById(R.id.card51);
-        final TextView progressTextView=(TextView) view1.findViewById(R.id.progressTextView);
-
-        LinearLayout linear1=(LinearLayout) view1.findViewById(R.id.linear31);
-        LinearLayout linear2=(LinearLayout) view1.findViewById(R.id.linear7);
-        LinearLayout linear3=(LinearLayout) view1.findViewById(R.id.linear8);
-        LinearLayout linear4=(LinearLayout) view1.findViewById(R.id.linear32);
-        LinearLayout linear5=(LinearLayout) view1.findViewById(R.id.buzzerNormalLinear);
-        LinearLayout linear6=(LinearLayout) view1.findViewById(R.id.buzzerPictureLinear);
-        switch1=(Switch) view1.findViewById(R.id.switch1);
-        switch2=(Switch) view1.findViewById(R.id.switch2);
-        switch3=(Switch) view1.findViewById(R.id.switch3);
-        switch4=(Switch) view1.findViewById(R.id.switch4);
-        switch5=(Switch) view1.findViewById(R.id.switch5);
-        switch6=(Switch) view1.findViewById(R.id.switch6);
-
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChangedValue = 0;
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChangedValue = progress;
-                progressTextView.setText(progressChangedValue+"% ");
-              
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(mainMenuActivity.this, "Volume At :" + progressChangedValue,
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("musicCollection",0);
-        final SharedPreferences.Editor myEdit = sharedPreferences.edit();
-        final Boolean switchState1 = switch1.isChecked();
-        final Boolean switchState2 = switch2.isChecked();
-        final Boolean switchState3 = switch3.isChecked();
-        final Boolean switchState4 = switch4.isChecked();
-        final Boolean switchState5 = switch5.isChecked();
-        final Boolean switchState6 = switch6.isChecked();
-
-
-
-        final AlertDialog alertDialog=builder.create();
-        if(alertDialog.getWindow()!=null){
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        try{
-            alertDialog.show();
-        }catch (Exception e){
-
-        }
-
-        int k1=sharedPreferences.getInt("m1",1);
-        int k2=sharedPreferences.getInt("m2",1);
-        int k3=sharedPreferences.getInt("m3",1);
-        int k4=sharedPreferences.getInt("m4",1);
-        int k5=sharedPreferences.getInt("m5",1);
-        int k6=sharedPreferences.getInt("m6",1);
-
-        if(k1==0){
-            Toast.makeText(this, "fine", Toast.LENGTH_SHORT).show();
-            switch1.setChecked(false);
-        }
-        if(k2==0){
-            switch2.setChecked(false);
-        }
-        if(k3==0){
-            switch3.setChecked(false);
-        }
-        if(k4==0){
-            switch4.setChecked(false);
-        }
-        if(k5==0){
-            switch5.setChecked(false);
-        }
-        if(k6==0){
-            switch6.setChecked(false);
-        }
-
-
-
-        view1.findViewById(R.id.doneButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(switch1.isChecked()){
-                    myEdit.putInt("m1", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m1", 0);
-                    myEdit.commit();
-                }
-                if(switch2.isChecked()){
-                    myEdit.putInt("m2", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m2", 0);
-                    myEdit.commit();
-
-                }
-                if(switch3.isChecked()){
-                    myEdit.putInt("m3", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m3", 0);
-                    myEdit.commit();
-
-                }
-                if(switch4.isChecked()){
-                    myEdit.putInt("m4", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m4", 0);
-                    myEdit.commit();
-
-                }
-                if(switch5.isChecked()){
-                    myEdit.putInt("m5", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m5", 0);
-                    myEdit.commit();
-
-                }
-                if(switch6.isChecked()){
-                    myEdit.putInt("m6", 1);
-                    myEdit.commit();
-
-                }else{
-                    myEdit.putInt("m6", 0);
-                    myEdit.commit();
-
-                }
-                alertDialog.dismiss();
-            }
-        });
-    }
-
-
-
-    private void stopPlaying() {
-        if (music != null) {
-            music.stop();
-            music.release();
-            music = null;
-        }
-    }
-    
-    public void musicChangerFunction(int n){
-        try{
-             if (music.isPlaying()) {
-            music.stop();
-            music.reset();
-        } else {
-            music.reset();
-        }
-        }catch (Exception e){
-
-        }
-
-        music = MediaPlayer.create(mainMenuActivity.this, n);
-        music.start();
-
-    }
-
-
-
-
-
-
-
-    public void cardManu47(LinearLayout musicCard1, LinearLayout musicCard2, LinearLayout musicCard3, LinearLayout musicCard4, LinearLayout musicCard5, LinearLayout musicCard6){
-        musicCard1.setAlpha(1);
-        musicCard2.setAlpha(1);
-        musicCard3.setAlpha(1);
-        musicCard4.setAlpha(1);
-        musicCard5.setAlpha(1);
-        musicCard6.setAlpha(1);
-    }
 
     public void prizeModeMain(){
         myRef.child("PrizeMode").child("indicator").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -1331,6 +1005,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                         startActivity(new Intent(mainMenuActivity.this,welcomeActivity.class));
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
 
                     }
                 });
@@ -1407,6 +1082,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 Intent helpguide = new Intent(mainMenuActivity.this,HelpGuide1.class);
                 startActivity(helpguide);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
                 break;
             case R.id.nav_contact:
 
@@ -2452,7 +2128,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     public void proPicFunction(){
 
 
-        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(new ValueEventListener() {
+        lisnerMAD1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 imageurl123 = (String) snapshot.getValue();
@@ -2466,7 +2142,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addValueEventListener(lisnerMAD1);
     }
 
     public void removalOfLastTournamentIfHost(){

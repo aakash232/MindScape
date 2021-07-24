@@ -46,6 +46,7 @@ public class KbcScoreActivity extends AppCompatActivity {
         Intent intent=new Intent(KbcScoreActivity.this,KbcPlay.class);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
     }
 
     public void restart(View view){
@@ -62,6 +63,7 @@ public class KbcScoreActivity extends AppCompatActivity {
         Intent intent=new Intent(KbcScoreActivity.this,KbcSetup.class);
         startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
     }
 
     @Override

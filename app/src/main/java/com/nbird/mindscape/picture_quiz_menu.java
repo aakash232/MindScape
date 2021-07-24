@@ -86,7 +86,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     Button joinButton,createButton;
     int isHost=0;
    // DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID");
-    ValueEventListener listenerFast1;
+    ValueEventListener listenerFast1,lisnerKiller;
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -319,7 +319,12 @@ public class picture_quiz_menu extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
+            Intent i=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
+           
+
         }
 
 
@@ -445,9 +450,12 @@ public class picture_quiz_menu extends AppCompatActivity {
                     }
                 });
                 alertDialog.dismiss();
-                picture_quiz_menu.super.onBackPressed();
+                Intent i=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
         });
 
@@ -540,7 +548,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                     myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
+                            lisnerKiller=new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -606,7 +614,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                 public void onCancelled(@NonNull DatabaseError error) {
 
                                 }
-                            });
+                            }; myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(lisnerKiller);
                         }
                     });
                 }
@@ -672,6 +680,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                                     }
                                     startActivity(intent);
                                     finish();
+                                   
+
                                 }else{
                                     if(countDownTimer!=null){
                                         countDownTimer.cancel();
@@ -683,6 +693,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                                     Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
                                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                     finish();
+                                   
+
                                 }
                             }catch (Exception e){
                                 Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
@@ -701,6 +713,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                                 }
                                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
+                               
+
                             }
 
                         }else{
@@ -720,6 +734,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                             }
                             startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
+                           
+
                         }
 
 
@@ -1438,6 +1454,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                     Intent intent=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     finish();
+                                                   
+
                                                 }
                                             });
 
@@ -1697,9 +1715,12 @@ public class picture_quiz_menu extends AppCompatActivity {
                         });
 
                         myRef.child("oneVsoneLocalPicture").child(mAuth.getCurrentUser().getUid()).removeValue();
-                        picture_quiz_menu.super.onBackPressed();
+                       Intent i=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+                       startActivity(i);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
+
                     }
                 });
 
@@ -1901,7 +1922,23 @@ public class picture_quiz_menu extends AppCompatActivity {
 
         }
 
+        try{
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeEventListener(lisnerKiller);
+
+        }catch (Exception e){
+
+        }
+
+        if(countDownTimer123!=null){
+            countDownTimer123.cancel();
+        }
+
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
         Runtime.getRuntime().gc();
+       
     }
 
 
@@ -1940,7 +1977,13 @@ public class picture_quiz_menu extends AppCompatActivity {
             batch99.setBackgroundResource(R.drawable.king);
         }
     }
+    public void onBackPressed() {
+        Intent i=new Intent(picture_quiz_menu.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
 
+    }
 
 
 }

@@ -110,6 +110,9 @@ public class prizeQuizMain extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
     @Override
@@ -725,6 +728,7 @@ public class prizeQuizMain extends AppCompatActivity {
                                                 if(countDownTimer!=null){
                                                     countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
 
                                             }
 
@@ -762,6 +766,8 @@ public class prizeQuizMain extends AppCompatActivity {
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
+
                                         return;
                                     }
 
@@ -791,6 +797,8 @@ public class prizeQuizMain extends AppCompatActivity {
                                                 if(countDownTimer!=null){
                                                     countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
+
 
                                             }
 
@@ -828,6 +836,8 @@ public class prizeQuizMain extends AppCompatActivity {
                                         if(countDownTimer!=null){
                                             countDownTimer.cancel();}overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
+
                                         return;
                                     }
                                 }
@@ -840,6 +850,7 @@ public class prizeQuizMain extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(prizeQuizMain.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
 
                     }
                     loadingDialog.dismiss();
@@ -851,6 +862,8 @@ public class prizeQuizMain extends AppCompatActivity {
                 Toast.makeText(prizeQuizMain.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
                 finish();
+               
+
             }
         });
     }
@@ -1086,6 +1099,7 @@ final MediaPlayer musicNav;
                             countDownTimer.cancel();}
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
 
                     }
 
@@ -1125,6 +1139,8 @@ final MediaPlayer musicNav;
                     countDownTimer.cancel();}
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
 
         }.start();
@@ -1197,9 +1213,11 @@ final MediaPlayer musicNav;
                 }catch (Exception e){
 
                 }
-                prizeQuizMain.super.onBackPressed();
+                Intent i=new Intent(prizeQuizMain.this,mainMenuActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
 
             }
         });

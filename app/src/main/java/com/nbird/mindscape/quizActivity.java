@@ -1664,7 +1664,8 @@ public class quizActivity extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 alertDialog.cancel();
-                quizActivity.super.onBackPressed();
+                Intent i=new Intent(quizActivity.this,mainMenuActivity.class);
+                startActivity(i);
                 try{
                     songActivity.songStop();
                 }catch (Exception e){

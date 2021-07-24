@@ -78,7 +78,7 @@ public class customCategoryListActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(customCategoryListActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 

@@ -838,6 +838,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                                 }
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
                                             }
 
                                         });
@@ -876,6 +877,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                         }
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
                                         return;
                                     }
 
@@ -906,6 +908,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                                                 }
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
+                                               
                                             }
 
                                         });
@@ -959,8 +962,10 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                             }
                         });
                     } else {
-                        finish();
                         Toast.makeText(activity_picture_singlePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
+                        finish();
+                       
+                       // Toast.makeText(activity_picture_singlePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
 
                     }
                     //loadingDialog.dismiss();
@@ -973,6 +978,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
                 Toast.makeText(activity_picture_singlePlayer.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
                 finish();
+               
             }
         });
     }
@@ -1421,7 +1427,8 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
                 }
 
-                activity_picture_singlePlayer.super.onBackPressed();
+                Intent i=new Intent(activity_picture_singlePlayer.this,picture_quiz_menu.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }

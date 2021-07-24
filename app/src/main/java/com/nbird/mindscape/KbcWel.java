@@ -61,6 +61,7 @@ public class KbcWel extends AppCompatActivity {
                 finish();
                 kbcmusic.stop();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+               
             }
 
         }, SPLASH_TIME_OUT);

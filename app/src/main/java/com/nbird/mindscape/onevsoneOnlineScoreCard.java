@@ -61,7 +61,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
-     ValueEventListener listenerFast1;
+     ValueEventListener listenerFast1,lisnerfish;
     int minrev,secriv;
     String opponentUID;
     String opponentimageUrl;
@@ -353,6 +353,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
+                           
 
                         }else{
                             Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
@@ -376,6 +377,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
+                           
+
                         }
 
                     }else if(acceptInt==0){
@@ -429,6 +432,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
         });
 
@@ -457,8 +462,20 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(onevsoneOnlineScoreCard.this, "Request Send To "+opponentUsername, Toast.LENGTH_SHORT).show();
+                rematch.setEnabled(false);
 
+                        new CountDownTimer(1000*5,1000){
 
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                rematch.setEnabled(true);
+                            }
+                        }.start();
 
 
 
@@ -976,7 +993,14 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
         }
 
+        try{
+            myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeEventListener(lisnerfish);
+
+        }catch (Exception e){
+
+        }
         Runtime.getRuntime().gc();
+       
     }
 
 
@@ -1054,6 +1078,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                     finish();
+                                   
+
                                 } else {
                                     Intent intent = new Intent(onevsoneOnlineScoreCard.this, multiPlayerPictureQuiz.class);
                                     intent.putExtra("opponentUID", opponentUID);
@@ -1078,6 +1104,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                     finish();
+                                   
+
                                 }
 
                             }
@@ -1257,7 +1285,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
 
     public void randomNumberGeneratorTaker(){
 
-        myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").addValueEventListener(new ValueEventListener() {
+        lisnerfish=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -1481,7 +1509,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").addValueEventListener(lisnerfish);
 
     }
 
@@ -2206,6 +2234,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
+
     }
 
 }

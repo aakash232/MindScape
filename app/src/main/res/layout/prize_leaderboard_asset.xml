@@ -21,7 +21,7 @@
         android:scaleY="0.9"
         cardview:cardCornerRadius="5dp"
         cardview:layout_constraintEnd_toEndOf="parent"
-        cardview:layout_constraintStart_toEndOf="@+id/cardView5"
+        cardview:layout_constraintStart_toStartOf="parent"
         cardview:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout

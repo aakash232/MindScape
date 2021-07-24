@@ -101,7 +101,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
     LottieAnimationView partypoper,party2;
     int correctAns=0;
     int wrongAns=0;
-    ValueEventListener listner;
+    ValueEventListener listner,lisnerrat1,lisnerrat2,lisnerrat3,lisnerrat4,lisnerrat5,lisnerrat6,lisnerrat7,lisnerrat8,lisnerrat9,lisnerrat10,lisnerrat11,lisnerrat12,lisnerrat13,lisnerrat14;
     int oppoStatus;
     int isAttempt=0,numMode;
     private InterstitialAd mInterstitialAd;
@@ -120,6 +120,158 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         if(countDownTimer!=null){
             countDownTimer.cancel();
         }
+
+        for(int i=1;i<=20;i++){
+             try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("player1").child(String.valueOf(i)).removeEventListener(lisnerrat1);
+        }catch (Exception e){
+
+        }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("player2").child(String.valueOf(i)).removeEventListener(lisnerrat1);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("player3").child(String.valueOf(i)).removeEventListener(lisnerrat1);
+            }catch (Exception e){
+
+            }
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("player4").child(String.valueOf(i)).removeEventListener(lisnerrat1);
+            }catch (Exception e){
+
+            }
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child("player1Score").removeEventListener(lisnerrat2);
+
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child("player2Score").removeEventListener(lisnerrat2);
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child("player3Score").removeEventListener(lisnerrat2);
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child("player4Score").removeEventListener(lisnerrat2);
+        }catch (Exception e){
+
+        }
+
+
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerrat3);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Answer").child(String.valueOf(i)).removeEventListener(lisnerrat4);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerrat5);
+
+            }catch (Exception e){
+
+            }
+        }
+
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerrat6);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Answer").child(String.valueOf(i)).removeEventListener(lisnerrat7);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerrat8);
+
+            }catch (Exception e){
+
+            }
+        }
+
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerrat9);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerrat10);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Answer").child(String.valueOf(i)).removeEventListener(lisnerrat11);
+
+            }catch (Exception e){
+
+            }
+        }
+
+
+        for(int i=1;i<=20;i++){
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Answer").child(String.valueOf(i)).removeEventListener(lisnerrat12);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Answer").child(String.valueOf(i)).removeEventListener(lisnerrat13);
+
+            }catch (Exception e){
+
+            }
+
+            try{
+                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Answer").child(String.valueOf(i)).removeEventListener(lisnerrat14);
+
+            }catch (Exception e){
+
+            }
+        }
+
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
+        }catch (Exception e){
+
+        }
+
+
+
 
         Runtime.getRuntime().gc();
     }
@@ -736,6 +888,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 Toast.makeText(tournamentBuzzerNormalQuiz.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
                 finish();
+               
+
             }
         });
     }
@@ -789,6 +943,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentBuzzerNormalQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
+
                     }
                     loadingDialog.dismiss();
                 }break;
@@ -814,6 +970,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentBuzzerNormalQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
 
                     }
                     loadingDialog.dismiss();
@@ -840,6 +997,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(tournamentBuzzerNormalQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
 
                     }
                     loadingDialog.dismiss();
@@ -911,6 +1069,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 startActivity(scoreIntent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
 
             }
 
@@ -959,6 +1118,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
         startActivity(scoreIntent);
         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
         finish();
+       
 
     }
 
@@ -1042,7 +1202,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
     public void dataReceivingForBuzzer(String playerName, int r, final LottieAnimationView playeranim){
 
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child(playerName).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat1=new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -1098,7 +1258,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            }; myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child(playerName).child(String.valueOf(i)).addValueEventListener(lisnerrat1);
         }
 
     }
@@ -1459,7 +1619,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
     }
 
     public void scoreReceiver(String playerNameScore, final TextView playerScoreTextView){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child(playerNameScore).addValueEventListener(new ValueEventListener() {
+        lisnerrat2=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -1475,7 +1635,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child("Buzzer").child("BuzzerScore").child(playerNameScore).addValueEventListener(lisnerrat2);
     }
 
     public void answerStatus(String playerAnswerStatusName, int i) {
@@ -1924,7 +2084,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer1(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat3=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1947,9 +2107,9 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerrat3);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat4=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1973,9 +2133,9 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerrat4);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat5=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -1999,7 +2159,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerrat5);
 
 
         }
@@ -2008,7 +2169,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer2(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat6=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2032,9 +2193,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerrat6);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat7=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2058,9 +2220,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerrat7);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat8=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2084,7 +2247,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerrat8);
 
 
         }
@@ -2093,7 +2257,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer3(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat9=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2117,9 +2281,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerrat9);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat10=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2143,9 +2308,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerrat10);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat11=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2169,7 +2335,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerrat11);
 
 
         }
@@ -2178,7 +2345,7 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
     public void opponentAnswersReceivingPlayer4(final String playerA, String playerB, String playerC, int r){
         for(int i=1;i<=r;i++){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat12=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2202,9 +2369,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerA).child(String.valueOf(i)).addValueEventListener(lisnerrat12);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat13=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2228,9 +2396,10 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerB).child(String.valueOf(i)).addValueEventListener(lisnerrat13);
 
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(new ValueEventListener() {
+            lisnerrat14=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
@@ -2254,7 +2423,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerC).child(String.valueOf(i)).addValueEventListener(lisnerrat14);
         }
 
     }
@@ -2643,6 +2813,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     startActivity(intent47);
 
                     finish();
+                   
+
                 }
             });
 
@@ -2664,6 +2836,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").removeValue();
                     finish();
+                   
+
                 }
             });
 
@@ -2686,6 +2860,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeValue();
                     finish();
+                   
+
                 }
             });
             //    myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").removeEventListener(listener2);
@@ -2707,6 +2883,8 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
                     startActivity(intent47);
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeValue();
                     finish();
+                   
+
                 }
             });
             //     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").removeEventListener(listener3);
@@ -2785,10 +2963,12 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
 
                 }
                 alertDialog.dismiss();
-                tournamentBuzzerNormalQuiz.super.onBackPressed();
+                Intent i=new Intent(tournamentBuzzerNormalQuiz.this,mainMenuActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-
                 finish();
+               
+
             }
         });
 

@@ -42,6 +42,8 @@ public class SlideActivity extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish();
+           
+
         }
 
         editorslidepermission.putBoolean("sp", true);
@@ -79,6 +81,8 @@ public class SlideActivity extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
+                   
+
                 }
                 slideViewPager.setCurrentItem(currentPage+1);
 

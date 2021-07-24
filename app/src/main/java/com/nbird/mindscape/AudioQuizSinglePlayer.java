@@ -97,7 +97,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
     TextView titleText;
     String userName;
     int starter=0,starterQuestion=0;
-    CountDownTimer c;
+    CountDownTimer c,c1;
     private List<musicQuestionHolder> list, listsecondary;
     private int position=0, score=0, count;
     private int setNo;
@@ -123,7 +123,9 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
-    private class DownloadData extends AsyncTask<String,Void,String> {
+
+
+    private  class DownloadData extends AsyncTask<String,Void,String> {
         private static final String TAG = "DownloadData";
 
         @Override
@@ -131,6 +133,12 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
             super.onPostExecute(s);
             if(loadingDialog.isShowing()){
                 loadingDialog.dismiss();
+            }
+
+            try{
+                DownloadData.this.cancel(true);
+            }catch (Exception e){
+
             }
 
 
@@ -150,7 +158,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     music.start();
                     seekBar.setMax(music.getDuration());
-
+                    music.setLooping(true);
 
                 }
             });
@@ -168,6 +176,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         if((!loadingDialog.isShowing())){
             loadingDialog.show();
         }
+
 
 
 
@@ -207,7 +216,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         animationListner();
         seekerManupulator();
 
-        new CountDownTimer(60*10*1000,1000){
+        c1=new CountDownTimer(60*10*1000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 try {
@@ -826,6 +835,17 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if(c1!=null){
+            c1.cancel();
+        }
+        if(c!=null){
+            c.cancel();
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
         Runtime.getRuntime().gc();
     }
 
@@ -974,6 +994,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                         musicNav.release();
                                     }
                                 });
+
                                 nextButton.setEnabled(false);
                                 nextButton.setAlpha(0.7f);
                                 enableOption(true);
@@ -1039,6 +1060,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                                         clearMediaPlayer();
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
                                         return;
                                     }
 
@@ -1111,9 +1133,10 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                             }
                         });
                     } else {
-                        finish();
                         Toast.makeText(AudioQuizSinglePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
+                        finish();
 
+                       
                     }
                     //loadingDialog.dismiss();
 
@@ -1560,8 +1583,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 clearMediaPlayer();
-                Intent intent=new Intent(AudioQuizSinglePlayer.this,mainMenuActivity.class);
-                intent.putExtra("mainfinder",1);
+                Intent intent=new Intent(AudioQuizSinglePlayer.this,SongChoiceActivity.class);
                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }

@@ -59,7 +59,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID");
-    ValueEventListener listenerFast1;
+    ValueEventListener listenerFast1,lisnerMAIN;
     private List<mainMenuFactsHolder> list;
     private List<onevsoneOnlinePlayerList> list123;
     public ViewPager slideViewPager;
@@ -341,7 +341,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==android.R.id.home){
+            Intent i=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
+           
         }
         return super.onOptionsItemSelected(item);
     }
@@ -480,7 +484,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             }
                         });
                         alertDialog.dismiss();
-                        oneVsOneChoiceActivity.super.onBackPressed();
+                        Intent i=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                        startActivity(i);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
                     }
@@ -721,7 +726,9 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             startActivity(intent);
                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
-                        }}catch (Exception e){
+                               
+
+                            }}catch (Exception e){
                                 Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
                                 intent.putExtra("opponentUID", opponentUID);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
@@ -740,6 +747,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
+                               
+
                             }
                         }else{
                             Intent intent = new Intent(oneVsOneChoiceActivity.this, onevsoneQuizActivity.class);
@@ -760,6 +769,8 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
+                           
+
                         }
 
 
@@ -1482,6 +1493,9 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                                     Intent intent=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
                                                     startActivity(intent);
                                                     finish();
+                                                   
+
+
                                                 }
                                             });
 
@@ -1734,9 +1748,12 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                         });
 
                         myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
-                        oneVsOneChoiceActivity.super.onBackPressed();
+                       Intent i=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+                       startActivity(i);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
+
                     }
                 });
 
@@ -1769,7 +1786,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                 });
 
 
-                myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(new ValueEventListener() {
+                lisnerMAIN=new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -1932,7 +1949,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                        });
+                        };myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").addValueEventListener(lisnerMAIN);
                         }
                     });
     }
@@ -1981,9 +1998,29 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         }catch (Exception e){
 
         }
+        try{
+
+        }catch (Exception e){
+            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeEventListener(lisnerMAIN);
+
+        }
+
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
+        if(countDownTimer123!=null){
+            countDownTimer123.cancel();
+        }
 
         Runtime.getRuntime().gc();
     }
+    public void onBackPressed() {
+        Intent i=new Intent(oneVsOneChoiceActivity.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
 
+    }
 
 }

@@ -177,6 +177,8 @@ public class prizeScoreActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
         });
 
@@ -345,6 +347,12 @@ public class prizeScoreActivity extends AppCompatActivity {
         mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
     }
+    public void onBackPressed() {
+        Intent i=new Intent(prizeScoreActivity.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
 
+    }
 
 }

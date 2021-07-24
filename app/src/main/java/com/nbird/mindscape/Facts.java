@@ -32,3 +32,4 @@ public class Facts {
         this.disText = disText;
     }
 }
+

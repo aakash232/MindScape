@@ -46,6 +46,7 @@ public class HelpGuide3 extends AppCompatActivity {
                 startActivity(skipInt3);
                 flag=true;
                 finish();
+               
             }
         });
 
@@ -175,7 +176,7 @@ public class HelpGuide3 extends AppCompatActivity {
                                                                                            Intent move3 = new Intent(HelpGuide3.this, mainMenuActivity.class);
                                                                                            if(!flag) startActivity(move3);
                                                                                            finish();
-
+                                                                                          
                                                                                        }
                                                                                    },1000);
 

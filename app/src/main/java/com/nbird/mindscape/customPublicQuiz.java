@@ -110,6 +110,9 @@ public class customPublicQuiz extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
     @Override
@@ -764,7 +767,7 @@ public class customPublicQuiz extends AppCompatActivity {
 
                                                     customPublicQuiz.super.onBackPressed();
                                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                    finish();
+                                                    finish();Runtime.getRuntime().gc();
                                                 }
                                             });
 
@@ -783,7 +786,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                                     intent.putExtra("position",cat);
                                                     startActivity(intent);
                                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                    finish();
+                                                    finish();Runtime.getRuntime().gc();
                                                 }
                                             });
 
@@ -803,7 +806,7 @@ public class customPublicQuiz extends AppCompatActivity {
                         } else {
                             finish();
                             Toast.makeText(customPublicQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                           
                         }
 
                     }
@@ -814,7 +817,7 @@ public class customPublicQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(customPublicQuiz.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     loadingDialog.dismiss();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
         }else{
@@ -1056,7 +1059,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                                    buttonMusic();
                                                    customPublicQuiz.super.onBackPressed();
                                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                   finish();
+                                                   finish();Runtime.getRuntime().gc();
                                                }
                                            });
 
@@ -1073,7 +1076,7 @@ public class customPublicQuiz extends AppCompatActivity {
                                                     Intent intent=new Intent(customPublicQuiz.this,customCategoryListActivity.class);
                                                     intent.putExtra("position",cat);
                                                     startActivity(intent);
-                                                    finish();
+                                                    finish();Runtime.getRuntime().gc();
                                                 }
                                             });
 
@@ -1093,7 +1096,7 @@ public class customPublicQuiz extends AppCompatActivity {
                         } else {
                             finish();
                             Toast.makeText(customPublicQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                           
                         }
 
                     }
@@ -1104,7 +1107,7 @@ public class customPublicQuiz extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(customPublicQuiz.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     loadingDialog.dismiss();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
         }
@@ -1442,7 +1445,7 @@ public class customPublicQuiz extends AppCompatActivity {
                     countDownTimer.cancel();}
                 customPublicQuiz.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
 
 
             }

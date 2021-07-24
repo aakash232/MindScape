@@ -84,6 +84,7 @@ public class customQuizListAdapter extends RecyclerView.Adapter<customQuizListAd
                 intent.putExtra("numberOfTimesPlayed",listItem.get(position).getNumberOfTimesPlayed());
                 context.startActivity(intent);
                 ((Activity)context).finish();
+                Runtime.getRuntime().gc();
             }
         });
 

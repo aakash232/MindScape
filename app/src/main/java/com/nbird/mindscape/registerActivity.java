@@ -198,6 +198,7 @@ public class registerActivity extends AppCompatActivity {
                                         startActivity(new Intent(getApplicationContext(),loginActivity.class));
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                         finish();
+                                       
 
                                     }
                                 }

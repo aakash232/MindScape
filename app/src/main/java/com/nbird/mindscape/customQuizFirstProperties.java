@@ -97,7 +97,7 @@ public class customQuizFirstProperties extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
-            finish();
+            finish();Runtime.getRuntime().gc();
         }
 
 

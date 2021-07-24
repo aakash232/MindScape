@@ -108,6 +108,9 @@ public class KbcSetup extends AppCompatActivity {
         if(countDownTimer100!=null){
             countDownTimer100.cancel();
         }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
 
@@ -700,7 +703,7 @@ public class KbcSetup extends AppCompatActivity {
                 KbcSetup.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
-
+               
             }
         });
 
@@ -730,6 +733,7 @@ public class KbcSetup extends AppCompatActivity {
                         KbcSetup.super.onBackPressed();
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
                     } else {
 
                     }
@@ -790,7 +794,7 @@ public class KbcSetup extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(KbcSetup.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
                     if(loadingDialog!=null)
                         loadingDialog.dismiss();
@@ -803,6 +807,7 @@ public class KbcSetup extends AppCompatActivity {
                 if(loadingDialog!=null)
                     loadingDialog.dismiss();
                 finish();
+               
             }
         });
     }
@@ -1004,7 +1009,7 @@ public class KbcSetup extends AppCompatActivity {
                         alertDialog.dismiss();
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
-
+                       
                     }
                 });
 
@@ -1061,7 +1066,7 @@ public class KbcSetup extends AppCompatActivity {
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
 
                         finish();
-
+                       
                     }
                 });
             }
@@ -1176,6 +1181,7 @@ public class KbcSetup extends AppCompatActivity {
                         startActivity(i);
                         alertDialog.cancel();
                         finish();
+                       
                     }
 
                 });
@@ -1194,6 +1200,7 @@ public class KbcSetup extends AppCompatActivity {
                 startActivity(i);
                 alertDialog.cancel();
                 finish();
+               
 
             }
         });
@@ -1307,6 +1314,7 @@ public class KbcSetup extends AppCompatActivity {
                         startActivity(i);
                         alertDialog.cancel();
                         finish();
+                       
                     }
 
                 });
@@ -1323,7 +1331,7 @@ public class KbcSetup extends AppCompatActivity {
                 }
                 startActivity(i);
                 alertDialog.cancel();
-                finish();
+                finish();Runtime.getRuntime().gc();
 
             }
         });
@@ -1390,7 +1398,7 @@ public class KbcSetup extends AppCompatActivity {
                 alertDialog.cancel();
                 KbcSetup.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 

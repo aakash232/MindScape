@@ -82,9 +82,20 @@ public class tournamentScoreActivity extends AppCompatActivity {
     barGroupHolder man;
     int numMode;
     ValueEventListener lisnernumber1,lisnernumber2,lisnernumber3,lisnerdog1;
+    ValueEventListener lisner89,lisnerdog0,lisnerdog2,lisnerdog3,lisnerdog4,lisnerdog5,lisnerdog6,lisnerdog7,lisnerdog8,lisnerdog9,lisnerdog10,lisnerdog11,lisnerdog12,lisnerdog13;
+    ValueEventListener lisnerdog14,lisnerdog15,lisnerdog16,lisnerdog17,lisnerdog18,lisnerdog19,lisnerdog20,lisnerdog21,lisnerdog22,lisnerdog23,lisnerdog24,lisnerdog25;
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+
+        Runtime.getRuntime().gc();
+
+       
+    }
+
+
+    public void allLisnerAndTimerRemover(){
         try{
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(lisner89);
         }catch (Exception e){
@@ -171,10 +182,195 @@ public class tournamentScoreActivity extends AppCompatActivity {
                 }break;
         }
 
-        Runtime.getRuntime().gc();
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").removeEventListener(lisnerdog0);
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Data").removeEventListener(lisnerdog2);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Data").removeEventListener(lisnerdog3);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Data").removeEventListener(lisnerdog4);
+        }catch (Exception e){
+
+        }
+
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Data").removeEventListener(lisnerdog2);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Data").removeEventListener(lisnerdog3);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Data").removeEventListener(lisnerdog4);
+        }catch (Exception e){
+
+        }
+
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Data").removeEventListener(lisnerdog2);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Data").removeEventListener(lisnerdog3);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Data").removeEventListener(lisnerdog4);
+        }catch (Exception e){
+
+        }
+
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Data").removeEventListener(lisnerdog2);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Data").removeEventListener(lisnerdog3);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Data").removeEventListener(lisnerdog4);
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Data").child("scoreInt").removeEventListener(lisnerdog5);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Data").child("scoreInt").removeEventListener(lisnerdog5);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Data").child("scoreInt").removeEventListener(lisnerdog5);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Data").child("scoreInt").removeEventListener(lisnerdog5);
+        }catch (Exception e){
+
+        }
+
+        lisnerremover("player1Answer",1,lisnerdog6);
+        lisnerremover("player1Answer",2,lisnerdog7);
+        lisnerremover("player1Answer",3,lisnerdog8);
+        lisnerremover("player1Answer",4,lisnerdog9);
+        lisnerremover("player1Answer",5,lisnerdog10);
+        lisnerremover("player1Answer",6,lisnerdog11);
+        lisnerremover("player1Answer",7,lisnerdog12);
+        lisnerremover("player1Answer",8,lisnerdog13);
+        lisnerremover("player1Answer",9,lisnerdog14);
+        lisnerremover("player1Answer",10,lisnerdog15);
+        lisnerremover("player1Answer",11,lisnerdog16);
+        lisnerremover("player1Answer",2,lisnerdog17);
+        lisnerremover("player1Answer",13,lisnerdog18);
+        lisnerremover("player1Answer",14,lisnerdog19);
+        lisnerremover("player1Answer",15,lisnerdog20);
+        lisnerremover("player1Answer",16,lisnerdog21);
+        lisnerremover("player1Answer",17,lisnerdog22);
+        lisnerremover("player1Answer",18,lisnerdog23);
+        lisnerremover("player1Answer",19,lisnerdog24);
+        lisnerremover("player1Answer",20,lisnerdog25);
+
+        lisnerremover("player2Answer",1,lisnerdog6);
+        lisnerremover("player2Answer",2,lisnerdog7);
+        lisnerremover("player2Answer",3,lisnerdog8);
+        lisnerremover("player2Answer",4,lisnerdog9);
+        lisnerremover("player2Answer",5,lisnerdog10);
+        lisnerremover("player2Answer",6,lisnerdog11);
+        lisnerremover("player2Answer",7,lisnerdog12);
+        lisnerremover("player2Answer",8,lisnerdog13);
+        lisnerremover("player2Answer",9,lisnerdog14);
+        lisnerremover("player2Answer",10,lisnerdog15);
+        lisnerremover("player2Answer",11,lisnerdog16);
+        lisnerremover("player2Answer",2,lisnerdog17);
+        lisnerremover("player2Answer",13,lisnerdog18);
+        lisnerremover("player2Answer",14,lisnerdog19);
+        lisnerremover("player2Answer",15,lisnerdog20);
+        lisnerremover("player2Answer",16,lisnerdog21);
+        lisnerremover("player2Answer",17,lisnerdog22);
+        lisnerremover("player2Answer",18,lisnerdog23);
+        lisnerremover("player2Answer",19,lisnerdog24);
+        lisnerremover("player2Answer",20,lisnerdog25);
+
+        lisnerremover("player3Answer",1,lisnerdog6);
+        lisnerremover("player3Answer",2,lisnerdog7);
+        lisnerremover("player3Answer",3,lisnerdog8);
+        lisnerremover("player3Answer",4,lisnerdog9);
+        lisnerremover("player3Answer",5,lisnerdog10);
+        lisnerremover("player3Answer",6,lisnerdog11);
+        lisnerremover("player3Answer",7,lisnerdog12);
+        lisnerremover("player3Answer",8,lisnerdog13);
+        lisnerremover("player3Answer",9,lisnerdog14);
+        lisnerremover("player3Answer",10,lisnerdog15);
+        lisnerremover("player3Answer",11,lisnerdog16);
+        lisnerremover("player3Answer",2,lisnerdog17);
+        lisnerremover("player3Answer",13,lisnerdog18);
+        lisnerremover("player3Answer",14,lisnerdog19);
+        lisnerremover("player3Answer",15,lisnerdog20);
+        lisnerremover("player3Answer",16,lisnerdog21);
+        lisnerremover("player3Answer",17,lisnerdog22);
+        lisnerremover("player3Answer",18,lisnerdog23);
+        lisnerremover("player3Answer",19,lisnerdog24);
+        lisnerremover("player3Answer",20,lisnerdog25);
+
+        lisnerremover("player4Answer",1,lisnerdog6);
+        lisnerremover("player4Answer",2,lisnerdog7);
+        lisnerremover("player4Answer",3,lisnerdog8);
+        lisnerremover("player4Answer",4,lisnerdog9);
+        lisnerremover("player4Answer",5,lisnerdog10);
+        lisnerremover("player4Answer",6,lisnerdog11);
+        lisnerremover("player4Answer",7,lisnerdog12);
+        lisnerremover("player4Answer",8,lisnerdog13);
+        lisnerremover("player4Answer",9,lisnerdog14);
+        lisnerremover("player4Answer",10,lisnerdog15);
+        lisnerremover("player4Answer",11,lisnerdog16);
+        lisnerremover("player4Answer",2,lisnerdog17);
+        lisnerremover("player4Answer",13,lisnerdog18);
+        lisnerremover("player4Answer",14,lisnerdog19);
+        lisnerremover("player4Answer",15,lisnerdog20);
+        lisnerremover("player4Answer",16,lisnerdog21);
+        lisnerremover("player4Answer",17,lisnerdog22);
+        lisnerremover("player4Answer",18,lisnerdog23);
+        lisnerremover("player4Answer",19,lisnerdog24);
+        lisnerremover("player4Answer",20,lisnerdog25);
     }
 
-    ValueEventListener lisner89;
+    public void lisnerremover(String str,int i,ValueEventListener lisner){
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode)).child(str).child(String.valueOf(i)).removeEventListener(lisner);
+        }catch (Exception e){
+
+        }
+
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -552,7 +748,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
                     }catch (Exception e){
                         int k=0;
                         if(playerNum==2){
-                            k=0;
+                            k=1;
                         }else if(playerNum==3){
                             k=3;
                         }else if(playerNum==4){
@@ -590,13 +786,15 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                             }else{
                                                 Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
                                                 startActivity(intent);
-                                                Toast.makeText(tournamentScoreActivity.this, "Room Is Full!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(tournamentScoreActivity.this, "Room Is Full OR Host Left The Game", Toast.LENGTH_LONG).show();
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                finish();
+                                                allLisnerAndTimerRemover();
+                                                finish();Runtime.getRuntime().gc();
                                             }
 
                                         }catch (Exception e){
 
+                                        //    Toast.makeText(tournamentScoreActivity.this, "It Seems Host Has Left The Room! Please Join Another Room Or Create One", Toast.LENGTH_SHORT).show();
 
                                         }
 
@@ -825,16 +1023,29 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
 
         if(playerNum==2||playerNum==3||playerNum==4){
-            myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").addValueEventListener(new ValueEventListener() {
+            lisnerdog0=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
                         j=snapshot.getValue(Integer.class);
                         if(j==1){
+                            try {
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                            }catch (Exception e){
+
+                            }
+                            if(Countdownlast!=null){
+                                Countdownlast.cancel();
+                            }
                             lobbyButton.setEnabled(false);
                             lobbyButton.setAlpha(0.8f);
                             lobbyButton.setText("Host Has Left The Room");
                             lobbyButton.setTextSize(10);
+                            numberOfPlayersReducerNotHostBecauseOfHost(1);
+                            numberOfPlayersReducerNotHostBecauseOfHost(0);
+                            quitorjoinasker();
+
+
                         }
                     }catch (Exception e){
 
@@ -846,7 +1057,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            }; myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").addValueEventListener(lisnerdog0);
         }
 
 
@@ -872,9 +1083,25 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
                 }
 
+
+
                 if(playerNum==1){
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
                     del(mAuth.getCurrentUser().getUid());
                 }else{
+                    try {
+                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                    }catch (Exception e){
+
+                    }
+                    if(Countdownlast!=null){
+                        Countdownlast.cancel();
+                    }
                     del(hostUid);
                 }
             }
@@ -918,6 +1145,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                 }
                             });
 
+
+
+
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("gameStarter").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -949,7 +1179,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                            finish();
+                            allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
 
                         }
                     });
@@ -964,6 +1195,79 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void quitorjoinasker(){
+        final MediaPlayer musicNav;
+        musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.lifelineused);
+        musicNav.start();
+        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                musicNav.reset();
+                musicNav.release();
+            }
+        });
+        AlertDialog.Builder builder=new AlertDialog.Builder(tournamentScoreActivity.this,R.style.AlertDialogTheme);
+
+        final View view1= LayoutInflater.from(tournamentScoreActivity.this).inflate(R.layout.askingtomoveintournamentchoiceactivity,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+        builder.setView(view1);
+        builder.setCancelable(true);
+        Button buttonYes=(Button) view1.findViewById(R.id.buttonYes);
+        Button buttonNo=(Button) view1.findViewById(R.id.buttonNo);
+
+
+        final AlertDialog alertDialog=builder.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                try {
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                }catch (Exception e){
+
+                }
+
+
+
+                if(playerNum==1){
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                    del47(mAuth.getCurrentUser().getUid());
+                }else{
+                    del47(hostUid);
+                }
+            }
+        });
     }
 
     public void fishManu(final int kali){
@@ -1055,8 +1359,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                 //  myRef.child("room").child(hostUid).child("numberOfPlayers").removeEventListener(listner99);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                allLisnerAndTimerRemover();
                 finish();
-
+               
             }
         });
     }
@@ -1087,6 +1392,14 @@ public class tournamentScoreActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                }catch (Exception e){
+
+                }
+                if(Countdownlast!=null){
+                    Countdownlast.cancel();
+                }
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(tournamentScoreActivity.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -1098,6 +1411,12 @@ public class tournamentScoreActivity extends AppCompatActivity {
                     }
                 });
                 if(playerNum==1){
+                    myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
                     del(mAuth.getCurrentUser().getUid());
                 }else{
                     del(hostUid);
@@ -1386,12 +1705,21 @@ public class tournamentScoreActivity extends AppCompatActivity {
                 try {
                     int swaper = snapshot.getValue(Integer.class);
                     if (swaper == 0) {
+                        try {
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("OnCompleteHolder").removeEventListener(listner45);
+                        }catch (Exception e){
+
+                        }
+                        if(Countdownlast!=null){
+                            Countdownlast.cancel();
+                        }
                         lobbyButton.setEnabled(false);
                         lobbyButton.setAlpha(0.6f);
                         lobbyButton.setText("Host Has Left The Room");
                         lobbyButton.setTextSize(10);
                         numberOfPlayersReducerNotHostBecauseOfHost(1);
                         numberOfPlayersReducerNotHostBecauseOfHost(0);
+                        quitorjoinasker();
                     }
                 }catch (Exception e) {
 
@@ -1633,7 +1961,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                            finish();
+                            allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
                         }else{
                             Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
 
@@ -1657,8 +1986,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             }
 
                             startActivity(intent);   overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            allLisnerAndTimerRemover();
                             finish();
-
+                           
                         }
                     }else {
                         if(playerNum==1){
@@ -1678,9 +2008,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                           // startActivity(intent);
+                                          //  overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                         //   finish();
                                         }
                                     });
 
@@ -1717,7 +2047,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
                                                 startActivity(intent);
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                finish();
+                                                allLisnerAndTimerRemover();
+                                                finish();Runtime.getRuntime().gc();
                                             }
                                         });
                                     }
@@ -1745,7 +2076,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         }else if(playerNum==3){
                                             Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
 
@@ -1759,7 +2091,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         }else{
                                             Intent intent=new Intent(tournamentScoreActivity.this,mainMenuActivity.class);
 
@@ -1773,7 +2106,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         }
 
                                     }
@@ -1796,8 +2130,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                         case 4:
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
                     }
-                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                    finish();
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                    finish();Runtime.getRuntime().gc();
                 }
 
 
@@ -1829,8 +2163,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
 
                             startActivity(intent);
-                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                            finish();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
                         } else {
                             Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
 
@@ -1852,8 +2186,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
                             }
                             startActivity(intent);
-                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                            finish();
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
 
                         }
                     } else {
@@ -1876,8 +2210,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
 
                                             startActivity(intent);
-                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         }
                                     });
 
@@ -1918,8 +2252,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
 
                                                 startActivity(intent);
-                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                finish();
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                                finish();Runtime.getRuntime().gc();
                                             }
                                         });
                                     }
@@ -1946,8 +2280,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
-                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         } else if (playerNum == 3) {
                                             Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
 
@@ -1960,8 +2294,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
-                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         } else {
                                             Intent intent = new Intent(tournamentScoreActivity.this, mainMenuActivity.class);
 
@@ -1973,8 +2307,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
                                                 countDownTimer1234.cancel();
                                             }
                                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
-                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                            finish();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
                                         }
 
                                     }
@@ -1998,8 +2332,408 @@ public class tournamentScoreActivity extends AppCompatActivity {
                         case 4:
                             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
                     }
-                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                    finish();
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                    finish();Runtime.getRuntime().gc();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void del47(String u){
+        myRef.child("room").child(String.valueOf(1)).child(u).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                try{
+                    int num=snapshot.getValue(Integer.class);
+                    num--;
+                    if(num==0){
+                        if(playerNum==1){
+                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+
+                            holeDeleteIfRoomIsEmpty(mAuth.getCurrentUser().getUid());
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer1234!=null){
+                                countDownTimer1234.cancel();
+                            }
+
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
+                        }else{
+                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+
+                            holeDeleteIfRoomIsEmpty(hostUid);
+                            if(countDownTimer!=null){
+                                countDownTimer.cancel();
+                            }
+                            if(countDownTimer1234!=null){
+                                countDownTimer1234.cancel();
+                            }
+                            if(playerNum==2){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                            }else if(playerNum==3){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+                            }else if(playerNum==4){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+                            }
+
+                            startActivity(intent);   overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
+
+                        }
+                    }else {
+                        if(playerNum==1){
+                            final int finalNum = num;
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
+                                            }
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+                                            // startActivity(intent);
+                                            //  overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                            //   finish();
+                                        }
+                                    });
+
+                                }
+                            });
+                        }else{
+                            if(j==1){
+                                switch (playerNum){
+                                    case 2:
+                                        deleter("player2Answer","player2Data","player2Status","player2Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                                    case 3:
+                                        deleter("player3Answer","player3Data","player3Status","player3Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                                    case 4:
+                                        deleter("player4Answer","player4Data","player4Status","player4Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                                }
+
+                                myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        int m=snapshot.getValue(Integer.class);
+                                        m--;
+                                        myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(countDownTimer!=null){
+                                                    countDownTimer.cancel();
+                                                }
+                                                if(countDownTimer1234!=null){
+                                                    countDownTimer1234.cancel();
+                                                }
+                                                Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                                finish();Runtime.getRuntime().gc();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                            }else{
+                                myRef.child("room").child(String.valueOf(1)).child(hostUid).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(playerNum==2){
+                                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+
+                                            deleter("player2Answer","player2Data","player2Status","player2Uid");
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
+                                            }
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        }else if(playerNum==3){
+                                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+
+                                            deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
+                                            }
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        }else{
+                                            Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+
+                                            deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                            if(countDownTimer!=null){
+                                                countDownTimer.cancel();
+                                            }
+                                            if(countDownTimer1234!=null){
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        }
+
+                                    }
+                                });
+                            }
+
+
+                        }
+
+                    }
+
+                }catch (Exception e){
+                    Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+                    startActivity(intent);
+                    switch (playerNum){
+                        case 2:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                        case 3:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                        case 4:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                    }
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                    finish();Runtime.getRuntime().gc();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        myRef.child("room").child(String.valueOf(0)).child(u).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    int num = snapshot.getValue(Integer.class);
+                    num--;
+                    if (num == 0) {
+                        if (playerNum == 1) {
+                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                            holeDeleteIfRoomIsEmpty(mAuth.getCurrentUser().getUid());
+                            if (countDownTimer != null) {
+                                countDownTimer.cancel();
+                            }
+                            if (countDownTimer1234 != null) {
+                                countDownTimer1234.cancel();
+                            }
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();Runtime.getRuntime().gc();
+                        } else {
+                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                            holeDeleteIfRoomIsEmpty(hostUid);
+                            if (countDownTimer != null) {
+                                countDownTimer.cancel();
+                            }
+                            if (countDownTimer1234 != null) {
+                                countDownTimer1234.cancel();
+                            }
+                            if(playerNum==2){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+
+                            }else if(playerNum==3){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+
+                            }else if(playerNum==4){
+                                myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+
+                            }
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                            finish();
+                           
+                        }
+                    } else {
+                        if (playerNum == 1) {
+                            final int finalNum = num;
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("exit").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).child("numberOfPlayers").setValue(finalNum).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                                            if (countDownTimer != null) {
+                                                countDownTimer.cancel();
+                                            }
+                                            if (countDownTimer1234 != null) {
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").onDisconnect().cancel();
+
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        }
+                                    });
+
+
+                                }
+                            });
+                        } else {
+                            if (j == 1) {
+                                switch (playerNum) {
+                                    case 2:
+                                        deleter("player2Answer", "player2Data", "player2Status", "player2Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                        break;
+                                    case 3:
+                                        deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                        break;
+                                    case 4:
+                                        deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                        myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                        break;
+                                }
+
+                                myRef.child("room").child(String.valueOf(0)).child(hostUid).child("numberOfPlayers").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        int m = snapshot.getValue(Integer.class);
+                                        m--;
+                                        myRef.child("room").child(String.valueOf(0)).child(hostUid).child("numberOfPlayers").setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (countDownTimer != null) {
+                                                    countDownTimer.cancel();
+                                                }
+                                                if (countDownTimer1234 != null) {
+                                                    countDownTimer1234.cancel();
+                                                }
+                                                Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                                                startActivity(intent);
+                                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                                finish();Runtime.getRuntime().gc();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+
+                            } else {
+                                myRef.child("room").child(String.valueOf(0)).child(hostUid).child("numberOfPlayers").setValue(num).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (playerNum == 2) {
+                                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                                            deleter("player2Answer", "player2Data", "player2Status", "player2Uid");
+                                            if (countDownTimer != null) {
+                                                countDownTimer.cancel();
+                                            }
+                                            if (countDownTimer1234 != null) {
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        } else if (playerNum == 3) {
+                                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+
+                                            deleter("player3Answer", "player3Data", "player3Status", "player3Uid");
+                                            if (countDownTimer != null) {
+                                                countDownTimer.cancel();
+                                            }
+                                            if (countDownTimer1234 != null) {
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        } else {
+                                            Intent intent = new Intent(tournamentScoreActivity.this, tournamentChoiceActicity.class);
+
+                                            deleter("player4Answer", "player4Data", "player4Status", "player4Uid");
+                                            if (countDownTimer != null) {
+                                                countDownTimer.cancel();
+                                            }
+                                            if (countDownTimer1234 != null) {
+                                                countDownTimer1234.cancel();
+                                            }
+                                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();
+                                            startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                                            finish();Runtime.getRuntime().gc();
+                                        }
+
+                                    }
+                                });
+                            }
+
+
+                        }
+
+                    }
+
+
+                } catch (Exception e) {
+                    Intent intent=new Intent(tournamentScoreActivity.this,tournamentChoiceActicity.class);
+                    startActivity(intent);
+                    switch (playerNum){
+                        case 2:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").onDisconnect().cancel();break;
+                        case 3:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").onDisconnect().cancel();break;
+                        case 4:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").onDisconnect().cancel();break;
+                    }
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);allLisnerAndTimerRemover();
+                    finish();Runtime.getRuntime().gc();
                 }
             }
 
@@ -3852,20 +4586,56 @@ public class tournamentScoreActivity extends AppCompatActivity {
     }
 
     public void opponentDataGetter(String playerAData, String playerBData, String playerCData){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAData).addValueEventListener(new ValueEventListener() {
+        lisnerdog2=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
-                    tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
+                    final tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
                     switch (playerNum){
                         case 1:
-                            scoreGetter("player2Data");
-                            uiDataSetter(s,accuracy2,totalLifeLines2,totalTimeTaken2,correctvswrong2,score2,img2,propic2,headText2,name2,image2Url,name2String,player2Shimmer,player2ShimmerPic);break;
-                        case 2:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player2Data");
+                                            uiDataSetter(s,accuracy2,totalLifeLines2,totalTimeTaken2,correctvswrong2,score2,img2,propic2,headText2,name2,image2Url,name2String,player2Shimmer,player2ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            }); break;
+                            case 2:
                         case 3:
                         case 4:
-                            scoreGetter("player1Data");
-                            uiDataSetter(s,accuracy1,totalLifeLines1,totalTimeTaken1,correctvswrong1,score1,img1,propic1,headText1,name1,hostImageUrl,hostName, player1Shimmer, player1ShimmerPic);break;
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player1Data");
+                                            uiDataSetter(s,accuracy1,totalLifeLines1,totalTimeTaken1,correctvswrong1,score1,img1,propic1,headText1,name1,hostImageUrl,hostName, player1Shimmer, player1ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });break;
                     }
 
                 }catch (Exception e){
@@ -3877,23 +4647,58 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAData).addValueEventListener(lisnerdog2);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerBData).addValueEventListener(new ValueEventListener() {
+        lisnerdog3=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
-                    tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
+                    final tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
                     switch (playerNum){
                         case 1:
                         case 2:
-                            scoreGetter("player3Data");
-                            uiDataSetter(s,accuracy3,totalLifeLines3,totalTimeTaken3,correctvswrong3,score3,img3,propic3,headText3,name3,image3Url,name3String, player3Shimmer, player3ShimmerPic);break;
-                        case 3:
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player3Data");
+                                            uiDataSetter(s,accuracy3,totalLifeLines3,totalTimeTaken3,correctvswrong3,score3,img3,propic3,headText3,name3,image3Url,name3String, player3Shimmer, player3ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            }); break;
+                            case 3:
                         case 4:
-                            scoreGetter("player2Data");
-                            uiDataSetter(s,accuracy2,totalLifeLines2,totalTimeTaken2,correctvswrong2,score2,img2,propic2,headText2,name2,image2Url,name2String, player2Shimmer, player2ShimmerPic);break;
-                    }
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player2Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player2Data");
+                                            uiDataSetter(s,accuracy2,totalLifeLines2,totalTimeTaken2,correctvswrong2,score2,img2,propic2,headText2,name2,image2Url,name2String, player2Shimmer, player2ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });break;
+                                   }
 
                 }catch (Exception e){
 
@@ -3904,24 +4709,58 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerBData).addValueEventListener(lisnerdog3);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerCData).addValueEventListener(new ValueEventListener() {
+        lisnerdog4=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
-                    tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
+                    final tournamentUserDataHolder s=snapshot.getValue(tournamentUserDataHolder.class);
                     switch (playerNum){
                         case 1:
                         case 2:
                         case 3:
-                            scoreGetter("player4Data");
-                            uiDataSetter(s,accuracy4,totalLifeLines4,totalTimeTaken4,correctvswrong4,score4,img4,propic4,headText4,name4,image4Url,name4String, player4Shimmer, player4ShimmerPic);break;
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player4Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player4Data");
+                                            uiDataSetter(s,accuracy4,totalLifeLines4,totalTimeTaken4,correctvswrong4,score4,img4,propic4,headText4,name4,image4Url,name4String, player4Shimmer, player4ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });break;
 
                         case 4:
-                            scoreGetter("player3Data");
-                            uiDataSetter(s,accuracy3,totalLifeLines3,totalTimeTaken3,correctvswrong3,score3,img3,propic3,headText3,name3,image3Url,name3String, player3Shimmer, player3ShimmerPic);break;
-                    }
+                            myRef.child("Lobby").child(String.valueOf(roomCode)).child("player3Status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try{
+                                        if(snapshot.getValue(Integer.class)==1){
+                                            scoreGetter("player3Data");
+                                            uiDataSetter(s,accuracy3,totalLifeLines3,totalTimeTaken3,correctvswrong3,score3,img3,propic3,headText3,name3,image3Url,name3String, player3Shimmer, player3ShimmerPic);
+
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });break;
+                                 }
 
                 }catch (Exception e){
 
@@ -3932,11 +4771,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerCData).addValueEventListener(lisnerdog4);
     }
 
     public void scoreGetter(final String playerData){
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).child("scoreInt").addValueEventListener(new ValueEventListener() {
+        lisnerdog5=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
@@ -3960,7 +4799,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerData).child("scoreInt").addValueEventListener(lisnerdog5);
     }
 
     public void uiDataSetter( tournamentUserDataHolder s, TextView accuracy, TextView totalLifeLines, TextView totalTimeTaken, TextView correctvswrong, TextView score, ImageView img, ImageView propic, TextView headText, TextView name, String imageUrl, String nameString, ShimmerFrameLayout playerShimmer, ShimmerFrameLayout playerShimmerPic){
@@ -4000,7 +4839,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
 
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(1)).addValueEventListener(new ValueEventListener() {
+        lisnerdog6=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -4026,9 +4865,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(1)).addValueEventListener(lisnerdog6);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(2)).addValueEventListener(new ValueEventListener() {
+        lisnerdog7=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4049,9 +4888,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(2)).addValueEventListener(lisnerdog7);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(3)).addValueEventListener(new ValueEventListener() {
+        lisnerdog8=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4073,9 +4912,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(3)).addValueEventListener(lisnerdog8);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
+        lisnerdog9=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4097,9 +4936,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(4)).addValueEventListener(lisnerdog9);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(5)).addValueEventListener(new ValueEventListener() {
+        lisnerdog10=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4121,9 +4960,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(5)).addValueEventListener(lisnerdog10);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(6)).addValueEventListener(new ValueEventListener() {
+        lisnerdog11=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4145,9 +4984,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(6)).addValueEventListener(lisnerdog11);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(7)).addValueEventListener(new ValueEventListener() {
+        lisnerdog12=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4169,9 +5008,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(7)).addValueEventListener(lisnerdog12);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(8)).addValueEventListener(new ValueEventListener() {
+        lisnerdog13=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4193,9 +5032,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(8)).addValueEventListener(lisnerdog13);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(9)).addValueEventListener(new ValueEventListener() {
+        lisnerdog14=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4217,9 +5056,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(9)).addValueEventListener(lisnerdog14);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(10)).addValueEventListener(new ValueEventListener() {
+        lisnerdog15=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4242,9 +5081,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(10)).addValueEventListener(lisnerdog15);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(11)).addValueEventListener(new ValueEventListener() {
+        lisnerdog16=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4267,9 +5106,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(11)).addValueEventListener(lisnerdog16);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(12)).addValueEventListener(new ValueEventListener() {
+        lisnerdog17=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4292,9 +5131,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(12)).addValueEventListener(lisnerdog17);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(13)).addValueEventListener(new ValueEventListener() {
+        lisnerdog18=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4316,9 +5155,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(13)).addValueEventListener(lisnerdog18);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(14)).addValueEventListener(new ValueEventListener() {
+        lisnerdog19=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4340,9 +5179,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(14)).addValueEventListener(lisnerdog19);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(15)).addValueEventListener(new ValueEventListener() {
+        lisnerdog20=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4364,9 +5203,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(15)).addValueEventListener(lisnerdog20);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(16)).addValueEventListener(new ValueEventListener() {
+        lisnerdog21=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4388,9 +5227,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(16)).addValueEventListener(lisnerdog21);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(17)).addValueEventListener(new ValueEventListener() {
+        lisnerdog22=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4412,9 +5251,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(17)).addValueEventListener(lisnerdog22);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(18)).addValueEventListener(new ValueEventListener() {
+        lisnerdog23=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4436,9 +5275,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(18)).addValueEventListener(lisnerdog23);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(19)).addValueEventListener(new ValueEventListener() {
+        lisnerdog24=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4460,9 +5299,9 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }; myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(19)).addValueEventListener(lisnerdog24);
 
-        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(20)).addValueEventListener(new ValueEventListener() {
+        lisnerdog25=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
@@ -4483,7 +5322,8 @@ public class tournamentScoreActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        myRef.child("Lobby").child(String.valueOf(roomCode)).child(playerAnswer).child(String.valueOf(20)).addValueEventListener(lisnerdog25);
 
 
     }

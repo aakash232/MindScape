@@ -561,7 +561,8 @@ public class scoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-                    scoreActivity.super.onBackPressed();
+                   Intent i=new Intent(scoreActivity.this,mainMenuActivity.class);
+                   startActivity(i);
                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -581,7 +582,6 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,AudioQuizSinglePlayer.class);
-                    intent.putExtra("mainfinder",1);
                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -601,7 +601,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
-                    intent.putExtra("mainfinder",1);
+
                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -621,7 +621,6 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,VideoQuizSinglePlayer.class);
-                    intent.putExtra("mainfinder",1);
                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -641,7 +640,7 @@ public class scoreActivity extends AppCompatActivity {
                         }
                     });
                     Intent intent=new Intent(scoreActivity.this,mainMenuActivity.class);
-                    intent.putExtra("mainfinder",1);
+
                     startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -680,7 +679,8 @@ public class scoreActivity extends AppCompatActivity {
                             musicNav.release();
                         }
                     });
-                    scoreActivity.super.onBackPressed();
+                    Intent i=new Intent(scoreActivity.this,mainMenuActivity.class);
+                    startActivity(i);
                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
                 }
@@ -991,6 +991,10 @@ public class scoreActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+        Intent i=new Intent(scoreActivity.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
 
     }
 

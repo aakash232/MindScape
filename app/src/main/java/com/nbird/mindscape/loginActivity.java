@@ -210,6 +210,7 @@ public class loginActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         loadingDialog.dismiss();
                                                         finish();
+                                                       
                                                     } else {
                                                         Toast.makeText(loginActivity.this, "Record Not Saved!", Toast.LENGTH_LONG).show();
                                                     }
@@ -233,7 +234,7 @@ public class loginActivity extends AppCompatActivity {
                             startActivity(intent);
                             loadingDialog.dismiss();
                             finish();
-
+                           
 
 
 
@@ -259,7 +260,7 @@ public class loginActivity extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                     finish();
-
+                   
                 }
             }
         });

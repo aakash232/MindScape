@@ -76,6 +76,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -90,6 +91,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -104,6 +106,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -119,6 +122,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -133,6 +137,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -148,6 +153,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -163,6 +169,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -178,6 +185,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -192,6 +200,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -207,6 +216,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -222,6 +232,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -236,6 +247,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -251,6 +263,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -266,6 +279,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -281,6 +295,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -296,6 +311,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -311,6 +327,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -326,6 +343,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -341,6 +359,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 
@@ -356,6 +375,7 @@ public class singleModeListView extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
     }
@@ -364,11 +384,23 @@ public class singleModeListView extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==android.R.id.home){
+            Intent i=new Intent(singleModeListView.this,mainMenuActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
+           
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        Intent i=new Intent(singleModeListView.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
+
     }
 
 }

@@ -70,6 +70,7 @@ public class welcomeActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),mainMenuActivity.class));
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             finish();
+           
         }
 
 
@@ -250,7 +251,7 @@ public class welcomeActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         loadingDialog.dismiss();
                                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                        finish();
+                                                        finish();Runtime.getRuntime().gc();
                                                     } else {
                                                         Toast.makeText(welcomeActivity.this, "Record Not Saved!", Toast.LENGTH_LONG).show();
                                                     }
@@ -274,7 +275,7 @@ public class welcomeActivity extends AppCompatActivity {
                             loadingDialog.dismiss();
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
-
+                           
 
 
 

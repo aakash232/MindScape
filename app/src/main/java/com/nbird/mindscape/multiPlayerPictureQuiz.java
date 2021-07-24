@@ -119,7 +119,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
     int myArrPos=1;
     CardView audienceLL,expertAdviceLL,fiftyfiftyLL,swapTheQuestionLL;
     LinearLayout linearLayoutexpert,linearLayoutAudience,linearLayoutFiftyFifty,linearLayoutSwap;
-
+    int kitkat=0;
     int minutes=2;
     int second=59;
     String minutestext,myProPicUrl,myName;
@@ -323,28 +323,10 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
         //countDownTimerFun50();
 
-        c=new CountDownTimer(1000*180,1000) {
-            @Override
-            public void onTick(long l) {
-                if(questionImage.getDrawable() != null){
-                    try {
-                        if(c!=null){
-                            c.cancel();
-                        }
-                        countDownTimerFun();
-                        loadingDialog.dismiss();
-                    }catch (Exception e){
 
-                    }
 
-                }
-            }
 
-            @Override
-            public void onFinish() {
 
-            }
-        }.start();
 
 
         for(int i=0;i<11;i++){
@@ -892,7 +874,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
             public void onFinish() {
                 alertDialog.dismiss();
                 countDownTimerFun47();
-                new CountDownTimer(1000*5000,1000){
+                new CountDownTimer(1000*5,1000){
                     @Override
                     public void onTick(long l) {
                         picWaiter();
@@ -900,6 +882,12 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
+                        try{
+                            loadingDialog.dismiss();
+                        }catch (Exception e){
+
+                        }
+
 
                     }
                 }.start();
@@ -995,6 +983,26 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
         }catch (Exception e){
 
         }
+
+          if(countDownTimer!=null){
+              countDownTimer.cancel();
+          }
+           if(countDownTimer47!=null){
+               countDownTimer47.cancel();
+          }
+            if(countDownTimer50!=null){
+                countDownTimer50.cancel();
+          }
+             if(countDownTimeralerDialog!=null){
+                 countDownTimeralerDialog.cancel();
+          }
+              if(c!=null){
+              c.cancel();
+          }
+               if(countDownTimerMine!=null){
+                   countDownTimerMine.cancel();
+          }
+
 
         Runtime.getRuntime().gc();
     }
@@ -1104,7 +1112,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(multiPlayerPictureQuiz.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
                    // loadingDialog.dismiss();
                 }
@@ -2034,6 +2042,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         }
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
                     }
                 }catch (Exception e){
 
@@ -2150,6 +2159,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
         if(item.getItemId()==android.R.id.home){
             finish();
+           
         }
         return super.onOptionsItemSelected(item);
     }
@@ -2227,6 +2237,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                         startActivity(i);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
                     }
                 });
             }
@@ -2309,6 +2320,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                 startActivity(i);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
             }
         });
 

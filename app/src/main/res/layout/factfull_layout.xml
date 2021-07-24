@@ -134,7 +134,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dotLayout"
                     cardview:layout_constraintBottom_toBottomOf="parent"
-                    cardview:layout_constraintStart_toEndOf="@+id/shimmer_view_container"
+                    cardview:layout_constraintStart_toStartOf="parent"
                     shimmer:layout_constraintEnd_toEndOf="parent"
                     shimmer:layout_constraintTop_toTopOf="parent">
 

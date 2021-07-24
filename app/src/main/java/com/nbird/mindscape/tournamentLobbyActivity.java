@@ -28,6 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -73,7 +74,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
     String hostUid,hostImageUrl,hostName;
     String player1Uid,player2Uid,player3Uid,player4Uid;
     int kim=0;
-    CardView chatButton,factsButton,settingButton,privacyButton,cancelButton;
+    CardView chatButton,factsButton,settingButton,privacyButton,cancelButton,troubleshoot;
    // AlertDialog.Builder builderFact;
    // View viewFact;
     ShimmerFrameLayout shimmerFact;
@@ -135,6 +136,28 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         }
         if(bCompany!=null){
             bCompany.cancel();
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player2Uid").removeEventListener(listener4);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player3Uid").removeEventListener(listener4);
+        }catch (Exception e){
+
+        }
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player4Uid").removeEventListener(listener4);
+        }catch (Exception e){
+
+        }
+
+        try{
+            myRef.child("Lobby").child(String.valueOf(roomCode1)).child("gameStarter").removeEventListener(listener5);
+        }catch (Exception e){
+
         }
 
         try{
@@ -244,6 +267,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         totalTimeTaken4=(TextView) findViewById(R.id.totalTimeTaken4);
         accuracy4=(TextView) findViewById(R.id.accuracy4);
         score4=(TextView) findViewById(R.id.score4);
+        troubleshoot=(CardView) findViewById(R.id.troubleshoot);
 
         hostUid=getIntent().getStringExtra("hostUid");
         hostImageUrl=getIntent().getStringExtra("hostImage");
@@ -261,6 +285,50 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
         oppoAdapter = new chatAdapter(listChat,playerNum);
 
+
+        troubleshoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 AlertDialog.Builder builder=new AlertDialog.Builder(tournamentLobbyActivity.this,R.style.AlertDialogTheme);
+
+                    final View view1= LayoutInflater.from(tournamentLobbyActivity.this).inflate(R.layout.troubleshhotlayout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+                    builder.setView(view1);
+                    builder.setCancelable(false);
+                    ((TextView) view1.findViewById(R.id.textTitle)).setText("* Anti-Cheat : Using App In Background for long will result in automatic kick-outs. \n" +
+                            "* Overlapping or Duplicate player details in lobby? Relax, it can be caused due to poor network. Will be solved later on in quiz itself or you can rejoin the lobby. \n" +"* Restarting app can solve Sluggishness (if any)\n"+
+                            "* Facing other issues?\n" +
+                            "-Check your Network Connection\n" +
+                            "-Re-creating Or Re-joining lobby might be a possible solution..");
+                    ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
+                    LottieAnimationView imageIcon=(LottieAnimationView) view1.findViewById(R.id.imageIcon);
+                    TextView textTitle1=(TextView) view1.findViewById(R.id.textTitle1);
+
+
+                    textTitle1.setText("Troubleshoot");
+
+                    imageIcon.setAnimation(R.raw.troubleshootanim);
+                    imageIcon.playAnimation();
+
+                    final AlertDialog alertDialog=builder.create();
+                    if(alertDialog.getWindow()!=null){
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                    }
+                    try{
+                        alertDialog.show();
+                    }catch (Exception e){
+
+                    }
+
+                    view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            alertDialog.dismiss();
+                        }
+                    });
+
+
+            }
+        });
 
         myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -937,7 +1005,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 countDownTimer.cancel();}
             if(countDownHost!=null){
                 countDownHost.cancel();}
-            tournamentLobbyActivity.super.onBackPressed();
+            Intent i=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
+            startActivity(i);
             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             finish();
 
@@ -1225,11 +1294,11 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             privacyButton.setEnabled(false);
             cancelButton.setEnabled(false);
             removePlayerButton.setEnabled(false);
-            bCompany=new CountDownTimer(1000 * 10, 1000) {
+            bCompany=new CountDownTimer(950 * 10, 950) {
 
 
                 public void onTick(long millisUntilFinished) {
-                    int sec = (int) (millisUntilFinished / 1000);
+                    int sec = (int) (millisUntilFinished / 950);
                     startButton.setText("Quiz Starts In " + sec + " Seconds");
                     startButton.setTextSize(15f);
                 }
@@ -2369,7 +2438,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                                     countDownTimer.cancel();}
                                 if(countDownHost!=null){
                                     countDownHost.cancel();}
-                                tournamentLobbyActivity.super.onBackPressed();
+                                    Intent i=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
+                                    startActivity(i);
                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                 finish();
                                 }
@@ -3483,8 +3553,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
 
     public void findplayer1Status(){
-        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
-        connectedRef.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference connectedRef5 = FirebaseDatabase.getInstance().getReference(".info/connected");
+        ValueEventListener lis = null;
+        final ValueEventListener finalLis = lis;
+        lis=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean connected = snapshot.getValue(Boolean.class);
@@ -3497,9 +3569,26 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                     });
                     myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player1Status").onDisconnect().setValue(0);
 
-                }
-                else {
+                }else{
+                    myRef.child("Lobby").child(String.valueOf(roomCode1)).removeValue();
+                    myRef.child("room").child(String.valueOf(1)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("room").child(String.valueOf(0)).child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("Lobby").child(String.valueOf(roomCode1)).child("player1Status").onDisconnect().cancel();
+                    if(counterRemovalDownTimer!=null){
+                        counterRemovalDownTimer.cancel();}
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();}
+                    if(countDownHost!=null){
+                        countDownHost.cancel();}
+                    try{
+                        connectedRef5.removeEventListener(finalLis);
+                    }catch (Exception e){
 
+                    }
+                    Intent intent=new Intent(tournamentLobbyActivity.this,mainMenuActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
                 }
             }
 
@@ -3507,7 +3596,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };connectedRef5.addValueEventListener(lis);
     }
 
     public void roomListViewPushingByHost(){

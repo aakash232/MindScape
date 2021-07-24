@@ -79,7 +79,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference myRef=database.getReference();
-    CountDownTimer countDownTimer,countDownTimerForPic;
+    CountDownTimer countDownTimer,countDownTimerForPic,c1;
     String imageurl;
     ImageView expertImage;
     int category,num=0, expertnum=0, swapnum=0, audiencenum=0, fiftyfiftynum=0, selectNum;
@@ -126,6 +126,12 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+
+            try{
+                DownloadData1.this.cancel(true);
+            }catch (Exception e){
+
+            }
 
 
             return;
@@ -204,7 +210,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
 
 
 
-        new CountDownTimer(60*10*1000,1000){
+        c1=new CountDownTimer(60*10*1000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 try {
@@ -799,6 +805,12 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(c1!=null){
+            c1.cancel();
+        }
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
 
@@ -939,7 +951,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                                                 clearMediaPlayer();
                                                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                 finish();
-
+                                               
                                             }
 
                                         });
@@ -969,7 +981,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                                         }
                                         clearMediaPlayer();
                                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                        finish();
+                                        finish();Runtime.getRuntime().gc();
                                         return;
                                     }
 
@@ -1041,7 +1053,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(VideoQuizSinglePlayer.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                       
                     }
                     //loadingDialog.dismiss();
 
@@ -1052,7 +1064,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(VideoQuizSinglePlayer.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
     }
@@ -1330,7 +1342,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                         if(countDownTimer!=null){
                             countDownTimer.cancel();}
                         finish();
-
+                       
                     }
 
                 });
@@ -1359,7 +1371,7 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
 
         }.start();
@@ -1504,9 +1516,8 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 Intent intent=new Intent(VideoQuizSinglePlayer.this,mainMenuActivity.class);
-                intent.putExtra("mainfinder",1);
                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
+                finish();Runtime.getRuntime().gc();
             }
         });
 

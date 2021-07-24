@@ -4,6 +4,14 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/kartik_sachu/Desktop/MindScapeKey/MindScapeFinalKey')
+            storePassword 'godofwar'
+            keyAlias 'key0'
+            keyPassword 'godofwar'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
@@ -11,8 +19,8 @@ android {
         applicationId "com.nbird.mindscape"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 13
+        versionName "2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -22,6 +30,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

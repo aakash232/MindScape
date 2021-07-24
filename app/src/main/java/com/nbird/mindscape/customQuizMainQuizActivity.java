@@ -609,6 +609,9 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         Runtime.getRuntime().gc();
     }
 
@@ -707,7 +710,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                     startActivity(intent);
                                                     alertDialog.dismiss();
                                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                                                    finish();
+                                                    finish();Runtime.getRuntime().gc();
 
                                                 }
                                             });
@@ -728,7 +731,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                         } else {
                             finish();
                             Toast.makeText(customQuizMainQuizActivity.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                           
                         }
 
                     }
@@ -740,6 +743,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                     Toast.makeText(customQuizMainQuizActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     loadingDialog.dismiss();
                     finish();
+                   
                 }
             });
         }else{
@@ -827,7 +831,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                                                     alertDialog.dismiss();
                                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                                     finish();
-
+                                                   
                                                 }
                                             });
 
@@ -847,7 +851,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                         } else {
                             finish();
                             Toast.makeText(customQuizMainQuizActivity.this, "No Questions", Toast.LENGTH_SHORT).show();
-
+                           
                         }
 
                     }
@@ -858,7 +862,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(customQuizMainQuizActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     loadingDialog.dismiss();
-                    finish();
+                    finish();Runtime.getRuntime().gc();
                 }
             });
         }
@@ -1165,7 +1169,7 @@ public class customQuizMainQuizActivity extends AppCompatActivity {
                 customQuizMainQuizActivity.super.onBackPressed();
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
-
+               
 
             }
         });

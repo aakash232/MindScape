@@ -901,6 +901,22 @@ public class onevsoneQuizActivity extends AppCompatActivity {
 
         }
 
+        if(countDownTimerMine!=null){
+            countDownTimerMine.cancel();
+        }
+
+         if(countDownTimer!=null){
+             countDownTimer.cancel();
+        }
+
+          if(countDownTimer47!=null){
+              countDownTimer47.cancel();
+        }
+
+           if(countDownTimer50!=null){
+               countDownTimer50.cancel();
+        }
+
 
 
         Runtime.getRuntime().gc();
@@ -1001,6 +1017,7 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                     } else {
                         finish();
                         Toast.makeText(onevsoneQuizActivity.this, "No Questions", Toast.LENGTH_SHORT).show();
+                       
 
                     }
                     loadingDialog.dismiss();
@@ -1741,6 +1758,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                             startActivity(scoreIntent);
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
+                           
+
                         }
                     });
                 }catch (Exception e){
@@ -1921,6 +1940,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                        startActivity(scoreIntent);
                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                        finish();
+                      
+
                    }
                }catch (Exception e){
 
@@ -2118,6 +2139,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                         finish();
+                       
+
                     }
                 });
             }
@@ -2193,6 +2216,8 @@ public class onevsoneQuizActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
+               
+
             }
         });
 
