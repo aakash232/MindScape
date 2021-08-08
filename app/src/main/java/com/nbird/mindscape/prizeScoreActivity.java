@@ -66,7 +66,7 @@ public class prizeScoreActivity extends AppCompatActivity {
     int timeHolder=0;
     int correct;
     int wrongfire=0,wrong=0;
-    LottieAnimationView partypoper,party2;
+
     ImageView levelImage;
     TextView levelText;
     int sumationOfScore=0;
@@ -100,12 +100,10 @@ public class prizeScoreActivity extends AppCompatActivity {
 
         imageView=(ImageView) findViewById(R.id.propic);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-        partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
-        party2 = (LottieAnimationView)findViewById(R.id.party2);
 
 
 
-        partypoper.loop(false);
+
 
         category=getIntent().getIntExtra("category",1);
         lstExam123 = new ArrayList<>();

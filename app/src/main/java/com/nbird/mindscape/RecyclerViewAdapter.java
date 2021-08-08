@@ -50,7 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder( final MyViewHolder holder, final int position) {
 
         holder.tv_exam_title.setText(mData.get(position).getTitle());
-        holder.img_exam_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        try{
+            holder.img_exam_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        }catch (Exception e){
+
+        }
+
         holder.exam_dis.setText(mData.get(position).getDis());
 
 
@@ -90,35 +95,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         music();
                         Intent intent4 = new Intent(mContext, picture_quiz_menu.class);
                         intent4.putExtra("position", a);
+                        intent4.putExtra("intentDeterminer",1);
                         mContext.startActivity(intent4);
                         ((Activity)mContext).finish();
                         Runtime.getRuntime().gc();
                         break;
                     case 5:
-                        try {
-                            countDownTimer.cancel();
-                            music.pause();
-                            music.release();
-                            music=null;
-                        }catch (Exception e){
-
-                        }
                         music();
-                        Intent intent5 = new Intent(mContext, SongChoiceActivity.class);
-                        intent5.putExtra("position", a);
+                        Intent intent45 = new Intent(mContext, SongChoiceActivity.class);
+                        mContext.startActivity(intent45);
+                        ((Activity)mContext).finish();
+                        Runtime.getRuntime().gc();
+                        break;
 
-                        mContext.startActivity(intent5);
+
+               /*     case 5:
+                        music();
+                        Intent intent10 = new Intent(mContext, picture_quiz_menu.class);
+                        intent10.putExtra("position", a);
+                        intent10.putExtra("intentDeterminer",2);
+                        mContext.startActivity(intent10);
                         ((Activity)mContext).finish();
                         Runtime.getRuntime().gc();
                         break;
                     case 6:
                         music();
-                        Intent intent6 = new Intent(mContext, customQuizMainMenu.class);
-                        intent6.putExtra("position", a);
-                        mContext.startActivity(intent6);
+                        Intent intent11 = new Intent(mContext, picture_quiz_menu.class);
+                        intent11.putExtra("position", a);
+                        intent11.putExtra("intentDeterminer",3);
+                        mContext.startActivity(intent11);
+                        ((Activity)mContext).finish();
                         Runtime.getRuntime().gc();
-                        break;
-                    case 7:
+                        break;*/
+                    case 6:
                         try {
                             countDownTimer.cancel();
                             music.pause();

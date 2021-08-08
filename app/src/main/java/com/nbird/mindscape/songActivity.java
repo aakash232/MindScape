@@ -31,6 +31,14 @@ public class songActivity {
 
         }
 
+        try{
+            if(countDownTimer!=null){
+                countDownTimer.cancel();
+            }
+        }catch (Exception e){
+
+        }
+
     }
 
     private void musicArray(){

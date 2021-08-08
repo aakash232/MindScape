@@ -17,10 +17,10 @@ android {
 
     defaultConfig {
         applicationId "com.nbird.mindscape"
-        minSdkVersion 19
+        minSdkVersion 22
         targetSdkVersion 30
-        versionCode 13
-        versionName "2.1"
+        versionCode 18
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -33,6 +33,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
 }
 
 repositories{
@@ -67,5 +68,7 @@ dependencies {
     implementation 'com.gauravk.audiovisualizer:audiovisualizer:0.9.2'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.android.gms:play-services-ads:19.3.0'
+
+
 
 }

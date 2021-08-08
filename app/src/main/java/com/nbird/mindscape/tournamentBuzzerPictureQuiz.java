@@ -101,7 +101,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
     int mainInt = 0;
 
     int myScore = 0;
-    LottieAnimationView partypoper, party2;
+
     int correctAns = 0;
     int wrongAns = 0;
     ValueEventListener listner,lisnerrat1,lisnerrat2,lisnerrat3,lisnerrat4,lisnerrat5,lisnerrat6,lisnerrat7,lisnerrat8,lisnerrat9,lisnerrat10,lisnerrat11,lisnerrat12,lisnerrat13,lisnerrat14;
@@ -333,9 +333,6 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         loadAds();
         songStopperAndResumer();
 
-        partypoper = (LottieAnimationView) findViewById(R.id.partypoper);
-        party2 = (LottieAnimationView) findViewById(R.id.party2);
-
 
         player1Score = (TextView) findViewById(R.id.player1Score);
         player2Score = (TextView) findViewById(R.id.player2Score);
@@ -477,8 +474,6 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
         }
 
 
-        partypoper.setVisibility(View.GONE);
-        party2.setVisibility(View.GONE);
 
         switch (numberOfPlayers) {
             case 1:
@@ -1441,14 +1436,7 @@ public class tournamentBuzzerPictureQuiz extends AppCompatActivity {
             isAttempt=1;
             correctAns++;
 
-            partypoper.setVisibility(View.VISIBLE);
-            partypoper.setAnimation(R.raw.partypoppersanim);
-            partypoper.playAnimation();
-            partypoper.loop(false);
-            party2.setVisibility(View.VISIBLE);
-            party2.setAnimation(R.raw.party3);
-            party2.playAnimation();
-            party2.loop(false);
+
 
             switch (playerNum) {
                 case 1:

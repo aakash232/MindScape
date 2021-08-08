@@ -87,7 +87,7 @@ public class KbcSetup extends AppCompatActivity {
     int yo2;
     int yo3;
     int yo4;
-    LottieAnimationView  partypoper1,partypoper2;
+
     ImageView expertImage;
     TextView titleText;
     String userName;
@@ -141,11 +141,7 @@ public class KbcSetup extends AppCompatActivity {
         kbc_que = findViewById(R.id.kbc_que);
         timerText = findViewById(R.id.timerText);
 
-        partypoper1=(LottieAnimationView) findViewById(R.id.partypoper);
-        partypoper2=(LottieAnimationView) findViewById(R.id.party2);
 
-        partypoper1.setVisibility(View.GONE);
-        partypoper2.setVisibility(View.GONE);
 
         list = new ArrayList<>();
         listsecondary=new ArrayList<>();
@@ -985,14 +981,6 @@ public class KbcSetup extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
-                partypoper1.setVisibility(View.VISIBLE);
-                partypoper1.setAnimation(R.raw.partypoppersanim);
-                partypoper1.playAnimation();
-                partypoper1.loop(false);
-                partypoper2.setVisibility(View.VISIBLE);
-                partypoper2.setAnimation(R.raw.partypoppersanim);
-                partypoper2.playAnimation();
-                partypoper2.loop(false);
 
                 view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1031,14 +1019,7 @@ public class KbcSetup extends AppCompatActivity {
 
 
 
-                partypoper1.setVisibility(View.VISIBLE);
-                partypoper1.setAnimation(R.raw.partypoppersanim);
-                partypoper1.playAnimation();
-                partypoper1.loop(false);
-                partypoper2.setVisibility(View.VISIBLE);
-                partypoper2.setAnimation(R.raw.partypoppersanim);
-                partypoper2.playAnimation();
-                partypoper2.loop(false);
+
 
                 final AlertDialog alertDialog=builder.create();
                 if(alertDialog.getWindow()!=null){
@@ -1094,14 +1075,6 @@ public class KbcSetup extends AppCompatActivity {
         }catch (Exception e){
 
         }
-        partypoper1.setVisibility(View.VISIBLE);
-        partypoper1.setAnimation(R.raw.partypoppersanim);
-        partypoper1.playAnimation();
-        partypoper1.loop(false);
-        partypoper2.setVisibility(View.VISIBLE);
-        partypoper2.setAnimation(R.raw.partypoppersanim);
-        partypoper2.playAnimation();
-        partypoper2.loop(false);
 
         view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override

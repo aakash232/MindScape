@@ -68,9 +68,16 @@ public class singleModeListView extends AppCompatActivity {
         historicalMonuments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",1);
                 startActivity(intent);
@@ -83,9 +90,16 @@ public class singleModeListView extends AppCompatActivity {
         floraAndFauna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",2);
                 startActivity(intent);
@@ -98,9 +112,16 @@ public class singleModeListView extends AppCompatActivity {
         geography.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",3);
                 startActivity(intent);
@@ -114,9 +135,16 @@ public class singleModeListView extends AppCompatActivity {
         astronmyAndSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",4);
                 startActivity(intent);
@@ -129,9 +157,16 @@ public class singleModeListView extends AppCompatActivity {
         sports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",5);
                 startActivity(intent);
@@ -145,9 +180,16 @@ public class singleModeListView extends AppCompatActivity {
         someSuperlatives.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",6);
                 startActivity(intent);
@@ -161,9 +203,16 @@ public class singleModeListView extends AppCompatActivity {
         countriesCapitalsAndCurriencies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",7);
                 startActivity(intent);
@@ -177,9 +226,16 @@ public class singleModeListView extends AppCompatActivity {
         famousPersonalities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",8);
                 startActivity(intent);
@@ -192,9 +248,16 @@ public class singleModeListView extends AppCompatActivity {
         science.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",9);
                 startActivity(intent);
@@ -208,9 +271,16 @@ public class singleModeListView extends AppCompatActivity {
         importantDatesAndEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",10);
                 startActivity(intent);
@@ -224,9 +294,16 @@ public class singleModeListView extends AppCompatActivity {
         religionAndMythology.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",11);
                 startActivity(intent);
@@ -239,9 +316,16 @@ public class singleModeListView extends AppCompatActivity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",12);
                 startActivity(intent);
@@ -255,9 +339,16 @@ public class singleModeListView extends AppCompatActivity {
         filmAndEntertainment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",13);
                 startActivity(intent);
@@ -271,9 +362,16 @@ public class singleModeListView extends AppCompatActivity {
         inventionAndDiscoveries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",14);
                 startActivity(intent);
@@ -287,9 +385,16 @@ public class singleModeListView extends AppCompatActivity {
         firstInDifferentFields.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",15);
                 startActivity(intent);
@@ -303,9 +408,16 @@ public class singleModeListView extends AppCompatActivity {
         festivalArtAndCulture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",16);
                 startActivity(intent);
@@ -319,9 +431,16 @@ public class singleModeListView extends AppCompatActivity {
         polityAndConstitution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",17);
                 startActivity(intent);
@@ -335,9 +454,16 @@ public class singleModeListView extends AppCompatActivity {
         literature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",18);
                 startActivity(intent);
@@ -351,9 +477,16 @@ public class singleModeListView extends AppCompatActivity {
         healthAndDiseases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",19);
                 startActivity(intent);
@@ -367,9 +500,16 @@ public class singleModeListView extends AppCompatActivity {
         miscellaneous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer musicNav;
+                final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(singleModeListView.this, R.raw.buttonmusic);
                 musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
                 Intent intent= new Intent(singleModeListView.this,quizActivity.class);
                 intent.putExtra("category",20);
                 startActivity(intent);

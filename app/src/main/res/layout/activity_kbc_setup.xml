@@ -7,35 +7,6 @@
     android:background="@drawable/kbc"
     tools:context=".KbcSetup">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/party2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:lottie_rawRes="@raw/party3"
-        app:lottie_speed="1" />
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/partypoper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="20dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false"
-        app:lottie_rawRes="@raw/partypoppersanim"
-        app:lottie_speed="1" />
 
 
     <LinearLayout

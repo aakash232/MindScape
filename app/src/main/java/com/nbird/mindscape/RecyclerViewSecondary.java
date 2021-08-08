@@ -92,11 +92,8 @@ public class RecyclerViewSecondary extends RecyclerView.Adapter<RecyclerViewSeco
                         Intent intent5 = new Intent(mContext, SongChoiceActivity.class);
                         intent5.putExtra("position", a);
                         mContext.startActivity(intent5);break;
+
                     case 6:
-                        Intent intent6 = new Intent(mContext, customQuizMainMenu.class);
-                        intent6.putExtra("position", a);
-                        mContext.startActivity(intent6);break;
-                    case 7:
 
                         Intent intent1 = new Intent(mContext, KbcWel.class);
                         intent1.putExtra("position", a);

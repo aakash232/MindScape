@@ -786,18 +786,34 @@ public class VideoQuizSinglePlayer extends AppCompatActivity {
         });
 
 
-        for(int i=0;i<11;i++){
-            // create instance of Random class
-            Random rand = new Random();
+        myRef.child("QUIZNUMBERS").child("VideoQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int num;
+                try{
+                    num=snapshot.getValue(Integer.class);
+                }catch (Exception e){
+                    num=118;
+                }
 
-            // Generate random integers in range 0 to 14
+                for(int i=0;i<11;i++){
+                    // create instance of Random class
+                    final Random rand = new Random();
 
-            final int setNumber = rand.nextInt(118)+1;  //NEED TO CHANGE HERE
-            //NEED TO CHANGE HERE
 
-            fireBaseData(setNumber);
+                    final int setNumber = rand.nextInt(num)+1;
+                    fireBaseData(setNumber);
 
-        }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }

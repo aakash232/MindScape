@@ -171,15 +171,6 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
         music = new MediaPlayer();
 
-
-
-        if((!loadingDialog.isShowing())){
-            loadingDialog.show();
-        }
-
-
-
-
         try{
             DownloadData downloadData=new DownloadData();
             downloadData.execute(musicUrl);
@@ -817,18 +808,35 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         });
 
 
-        for(int i=0;i<11;i++){
+        myRef.child("QUIZNUMBERS").child("AudioQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int num;
+                try{
+                     num=snapshot.getValue(Integer.class);
+                }catch (Exception e){
+                    num=156;
+                }
+
+                for(int i=0;i<11;i++){
             // create instance of Random class
-            Random rand = new Random();
+               final Random rand = new Random();
 
-            // Generate random integers in range 0 to 14
 
-            final int setNumber = rand.nextInt(156)+1;  //NEED TO CHANGE HERE
-            //NEED TO CHANGE HERE
+               final int setNumber = rand.nextInt(num)+1;
+               fireBaseData(setNumber);
 
-            fireBaseData(setNumber);
+
 
         }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -1583,7 +1591,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                 if(countDownTimer!=null){
                     countDownTimer.cancel();}
                 clearMediaPlayer();
-                Intent intent=new Intent(AudioQuizSinglePlayer.this,SongChoiceActivity.class);
+                Intent intent=new Intent(AudioQuizSinglePlayer.this,mainMenuActivity.class);
                 startActivity(intent);overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 finish();
             }

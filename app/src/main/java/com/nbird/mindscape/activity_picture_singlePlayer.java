@@ -149,6 +149,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_singleplayer);
+       
         loadAds();
        songStopperAndResumer();
         questionTextView=findViewById(R.id.questionTip);

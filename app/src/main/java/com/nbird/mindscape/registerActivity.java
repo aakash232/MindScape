@@ -88,7 +88,7 @@ public class registerActivity extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
+                Intent browserIntentps = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FMindscape-PrivacyPoilcy-converted.pdf?alt=media&token=593f0977-c7da-4530-a9a2-12d29168eeca"));
                 startActivity(browserIntentps);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
             }

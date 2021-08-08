@@ -101,7 +101,6 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     ImageView levelImage;
     TextView levelText;
     int score123,timeHolder,correct,wrong,wrongfire,sumationOfScore;
-    LottieAnimationView partypoper,party2;
     ImageView image1,image2;
     TextView oppoLevel;
     ImageView oppoBatch;
@@ -174,8 +173,6 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         levelText   =(TextView) findViewById(R.id.levelText1234);
         oppoLevel=(TextView) findViewById(R.id.levelText12345);
         oppoBatch=(ImageView) findViewById(R.id.batch5);
-        partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
-        party2 = (LottieAnimationView)findViewById(R.id.party2);
 
       //  mShimmerViewContainer=(ShimmerFrameLayout) view1.findViewById(R.id.shimmer90);
 
@@ -355,7 +352,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             finish();
                            
 
-                        }else{
+                        }else if(desider==1){
                             Intent intent=new Intent(onevsoneOnlineScoreCard.this,multiPlayerPictureQuiz.class);
                             intent.putExtra("opponentUID",opponentUID);
                             intent.putExtra("opponentImageUrl",opponentimageUrl);
@@ -378,6 +375,52 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                             overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                             finish();
                            
+
+                        }else if(desider==2){
+                             Intent intent=new Intent(onevsoneOnlineScoreCard.this,Audio1vs1Quiz.class);
+                            intent.putExtra("opponentUID",opponentUID);
+                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                            intent.putExtra("opponentUserName",opponentUsername);
+                            intent.putExtra("mypropic",myProPicUrl);
+                            intent.putExtra("myName",myName123);
+                            deleteData();
+                            try{
+                                myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef1.removeEventListener(listenerFast1);
+                            }catch (Exception e){
+
+                            }
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            finish();
+
+                        }else if(desider==3){
+                            Intent intent=new Intent(onevsoneOnlineScoreCard.this,Video1vs1Quiz.class);
+                            intent.putExtra("opponentUID",opponentUID);
+                            intent.putExtra("opponentImageUrl",opponentimageUrl);
+                            intent.putExtra("opponentUserName",opponentUsername);
+                            intent.putExtra("mypropic",myProPicUrl);
+                            intent.putExtra("myName",myName123);
+                            deleteData();
+                            try{
+                                myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                            }catch (Exception e){
+
+                            }
+                            try{
+                                myRef1.removeEventListener(listenerFast1);
+                            }catch (Exception e){
+
+                            }
+                            intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                            finish();
 
                         }
 
@@ -930,9 +973,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             animDialog.playAnimation();
         }
 
-        partypoper.setAnimation(R.raw.partypoppersanim);
-        partypoper.playAnimation();
-        partypoper.loop(false);
+
         final AlertDialog alertDialog=builder.create();
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
@@ -1080,7 +1121,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                     finish();
                                    
 
-                                } else {
+                                } else if(desider==1){
                                     Intent intent = new Intent(onevsoneOnlineScoreCard.this, multiPlayerPictureQuiz.class);
                                     intent.putExtra("opponentUID", opponentUID);
                                     intent.putExtra("opponentImageUrl", opponentimageUrl);
@@ -1105,6 +1146,52 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                                     overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                                     finish();
                                    
+
+                                }else if(desider==2){
+                                    Intent intent=new Intent(onevsoneOnlineScoreCard.this,Audio1vs1Quiz.class);
+                                    intent.putExtra("opponentUID",opponentUID);
+                                    intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                    intent.putExtra("opponentUserName",opponentUsername);
+                                    intent.putExtra("mypropic",myProPicUrl);
+                                    intent.putExtra("myName",myName123);
+                                    deleteData();
+                                    try{
+                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                                    }catch (Exception e){
+
+                                    }
+                                    try{
+                                        myRef1.removeEventListener(listenerFast1);
+                                    }catch (Exception e){
+
+                                    }
+                                    intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
+
+                                }else if(desider==3){
+                                    Intent intent=new Intent(onevsoneOnlineScoreCard.this,Video1vs1Quiz.class);
+                                    intent.putExtra("opponentUID",opponentUID);
+                                    intent.putExtra("opponentImageUrl",opponentimageUrl);
+                                    intent.putExtra("opponentUserName",opponentUsername);
+                                    intent.putExtra("mypropic",myProPicUrl);
+                                    intent.putExtra("myName",myName123);
+                                    deleteData();
+                                    try{
+                                        myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                                    }catch (Exception e){
+
+                                    }
+                                    try{
+                                        myRef1.removeEventListener(listenerFast1);
+                                    }catch (Exception e){
+
+                                    }
+                                    intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
 
                                 }
 
@@ -1146,38 +1233,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     }
 
 
-
-    public void randomNumberGeneratorFunction(){
-        if(desider==0){
-            for(int i=0;i<14;i++){
-                // create instance of Random class
-                Random rand = new Random();
-
-                // Generate random integers in range 0 to 6326
-
-                int setNumber=rand.nextInt(6326)+1; //NEED TO CHANGE HERE
-                //NEED TO CHANGE HERE
-                arrlist30.add(setNumber);
-            }
-        }else{
-            for(int i=0;i<14;i++){
-                // create instance of Random class
-                Random rand = new Random();
-
-
-
-
-                int setNumber = rand.nextInt(4999)+1;
-
-                if(setNumber>1210&&setNumber<2000){
-                    setNumber=setNumber-1000;
-                }  //NEED TO CHANGE HERE
-                //NEED TO CHANGE HERE
-                arrlist30.add(setNumber);
-            }
-        }
-
-
+    public void dataSetterMain(List<Integer> arrlist30){
         try{
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").child(String.valueOf(1)).setValue(arrlist30.get(0)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -1280,7 +1336,96 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         }catch(Exception e){
 
         }
+    }
 
+
+    public void randomNumberGeneratorFunction(){
+        if(desider==0){
+            for(int i=0;i<14;i++){
+                // create instance of Random class
+                Random rand = new Random();
+
+                // Generate random integers in range 0 to 6326
+
+                int setNumber=rand.nextInt(6326)+1; //NEED TO CHANGE HERE
+                //NEED TO CHANGE HERE
+                arrlist30.add(setNumber);
+            }
+            dataSetterMain(arrlist30);
+        }else if(desider==1){
+            for(int i=0;i<14;i++){
+                // create instance of Random class
+                Random rand = new Random();
+
+                int setNumber = rand.nextInt(4999)+1;
+
+                if(setNumber>1210&&setNumber<2000){
+                    setNumber=setNumber-1000;
+                }  //NEED TO CHANGE HERE
+                //NEED TO CHANGE HERE
+                arrlist30.add(setNumber);
+            }
+            dataSetterMain(arrlist30);
+        }else if(desider==2){
+            myRef.child("QUIZNUMBERS").child("AudioQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int num;
+                    try{
+                        num=snapshot.getValue(Integer.class);
+                    }catch (Exception e){
+                        num=156;
+                    }
+
+                    for(int i=0;i<14;i++){
+                        Random rand = new Random();
+
+                        // Generate random integers in range 0 to 6326
+
+                        int setNumber=rand.nextInt(num)+1; //NEED TO CHANGE HERE
+                        //NEED TO CHANGE HERE
+                        arrlist30.add(setNumber);
+                    }
+                    dataSetterMain(arrlist30);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }else if(desider==3){
+            myRef.child("QUIZNUMBERS").child("VideoQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int num;
+                    try{
+                        num=snapshot.getValue(Integer.class);
+                    }catch (Exception e){
+                        num=118;
+                    }
+
+                    for(int i=0;i<14;i++){
+                        Random rand = new Random();
+
+                        // Generate random integers in range 0 to 6326
+
+                        int setNumber=rand.nextInt(num)+1; //NEED TO CHANGE HERE
+                        //NEED TO CHANGE HERE
+                        arrlist30.add(setNumber);
+                    }
+                    dataSetterMain(arrlist30);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     public void randomNumberGeneratorTaker(){
@@ -2041,8 +2186,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         image1=((ImageView) view1.findViewById(R.id.imageIcon));
         image2=((ImageView) view1.findViewById(R.id.imageIcon2));
         final AlertDialog alertDialog=builder.create();
-        party2.loop(false);
-        party2.playAnimation();
+
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }

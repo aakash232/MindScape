@@ -84,7 +84,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     TextInputEditText roomCodeEditText;
     AlertDialog alertDialog123;
     Button joinButton,createButton;
-    int isHost=0;
+    int isHost=0,intentDeterminer;
    // DatabaseReference myRef1 = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID");
     ValueEventListener listenerFast1,lisnerKiller;
     private void loadAds(){
@@ -102,12 +102,25 @@ public class picture_quiz_menu extends AppCompatActivity {
         onlineButton=(CardView) findViewById(R.id.online12345);
         localButton=(CardView) findViewById(R.id.local);
 
+        intentDeterminer=getIntent().getIntExtra("intentDeterminer",0);
+
         arrlist = new ArrayList<>(13);
         list = new ArrayList<>();
         list123 = new ArrayList<>();
 
         toolbar=findViewById(R.id.toolbar);
-        toolbar.setTitle("Category");
+
+
+        if(intentDeterminer==1){
+            toolbar.setTitle("Picture Quiz");
+        }else if(intentDeterminer==2){
+            toolbar.setTitle("Audio Quiz");
+        }else{
+            toolbar.setTitle("Video Quiz");
+        }
+
+
+
 
         setSupportActionBar(toolbar);
 
@@ -242,8 +255,26 @@ public class picture_quiz_menu extends AppCompatActivity {
     }
 
     public void openSinglePlayer() {
-        Intent intent = new Intent(this, activity_picture_singlePlayer.class);
+
+        if(intentDeterminer==1){
+            Intent intent = new Intent(this, activity_picture_singlePlayer.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+            finish();
+        }else if(intentDeterminer==2){
+            Intent intent = new Intent(this, AudioQuizSinglePlayer.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+            finish();
+        }else{
+        Intent intent = new Intent(this, VideoQuizSinglePlayer.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
+    }
+
+
+
     }
 
 
@@ -396,7 +427,14 @@ public class picture_quiz_menu extends AppCompatActivity {
     }
 
     public void onlineFunction(){
-        findingOponentFunction();
+        if(intentDeterminer==1){
+            findingOponentFunction("oneVsonePicture");
+        }else if(intentDeterminer==2){
+            findingOponentFunction("oneVsoneAudio");
+        }else {
+            findingOponentFunction("oneVsoneVideo");
+        }
+
         builder.setView(view1);
         builder.setCancelable(false);
         cancelButton = ((Button) view1.findViewById(R.id.cancelButton));
@@ -435,7 +473,8 @@ public class picture_quiz_menu extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
-
+                    myRef.child("oneVsoneAudio").child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child("oneVsoneVideo").child(mAuth.getCurrentUser().getUid()).removeValue();
                 } catch (Exception e) {
 
                 }
@@ -471,9 +510,9 @@ public class picture_quiz_menu extends AppCompatActivity {
     }
 
 
-    public void findingOponentFunction() {
+    public void findingOponentFunction(final String oneVsoneString) {
 
-        myRef.child("oneVsonePicture").orderByChild("status").equalTo(1).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(oneVsoneString).orderByChild("status").equalTo(1).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -483,8 +522,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                 try {
                     opponentUID = list123.get(0).getUID();
                     leader = 1;
-                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
-                    myRef.child("oneVsonePicture").child(opponentUID).removeValue();
+                    myRef.child(oneVsoneString).child(mAuth.getCurrentUser().getUid()).removeValue();
+                    myRef.child(oneVsoneString).child(opponentUID).removeValue();
 
                     randomNumberGeneratorFunction(opponentUID);
 
@@ -545,7 +584,7 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                 } catch (Exception e) {
                     onevsoneOnlinePlayerList s1 = new onevsoneOnlinePlayerList(mAuth.getCurrentUser().getUid(), 1);
-                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    myRef.child(oneVsoneString).child(mAuth.getCurrentUser().getUid()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             lisnerKiller=new ValueEventListener() {
@@ -664,7 +703,15 @@ public class picture_quiz_menu extends AppCompatActivity {
                         if(isHost==0){
                             try{
                                 if(snapshot.getValue(String.class).equals(mAuth.getCurrentUser().getUid())){
-                                    Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                                    Intent intent;
+                                    if(intentDeterminer==1){
+                                         intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                                    }else if(intentDeterminer==2){
+                                         intent = new Intent(picture_quiz_menu.this, Audio1vs1Quiz.class);
+                                    }else {
+                                         intent = new Intent(picture_quiz_menu.this, Video1vs1Quiz.class);
+                                    }
+
                                     intent.putExtra("opponentUID", opponentUID);
                                     intent.putExtra("opponentImageUrl", opponentimageUrl);
                                     intent.putExtra("opponentUserName", opponentUsername);
@@ -697,7 +744,14 @@ public class picture_quiz_menu extends AppCompatActivity {
 
                                 }
                             }catch (Exception e){
-                                Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                                Intent intent;
+                                if(intentDeterminer==1){
+                                    intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                                }else if(intentDeterminer==2){
+                                    intent = new Intent(picture_quiz_menu.this, Audio1vs1Quiz.class);
+                                }else {
+                                    intent = new Intent(picture_quiz_menu.this, Video1vs1Quiz.class);
+                                }
                                 intent.putExtra("opponentUID", opponentUID);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
                                 intent.putExtra("opponentUserName", opponentUsername);
@@ -718,7 +772,14 @@ public class picture_quiz_menu extends AppCompatActivity {
                             }
 
                         }else{
-                            Intent intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                            Intent intent;
+                            if(intentDeterminer==1){
+                                intent = new Intent(picture_quiz_menu.this, multiPlayerPictureQuiz.class);
+                            }else if(intentDeterminer==2){
+                                intent = new Intent(picture_quiz_menu.this, Audio1vs1Quiz.class);
+                            }else {
+                                intent = new Intent(picture_quiz_menu.this, Video1vs1Quiz.class);
+                            }
                             intent.putExtra("opponentUID", opponentUID);
                             intent.putExtra("opponentImageUrl", opponentimageUrl);
                             intent.putExtra("opponentUserName", opponentUsername);
@@ -998,23 +1059,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     }
 
 
-    public void randomNumberGeneratorFunction(String opponentUID) {
-        for (int i = 0; i < 14; i++) {
-            // create instance of Random class
-            Random rand = new Random();
-
-            // Generate random integers in range 1 to 14
-
-
-            int setNumber = rand.nextInt(4999)+1;
-
-            if(setNumber>1210&&setNumber<2000){
-                setNumber=setNumber-1000;
-            }  //NEED TO CHANGE HERE
-            //NEED TO CHANGE HERE
-            arrlist.add(setNumber);
-        }
-
+    public void setterData(List<Integer> arrlist){
         try {
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("questionNUmberPicUP").child(String.valueOf(1)).setValue(arrlist.get(0)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -1117,6 +1162,136 @@ public class picture_quiz_menu extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Not Able To Get Questions From The Server!", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    int setNumber;
+    public void randomNumberGeneratorFunction(String opponentUID) {
+
+        if(intentDeterminer==1){
+            Random rand = new Random();
+
+            // Generate random integers in range 1 to 14
+            for (int i = 0; i < 14; i++) {
+                 setNumber = rand.nextInt(4999)+1;
+                if(setNumber>1210&&setNumber<2000) {
+                    setNumber = setNumber - 1000;
+                }
+                arrlist.add(setNumber);
+            }
+
+            setterData(arrlist);
+
+
+
+        }else if(intentDeterminer==2){
+
+                myRef.child("QUIZNUMBERS").child("AudioQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                       int num;
+                        try{
+                            num=snapshot.getValue(Integer.class);
+                        }catch (Exception e){
+                            num=156;
+                        }
+
+                        Random rand = new Random();
+
+                        // Generate random integers in range 1 to 14
+                        for (int i = 0; i < 14; i++) {
+                            setNumber = rand.nextInt(num)+1;
+
+                            arrlist.add(setNumber);
+                        }
+
+                        setterData(arrlist);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+        }else {
+            myRef.child("QUIZNUMBERS").child("VideoQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int num;
+                    try{
+                        num=snapshot.getValue(Integer.class);
+                    }catch (Exception e){
+                        num=118;
+                    }
+
+                    Random rand = new Random();
+
+                    // Generate random integers in range 1 to 14
+                    for (int i = 0; i < 14; i++) {
+                        setNumber = rand.nextInt(num)+1;
+
+                        arrlist.add(setNumber);
+                    }
+
+                    setterData(arrlist);
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
+        for (int i = 0; i < 14; i++) {
+            // create instance of Random class
+
+             if(intentDeterminer==2){
+                myRef.child("QUIZNUMBERS").child("AudioQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            setNumber=snapshot.getValue(Integer.class);
+                        }catch (Exception e){
+                            setNumber=156;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }else {
+                myRef.child("QUIZNUMBERS").child("VideoQuestionQuantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+                            setNumber=snapshot.getValue(Integer.class);
+                        }catch (Exception e){
+                            setNumber=118;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+
+
+            //NEED TO CHANGE HERE
+            //NEED TO CHANGE HERE
+            arrlist.add(setNumber);
+        }
+
 
 
     }
@@ -1434,7 +1609,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                 public void onClick(View view) {
                                                     try {
                                                         myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
-
+                                                        myRef.child("oneVsoneAudio").child(mAuth.getCurrentUser().getUid()).removeValue();
+                                                        myRef.child("oneVsoneVideo").child(mAuth.getCurrentUser().getUid()).removeValue();
                                                     } catch (Exception e) {
 
                                                     }
@@ -1698,7 +1874,8 @@ public class picture_quiz_menu extends AppCompatActivity {
                     public void onClick(View view) {
                         try {
                             myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
-
+                            myRef.child("oneVsoneAudio").child(mAuth.getCurrentUser().getUid()).removeValue();
+                            myRef.child("oneVsoneVideo").child(mAuth.getCurrentUser().getUid()).removeValue();
                         } catch (Exception e) {
 
                         }

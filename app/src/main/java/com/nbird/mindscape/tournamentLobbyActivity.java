@@ -1672,7 +1672,8 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             }
         });
 
-        cardView1.setOnClickListener(new View.OnClickListener() {
+        if(!name2.getText().toString().matches("")){
+             cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final MediaPlayer musicNav;
@@ -1715,8 +1716,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
             }
         });
+        }
 
-        cardView2.setOnClickListener(new View.OnClickListener() {
+        if(!name3.getText().toString().matches("")){
+             cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final MediaPlayer musicNav;
@@ -1755,8 +1758,10 @@ public class tournamentLobbyActivity extends AppCompatActivity {
 
             }
         });
+        }
 
-        cardView3.setOnClickListener(new View.OnClickListener() {
+        if(!name4.getText().toString().matches("")){
+             cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final MediaPlayer musicNav;
@@ -1788,6 +1793,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
             }
         });
 
+        }
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1807,7 +1813,6 @@ public class tournamentLobbyActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-
 
 
 

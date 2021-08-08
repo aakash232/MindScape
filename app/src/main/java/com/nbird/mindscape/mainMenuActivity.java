@@ -209,7 +209,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
     LottieAnimationView prizeModeAnim;
-    LottieAnimationView partypoper,party2;
+
 
 
     MediaPlayer music,musicNav;
@@ -298,7 +298,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        countIsInternet=new CountDownTimer(1000*60*30,1000){
+        try{
+             countIsInternet=new CountDownTimer(1000*60*30,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -338,6 +339,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
             }
         }.start();
+        } catch (Exception e){
+
+        }
+
 
 
 
@@ -360,11 +365,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             myrv.setLayoutManager(new GridLayoutManager(this,2));
             myrv.setAdapter(myAdapter);
         }
-        partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
-        party2=(LottieAnimationView) findViewById(R.id.party2);
-
-        partypoper.setVisibility(View.GONE);
-        party2.setVisibility(View.GONE);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -509,6 +509,9 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             myRef.child("oneVsoneLocalPlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
             myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("myStatus").removeValue();
             myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("oneVsoneAudio").child(mAuth.getCurrentUser().getUid()).removeValue();
+            myRef.child("oneVsoneVideo").child(mAuth.getCurrentUser().getUid()).removeValue();
         }catch (Exception e){
 
         }
@@ -565,7 +568,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
             buttonYes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    alertDialog.dismiss();
+                    try{alertDialog.dismiss();}catch(Exception e){}
                 }
             });
 
@@ -749,7 +752,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
        noButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               alertDialog.dismiss();
+               try{alertDialog.dismiss();}catch(Exception e){}
                int pid = android.os.Process.myPid();
                android.os.Process.killProcess(pid);
                Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -793,14 +796,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                             @Override
                             public void onClick(View view) {
                                 alertDialogForPrizeMode();
-                                partypoper.setVisibility(View.VISIBLE);
-                                partypoper.setAnimation(R.raw.partypoppersanim);
-                                partypoper.playAnimation();
-                                partypoper.loop(false);
-                                party2.setVisibility(View.VISIBLE);
-                                party2.setAnimation(R.raw.party3);
-                                party2.playAnimation();
-                                party2.loop(false);
+
                             }
                         });
 
@@ -1012,7 +1008,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 view1.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        alertDialog.dismiss();
+                        try{alertDialog.dismiss();}catch(Exception e){}
                     }
                 });
                 break;
@@ -1074,7 +1070,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
             case R.id.nav_ps:
-                Intent browserIntenttos2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FPRIVACY%20STATEMENT-converted.pdf?alt=media&token=90a45a44-0844-4468-ac76-0180fc262f74"));
+                Intent browserIntenttos2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://firebasestorage.googleapis.com/v0/b/mindscape-3a832.appspot.com/o/LegalFiles%2FMindscape-PrivacyPoilcy-converted.pdf?alt=media&token=593f0977-c7da-4530-a9a2-12d29168eeca"));
                 startActivity(browserIntenttos2);
                 overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
                 break;
@@ -1167,9 +1163,11 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
         lstExam.add(new Modes("Tournament Mode",R.drawable.leaguefinalfinal,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));
         lstExam.add(new Modes("Picture Quiz",R.drawable.picturequizicon,"Test your visual skills and ace your pictorial predicts. Compete in single mode or join the online multiplayer."));
+       // lstExam.add(new Modes("Audio Quiz",R.drawable.musicicon,"The ultimate test of senses! A knowledgeable and alert mind is the one which rules. Fight and make your way up!"));
+       // lstExam.add(new Modes("Video Quiz",R.drawable.svfinal,"The ultimate test of senses! A knowledgeable and alert mind is the one which rules. Fight and make your way up!"));
         //lstExam.add(new Modes("Buzzer Round",R.drawable.buzzer2,"Buzzzz! A knowledgeable and alert mind is the one which rules. Buzz with players across the world in this mode of knowledge and Agility!"));
         lstExam.add(new Modes("Audio And Video",R.drawable.svfinal,"The ultimate test of senses! A knowledgeable and alert mind is the one which rules. Fight and make your way up!"));
-        lstExam.add(new Modes("Custom Quiz",R.drawable.customquizfinal3,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
+      //  lstExam.add(new Modes("Custom Quiz",R.drawable.customquizfinal3,"Do your friends really know you? Shh..we got the plan. Create, share and enjoy with these custom quiz that YOU design."));
         lstExam.add(new Modes("KBC",R.drawable.kbc123,"The legendary KBC is back! Crack the questions and earn as much as you can. It's your time to set the leaderboard UP!"));
         lstExam.add(new Modes("League (Coming Soon)",R.drawable.tournament,"The Ultimate MindScape League. Group matches,Knockout rounds,Finale, and many more. Survive till the end and wear the Crown of a super Quizzer! Coming soon..."));
     }
@@ -1299,7 +1297,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-                                            alertDialog.dismiss();
+                                            try{alertDialog.dismiss();}catch(Exception e){}
                                         }
 
                                     }
@@ -1329,7 +1327,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
                                             }
                                         });
-                                        alertDialog.dismiss();
+                                        try{alertDialog.dismiss();}catch(Exception e){}
                                     }
 
                                 }
@@ -1357,14 +1355,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                                         }
                                     }catch (Exception e){
                                         alertDialogForPrizeMode();
-                                        partypoper.setVisibility(View.VISIBLE);
-                                        partypoper.setAnimation(R.raw.partypoppersanim);
-                                        partypoper.playAnimation();
-                                        partypoper.loop(false);
-                                        party2.setVisibility(View.VISIBLE);
-                                        party2.setAnimation(R.raw.party3);
-                                        party2.playAnimation();
-                                        party2.loop(false);
+
                                     }
                                 }
                                 @Override

@@ -11,20 +11,7 @@
 
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/backlitemodeanim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="-5dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/backquiz"
-        app:lottie_speed="0.1" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSpeaker"

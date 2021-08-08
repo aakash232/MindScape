@@ -1662,7 +1662,8 @@ public class quizActivity extends AppCompatActivity {
                     }
                 });
                 if(countDownTimer!=null){
-                    countDownTimer.cancel();}
+                    countDownTimer.cancel();
+                }
                 alertDialog.cancel();
                 Intent i=new Intent(quizActivity.this,mainMenuActivity.class);
                 startActivity(i);
@@ -1703,6 +1704,17 @@ public class quizActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
+
+        }
+
+
+        if(countDownTimer!=null){
+            countDownTimer.cancel();}
+
         Runtime.getRuntime().gc();
     }
 

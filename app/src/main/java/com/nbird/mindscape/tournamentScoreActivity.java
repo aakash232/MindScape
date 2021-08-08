@@ -77,7 +77,7 @@ public class tournamentScoreActivity extends AppCompatActivity {
     ValueEventListener listner45;
     int m=0,privacyFinder;
     ValueEventListener listner99;
-    LottieAnimationView partypoper,party2;
+
     ShimmerFrameLayout headShimmer,player1ShimmerPic,player2ShimmerPic,player3ShimmerPic,player4ShimmerPic,player1Shimmer,player2Shimmer,player3Shimmer,player4Shimmer;
     barGroupHolder man;
     int numMode;
@@ -377,9 +377,6 @@ public class tournamentScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_score);
 
-        partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
-        party2=(LottieAnimationView) findViewById(R.id.party2);
-
 
 
         headShimmer=(ShimmerFrameLayout) findViewById(R.id.headShimmer);
@@ -561,15 +558,6 @@ public class tournamentScoreActivity extends AppCompatActivity {
         timerNum=getIntent().getIntExtra("timerNum",0);
         counter=getIntent().getIntExtra("counter",0);
         numMode=getIntent().getIntExtra("numMode",0);
-
-        partypoper.setVisibility(View.VISIBLE);
-        partypoper.setAnimation(R.raw.partypoppersanim);
-        partypoper.playAnimation();
-        partypoper.loop(false);
-        party2.setVisibility(View.VISIBLE);
-        party2.setAnimation(R.raw.party3);
-        party2.playAnimation();
-        party2.loop(false);
 
 
 

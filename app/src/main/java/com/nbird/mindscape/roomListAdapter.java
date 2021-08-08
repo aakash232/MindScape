@@ -101,7 +101,7 @@ public class roomListAdapter extends RecyclerView.Adapter<roomListAdapter.viewho
                              if(snapshot.getValue(Integer.class)==0){
                                  joiner(holder,position);
                              }else{
-                                 Toast.makeText(context, "They Have Started Playing!!!Try Some Other Room", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(context, "They Have Started Playing!!!Please Refresh And Try Some Other Room", Toast.LENGTH_SHORT).show();
                              }
                         }catch (Exception e){
                             joiner(holder,position);

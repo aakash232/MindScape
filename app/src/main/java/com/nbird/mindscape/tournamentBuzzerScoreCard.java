@@ -78,7 +78,7 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
     CountDownTimer countDownTimer,countDownTimer1234,Countdownlast;
     int j=0,privacyFinder,numMode;
     correctWrongAnsweredBuzzerHolder m;
-    LottieAnimationView partypoper,party2;
+
     ValueEventListener lisnernumber1,lisnernumber2,lisnernumber3,lisnerdog1,lisnercat1,lisnercat2,lisnercat3,lisnercat4,lisnercat5,lisnercat6,lisnercat7,lisnercat8,lisnercat9,lisnercat10;
     ValueEventListener lisnercat11,lisnercat12,lisnercat13,lisnercat14,lisnercat15,lisnercat16,lisnercat17,lisnercat18,lisnercat19,lisnercat20,lisnercat21,lisnercat22;
     @Override
@@ -422,9 +422,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_buzzer_score_card);
 
-        partypoper=(LottieAnimationView) findViewById(R.id.partypoper);
-        party2=(LottieAnimationView) findViewById(R.id.party2);
-
 
         headShimmer=(ShimmerFrameLayout) findViewById(R.id.headShimmer);
         player1Shimmer=(ShimmerFrameLayout) findViewById(R.id.player1Shimmer);
@@ -597,14 +594,6 @@ public class tournamentBuzzerScoreCard extends AppCompatActivity {
         mywrong=getIntent().getIntExtra("wrongMy",0);
         numMode=getIntent().getIntExtra("numMode",0);
 
-        partypoper.setVisibility(View.VISIBLE);
-        partypoper.setAnimation(R.raw.partypoppersanim);
-        partypoper.playAnimation();
-        partypoper.loop(false);
-        party2.setVisibility(View.VISIBLE);
-        party2.setAnimation(R.raw.party3);
-        party2.playAnimation();
-        party2.loop(false);
 
         numberOfTimesPlayed();
         if(playerNum==2||playerNum==3||playerNum==4){

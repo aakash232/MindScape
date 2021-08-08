@@ -1,68 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nbird.mindscape">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutUsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HelpGuide1"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HelpGuide2"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HelpGuide3"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".VideoQuizSinglePlayer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".AudioQuizSinglePlayer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SongChoiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customPublicQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customCategoryListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customQuizMainQuizActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customFlipperMain"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".prizePictureQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".prizeScoreActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".prizeQuizMain"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CustomQuiz_Question"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customQuizFirstProperties"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".customQuizMainMenu"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentBuzzerScoreCard"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentBuzzerPictureQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentBuzzerNormalQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentPictureQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentScoreActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentLobbyActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tournamentChoiceActicity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".Video1vs1Quiz"></activity>
+        <activity android:name=".Audio1vs1Quiz" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HelpGuide1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HelpGuide2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HelpGuide3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VideoQuizSinglePlayer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AudioQuizSinglePlayer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SongChoiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".prizePictureQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".prizeScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".prizeQuizMain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentBuzzerScoreCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentBuzzerPictureQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentBuzzerNormalQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentPictureQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentLobbyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tournamentChoiceActicity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".KbcSetup"
             android:screenOrientation="landscape" />
@@ -76,52 +84,69 @@
             android:name=".KbcScoreActivity"
             android:parentActivityName=".KbcPlay"
             android:screenOrientation="landscape" />
-        <activity android:name=".scoreActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".quizActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".multiPlayerPictureQuiz"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".singleModeListView"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SlideActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".loginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".mainMenuActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".onevsoneOnlineScoreCard"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".onevsoneQuizActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".oneVsOneChoiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".welcomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".registerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".forgotPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".profile"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".picture_quiz_menu"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity_picture_singlePlayer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity">
-
+        <activity
+            android:name=".scoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".quizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiPlayerPictureQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".singleModeListView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SlideActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".loginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mainMenuActivity"
+            android:screenOrientation="portrait" >
+
+        </activity>
+        <activity
+            android:name=".onevsoneOnlineScoreCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".onevsoneQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".oneVsOneChoiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".welcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".forgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".picture_quiz_menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity_picture_singlePlayer"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity">
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />

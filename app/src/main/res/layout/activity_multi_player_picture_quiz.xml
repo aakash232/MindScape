@@ -11,21 +11,6 @@
 
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/backlitemodeanim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="-5dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/backquiz"
-        app:lottie_speed="0.1" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSpeaker"
@@ -651,26 +636,27 @@
                 android:id="@+id/linearLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:weightSum="4"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView123">
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
 
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/expert"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:background="@drawable/expert"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
-                    android:scaleX="0.80"
-                    android:scaleY="0.80"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     cardview:cardCornerRadius="5dp">
 
@@ -684,6 +670,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/kaal"
+
                             android:scaleX="0.85"
                             android:scaleY="0.7" />
 
@@ -693,13 +680,13 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/swap"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
-                    android:scaleX="0.80"
-                    android:scaleY="0.80"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     cardview:cardCornerRadius="5dp">
 
@@ -723,13 +710,13 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/audience"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
-                    android:scaleX="0.80"
-                    android:scaleY="0.80"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     cardview:cardCornerRadius="5dp">
 
@@ -754,13 +741,13 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fiftyfifty"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
-                    android:scaleX="0.80"
-                    android:scaleY="0.80"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     cardview:cardCornerRadius="5dp">
 
@@ -780,7 +767,7 @@
                             android:scaleY="0.8"
                             android:text="50:50"
                             android:textColor="#000000"
-                            android:textSize="27dp"
+                            android:textSize="30dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

@@ -83,7 +83,7 @@ public class scoreActivity extends AppCompatActivity {
     int timeHolder=0;
     int correct;
     int wrongfire=0,wrong=0;
-    LottieAnimationView partypoper,party2;
+
     ImageView levelImage;
     TextView levelText;
     int sumationOfScore=0;
@@ -114,15 +114,12 @@ public class scoreActivity extends AppCompatActivity {
         cardViewRematch=(CardView) findViewById(R.id.cardView700);
         imageView=(ImageView) findViewById(R.id.propic);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-        partypoper = (LottieAnimationView)findViewById(R.id.partypoper);
-        party2 = (LottieAnimationView)findViewById(R.id.party2);
+
+
         levelImage=(ImageView) findViewById(R.id.levelImage);
         levelText=(TextView) findViewById(R.id.levelText);
 
-        partypoper.loop(false);
-        MediaPlayer musicNav;
-        musicNav = MediaPlayer.create(scoreActivity.this, R.raw.partypoppermusic);
-        musicNav.start();
+
 
 
         category=getIntent().getIntExtra("category",1);
@@ -741,8 +738,6 @@ public class scoreActivity extends AppCompatActivity {
 
             // ...
         });
-
-
     }
     @Override
     public void onResume() {
@@ -910,8 +905,7 @@ public class scoreActivity extends AppCompatActivity {
         image1=((ImageView) view1.findViewById(R.id.imageIcon));
         image2=((ImageView) view1.findViewById(R.id.imageIcon2));
         final AlertDialog alertDialog=builder.create();
-        party2.loop(false);
-        party2.playAnimation();
+
         if(alertDialog.getWindow()!=null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
