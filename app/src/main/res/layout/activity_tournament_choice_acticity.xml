@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".oneVsOneChoiceActivity">
+    tools:context=".Tournament.oneVsOneChoiceActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

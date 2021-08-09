@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/kbc_main"
-    tools:context=".KbcWel">
+    tools:context=".UI.KbcWel">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

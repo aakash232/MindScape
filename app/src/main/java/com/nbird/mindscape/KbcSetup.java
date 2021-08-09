@@ -1,26 +1,16 @@
 package com.nbird.mindscape;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.animation.Animator;
-
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-
 import android.graphics.Color;
-
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -30,6 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -38,7 +34,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -54,7 +49,7 @@ import java.util.Random;
 
 public class KbcSetup extends AppCompatActivity {
 
-
+    Button opt1,opt2,opt3,opt4;
     LinearLayout linearLayoutButton,linearLayoutPrice,lifelineLayout;
     int count=0,position=0,score=0;
     TextView kbc_que;
@@ -124,6 +119,10 @@ public class KbcSetup extends AppCompatActivity {
         kbcQueMus=MediaPlayer.create(KbcSetup.this,R.raw.kbc_que_start);
         kbcCountMus=MediaPlayer.create(KbcSetup.this,R.raw.kb_tick);
 
+        opt1=(Button) findViewById(R.id.opt1);
+        opt2=(Button) findViewById(R.id.opt2);
+        opt3=(Button) findViewById(R.id.opt3);
+        opt4=(Button) findViewById(R.id.opt4);
         half= findViewById(R.id.half);
         advice= findViewById(R.id.expert);
         flip= findViewById(R.id.flip);
@@ -773,18 +772,31 @@ public class KbcSetup extends AppCompatActivity {
                 if(num==13) {
                     if (list.size() > 0) {
                         for (int i = 0; i < 4; i++) {
-                            linearLayoutButton.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                            opt1.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-                                    try{
-                                        checkAnswer((Button) view);
-                                    }catch (Exception e){
-
-                                    }
-
+                                public void onClick(View v) {
+                                    checkAnswer(opt1);
                                 }
                             });
+                            opt2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    checkAnswer(opt2);
+                                }
+                            });
+                            opt3.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    checkAnswer(opt3);
+                                }
+                            });
+                            opt4.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    checkAnswer(opt4);
+                                }
+                            });
+
                         }
                         playAnim(kbc_que, 0, list.get(position).getQuestionTextView());
                     } else {
@@ -820,24 +832,32 @@ public class KbcSetup extends AppCompatActivity {
                     if(count==0){
                         option=list.get(position).getOption1();
                         button1.setTextColor(Color.parseColor("#ffffff"));
-                        linearLayoutButton.getChildAt(0).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        opt1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==1){
                         option=list.get(position).getOption2();
                         button2.setTextColor(Color.parseColor("#ffffff"));
-                        linearLayoutButton.getChildAt(1).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        opt2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==2){
                         option=list.get(position).getOption3();
                         button3.setTextColor(Color.parseColor("#ffffff"));
-                        linearLayoutButton.getChildAt(2).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        opt3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }else if(count==3){
                         option=list.get(position).getOption4();
                         button4.setTextColor(Color.parseColor("#ffffff"));
-                        linearLayoutButton.getChildAt(3).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        opt4.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     }
 
 
 
-                    playAnim(linearLayoutButton.getChildAt(count),0,option);
+                    if(count==0){
+                        playAnim(opt1,0,option);
+                    }else if(count==1){
+                        playAnim(opt2,0,option);
+                    }else if(count==2){
+                        playAnim(opt3,0,option);
+                    }else{
+                        playAnim(opt4,0,option);
+                    }
                     count++;
                 }
             }
@@ -889,11 +909,6 @@ public class KbcSetup extends AppCompatActivity {
 
             }
 
-
-
-
-
-
         }else {
             wrongString = "Wrong Answer";
             moveToScore();
@@ -902,14 +917,32 @@ public class KbcSetup extends AppCompatActivity {
     }
 
     private void enableOption(boolean enable){
-        for (int i=0;i<4;i++) {
-            linearLayoutButton.getChildAt(i).setEnabled(enable);
-            if (enable) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    linearLayoutButton.getChildAt(i).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E4E4E4")));
-                }
+        opt1.setEnabled(enable);
+        if (enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                opt1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E4E4E4")));
             }
         }
+        opt2.setEnabled(enable);
+        if (enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                opt2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E4E4E4")));
+            }
+        }
+        opt3.setEnabled(enable);
+        if (enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                opt3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E4E4E4")));
+            }
+        }
+        opt4.setEnabled(enable);
+        if (enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                opt4.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E4E4E4")));
+            }
+        }
+
+
     }
 
 

@@ -68,6 +68,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     int num = 0;
     int codeInteger;
     LinearLayout linearLayout300;
+    CountDownTimer countDownTimerBotStarter;
     TextView shareText;
     private ShimmerFrameLayout mShimmerViewContainer, shimmer1,shimmer40,shimmer30;
     private onevsoneonlineAdapter sliderAdapter;
@@ -419,6 +420,30 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                online.setEnabled(false);
+                Random random=new Random();
+                int r=random.nextInt(5)+4;
+                countDownTimerBotStarter=new CountDownTimer(1000*r,1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        try{
+                            myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeEventListener(lisnerMAIN);
+
+                        }catch (Exception e){
+
+                        }
+                        cardView5.setAlpha(1);
+                        BotOneVsOne botOneVsOne=new BotOneVsOne(mAuth.getCurrentUser().getUid(),cancelButton,oneVsOneChoiceActivity.this,proPicUrl,userName,leader,
+                                isHostFinal,1,linearLayout100,shimmer1,secondplayerimg,highestScore,totalTime,oppoAccu,oppoRatio,secondPlayername,oppoLevel,oppoBatch);
+
+                        botOneVsOne.startBot();
+                    }
+                }.start();
                 final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(oneVsOneChoiceActivity.this, R.raw.finalbuttonmusic);
                 musicNav.start();
@@ -677,6 +702,9 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     }
 
     public void countDownTimerFun() {   //Clock Algo
+        if(countDownTimerBotStarter!=null)
+        {countDownTimerBotStarter.cancel();}
+
         countDownTimer = new CountDownTimer(1000 * 10, 1000) {
 
 
@@ -1841,6 +1869,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                                                         sumationOfScore = snapshot.getValue(Integer.class);
+                                                                        cardView11.setAlpha(1);
                                                                         levelManupulation99();
 
                                                                     }
@@ -2008,6 +2037,10 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
         if(countDownTimer!=null){
             countDownTimer.cancel();
         }
+        if(countDownTimerBotStarter!=null){
+            countDownTimerBotStarter.cancel();
+        }
+
 
         if(countDownTimer123!=null){
             countDownTimer123.cancel();

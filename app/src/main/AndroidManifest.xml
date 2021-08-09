@@ -71,6 +71,14 @@
         <activity
             android:name=".tournamentChoiceActicity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".OneVsOneBotPictureQuiz"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OneVsOneBOTScoreActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OneVsOneBOTNormalQuiz"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".KbcSetup"
             android:screenOrientation="landscape" />

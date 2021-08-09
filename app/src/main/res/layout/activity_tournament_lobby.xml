@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    tools:context=".Lobby">
+    tools:context=".Tournament.Lobby">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView8"
@@ -93,7 +93,7 @@
         android:clickable="true"
         android:foreground="?selectableItemBackground"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="14dp"
         app:cardElevation="5dp"
         app:layout_constraintStart_toStartOf="@+id/cardView8"
         app:layout_constraintTop_toBottomOf="@+id/cardView8">
@@ -115,29 +115,11 @@
         android:id="@+id/cons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:scaleX="0.85"
         android:scaleY="0.85"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/backlitemodeanim"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:elevation="-5dp"
-            android:scaleType="centerCrop"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            app:layout_constraintBottom_toTopOf="@+id/imageView8"
-            app:layout_constraintEnd_toStartOf="@+id/imageView7"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/findinghumans"
-            app:lottie_speed="0.5" />
 
 
         <ImageView
@@ -252,7 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="20dp"
             android:clickable="true"
             app:cardElevation="5dp"
             android:foreground="?selectableItemBackground"
@@ -278,7 +260,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="20dp"
             android:clickable="true"
             app:cardElevation="5dp"
             android:foreground="?selectableItemBackground"
@@ -304,7 +286,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="17dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="14dp"
             android:clickable="true"
             app:cardElevation="5dp"
             android:foreground="?selectableItemBackground"
@@ -331,18 +313,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="20dp"
-        app:cardCornerRadius="50dp"
+        android:layout_marginBottom="5dp"
         android:clickable="true"
-        app:cardElevation="5dp"
         android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/cancel"
                 android:layout_width="40dp"
@@ -356,18 +338,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardCornerRadius="50dp"
+        android:layout_marginBottom="5dp"
         android:clickable="true"
-        app:cardElevation="5dp"
         android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toTopOf="@id/cardcancel"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/chat"
                 android:layout_width="40dp"
@@ -382,18 +364,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="50dp"
-
         android:clickable="true"
-        app:cardElevation="5dp"
+
         android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toTopOf="@id/cardchat"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="@+id/linearLayout34">
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -468,39 +451,38 @@
     </androidx.cardview.widget.CardView>
 
 
-
-            <Button
-                android:id="@+id/startButton"
-                android:gravity="center"
-                android:layout_width="160dp"
-                android:layout_height="52dp"
-                android:background="@drawable/whitewithblackstroke"
-                android:fontFamily="@font/mouse_memoirs"
-                android:text="START"
-                android:textSize="30dp"
-                android:textColor="#000000"
-                android:layout_marginStart="10dp"
-                android:clickable="true"
-                android:scaleX="0.9"
-                android:scaleY="0.9"
-                android:foreground="?selectableItemBackground"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-               />
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="160dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/whitewithblackstroke"
+        android:clickable="true"
+        android:fontFamily="@font/mouse_memoirs"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:text="START"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout34"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cons">
         >
 
         <LinearLayout
@@ -568,8 +550,7 @@
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
-                                        android:gravity="center"
-                                         />
+                                        android:gravity="center" />
 
 
                                     <LinearLayout
@@ -578,7 +559,7 @@
                                         android:layout_marginTop="5dp"
                                         android:layout_marginRight="5dp"
                                         android:layout_marginBottom="5dp"
-                                        android:background="@drawable/black_inner_back"
+                                       
                                         android:orientation="vertical">
 
 
@@ -592,7 +573,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13dp" 
+                                            android:textSize="13dp"
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -609,7 +590,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -625,7 +606,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -642,7 +623,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15dp" 
+                                            android:textSize="15dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -691,8 +672,7 @@
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
-                                        android:gravity="center"
-                                        />
+                                        android:gravity="center" />
 
 
                                     <LinearLayout
@@ -701,7 +681,7 @@
                                         android:layout_marginTop="5dp"
                                         android:layout_marginRight="5dp"
                                         android:layout_marginBottom="5dp"
-                                        android:background="@drawable/black_inner_back"
+                                       
                                         android:orientation="vertical">
 
 
@@ -715,7 +695,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13dp" 
+                                            android:textSize="13dp"
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -732,7 +712,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -747,7 +727,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -764,7 +744,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15dp" 
+                                            android:textSize="15dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -825,8 +805,7 @@
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
-                                        android:gravity="center"
-                                        />
+                                        android:gravity="center" />
 
 
                                     <LinearLayout
@@ -835,7 +814,7 @@
                                         android:layout_marginTop="5dp"
                                         android:layout_marginRight="5dp"
                                         android:layout_marginBottom="5dp"
-                                        android:background="@drawable/black_inner_back"
+                                       
                                         android:orientation="vertical">
 
 
@@ -849,7 +828,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13dp" 
+                                            android:textSize="13dp"
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -866,7 +845,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -882,7 +861,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -899,7 +878,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15dp" 
+                                            android:textSize="15dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -948,8 +927,7 @@
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_margin="5dp"
-                                        android:gravity="center"
-                                        />
+                                        android:gravity="center" />
 
 
                                     <LinearLayout
@@ -958,7 +936,7 @@
                                         android:layout_marginTop="5dp"
                                         android:layout_marginRight="5dp"
                                         android:layout_marginBottom="5dp"
-                                        android:background="@drawable/black_inner_back"
+                                       
                                         android:orientation="vertical">
 
 
@@ -972,7 +950,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="13dp" 
+                                            android:textSize="13dp"
                                             android:textStyle="bold"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -989,7 +967,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -1005,7 +983,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="10dp" 
+                                            android:textSize="10dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />
@@ -1022,7 +1000,7 @@
                                             android:gravity="left"
                                             android:text=""
                                             android:textColor="#ffffff"
-                                            android:textSize="15dp" 
+                                            android:textSize="15dp"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent" />

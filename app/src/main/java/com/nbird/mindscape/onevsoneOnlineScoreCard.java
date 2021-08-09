@@ -2214,49 +2214,7 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
     }
 
 
-    public void dialogFunctionLeaderBoard(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(onevsoneOnlineScoreCard.this,R.style.AlertDialogTheme);
-        View view1= LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.one_vs_one_leaderboard,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
-        builder.setView(view1);
-        builder.setCancelable(false);
-        ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
 
-
-        recyclerView = (RecyclerView) view1.findViewById(R.id.recyclerview);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(recyclerView.VERTICAL);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(categoryAdapter);
-
-        final AlertDialog alertDialog=builder.create();
-        if(alertDialog.getWindow()!=null){
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        try{
-            alertDialog.show();
-        }catch (Exception e){
-
-        }
-        categoryAdapter.notifyDataSetChanged();
-        view1.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
-                alertDialog.dismiss();
-            }
-        });
-    }
 
 
     public void oppoLevelFunction(){

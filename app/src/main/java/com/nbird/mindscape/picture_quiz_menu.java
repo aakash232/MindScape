@@ -55,7 +55,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     ImageView batch99;
     TextView levelText99;
     CardView cardView5,cardView11,share;
-
+    int isHostFinal=0;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -79,7 +79,7 @@ public class picture_quiz_menu extends AppCompatActivity {
     TextView userName123,level,secondPlayername,myLevel,oppoLevel;
 
     List<Integer> arrlist;
-    CountDownTimer countDownTimer,countDownTimer123;
+    CountDownTimer countDownTimer,countDownTimer123,countDownTimerBotStarter;
 
     TextInputEditText roomCodeEditText;
     AlertDialog alertDialog123;
@@ -467,6 +467,31 @@ public class picture_quiz_menu extends AppCompatActivity {
 
         }
 
+        onlineButton.setEnabled(false);
+        Random random=new Random();
+        int r=random.nextInt(5)+4;
+        countDownTimerBotStarter=new CountDownTimer(1000*r,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                try{
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1onlineOpponentUID").removeEventListener(listenerFast1);
+
+                }catch (Exception e){
+
+                }
+                cardView5.setAlpha(1);
+                BotOneVsOne botOneVsOne=new BotOneVsOne(mAuth.getCurrentUser().getUid(),cancelButton,picture_quiz_menu.this,proPicUrl,userName,leader,
+                        isHostFinal,2,linearLayout100,shimmer1,secondplayerimg,highestScore,totalTime,oppoAccu,oppoRatio,secondPlayername,oppoLevel,oppoBatch);
+
+                botOneVsOne.startBot();
+            }
+        }.start();
+
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -684,7 +709,10 @@ public class picture_quiz_menu extends AppCompatActivity {
 
     }
 
-    public void countDownTimerFun() {   //Clock Algo
+    public void countDownTimerFun() {
+        if(countDownTimerBotStarter!=null){
+            countDownTimerBotStarter.cancel();
+        }//Clock Algo
         countDownTimer = new CountDownTimer(1000 * 10, 1000) {
 
 
@@ -1976,6 +2004,7 @@ public class picture_quiz_menu extends AppCompatActivity {
                                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                                                         sumationOfScore = snapshot.getValue(Integer.class);
+                                                                        cardView11.setAlpha(1);
                                                                         levelManupulation99(sumationOfScore);
 
                                                                     }
@@ -2108,6 +2137,10 @@ public class picture_quiz_menu extends AppCompatActivity {
 
         if(countDownTimer123!=null){
             countDownTimer123.cancel();
+        }
+
+        if(countDownTimerBotStarter!=null){
+            countDownTimerBotStarter.cancel();
         }
 
         if(countDownTimer!=null){

@@ -186,6 +186,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
         userNameFunction();
 
 
+
         c=new CountDownTimer(1000*15,1000) {
             @Override
             public void onTick(long l) {
@@ -754,7 +755,6 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
             fireBaseData(setNumber);
 
         }
-
     }
 
     //Firebase Fetch
@@ -1454,6 +1454,7 @@ public class activity_picture_singlePlayer extends AppCompatActivity {
 
 
     }
+
 
     @Override
     public void onDestroy() {

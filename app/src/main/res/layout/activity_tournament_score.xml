@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    tools:context=".tournamentScoreActivity">
+    tools:context=".Tournament.tournamentScoreActivity">
 
 
     <ScrollView

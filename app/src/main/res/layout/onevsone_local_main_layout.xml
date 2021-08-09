@@ -303,7 +303,7 @@
                         android:id="@+id/batchdisplay1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:alpha="0"
+                        android:alpha="1"
                         android:background="@drawable/whitewithblackstroke"
                         android:elevation="10dp"
                         android:orientation="horizontal">
