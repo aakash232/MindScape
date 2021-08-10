@@ -1032,6 +1032,11 @@ public class tournamentBuzzerNormalQuiz extends AppCompatActivity {
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
         }
 
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
+
+        }
 
         mInterstitialAd.setAdListener(new AdListener(){
             public void onAdClosed(){

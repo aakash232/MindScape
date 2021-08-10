@@ -140,6 +140,8 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
         }
     }
     barGroupHolder man;
+    CountDownTimer cf;
+    int yalo=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +149,18 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
 
         loadAds();
         arrlist30 = new ArrayList<>(13);
+
+        cf=new CountDownTimer(1000*45,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                 yalo=1;
+            }
+        }.start();
 
         onlineImage=(ImageView) findViewById(R.id.onlineImage);
         opponentImage=(ImageView) findViewById(R.id.opponentImage);
@@ -341,25 +355,11 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(OneVsOneBOTScoreActivity.this, R.raw.finalbuttonmusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
+                try{
+                    cancelDialogFunction();
+                }catch (Exception e){
 
-
-
-                Intent intent=new Intent(OneVsOneBOTScoreActivity.this,mainMenuActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
-
-
+                }
             }
         });
 
@@ -377,7 +377,11 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                randomNumberGeneratorFunction();
+
+
+                if(yalo==0){
+                      randomNumberGeneratorFunction();
+
 
 
 
@@ -396,6 +400,11 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                                 rematch.setEnabled(true);
                             }
                         }.start();
+                }else {
+                    Toast.makeText(OneVsOneBOTScoreActivity.this, opponentUsername+ " Has Left The Room!!!Please Find Another Opponent.", Toast.LENGTH_SHORT).show();
+
+                }
+
 
 
 
@@ -408,7 +417,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
         int b=r.nextInt(10)+1;
 
         if(b<=8){
-            int l=r.nextInt(8)+8;
+            int l=r.nextInt(8)+10;
             countDownTimerBOTRequest=new CountDownTimer(1000*l,1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -417,6 +426,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
+
                     requestDialogBoxFun();
                 }
             }.start();
@@ -466,10 +476,6 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                     alertDialog.dismiss();
 
 
-                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
                             if (desider == 1) {
                                 for(int i=0;i<14;i++){
                                     // create instance of Random class
@@ -481,7 +487,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                                     //NEED TO CHANGE HERE
                                     arrlist30.add(setNumber);
                                 }
-                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, onevsoneQuizActivity.class);
+                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, OneVsOneBOTNormalQuiz.class);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
                                 intent.putExtra("opponentUserName", opponentUsername);
                                 intent.putExtra("mypropic", myProPicUrl);
@@ -506,7 +512,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                                     //NEED TO CHANGE HERE
                                     arrlist30.add(setNumber);
                                 }
-                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, multiPlayerPictureQuiz.class);
+                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, OneVsOneBotPictureQuiz.class);
                                 intent.putExtra("opponentImageUrl", opponentimageUrl);
                                 intent.putExtra("opponentUserName", opponentUsername);
                                 intent.putExtra("mypropic", myProPicUrl);
@@ -525,8 +531,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
                     });
 
 
-                }
-            });
+
 
             buttonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -643,6 +648,16 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
         myRatio.setText("Correct/Wrong : "+score+"/"+mer);
 
         greatFunSetter();
+        final int f=10-score;
+        long k=(60*1000*10)-milliholder;
+        quizHistoryData s5 = new quizHistoryData((int) totalSum, k,score,f);
+        String key = database.getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").push().getKey();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeQuizHistory").child(key).setValue(s5).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
 
     }
 
@@ -1203,6 +1218,13 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        if(cf!=null){
+            cf.cancel();
+        }
+        if(countDownTimerBOTRequest!=null){
+            countDownTimerBOTRequest.cancel();
+        }
 
         Runtime.getRuntime().gc();
 

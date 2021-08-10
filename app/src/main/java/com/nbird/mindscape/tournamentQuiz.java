@@ -1823,6 +1823,11 @@ public class tournamentQuiz extends AppCompatActivity {
         if(playerNum==2||playerNum==3||playerNum==4){
             myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
         }
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
+
+        }
 
         mInterstitialAd.setAdListener(new AdListener(){
             public void onAdClosed(){
@@ -2496,6 +2501,11 @@ public class tournamentQuiz extends AppCompatActivity {
                 }
             }
             public void onFinish() {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 if(playerNum==2||playerNum==3||playerNum==4){
                     myRef.child("Lobby").child(String.valueOf(roomCode)).child("player1Status").removeEventListener(listner);
                 }

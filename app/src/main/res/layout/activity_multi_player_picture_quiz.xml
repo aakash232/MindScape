@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="30"
-    android:background="@color/white"
+    android:background="@drawable/quibackfinal"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".multiPlayerPictureQuiz">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewdpeaker"
+        android:id="@+id/cardViewSpeaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/dpeaker"
+            android:id="@+id/Speaker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
@@ -564,7 +564,7 @@
                 android:layout_margin="5dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@id/question"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

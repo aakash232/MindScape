@@ -484,6 +484,11 @@ public class picture_quiz_menu extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
+                try{
+                    myRef.child("oneVsonePicture").child(mAuth.getCurrentUser().getUid()).removeValue();
+                }catch (Exception e){
+
+                }
                 cardView5.setAlpha(1);
                 BotOneVsOne botOneVsOne=new BotOneVsOne(mAuth.getCurrentUser().getUid(),cancelButton,picture_quiz_menu.this,proPicUrl,userName,leader,
                         isHostFinal,2,linearLayout100,shimmer1,secondplayerimg,highestScore,totalTime,oppoAccu,oppoRatio,secondPlayername,oppoLevel,oppoBatch);

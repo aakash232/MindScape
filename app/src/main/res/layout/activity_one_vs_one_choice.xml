@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@drawable/backimage"
     tools:context=".oneVsOneChoiceActivity">
 
     <androidx.appcompat.widget.Toolbar

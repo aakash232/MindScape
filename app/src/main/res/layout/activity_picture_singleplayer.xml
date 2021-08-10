@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="30"
-    android:background="@color/white"
+    android:background="@drawable/quibackfinal"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".UI.SinglePlayerPictureQuiz">
+    tools:context=".activity_picture_singlePlayer">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSpeaker"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/speaker"
+            android:id="@+id/Speaker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
@@ -77,7 +77,7 @@
                 android:elevation="10dp"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:gravity="right"
                 android:text=""
                 android:textColor="#000000"
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:elevation="10dp"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:gravity="right"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
@@ -372,7 +372,7 @@
                 android:layout_margin="5dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@id/question"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -388,8 +388,8 @@
         android:id="@+id/cardView123"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_weight="1"
         android:clickable="true"
         android:elevation="-2dp"
@@ -594,7 +594,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/optionbuttonback"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:shadowColor="@color/black"
                 android:text=""
                 android:textColor="#ffffff"
@@ -606,7 +606,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
@@ -617,7 +617,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
@@ -628,7 +628,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:textColor="#ffffff"
 

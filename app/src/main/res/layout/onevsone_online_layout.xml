@@ -62,7 +62,7 @@
                         android:textColor="@color/white"
                         android:fontFamily="@font/mouse_memoirs"
                         android:layout_margin="10dp"
-                        android:text="Finding Your Opponent.Please Wait!!Unit Then Read Some Facts Given Below."/>
+                        android:text="Finding Your Opponent.Please Wait!!Until Then Read Some Facts Given Below."/>
 
                 </LinearLayout>
             </LinearLayout>

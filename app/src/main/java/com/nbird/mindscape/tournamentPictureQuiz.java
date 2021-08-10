@@ -1939,7 +1939,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
     }
 
     public void quizIntent(){
+        try{
+            songActivity.songStop();
+        }catch (Exception e){
 
+        }
         mInterstitialAd.setAdListener(new AdListener(){
             public void onAdClosed(){
                 super.onAdClosed();
@@ -2637,7 +2641,11 @@ public class tournamentPictureQuiz extends AppCompatActivity {
                 }
             }
             public void onFinish() {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
 
+                }
                 mInterstitialAd.setAdListener(new AdListener(){
                     public void onAdClosed(){
                         super.onAdClosed();

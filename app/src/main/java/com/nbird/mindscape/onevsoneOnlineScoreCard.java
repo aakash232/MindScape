@@ -445,38 +445,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
                 try{
-                    myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                    cancelDialogFunction();
                 }catch (Exception e){
 
                 }
-                try{
-                    myRef1.removeEventListener(listenerFast1);
-                }catch (Exception e){
-
-                }
-                myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
-                myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
-                myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
-                deleteData();
-                Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-                finish();
-               
-
             }
         });
 
@@ -2305,39 +2278,97 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
             }
         });
     }
-    public void onBackPressed() {
-        final MediaPlayer musicNav;
-        musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
-        musicNav.start();
-        musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+
+    public void cancelDialogFunction(){
+        AlertDialog.Builder builderRemove=new AlertDialog.Builder(onevsoneOnlineScoreCard.this,R.style.AlertDialogTheme);
+        View viewRemove1= LayoutInflater.from(onevsoneOnlineScoreCard.this).inflate(R.layout.quit_asker_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer),false);
+        builderRemove.setView(viewRemove1);
+        builderRemove.setCancelable(false);
+        Button yesButton=(Button) viewRemove1.findViewById(R.id.buttonYes);
+        Button noButton=(Button) viewRemove1.findViewById(R.id.buttonNo);
+
+
+
+
+
+        final AlertDialog alertDialog=builderRemove.create();
+        if(alertDialog.getWindow()!=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        try{
+            alertDialog.show();
+        }catch (Exception e){
+
+        }
+
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                musicNav.reset();
-                musicNav.release();
+            public void onClick(View view) {
+
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
+                myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
+                myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
+                myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
+                myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+                deleteData();
+                try{
+                    myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+                }catch (Exception e){
+
+                }
+                try{
+                    myRef1.removeEventListener(listenerFast1);
+                }catch (Exception e){
+
+                }
+                Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                finish();
+
             }
         });
-        myRef.child("User").child(opponentUID).child("1vs1onlineCorrectAns").removeValue();
-        myRef.child("User").child(opponentUID).child("1vs1onlineCurrentScore").removeValue();
-        myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
-        myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
-        myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
-        deleteData();
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MediaPlayer musicNav;
+                musicNav = MediaPlayer.create(onevsoneOnlineScoreCard.this, R.raw.finalbuttonmusic);
+                musicNav.start();
+                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        musicNav.reset();
+                        musicNav.release();
+                    }
+                });
+                alertDialog.dismiss();
+            }
+        });
+
+
+    }
+
+
+
+    public void onBackPressed() {
         try{
-            myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeEventListener(listener1);
+            cancelDialogFunction();
         }catch (Exception e){
 
         }
-        try{
-            myRef1.removeEventListener(listenerFast1);
-        }catch (Exception e){
-
-        }
-        Intent intent=new Intent(onevsoneOnlineScoreCard.this,mainMenuActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
-        finish();
-       
-
     }
 
 }

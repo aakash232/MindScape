@@ -437,6 +437,11 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
                         }catch (Exception e){
 
                         }
+                        try{
+                            myRef.child("oneVsoneOnlinePlayers").child(mAuth.getCurrentUser().getUid()).removeValue();
+                        }catch (Exception e){
+
+                        }
                         cardView5.setAlpha(1);
                         BotOneVsOne botOneVsOne=new BotOneVsOne(mAuth.getCurrentUser().getUid(),cancelButton,oneVsOneChoiceActivity.this,proPicUrl,userName,leader,
                                 isHostFinal,1,linearLayout100,shimmer1,secondplayerimg,highestScore,totalTime,oppoAccu,oppoRatio,secondPlayername,oppoLevel,oppoBatch);

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     cardview:cardCornerRadius="5dp"
-    android:background="@color/white"
+    android:background="@drawable/quibackfinal"
     tools:context=".quizActivity">
 
     <com.google.android.gms.ads.AdView
@@ -159,7 +159,7 @@
                         android:layout_margin="5dp"
                         android:fontFamily="@font/mouse_memoirs"
                         android:textColor="@color/white"
-                        android:textSize="20dp" 
+                        android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="@id/question"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -231,7 +231,6 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:background="@drawable/expert"
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
                     android:scaleX="0.75"

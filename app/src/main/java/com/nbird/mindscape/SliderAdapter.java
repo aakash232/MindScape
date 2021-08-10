@@ -37,7 +37,7 @@ public class SliderAdapter extends PagerAdapter {
     public String[] slide_descs={
       "Compete with players across the world. \n" +
               "1 vs 1 - Tournaments - Single player",
-      "Play the legindary KBC... \n" +
+      "Play the legendary KBC... \n" +
               "Test your visual skills with picture mode and \n"+
               "Do your friends really know you? \n" +
               "Check out the personal custom quiz. \n" +

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     cardview:cardCornerRadius="5dp"
-    android:background="@color/white"
-    tools:context=".Tournament.tournamentBuzzerNormalQuiz">
+    android:background="@drawable/quibackfinal"
+    tools:context=".tournamentBuzzerNormalQuiz">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSpeaker"

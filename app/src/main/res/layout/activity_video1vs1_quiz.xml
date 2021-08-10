@@ -698,7 +698,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:background="@drawable/expert"
+
                     android:clickable="true"
                     android:foreground="?selectableItemBackground"
                     android:scaleX="0.75"

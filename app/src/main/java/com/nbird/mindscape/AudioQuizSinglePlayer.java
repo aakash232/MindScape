@@ -70,7 +70,7 @@ import java.util.Timer;
 
 public class AudioQuizSinglePlayer extends AppCompatActivity {
 
-
+    LottieAnimationView anim11,anim12,anim13,anim14,anim15,anim16,anim17,anim18,anim19,anim20;
     TextView questionTextView,scoreBoard,timerText;
     Button option1,option2,option3,option4,nextButton;
     LinearLayout linearLayout;
@@ -185,7 +185,102 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
     int ptron=1;
 
     int mainfinder;
+    ImageView myPic;
 
+    int myPosition;
+    public void myanimManuCorrect(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.tickanim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.tickanim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.tickanim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.tickanim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.tickanim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.tickanim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.tickanim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.tickanim);
+                anim18.playAnimation();
+                anim18.loop(false);break;
+            case 9:
+                anim19.setAnimation(R.raw.tickanim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.tickanim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
+        }
+    }
+
+
+    public void myanimManuWrong(){
+        myPosition++;
+        switch (myPosition){
+            case 1:
+                anim11.setAnimation(R.raw.wronganim);
+                anim11.playAnimation();
+                anim11.loop(false);break;
+            case 2:
+                anim12.setAnimation(R.raw.wronganim);
+                anim12.playAnimation();
+                anim12.loop(false);break;
+            case 3:
+                anim13.setAnimation(R.raw.wronganim);
+                anim13.playAnimation();
+                anim13.loop(false);break;
+            case 4:
+                anim14.setAnimation(R.raw.wronganim);
+                anim14.playAnimation();
+                anim14.loop(false);break;
+            case 5:
+                anim15.setAnimation(R.raw.wronganim);
+                anim15.playAnimation();
+                anim15.loop(false);break;
+            case 6:
+                anim16.setAnimation(R.raw.wronganim);
+                anim16.playAnimation();
+                anim16.loop(false);break;
+            case 7:
+                anim17.setAnimation(R.raw.wronganim);
+                anim17.playAnimation();
+                anim17.loop(false);break;
+            case 8:
+                anim18.setAnimation(R.raw.wronganim);
+                anim18.playAnimation();
+                anim18.loop(false);
+                break;
+            case 9:
+                anim19.setAnimation(R.raw.wronganim);
+                anim19.playAnimation();
+                anim19.loop(false);break;
+            case 10:
+                anim20.setAnimation(R.raw.wronganim);
+                anim20.playAnimation();
+                anim20.loop(false);break;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,7 +321,17 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
         }.start();
 
         mainfinder=getIntent().getIntExtra("mainfinder",0);
-
+        myPic=(ImageView) findViewById(R.id.myPic);
+        anim11=(LottieAnimationView) findViewById(R.id.anim11);
+        anim12=(LottieAnimationView) findViewById(R.id.anim12);
+        anim13=(LottieAnimationView) findViewById(R.id.anim13);
+        anim14=(LottieAnimationView) findViewById(R.id.anim14);
+        anim15=(LottieAnimationView) findViewById(R.id.anim15);
+        anim16=(LottieAnimationView) findViewById(R.id.anim16);
+        anim17=(LottieAnimationView) findViewById(R.id.anim17);
+        anim18=(LottieAnimationView) findViewById(R.id.anim18);
+        anim19=(LottieAnimationView) findViewById(R.id.anim19);
+        anim20=(LottieAnimationView) findViewById(R.id.anim20);
         questionTextView=findViewById(R.id.questionTip);
         questionImage=(ImageView) findViewById(R.id.questionImage);
         scoreBoard=findViewById(R.id.questionNumber);
@@ -1304,6 +1409,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     musicNav.release();
                 }
             });
+            myanimManuCorrect();
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B1FF88")));   //green color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -1320,6 +1426,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
                     musicNav.release();
                 }
             });
+            myanimManuWrong();
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8888")));     //red color
             selectedOption.setTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
             selectedOption.setShadowLayer(3,1,1,R.color.lightgreen);
@@ -1534,6 +1641,22 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userName=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("propic").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String str=snapshot.getValue(String.class);
+                Glide.with(getBaseContext())
+                        .load(str)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                        .into(myPic);
             }
 
             @Override

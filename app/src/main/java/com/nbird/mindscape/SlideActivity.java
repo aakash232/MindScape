@@ -66,16 +66,7 @@ public class SlideActivity extends AppCompatActivity {
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(SlideActivity.this, R.raw.finalbuttonmusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
+
                 if(currentPage==2){
                     Intent intent=new Intent(getBaseContext(),welcomeActivity.class);
                     startActivity(intent);

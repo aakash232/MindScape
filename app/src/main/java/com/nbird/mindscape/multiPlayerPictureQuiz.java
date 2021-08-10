@@ -161,7 +161,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
         final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
         CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
-        final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
+        final ImageView speakerImage=(ImageView) findViewById(R.id.dpeakerImage);
         final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
         if(songDetect){
             songActivity=new songActivity(this);

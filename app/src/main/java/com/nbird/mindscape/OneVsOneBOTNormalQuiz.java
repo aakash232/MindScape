@@ -43,8 +43,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -196,7 +198,7 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
 
     public void botFunction(){
          Random r=new Random();
-         int jk=r.nextInt(10)+6;
+         int jk=r.nextInt(10)+5;
         countBot(jk);
 
     }
@@ -233,11 +235,18 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
     }
 
     int sumScore;
+    private InterstitialAd mInterstitialAd;
+    private void loadAds(){
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onevsone_quiz);
 
+        loadAds();
         songStopperAndResumer();
 
         botFunction();
@@ -369,7 +378,9 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
         fiftyfiftyLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
+
+                if(fiftyfiftynum==0) {
+                     final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
                 musicNav.start();
                 musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -379,7 +390,6 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if(fiftyfiftynum==0) {
                     lifelineSum++;
                     fiftyfiftynum = 1;
                     linearLayoutFiftyFifty.setBackgroundResource(R.drawable.usedicon);
@@ -519,7 +529,9 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
         audienceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
+
+                if(audiencenum==0) {
+                     final MediaPlayer musicNav;
                 musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
                 musicNav.start();
                 musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -529,7 +541,6 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
                         musicNav.release();
                     }
                 });
-                if(audiencenum==0) {
                     lifelineSum++;
                     audiencenum=1;
                     linearLayoutAudience.setBackgroundResource(R.drawable.usedicon);
@@ -695,17 +706,18 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
+
                 if(swapnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     swapnum=1;
                     linearLayoutSwap.setBackgroundResource(R.drawable.usedicon);
@@ -767,17 +779,18 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
         expertAdviceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MediaPlayer musicNav;
-                musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
-                musicNav.start();
-                musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        musicNav.reset();
-                        musicNav.release();
-                    }
-                });
+
                 if(expertnum==0){
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(OneVsOneBOTNormalQuiz.this, R.raw.lifelinemusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
                     lifelineSum++;
                     expertnum=1;
                     linearLayoutexpert.setBackgroundResource(R.drawable.usedicon);
@@ -1321,6 +1334,89 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
 
             }
             public void onFinish() {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdClosed(){
+                        super.onAdClosed();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        Toast.makeText(OneVsOneBOTNormalQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
+                        Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
+                        //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                        try{
+                            //         myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                        }catch (Exception e){
+
+                        }
+                        if(countDownTimerMine!=null){
+                            countDownTimerMine.cancel();}
+                        if(countDownTimer47!=null){
+                            countDownTimer47.cancel();}
+                        if(countDownTimer50!=null){
+                            countDownTimer50.cancel();}
+                        if(countDownTimer!=null){
+                            countDownTimer.cancel();
+                        }
+
+
+
+
+                        // Toast.makeText(OneVsOneBOTNormalQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
+                        try{
+                            songActivity.songStop();
+                        }catch (Exception e){
+
+                        }
+                        minman=2-minutes;
+                        secman=59-second;
+                        mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
+
+                        //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                        scoreIntent.putExtra("opponentUID",opponentUID);
+                        scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+                        scoreIntent.putExtra("opponentUserName",opponentUsername);
+                        scoreIntent.putExtra("mypropic",myProPicUrl);
+                        scoreIntent.putExtra("myName",myName);
+                        scoreIntent.putExtra("desider",1);
+                        scoreIntent.putExtra("botTime",botTime);
+                        scoreIntent.putExtra("score", score);
+                        scoreIntent.putExtra("lifeline",lifelineSum);
+                        scoreIntent.putExtra("minutes",minutes);
+                        scoreIntent.putExtra("seconds",second);
+                        scoreIntent.putExtra("minutestext",minutestext);
+                        scoreIntent.putExtra("secondtext",secondtext);
+                        scoreIntent.putExtra("milliholder",milliHolder);
+                        scoreIntent.putExtra("category",category);
+                        scoreIntent.putExtra("imageurl",imageurl);
+                        scoreIntent.putExtra("mine",mine);
+                        scoreIntent.putExtra("botCorrectAns",botCorrectAns);
+                        scoreIntent.putExtra("actualmin",a1);
+                        scoreIntent.putExtra("actualsec",a2);
+                        scoreIntent.putExtra("minman",minman);
+                        scoreIntent.putExtra("secman",secman);
+                        scoreIntent.putExtra("isHostFinal", isHostFinal);
+                        scoreIntent.putExtra("sumScore", sumScore);
+                        scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                        scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
+                        scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+                        scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+                        startActivity(scoreIntent);
+                        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                        finish();
+
+                    }
+
+                });
+
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                    return ;
+                }
+
+
                 Toast.makeText(OneVsOneBOTNormalQuiz.this, "Time Over", Toast.LENGTH_SHORT).show();
                 Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
                 //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
@@ -1669,6 +1765,86 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
     public void waitingFunction(){
 
         if(binaryPosition>10){
+            try{
+                songActivity.songStop();
+            }catch (Exception e){
+
+            }
+            mInterstitialAd.setAdListener(new AdListener(){
+                public void onAdClosed(){
+                    super.onAdClosed();
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+                    Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
+                    //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                    try{
+                        //         myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                    }catch (Exception e){
+
+                    }
+                    if(countDownTimerMine!=null){
+                        countDownTimerMine.cancel();}
+                    if(countDownTimer47!=null){
+                        countDownTimer47.cancel();}
+                    if(countDownTimer50!=null){
+                        countDownTimer50.cancel();}
+                    if(countDownTimer!=null){
+                        countDownTimer.cancel();
+                    }
+
+
+
+                    // Toast.makeText(OneVsOneBOTNormalQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
+                    try{
+                        songActivity.songStop();
+                    }catch (Exception e){
+
+                    }
+                    minman=2-minutes;
+                    secman=59-second;
+                    mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
+
+                    //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                    scoreIntent.putExtra("opponentUID",opponentUID);
+                    scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+                    scoreIntent.putExtra("opponentUserName",opponentUsername);
+                    scoreIntent.putExtra("mypropic",myProPicUrl);
+                    scoreIntent.putExtra("myName",myName);
+                    scoreIntent.putExtra("score", score);
+                    scoreIntent.putExtra("lifeline",lifelineSum);
+                    scoreIntent.putExtra("minutes",minutes);
+                    scoreIntent.putExtra("seconds",second);
+                    scoreIntent.putExtra("minutestext",minutestext); scoreIntent.putExtra("sumScore", sumScore);
+                    scoreIntent.putExtra("secondtext",secondtext);
+                    scoreIntent.putExtra("milliholder",milliHolder);
+                    scoreIntent.putExtra("category",category);
+                    scoreIntent.putExtra("imageurl",imageurl);
+                    scoreIntent.putExtra("mine",mine);
+                    scoreIntent.putExtra("botTime",botTime);
+                    scoreIntent.putExtra("desider",1);
+                    scoreIntent.putExtra("botCorrectAns",botCorrectAns);
+                    scoreIntent.putExtra("actualmin",a1);
+                    scoreIntent.putExtra("actualsec",a2);
+                    scoreIntent.putExtra("minman",minman);
+                    scoreIntent.putExtra("secman",secman);
+                    scoreIntent.putExtra("isHostFinal", isHostFinal);
+                    scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                    scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
+                    scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+                    scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+                    startActivity(scoreIntent);
+                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                    finish();
+                }
+
+            });
+
+            if(mInterstitialAd.isLoaded()){
+                mInterstitialAd.show();
+                return ;
+            }
+
+
                   Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
                             //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
                             try{
@@ -1808,6 +1984,95 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         if(binaryPosition>10){
+                            try{
+                                songActivity.songStop();
+                            }catch (Exception e){
+
+                            }
+                            if(cCompany!=null){
+                                cCompany.cancel();
+                            }
+                            mInterstitialAd.setAdListener(new AdListener(){
+                                public void onAdClosed(){
+                                    super.onAdClosed();
+                                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                                    Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
+                                    //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
+                                    try{
+                                        //         myRef.child("User").child(opponentUID).child("1vs1onlineOpponentUID").removeValue();
+                                    }catch (Exception e){
+
+                                    }
+                                    if(countDownTimerMine!=null){
+                                        countDownTimerMine.cancel();}
+                                    if(countDownTimer47!=null){
+                                        countDownTimer47.cancel();}
+                                    if(countDownTimer50!=null){
+                                        countDownTimer50.cancel();}
+                                    if(countDownTimer!=null){
+                                        countDownTimer.cancel();
+                                    }
+                                    minman=2-minutes;
+                                    secman=59-second;
+
+                                    mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
+
+
+
+                                    // Toast.makeText(OneVsOneBOTNormalQuiz.this, "Gate1", Toast.LENGTH_LONG).show();
+
+                                    try{
+                                        songActivity.songStop();
+                                    }catch (Exception e){
+
+                                    }
+                                    //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+                                    scoreIntent.putExtra("opponentUID",opponentUID);
+                                    scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+                                    scoreIntent.putExtra("opponentUserName",opponentUsername);
+                                    scoreIntent.putExtra("mypropic",myProPicUrl);
+                                    scoreIntent.putExtra("myName",myName);
+                                    scoreIntent.putExtra("score", score);
+                                    scoreIntent.putExtra("desider",1);
+                                    scoreIntent.putExtra("lifeline",lifelineSum);
+                                    scoreIntent.putExtra("minutes",minutes);
+                                    scoreIntent.putExtra("seconds",second);
+                                    scoreIntent.putExtra("minutestext",minutestext);
+                                    scoreIntent.putExtra("secondtext",secondtext);
+                                    scoreIntent.putExtra("milliholder",milliHolder);
+                                    scoreIntent.putExtra("category",category);
+                                    scoreIntent.putExtra("imageurl",imageurl);
+                                    scoreIntent.putExtra("mine",mine);
+                                    scoreIntent.putExtra("botTime",botTime);
+                                    scoreIntent.putExtra("actualmin",a1);
+                                    scoreIntent.putExtra("actualsec",a2);
+                                    scoreIntent.putExtra("minman",kalimin);
+                                    scoreIntent.putExtra("sumScore", sumScore);
+                                    scoreIntent.putExtra("botCorrectAns",botCorrectAns);
+                                    scoreIntent.putExtra("secman",kalisec);
+                                    scoreIntent.putExtra("parsel",1);
+                                    scoreIntent.putExtra("isHostFinal", isHostFinal);
+                                    scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+                                    scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
+                                    scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+                                    scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+                                    startActivity(scoreIntent);
+                                    overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                    finish();
+                                }
+
+
+
+                            });
+
+                            if(mInterstitialAd.isLoaded()){
+                                mInterstitialAd.show();
+                                return ;
+                            }
+
+
+
+
                             Intent scoreIntent = new Intent(OneVsOneBOTNormalQuiz.this, OneVsOneBOTScoreActivity.class);
                             //    myRef.child("battleGround").child("onevsoneOnline").child(opponentUID).removeValue();
                             try{

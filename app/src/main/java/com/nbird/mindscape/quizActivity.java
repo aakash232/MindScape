@@ -200,7 +200,6 @@ public class quizActivity extends AppCompatActivity {
         anim18=(LottieAnimationView) findViewById(R.id.anim18);
         anim19=(LottieAnimationView) findViewById(R.id.anim19);
         anim20=(LottieAnimationView) findViewById(R.id.anim20);
-        myName=(TextView) findViewById(R.id.myName);
         myPic=(ImageView) findViewById(R.id.myPic);
 
         userNameFunction();
@@ -987,7 +986,11 @@ public class quizActivity extends AppCompatActivity {
 
                                 if(swapnum==0){
                                     if (position == 10) {
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
                                         mInterstitialAd.setAdListener(new AdListener(){
                                             public void onAdClosed(){
                                                 super.onAdClosed();
@@ -1050,7 +1053,11 @@ public class quizActivity extends AppCompatActivity {
                                 }else {
                                     if (position == 11) {
 
+                                        try{
+                                            songActivity.songStop();
+                                        }catch (Exception e){
 
+                                        }
 
                                         mInterstitialAd.setAdListener(new AdListener(){
                                             public void onAdClosed(){
@@ -1441,6 +1448,11 @@ public class quizActivity extends AppCompatActivity {
 
             }
             public void onFinish() {
+                try{
+                    songActivity.songStop();
+                }catch (Exception e){
+
+                }
                 Toast.makeText(quizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
                 mInterstitialAd.setAdListener(new AdListener(){
                     public void onAdClosed(){
@@ -1588,11 +1600,6 @@ public class quizActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userName=snapshot.getValue(String.class);
-                myName.setText(userName);
-
-
-
-
             }
 
             @Override
@@ -1695,9 +1702,6 @@ public class quizActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    public void adManu(){
     }
 
 

@@ -110,7 +110,6 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:background="@drawable/expert"
                         android:clickable="true"
                         android:foreground="?selectableItemBackground"
                         android:scaleX="0.75"
