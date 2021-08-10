@@ -8,36 +8,36 @@
     android:background="@color/white"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".UI.SinglePlayerQuiz">
+    tools:context=".SinglePlayerQuiz">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewSpeaker"
+        android:id="@+id/cardViewdpeaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView2"
         app:layout_constraintEnd_toStartOf="@+id/cardView2"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/Speaker"
+            android:id="@+id/dpeaker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <ImageView
-                android:id="@+id/speakerImage"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:id="@+id/dpeakerImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@drawable/speakeron" />
 
         </LinearLayout>
@@ -51,14 +51,14 @@
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:layout_marginEnd="15sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:scaleY="0.8"
         android:scaleX="0.8"
         android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -66,22 +66,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <TextView
                 android:id="@+id/questionNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:elevation="10sp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="right"
                 android:text=""
                 android:textColor="#000000"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,14 +96,14 @@
         android:id="@+id/cardView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:layout_marginTop="5sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -112,22 +112,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <TextView
                 android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:elevation="10sp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="right"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
                 android:text=""
                 android:textColor="#000000"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,18 +141,18 @@
         android:id="@+id/cardView46"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10sp"
-        android:layout_marginEnd="10sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_weight="1"
         android:clickable="true"
-        android:elevation="-2sp"
+        android:elevation="-2dp"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.95"
         android:scaleY="0.95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        cardview:cardCornerRadius="5sp">
+        cardview:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -174,18 +174,18 @@
 
                     <ImageView
                         android:id="@+id/myPic"
-                        android:layout_width="30sp"
-                        android:layout_height="30sp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_margin="3sp"
+                        android:layout_margin="3dp"
                         android:scaleX="0.8"
                         android:scaleY="0.8" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5sp"
-                        android:layout_marginBottom="5sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/insidecardviewlessradius"
                         android:orientation="vertical">
@@ -194,17 +194,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="5sp"
-                            android:layout_marginTop="3sp"
+                            android:layout_margin="5dp"
+                            android:layout_marginTop="3dp"
                             android:orientation="horizontal"
                             android:weightSum="10">
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim11"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,10 +214,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim12"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -227,10 +227,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim13"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,10 +240,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim14"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -253,10 +253,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim15"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -266,10 +266,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim16"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -279,10 +279,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim17"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -292,10 +292,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim18"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -305,10 +305,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim19"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -318,10 +318,10 @@
 
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/anim20"
-                                android:layout_width="25sp"
-                                android:layout_height="25sp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
-                                android:elevation="-5sp"
+                                android:elevation="-5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -346,19 +346,19 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_marginLeft="20sp"
-        android:layout_marginTop="5sp"
-        android:layout_marginRight="20sp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="1"
         android:clickable="true"
-        android:elevation="-2sp"
+        android:elevation="-2dp"
         android:foreground="?selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView46"
-        cardview:cardCornerRadius="5sp">
+        cardview:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -369,14 +369,14 @@
                 android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:padding="15sp"
+                android:padding="15dp"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -391,8 +391,8 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal"
         android:scaleX="0.9"
         android:scaleY="0.9"
@@ -404,15 +404,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/expert"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/linearLayoutexpert"
@@ -434,15 +434,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/swap"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/linearLayoutSwap"
@@ -464,15 +464,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/audience"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
 
             <LinearLayout
@@ -495,15 +495,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fiftyfifty"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
 
             <LinearLayout
@@ -521,7 +521,7 @@
                     android:scaleY="0.8"
                     android:text="50:50"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -536,8 +536,8 @@
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45sp"
-        android:layout_marginRight="45sp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
         android:scaleX="0.9"
         android:scaleY="0.9"
         android:gravity="center"
@@ -557,67 +557,67 @@
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
+                android:layout_height="55dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/roboto_bold"
                 android:shadowColor="@color/black"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
-                android:layout_marginTop="8sp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/roboto_bold"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
-                android:layout_marginTop="8sp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/roboto_bold"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
-                android:layout_marginTop="8sp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/roboto_bold"
                 android:text=""
                 android:textColor="#ffffff"
 
-                android:textSize="20sp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
 
     </LinearLayout>
     <Button
         android:id="@+id/nextbutton"
-        android:layout_width="200sp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="40sp"
-        android:layout_marginEnd="40sp"
-        android:layout_marginBottom="10sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
         android:alpha="0.65"
         android:background="@drawable/blackwithwhitestroke"
         android:enabled="false"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/mouse_memoirs"
         android:scaleX="0.8"
         android:scaleY="0.8"
         android:text="Next"
-        android:textSize="30sp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1242,7 +1242,7 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            cardview:cardCornerRadius="100dp">
+            cardview:cardCornerRadius="50dp">
 
 
             <LinearLayout

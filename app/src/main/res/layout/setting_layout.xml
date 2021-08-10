@@ -3,22 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
     android:scaleY="0.8"
-    android:scaleX="0.8"
-    android:padding="20dp"
+    android:scaleX="0.7"
+    android:padding="5dp"
     android:background="@color/transparent"
     android:id="@+id/layoutDialogContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutDialog"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/whitewithblackstroke"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="176dp">
+        tools:layout_editor_absoluteX="20dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +56,7 @@
                 android:padding="10dp"
                 android:text="Select The Number Of Questions"
                 android:textColor="#000000"
-                android:textSize="23dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +168,7 @@
                             android:gravity="center"
                             android:text="20"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -191,7 +192,7 @@
                 android:padding="10dp"
                 android:text="Select The Time"
                 android:textColor="#000000"
-                android:textSize="23dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +235,7 @@
                             android:gravity="center"
                             android:text="3 Mins"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -268,7 +269,7 @@
                             android:gravity="center"
                             android:text="4.5 Mins"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -302,7 +303,7 @@
                             android:gravity="center"
                             android:text="6 Mins"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -326,7 +327,7 @@
                 android:padding="10dp"
                 android:text="Select Mode"
                 android:textColor="#000000"
-             android:textSize="23dp" 
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -369,7 +370,7 @@
                             android:gravity="center"
                             android:text="Normal"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -404,7 +405,7 @@
                             android:gravity="center"
                             android:text="Picture"
                             android:textColor="#000000"
-                            android:textSize="25dp" 
+                            android:textSize="25dp"
                             android:textStyle="bold" />
 
 
@@ -452,7 +453,7 @@
                             android:gravity="center"
                             android:text="Buzzer Normal"
                             android:textColor="#000000"
-                         android:textSize="20dp" 
+                            android:textSize="20dp"
                             android:textStyle="bold" />
 
 
@@ -487,7 +488,7 @@
                             android:gravity="center"
                             android:text="Buzzer Picture"
                             android:textColor="#000000"
-                         android:textSize="20dp" 
+                            android:textSize="20dp"
                             android:textStyle="bold" />
 
 
@@ -512,17 +513,11 @@
 
                 android:scaleY="0.9"
                 android:text="Done"
-             android:textSize="18dp" 
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
 
         </LinearLayout>
-
-
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

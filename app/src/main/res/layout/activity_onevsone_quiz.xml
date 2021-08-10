@@ -8,7 +8,7 @@
     android:background="@color/white"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".UI.OneVsOneNormalActivity">
+    tools:context=".onevsoneQuizActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSpeaker"
@@ -807,7 +807,7 @@
         android:alpha="0.65"
         android:background="@drawable/blackwithwhitestroke"
         android:enabled="false"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/mouse_memoirs"
         android:scaleX="0.8"
         android:scaleY="0.8"
         android:text="Next"

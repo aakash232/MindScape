@@ -242,7 +242,8 @@ public class BotOneVsOne {
         Random r= new Random();
         int  tom=r.nextInt(3735)+1;
 
-        String array[] = {"Abbott", "Acevedo",
+        String array[] = {
+                "Abbott", "Acevedo",
                 "Acosta",
                 "Adams",
                 "Adkins",

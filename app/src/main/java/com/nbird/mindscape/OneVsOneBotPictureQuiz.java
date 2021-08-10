@@ -158,7 +158,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
         final SharedPreferences.Editor editorsongStopper = songStopper.edit();
 
         final Boolean songDetect = songStopper.getBoolean("IsPlaying",true);
-        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewSpeaker);
+        CardView cardViewSpeaker=(CardView) findViewById(R.id.cardViewdpeaker);
         final ImageView speakerImage=(ImageView) findViewById(R.id.speakerImage);
         final LinearLayout Speaker=(LinearLayout) findViewById(R.id.Speaker);
         if(songDetect){
@@ -244,7 +244,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
 
         songStopperAndResumer();
 
-        botFunction();
+
 
         builder=new AlertDialog.Builder(OneVsOneBotPictureQuiz.this,R.style.AlertDialogTheme);
         view1= LayoutInflater.from(OneVsOneBotPictureQuiz.this).inflate(R.layout.waiting_dialog_layout,(ConstraintLayout) findViewById(R.id.layoutDialogContainer));
@@ -889,6 +889,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                botFunction();
                 alertDialog.dismiss();
                 countDownTimerFun47();
                 new CountDownTimer(1000*5,1000){

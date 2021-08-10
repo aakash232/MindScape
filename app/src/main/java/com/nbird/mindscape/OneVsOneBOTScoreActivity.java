@@ -45,8 +45,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class OneVsOneBOTScoreActivity extends AppCompatActivity {
@@ -65,9 +68,9 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
     long milliholder;
     long totalSum=0;
     int opponentScorebro;
-
+    Button buttonYes,buttonNo;
     TextView titleDialog;
-    LottieAnimationView animDialog;
+    LottieAnimationView animDialog,requestAnim;
 
     ImageView onlineImage,opponentImage;
     TextView myName,myScore,myAcuu,myRatio,myTime,myLifelines,oppoName,oppoScore,oppoAccu,oppoRatio,oppoTime,oppoLifelines;
@@ -80,6 +83,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
     List<Integer> arrlist30;
     String username;
     int sumScore;
+    CountDownTimer countDownTimerBOTRequest;
 
     int score123,timeHolder,correct,wrong,wrongfire,sumationOfScore;
 
@@ -135,6 +139,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
             oppoBatch.setBackgroundResource(R.drawable.king);
         }
     }
+    barGroupHolder man;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,6 +232,111 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
 
 
 
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    long i=snapshot.getValue(Integer.class);
+                    long k=((1000*60*3)-milliholder)/1000;
+                    i=i+k;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    long k=((1000*60*3)-milliholder)/1000;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("LineChartGradient").child(date).setValue(k).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        final String dayOfTheWeek = sdf.format(d);
+
+        man=new barGroupHolder();
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    man=snapshot.getValue(barGroupHolder.class);
+                    int cA=man.getCorrect()+score;
+                    int wA=man.getWrong()+(10-score);
+
+
+                    barGroupHolder g1=new barGroupHolder(cA,wA);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                }catch (Exception e){
+                    int t=10-score;
+                    barGroupHolder g1=new barGroupHolder(score,t);
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("OnlineModeProfileData").child("barGroupData").child(dayOfTheWeek).setValue(g1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+        numberOfTimesPlayed();
+
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    int s=snapshot.getValue(Integer.class);
+                    s++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(s).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfOnlineModePlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,10 +403,185 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
 
             }
         });
+
+        Random r=new Random();
+        int b=r.nextInt(10)+1;
+
+        if(b<=8){
+            int l=r.nextInt(8)+8;
+            countDownTimerBOTRequest=new CountDownTimer(1000*l,1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    requestDialogBoxFun();
+                }
+            }.start();
+        }
+
         
     }
 
 
+    public void requestDialogBoxFun(){
+
+
+
+
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(OneVsOneBOTScoreActivity.this, R.style.AlertDialogTheme);
+
+            final View view1 = LayoutInflater.from(OneVsOneBOTScoreActivity.this).inflate(R.layout.request_layout, (ConstraintLayout) findViewById(R.id.layoutDialogContainer));
+            builder.setView(view1);
+            builder.setCancelable(false);
+
+            titleDialog = (TextView) view1.findViewById(R.id.textTitle);
+            buttonYes = (Button) view1.findViewById(R.id.buttonYes);
+            buttonNo = (Button) view1.findViewById(R.id.buttonNo);
+            requestAnim = (LottieAnimationView) view1.findViewById(R.id.backlitemodeanim);
+
+            final AlertDialog alertDialog = builder.create();
+            if (alertDialog.getWindow() != null) {
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            try{
+                alertDialog.show();
+            }catch (Exception e){
+
+            }
+
+            titleDialog.setText(opponentUsername + " Has Send You A Request For A Rematch!");
+
+
+            buttonYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(OneVsOneBOTScoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    alertDialog.dismiss();
+
+
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("accept").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            myRef.child("User").child(opponentUID).child("questionNUmberPicUP").removeValue();
+                            if (desider == 1) {
+                                for(int i=0;i<14;i++){
+                                    // create instance of Random class
+                                    Random rand = new Random();
+
+                                    // Generate random integers in range 0 to 6326
+
+                                    int setNumber=rand.nextInt(6326)+1; //NEED TO CHANGE HERE
+                                    //NEED TO CHANGE HERE
+                                    arrlist30.add(setNumber);
+                                }
+                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, onevsoneQuizActivity.class);
+                                intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                intent.putExtra("opponentUserName", opponentUsername);
+                                intent.putExtra("mypropic", myProPicUrl);
+                                intent.putExtra("myName", myName123);
+
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                finish();
+
+
+                            } else {
+                                for(int i=0;i<14;i++){
+                                    // create instance of Random class
+                                    Random rand = new Random();
+
+                                    int setNumber = rand.nextInt(4999)+1;
+
+                                    if(setNumber>1210&&setNumber<2000){
+                                        setNumber=setNumber-1000;
+                                    }  //NEED TO CHANGE HERE
+                                    //NEED TO CHANGE HERE
+                                    arrlist30.add(setNumber);
+                                }
+                                Intent intent = new Intent(OneVsOneBOTScoreActivity.this, multiPlayerPictureQuiz.class);
+                                intent.putExtra("opponentImageUrl", opponentimageUrl);
+                                intent.putExtra("opponentUserName", opponentUsername);
+                                intent.putExtra("mypropic", myProPicUrl);
+                                intent.putExtra("myName", myName123);
+
+                                intent.putIntegerArrayListExtra("arrList12345", (ArrayList<Integer>) arrlist30);
+
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+                                finish();
+
+
+                            }
+
+                        }
+                    });
+
+
+                }
+            });
+
+            buttonNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    final MediaPlayer musicNav;
+                    musicNav = MediaPlayer.create(OneVsOneBOTScoreActivity.this, R.raw.finalbuttonmusic);
+                    musicNav.start();
+                    musicNav.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            musicNav.reset();
+                            musicNav.release();
+                        }
+                    });
+
+                            //    myRef.child("User").child(opponentUID).child("1vs1Online").removeValue();
+                            alertDialog.dismiss();
+
+
+
+                }
+            });
+
+
+    }
+    public void numberOfTimesPlayed(){
+        myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    int i=snapshot.getValue(Integer.class);
+                    i++;
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(i).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }catch (Exception e){
+                    myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("numberOfTimesPlayed").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void dataSetterFun(){
 
         Glide.with(getBaseContext()).load(opponentimageUrl).apply(RequestOptions

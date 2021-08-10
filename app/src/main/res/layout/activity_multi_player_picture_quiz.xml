@@ -8,36 +8,36 @@
     android:background="@color/white"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".UI.OneVsOnePictureQuiz">
+    tools:context=".multiPlayerPictureQuiz">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewSpeaker"
+        android:id="@+id/cardViewdpeaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView2"
         app:layout_constraintEnd_toStartOf="@+id/cardView2"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/Speaker"
+            android:id="@+id/dpeaker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <ImageView
-                android:id="@+id/speakerImage"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:id="@+id/dpeakerImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@drawable/speakeron" />
 
         </LinearLayout>
@@ -51,14 +51,14 @@
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:layout_marginEnd="15sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:scaleY="0.8"
         android:scaleX="0.8"
         android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -66,15 +66,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <TextView
                 android:id="@+id/questionNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:elevation="10sp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
                 android:fontFamily="@font/mouse_memoirs"
@@ -96,14 +96,14 @@
         android:id="@+id/cardView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:layout_marginTop="5sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
-        android:elevation="10sp"
+        android:elevation="10dp"
         android:foreground="?selectableItemBackground"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        app:cardCornerRadius="5sp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -112,15 +112,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/whitewithblackstroke"
-            android:elevation="10sp">
+            android:elevation="10dp">
 
 
             <TextView
                 android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:elevation="10sp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/mouse_memoirs"
                 android:gravity="right"
                 android:scaleX="0.9"
@@ -620,8 +620,8 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal"
         android:scaleX="0.9"
         android:scaleY="0.9"
@@ -633,15 +633,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/expert"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/linearLayoutexpert"
@@ -663,15 +663,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/swap"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/linearLayoutSwap"
@@ -693,15 +693,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/audience"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
 
             <LinearLayout
@@ -724,15 +724,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fiftyfifty"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             android:scaleX="0.75"
             android:scaleY="0.75"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            cardview:cardCornerRadius="5sp">
+            cardview:cardCornerRadius="5dp">
 
 
             <LinearLayout
@@ -750,7 +750,7 @@
                     android:scaleY="0.8"
                     android:text="50:50"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -765,8 +765,8 @@
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45sp"
-        android:layout_marginRight="45sp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
         android:scaleY="0.9"
@@ -787,46 +787,46 @@
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
+                android:layout_height="55dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/mouse_memoirs"
                 android:shadowColor="@color/black"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
+                android:layout_height="55dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
+                android:layout_height="55dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:layout_marginTop="5dp"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
-                android:layout_height="55sp"
+                android:layout_height="55dp"
                 android:background="@drawable/optionbuttonback"
                 android:fontFamily="@font/mouse_memoirs"
                 android:text=""
                 android:textColor="#ffffff"
                 android:layout_marginTop="5dp"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
 
@@ -834,20 +834,20 @@
 
     <Button
         android:id="@+id/nextbutton"
-        android:layout_width="200sp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="40sp"
-        android:layout_marginEnd="40sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="5dp"
         android:alpha="0.65"
         android:background="@drawable/blackwithwhitestroke"
         android:enabled="false"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/mouse_memoirs"
         android:scaleX="0.8"
         android:scaleY="0.8"
         android:text="Next"
-        android:textSize="30sp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
