@@ -55,14 +55,11 @@
                     android:padding="10dp">
 
 
-                    <com.airbnb.lottie.LottieAnimationView
+                    <ImageView
                         android:id="@+id/online232"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/onlineanim1"
-                        app:lottie_speed="1" />
+                       android:src="@drawable/mp" />
 
 
                     <LinearLayout
@@ -147,14 +144,11 @@
                     android:padding="10dp">
 
 
-                    <com.airbnb.lottie.LottieAnimationView
+                    <ImageView
                         android:id="@+id/localanim"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/localanim"
-                        app:lottie_speed="1" />
+                        android:src="@drawable/local"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -30,8 +30,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.airbnb.lottie.LottieAnimationView
+            <ImageView
                 android:id="@+id/backlitemodeanim"
+                android:src="@drawable/privacymode"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_gravity="center"
@@ -40,10 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/privacyiconanim"
-                app:lottie_speed="1" />
+               />
 
             <TextView
                 android:id="@+id/textView15"

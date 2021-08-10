@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <com.airbnb.lottie.LottieAnimationView
+
+                <ImageView
                     android:id="@+id/backlitemodeanim"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -43,10 +44,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    cardview:lottie_autoPlay="true"
-                    cardview:lottie_loop="true"
-                    cardview:lottie_rawRes="@raw/findingopponentanim"
-                    cardview:lottie_speed="1" />
+                   android:src="@drawable/findlobby" />
 
 
                 <LinearLayout

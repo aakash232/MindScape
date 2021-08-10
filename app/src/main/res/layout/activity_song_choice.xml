@@ -55,14 +55,11 @@
                     android:padding="16dp">
 
 
-                    <com.airbnb.lottie.LottieAnimationView
+                    <ImageView
                         android:id="@+id/single_player"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/musicmodeanim"
-                        app:lottie_speed="1" />
+                        android:src="@drawable/audioquiz" />
 
 
                     <LinearLayout
@@ -144,14 +141,11 @@
                     android:padding="16dp">
 
 
-                    <com.airbnb.lottie.LottieAnimationView
+                    <ImageView
                         android:id="@+id/online"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/videomodeanim"
-                        app:lottie_speed="1" />
+                       android:src="@drawable/videoquiz" />
 
 
                     <LinearLayout
@@ -233,14 +227,11 @@
                     android:padding="16dp">
 
 
-                    <com.airbnb.lottie.LottieAnimationView
+                    <ImageView
                         android:id="@+id/exp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/databaseanim"
-                        app:lottie_speed="1" />
+                        android:src="@drawable/avtest" />
 
 
                     <LinearLayout
@@ -267,7 +258,7 @@
                             android:layout_gravity="left"
                             android:fontFamily="@font/mouse_memoirs"
                             android:gravity="left"
-                            android:text="More Questions And Online Mode Of Audio Quiz(in Test Phase) And Video Quiz(in Test Phase) Coming Soon In Full Version....\nQuiz Time : 10 Mins"
+                            android:text="More Questions And Online Mode! Coming soon in Audio-Video full version quiz mode... \nQuiz Time : 10 Mins"
                             android:textColor="#000000"
                             android:textSize="15dp" />
 

@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp">
 
-                        <com.airbnb.lottie.LottieAnimationView
+                        <ImageView
                             android:id="@+id/online"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
@@ -70,10 +70,7 @@
                             android:layout_marginStart="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/tournamentanimallow"
-                            app:lottie_speed="1" />
+                           android:src="@drawable/tournamentchoose"/>
 
 
                         <androidx.cardview.widget.CardView
