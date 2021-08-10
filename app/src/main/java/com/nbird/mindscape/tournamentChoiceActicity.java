@@ -502,5 +502,12 @@ public class tournamentChoiceActicity extends AppCompatActivity {
         });
 
     }
+    public void onBackPressed() {
+        Intent i=new Intent(tournamentChoiceActicity.this,mainMenuActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+        finish();
+
+    }
 
 }
