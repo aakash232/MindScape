@@ -126,7 +126,7 @@ public class tournamentPictureQuiz extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    //    mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     songActivity songActivity;

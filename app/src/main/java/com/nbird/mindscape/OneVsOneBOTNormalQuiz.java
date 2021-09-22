@@ -239,7 +239,7 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
     private void loadAds(){
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+      //  mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1932,7 +1932,7 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
 
         AdView mAdView = view1.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+    //    mAdView.loadAd(adRequest);
 
         ImageView cancelButton=(ImageView) view1.findViewById(R.id.cancelButton);
 

@@ -531,11 +531,11 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
         if(parcel==1){
             minrev=amin;
             secriv=asec;
-            totalSum= ((60*(2-amin))+(59-asec))*80;
+            totalSum= ((60*(2-amin))+(59-asec))*10;
         }else{
             minrev=2-minutes;
             secriv=59-second;
-            totalSum= ((60*minutes)+second)*80;
+            totalSum= ((60*minutes)+second)*10;
         }
 
 

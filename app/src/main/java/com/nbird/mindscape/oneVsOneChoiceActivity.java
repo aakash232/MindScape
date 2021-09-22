@@ -112,7 +112,7 @@ public class oneVsOneChoiceActivity extends AppCompatActivity {
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+  //      mAdView.loadAd(adRequest);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

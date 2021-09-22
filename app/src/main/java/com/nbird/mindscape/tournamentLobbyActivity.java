@@ -3469,7 +3469,7 @@ public class tournamentLobbyActivity extends AppCompatActivity {
         AdView mAdView = viewFact.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
 
-            mAdView.loadAd(adRequest);
+          //  mAdView.loadAd(adRequest);
 
 
 

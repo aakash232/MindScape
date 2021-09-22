@@ -1082,7 +1082,12 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                                     }else{
                                         count = 0;
 
-                                        playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                        try {
+                                            playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                        }catch (Exception e){
+
+                                        }
+
                                     }
 
                                 }else {
@@ -1918,7 +1923,7 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
 
         AdView mAdView = view1.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+     //   mAdView.loadAd(adRequest);
 
         ImageView cancelButton=(ImageView) view1.findViewById(R.id.cancelButton);
 

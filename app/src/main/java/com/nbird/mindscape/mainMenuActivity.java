@@ -248,7 +248,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     private void loadAds(){
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    //    mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     LottieAnimationView profilebutton;
 
@@ -303,7 +303,8 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
 
             @Override
             public void onTick(long millisUntilFinished) {
-                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                try{
+                    ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                 if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                     //we are connected to a network
@@ -332,6 +333,10 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
                         wanted=1;
                     }
                 }
+                }catch (Exception e){
+
+                }
+
             }
 
             @Override

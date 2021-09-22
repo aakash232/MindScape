@@ -308,11 +308,9 @@ public class BotOneVsOne {
                 JSONArray arr = new JSONArray(weatherInfo);
 
 
-                oppoName= jsonObject.getJSONArray("results")
-                        .getJSONObject(0)
-                        .getJSONObject("login")
-                        .optString("username");
+                oppoName();
                 secondPlayername.setText(oppoName);
+
 
 
                 oppoURL=jsonObject.getJSONArray("results")

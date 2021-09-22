@@ -97,7 +97,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+      //  mAdView.loadAd(adRequest);
     }
     TextView oppoLevel;
     ImageView oppoBatch;
@@ -600,11 +600,11 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
         if(parcel==1){
             minrev=amin;
             secriv=asec;
-            totalSum= ((60*(2-amin))+(59-asec))*80;
+            totalSum= ((60*(2-amin))+(59-asec))*10;
         }else{
             minrev=2-minutes;
             secriv=59-second;
-            totalSum= ((60*minutes)+second)*80;
+            totalSum= ((60*minutes)+second)*10;
         }
 
 
@@ -1336,7 +1336,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
 
         int botmin=2-botTime/60;
         int botsec=59-botTime%60;
-        opponentScorebro= (180-botTime)*80;
+        opponentScorebro= (180-botTime)*10;
         oppoTime.setText("Time Taken : "+botmin+" min "+botsec+" sec");
 
         opponentScorebro=opponentScorebro+2000;

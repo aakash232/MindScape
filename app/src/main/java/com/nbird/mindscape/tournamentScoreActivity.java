@@ -4279,11 +4279,11 @@ public class tournamentScoreActivity extends AppCompatActivity {
 
         switch (timerNum){
             case 0:
-                totalSum= (180-counter)*80;break;
+                totalSum= (180-counter)*10;break;
             case 1:
-                totalSum= (270-counter)*80;break;
+                totalSum= (270-counter)*10;break;
             case 2:
-                totalSum= (360-counter)*80;break;
+                totalSum= (360-counter)*10;break;
         }
 
         totalSum=totalSum+2000;

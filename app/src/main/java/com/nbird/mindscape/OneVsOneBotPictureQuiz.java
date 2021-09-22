@@ -232,6 +232,8 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
                     Random ro=new Random();
                     int jk=ro.nextInt(8)+5;
                     countBot(jk);
+                }else{
+                    binaryPosition=50;
                 }
 
             }
@@ -243,7 +245,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
     private void loadAds(){
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+       // mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
@@ -1065,7 +1067,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
                                         try{
                                             playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
                                         }catch (Exception e){
-                                            playAnim(questionTextView, 0, list.get(position+1).getQuestionTextView());
+                                   //         playAnim(questionTextView, 0, list.get(position+1).getQuestionTextView());
                                         }
 
                                     }
@@ -1086,7 +1088,12 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
                                     }else{
                                         count = 0;
 
-                                        playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                        try {
+                                            playAnim(questionTextView, 0, list.get(position).getQuestionTextView());
+                                        }catch (Exception e){
+
+                                        }
+
                                     }
                                 }
 
@@ -1863,7 +1870,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
 
     public void waitingFunction(){
 
-        if(binaryPosition>10){
+        if(binaryPosition==50){
             try{
                 songActivity.songStop();
             }catch (Exception e){
@@ -1937,6 +1944,64 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
                 mInterstitialAd.show();
                 return ;
             }
+
+
+            Intent scoreIntent = new Intent(OneVsOneBotPictureQuiz.this, OneVsOneBOTScoreActivity.class);
+
+            if(countDownTimerMine!=null){
+                countDownTimerMine.cancel();}
+            if(countDownTimer47!=null){
+                countDownTimer47.cancel();}
+            if(countDownTimer50!=null){
+                countDownTimer50.cancel();}
+            if(countDownTimer!=null){
+                countDownTimer.cancel();
+            }
+
+
+
+            // Toast.makeText(OneVsOneBotPictureQuiz.this, "Gate2", Toast.LENGTH_LONG).show();
+            try{
+                songActivity.songStop();
+            }catch (Exception e){
+
+            }
+            minman=2-minutes;
+            secman=59-second;
+            mine=" Time Taken : "+(2-minutes)+"min "+(59-second)+"sec ";
+
+            //   myRef.child("battleGround").child("onevsoneOnline").child(mAuth.getCurrentUser().getUid()).child("isComplete").removeValue();
+            scoreIntent.putExtra("opponentUID",opponentUID);
+            scoreIntent.putExtra("opponentImageUrl",opponentimageUrl);
+            scoreIntent.putExtra("opponentUserName",opponentUsername);
+            scoreIntent.putExtra("mypropic",myProPicUrl);
+            scoreIntent.putExtra("myName",myName);
+            scoreIntent.putExtra("score", score);
+            scoreIntent.putExtra("lifeline",lifelineSum);
+            scoreIntent.putExtra("minutes",minutes);
+            scoreIntent.putExtra("seconds",second);
+            scoreIntent.putExtra("minutestext",minutestext);
+            scoreIntent.putExtra("secondtext",secondtext);
+            scoreIntent.putExtra("milliholder",milliHolder);
+            scoreIntent.putExtra("category",category);
+            scoreIntent.putExtra("imageurl",imageurl);
+            scoreIntent.putExtra("mine",mine);
+            scoreIntent.putExtra("desider",2);
+            scoreIntent.putExtra("botTime",botTime);
+            scoreIntent.putExtra("botCorrectAns",botCorrectAns);
+            scoreIntent.putExtra("actualmin",a1);
+            scoreIntent.putExtra("actualsec",a2);
+            scoreIntent.putExtra("minman",minman);
+            scoreIntent.putExtra("secman",secman);
+            scoreIntent.putExtra("isHostFinal", isHostFinal);
+            scoreIntent.putExtra("sumScore", sumScore);
+            scoreIntent.putExtra("oppoScoreCounter",oppoScoreCounter);
+            scoreIntent.putExtra("oppoWrongAnsCounter",oppoWrongAnsCounter);
+            scoreIntent.putIntegerArrayListExtra("myArr", (ArrayList<Integer>) arrlist);
+            scoreIntent.putIntegerArrayListExtra("oppoArr", (ArrayList<Integer>) arroppo);
+            startActivity(scoreIntent);
+            overridePendingTransition(R.anim.fadeinmain, R.anim.fadeoutmain);
+            finish();
 
 
         }else{
@@ -2016,7 +2081,7 @@ public class OneVsOneBotPictureQuiz extends AppCompatActivity {
         cCompany=new CountDownTimer(1000*180,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(binaryPosition>10){
+                if(binaryPosition==50){
                     try{
                         songActivity.songStop();
                     }catch (Exception e){
