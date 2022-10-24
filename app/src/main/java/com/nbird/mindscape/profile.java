@@ -1184,6 +1184,8 @@ public class profile extends AppCompatActivity {
             holder= sumationOfScoreFinal /50000;
             level.setText(" Level "+holder+" ");
         }
+
+
         if(sumationOfScoreFinal <50000){
 
             levelicon.setBackgroundResource(R.drawable.blackiron);

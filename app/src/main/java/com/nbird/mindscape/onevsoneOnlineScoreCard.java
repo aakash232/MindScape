@@ -428,7 +428,6 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                         myRef.child("User").child(opponentUID).child("1vs1Online").child("accept").removeValue();
                         isRequesSendValid=1;
                         Toast.makeText(onevsoneOnlineScoreCard.this, "Request Declined By "+opponentUsername, Toast.LENGTH_SHORT).show();
-
                     }
                 }catch (Exception e){
 
@@ -474,6 +473,8 @@ public class onevsoneOnlineScoreCard extends AppCompatActivity {
                 myRef.child("User").child(opponentUID).child("1vs1onlineLifeLineUsed").removeValue();
                 myRef.child("User").child(opponentUID).child("1vs1onlineTimeTaken").removeValue();
                 myRef.child("User").child(opponentUID).child("questionNUmberPicUP").child("OnCompleteHolder").removeValue();
+
+
                 myRef.child("User").child(mAuth.getCurrentUser().getUid()).child("1vs1Online").child("request").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

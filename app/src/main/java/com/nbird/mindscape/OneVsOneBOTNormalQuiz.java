@@ -200,7 +200,6 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
          Random r=new Random();
          int jk=r.nextInt(10)+5;
         countBot(jk);
-
     }
 
     public void countBot(int jk){
@@ -208,7 +207,6 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 botTime++;
-
             }
 
             @Override
@@ -239,7 +237,7 @@ public class OneVsOneBOTNormalQuiz extends AppCompatActivity {
     private void loadAds(){
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-      //  mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

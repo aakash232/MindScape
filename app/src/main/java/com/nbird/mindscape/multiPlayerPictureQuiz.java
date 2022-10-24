@@ -599,9 +599,9 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     visitors.add(new BarEntry(3, yo3));
                     visitors.add(new BarEntry(4, yo4));
 
-                    AdView mAdView = view1.findViewById(R.id.adView);
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    mAdView.loadAd(adRequest);
+              //      AdView mAdView = view1.findViewById(R.id.adView);
+             //       AdRequest adRequest = new AdRequest.Builder().build();
+             //       mAdView.loadAd(adRequest);
 
                     BarDataSet barDataSet = new BarDataSet(visitors, "Bar Data");
                     barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -780,9 +780,9 @@ public class multiPlayerPictureQuiz extends AppCompatActivity {
                     ((TextView) view1.findViewById(R.id.textMessage)).setText(userName+" I feel you should go for  : '"+answerByExpert+"'");
                     ((Button) view1.findViewById(R.id.buttonYes)).setText("OKAY");
                     expertImage=((ImageView) view1.findViewById(R.id.imageIcon));
-                    AdView mAdView = view1.findViewById(R.id.adView);
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    mAdView.loadAd(adRequest);
+             //       AdView mAdView = view1.findViewById(R.id.adView);
+            //        AdRequest adRequest = new AdRequest.Builder().build();
+            //        mAdView.loadAd(adRequest);
                     expertAdviceImageManupulator();
 
 

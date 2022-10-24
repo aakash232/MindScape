@@ -248,7 +248,7 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     private void loadAds(){
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-    //    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
     LottieAnimationView profilebutton;
 
@@ -1159,11 +1159,6 @@ public class mainMenuActivity extends AppCompatActivity implements NavigationVie
     }
 
     public void parto(){
-
-
-
-
-
         lstExam.add(new Modes("Single Mode",R.drawable.singleicon,"Test your knowledge and compete against time. Score points for accuracy and achieve ranks."));
         lstExam.add(new Modes("1 Vs 1",R.drawable.versusicon,"Time for the One-On-One. Compete with a rival online. Time your knowledge and be the champion."));
         lstExam.add(new Modes("Tournament Mode",R.drawable.leaguefinalfinal,"Quizzers from all over the world come together in the arena to show who's the ultimate leaderboard breaker."));

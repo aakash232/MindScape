@@ -1,12 +1,30 @@
 <component name="libraryTable">
   <library name="Gradle: com.gauravk.audiovisualizer:audiovisualizer:0.9.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c918fe8f132e826516a2274fd297cfa3/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c918fe8f132e826516a2274fd297cfa3/jetified-audiovisualizer-0.9.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c918fe8f132e826516a2274fd297cfa3/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ff472e06aa03b9d4c0e82f63912fa38e/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ff472e06aa03b9d4c0e82f63912fa38e/jetified-audiovisualizer-0.9.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ff472e06aa03b9d4c0e82f63912fa38e/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/104a0d9cbc725b4f9bfd57bf7ab9f6fc/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/104a0d9cbc725b4f9bfd57bf7ab9f6fc/jetified-audiovisualizer-0.9.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/104a0d9cbc725b4f9bfd57bf7ab9f6fc/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/198c6240072be65204a9565cb217d762/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/198c6240072be65204a9565cb217d762/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/198c6240072be65204a9565cb217d762/jetified-audiovisualizer-0.9.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36600c7e339daf4a37235d26834ee843/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36600c7e339daf4a37235d26834ee843/jetified-audiovisualizer-0.9.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36600c7e339daf4a37235d26834ee843/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c676f25b5494dedaaf80c38c24417a2f/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c676f25b5494dedaaf80c38c24417a2f/jetified-audiovisualizer-0.9.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c676f25b5494dedaaf80c38c24417a2f/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/649568b74616452277475e9a88215a8d/jetified-audiovisualizer-0.9.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/649568b74616452277475e9a88215a8d/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/649568b74616452277475e9a88215a8d/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/351d4518c96435aab55ccc01e5f8dd0b/jetified-audiovisualizer-0.9.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/351d4518c96435aab55ccc01e5f8dd0b/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/351d4518c96435aab55ccc01e5f8dd0b/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9234bda8d1c8793fe7988780f6ae7b82/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9234bda8d1c8793fe7988780f6ae7b82/jetified-audiovisualizer-0.9.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9234bda8d1c8793fe7988780f6ae7b82/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/be89e6ab2e6f32d9b5bfcab5e9f41b69/jetified-audiovisualizer-0.9.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/be89e6ab2e6f32d9b5bfcab5e9f41b69/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/be89e6ab2e6f32d9b5bfcab5e9f41b69/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gauravk.audiovisualizer/audiovisualizer/0.9.2/d208e74aadfa145e779e9427ed2fb1c7c0e9a347/audiovisualizer-0.9.2-javadoc.jar!/" />

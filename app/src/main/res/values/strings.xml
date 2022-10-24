@@ -8,3 +8,9 @@
     <string name="interstitialAd_id">ca-app-pub-2384938955607297/1310607588</string>
     <string name="bannerID">ca-app-pub-2384938955607297/5454507355</string>
 </resources>
+
+    <!--Live Banner : ca-app-pub-2384938955607297/5454507355-->
+    <!--Live interstitialAd_id : ca-app-pub-2384938955607297/1310607588-->
+
+    <!--DEMO Banner : ca-app-pub-3940256099942544/6300978111-->
+    <!--DEMO interstitialAd_id : ca-app-pub-3940256099942544/1033173712-->

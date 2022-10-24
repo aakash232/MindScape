@@ -120,7 +120,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitialAd_id));
-     //   mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
 
@@ -1051,9 +1051,7 @@ public class AudioQuizSinglePlayer extends AppCompatActivity {
             music.release();
             music = null;
         }catch (Exception e){
-
         }
-
     }
 
     public void pauseMusic(){

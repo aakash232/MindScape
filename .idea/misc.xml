@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_onevsone_online_score_card.xml" value="0.13437217705510388" />
+        <entry key="app/src/main/res/layout/activity_score.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/activity_tournament_lobby.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/activity_video1vs1_quiz.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/askingtomoveintournamentchoiceactivity.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/audience_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/batch_display_dialog_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/cardview_first_time.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/cardviewfact.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/cardviewmainmenu.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/category_selection_asset.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/chat_item.xml" value="0.33061594202898553" />
+        <entry key="app/src/main/res/layout/chat_layout.xml" value="0.33061594202898553" />
+        <entry key="app/src/main/res/layout/custom_category_show_asset.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/customquiz_card_layout.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/data_1v1_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/data_placeholder_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/expertadvicelayout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/factfull_layout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/leader_board_listview.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/leader_board_pre_loading_screen.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/loading_screen.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/logout_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/lose_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/mainmenuhorizontalslide.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/music_manu.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/my_chat_collection_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/nointernetlayout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/onevsone_dialog_layout.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/onevsone_local_main_layout.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/onevsone_local_mode_layout.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/onevsone_online_layout.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/opponent_chat_collection_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/position_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/privacy_setting_layout.xml" value="0.23287037037037037" />
+        <entry key="app/src/main/res/layout/prize_category_asset.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/prize_leaderboard_asset.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/prize_quiz_selector_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/prize_submit_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/prize_upi_asker_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/profile_item_main.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/profile_selection_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/profileimageselector.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/quit_asker_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/removal_lobby_layout.xml" value="0.2324074074074074" />
+        <entry key="app/src/main/res/layout/remove_player_layout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/request_layout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/setting_layout.xml" value="0.33061594202898553" />
+        <entry key="app/src/main/res/layout/siglemodelistviewassets.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/slidelayout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/sorry_layout_for_helplines.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/survey_layout.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/tournament_joining_listview.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/tournment_join_create_layout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/troubleshhotlayout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/update_app_asker_layout.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/waiting_dialog_layout.xml" value="0.11291779584462511" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />

@@ -102,13 +102,12 @@ public class BotOneVsOne {
         int score123=r.nextInt(18000)+4000;
         int timeHolder=r.nextInt(30000)+140;
         int y = 1;
-        try{
 
+        try{
              y=(timeHolder/120);
         }catch (Exception e){
 
         }
-
 
         int c1 =r.nextInt(8)+1;
         int correct=c1*y;
@@ -264,9 +263,6 @@ public class BotOneVsOne {
             task = new DownloadTask();
             task.execute("https://randomuser.me/api/?format=JSON");
         }
-
-
-
     }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {

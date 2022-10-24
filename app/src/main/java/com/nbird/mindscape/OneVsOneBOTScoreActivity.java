@@ -97,7 +97,7 @@ public class OneVsOneBOTScoreActivity extends AppCompatActivity {
     private void loadAds(){
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-      //  mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);
     }
     TextView oppoLevel;
     ImageView oppoBatch;

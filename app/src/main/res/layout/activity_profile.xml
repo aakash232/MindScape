@@ -321,6 +321,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_margin="10dp" />
 
+
                         <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/idBarChart"
                             android:layout_width="match_parent"
