@@ -60,6 +60,6 @@ An aim to connect people across the world 🤳🏻 and provide them a platform t
 
 ### ***PUBLISHED SAMPLE***
 Experience the fun of quizzing on MindScape!
-[Download now](https://play.google.com/store/apps/details?id=com.nbird.mindscape) at Google Play Store
+[Download now](https://galaxystore.samsung.com/detail/com.nbird.mindscape)
 
 >The most creative way to spend your spare time.🎯🏆 The Interactive platform will never stop astonishing the quizzer inside you.
